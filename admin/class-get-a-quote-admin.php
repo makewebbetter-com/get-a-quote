@@ -51,6 +51,8 @@ class Get_A_Quote_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		add_action('admin_menu', [ $this, 'quote_panel' ]);
+		add_action( 'init', [ $this, 'quote_post_type' ]);
 
 	}
 
@@ -98,6 +100,38 @@ class Get_A_Quote_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/get-a-quote-admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+	public function quote_panel() {
+		add_menu_page('quote page title', 'GET A QUOTE', 'manage_options', 'quote-options', 'wps_quote_func');
+		add_submenu_page( 'quote-options', 'Settings page title', 'Settings', 'manage_options', 'quote-op-settings', 'wps_quote_func_settings');
+		add_submenu_page( 'quote-options', 'form fields title', 'Form Fields', 'manage_options', 'quote-op-ff', 'wps_quote_func_ff');
+		add_submenu_page( 'quote-options', 'FAQ page title', 'FAQ', 'manage_options', 'quote-op-faq', 'wps_quote_func_faq');
+	}
+	/**
+	 * Wporg_custom_post_type
+	 */
+	public function quote_post_type() {
+		register_post_type( 'wporg_product',
+			array(
+				'labels'      => array(
+					'name'          => __( 'Quotes', 'textdomain' ),
+					'singular_name' => __( 'Quote', 'textdomain' ),
+				),
+				'public'              => true,
+				'show_ui'             => true,
+				'show_in_menu'        => true,
+				'show_in_nav_menus'   => true,
+				'show_in_admin_bar'   => true,
+				'menu_position'       => 5,
+				'menu_icon'           => 'dashicons-text-page',
+				'can_export'          => true,
+				'has_archive'         => true,
+				'exclude_from_search' => false,
+				'publicly_queryable'  => true,
+				'capability_type'     => 'page',
+				'rewrite'     => array( 'slug' => 'Quotes' ), // my custom slug.
+			)
+		);
 	}
 
 }

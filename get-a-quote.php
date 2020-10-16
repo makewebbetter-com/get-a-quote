@@ -80,3 +80,19 @@ function run_get_a_quote() {
 
 }
 run_get_a_quote();
+function wps_quote_func() {
+	echo '<div class="wrap"><div id="icon-options-general" class="icon32"><br></div>
+	<h2>Welcome Page</h2></div>';
+}
+function wps_quote_func_settings() {
+	echo '<div class="wrap"><div id="icon-options-general" class="icon32"><br></div>
+	<h2>Settings</h2></div>';
+}
+function wps_quote_func_ff() {
+	echo '<div class="wrap"><div id="icon-options-general" class="icon32"><br></div>
+	<h2>Form Fields</h2></div>';
+}
+function wps_quote_func_faq() {
+	echo '<div class="wrap"><div id="icon-options-general" class="icon32"><br></div>
+	<h2>FAQ</h2></div>';
+}
