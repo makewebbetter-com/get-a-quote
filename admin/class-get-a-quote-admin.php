@@ -53,6 +53,8 @@ class Get_A_Quote_Admin {
 		$this->version = $version;
 		add_action('admin_menu', [ $this, 'quote_panel' ]);
 		add_action( 'init', [ $this, 'quote_post_type' ]);
+		add_action( 'init', [ $this, 'wporg_register_taxonomy_service' ]);
+		add_action( 'init', [ $this, 'wporg_register_taxonomy_quote_status' ]);
 
 	}
 
@@ -111,7 +113,7 @@ class Get_A_Quote_Admin {
 	 * Wporg_custom_post_type
 	 */
 	public function quote_post_type() {
-		register_post_type( 'wporg_product',
+		register_post_type( 'wporg_quotes',
 			array(
 				'labels'      => array(
 					'name'          => __( 'Quotes', 'textdomain' ),
@@ -132,6 +134,60 @@ class Get_A_Quote_Admin {
 				'rewrite'     => array( 'slug' => 'Quotes' ), // my custom slug.
 			)
 		);
+	}
+	/**
+	 * Wporg_register_taxonomy_service
+	 */
+	function wporg_register_taxonomy_service() {
+		$labels = [
+			'name'              => _x( 'Services', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Service', 'taxonomy singular name' ),
+			'search_items'      => __( 'Search Services' ),
+			'all_items'         => __( 'All Services' ),
+			'parent_item'       => __( 'Parent Service' ),
+			'parent_item_colon' => __( 'Parent Service:' ),
+			'edit_item'         => __( 'Edit Service' ),
+			'update_item'       => __( 'Update Service' ),
+			'add_new_item'      => __( 'Add New Service' ),
+			'new_item_name'     => __( 'New Service Name' ),
+			'menu_name'         => __( 'Services' ),
+		];
+		$args = [
+			'hierarchical'      => true, // make it hierarchical (like categories).
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => [ 'slug' => 'service' ],
+		];
+		register_taxonomy( 'service', [ 'wporg_quotes' ], $args );
+	}
+	/**
+	 * Wporg_register_taxonomy_quote_status
+	 */
+	function wporg_register_taxonomy_quote_status() {
+		$labels = [
+			'name'              => _x( 'Quote Status', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Status', 'taxonomy singular name' ),
+			'search_items'      => __( 'Search Status' ),
+			'all_items'         => __( 'All Status' ),
+			'parent_item'       => __( 'Parent Status' ),
+			'parent_item_colon' => __( 'Parent Status:' ),
+			'edit_item'         => __( 'Edit Status' ),
+			'update_item'       => __( 'Update Status' ),
+			'add_new_item'      => __( 'Add New Status' ),
+			'new_item_name'     => __( 'New Status Name' ),
+			'menu_name'         => __( 'Quote Statuses' ),
+		];
+		$args = [
+			'hierarchical'      => true, // make it hierarchical (like categories).
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => [ 'slug' => 'Status' ],
+		];
+		register_taxonomy( 'Status', [ 'wporg_quotes' ], $args );
 	}
 
 }

@@ -51,6 +51,7 @@ class Get_A_Quote_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		add_shortcode( 'fform', [ $this,  'Quote_form' ] );
 
 	}
 
@@ -98,6 +99,58 @@ class Get_A_Quote_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/get-a-quote-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+	public function Quote_form() {?>
+		<form method="post">
+		<p>
+			<label>First Name</label><br />
+			<input type="text" name="qfname" pattern="[a-zA-Z0-9 ]+" value="" size="40" placeholder="First Name" />
+		</p>
+		<p>
+			<label>Last Name</label><br />
+			<input type="text" name="qlname" pattern="[a-zA-Z0-9 ]+" value="" size="40" placeholder="Last Name" />
+		</p>
+		<p>
+			<label>Address</label><br />
+			<input type="text" name="qaddress" value="" size="40" placeholder="Address" />
+		</p>
+		<p>
+			<label>City</label><br />
+			<input type="text" name="qcity" value="" size="40" placeholder="City" />
+		</p>
+		<p>
+			<label>Zipcode</label><br />
+			<input type="text" name="qzipcode" value="" size="40" placeholder="Zipcode" />
+		</p>
+		<p>
+			<label>Country</label><br />
+			<input type="text" name="qcountry" value="" size="40" placeholder="Country" />
+		</p>
+		<p>
+			<label>States</label><br />
+			<input type="text" name="qstates" value="" size="40" placeholder="States" />
+		</p>
+		<p>
+			<label>Email</label><br />
+			<input type="text" name="qemail" value="" size="40" placeholder="Email" />
+		</p>
+		<p>
+			<label>Phone</label><br />
+			<input type="text" name="qphone" value="" size="40" placeholder="Phone" />
+		</p>
+		<p>
+			<label>Budget</label><br />
+			<input type="text" name="qbudget" value="" size="40" placeholder="Budget" />
+		</p>
+		<p>
+			<label>Additional</label><br />
+			<textarea name="qadd" rows="3" cols="50" ></textarea>
+		</p>
+		<p>
+			<label> Max Size: 3MB</label><br />
+			<input type="button" name="qfile" size="40" value="Upload File" />
+		</p>
+		<input type="submit" name="qsubmit" value="Submit"><?php
 	}
 
 }
