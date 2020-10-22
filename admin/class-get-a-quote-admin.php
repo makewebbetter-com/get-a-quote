@@ -105,8 +105,6 @@ class Get_A_Quote_Admin {
 	}
 	public function quote_panel() {
 		add_menu_page('quote page title', 'GET A QUOTE', 'manage_options', 'quote-options', 'wps_quote_func');
-		add_submenu_page( 'quote-options', 'Settings page title', 'Settings', 'manage_options', 'quote-op-settings', 'wps_quote_func_settings');
-		add_submenu_page( 'quote-options', 'form fields title', 'Form Fields', 'manage_options', 'quote-op-ff', 'wps_quote_func_ff');
 		add_submenu_page( 'quote-options', 'FAQ page title', 'FAQ', 'manage_options', 'quote-op-faq', 'wps_quote_func_faq');
 	}
 	/**
