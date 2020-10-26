@@ -22,7 +22,7 @@ $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'Welcome';
 do_action( 'mwb_gaq_setting_tab_active' );
 if ( 'overview' == get_transient( 'mwb_gaq_default_settings_tab' ) ) {
 
-$mwb_membership_active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'overview';
+$mwb_membership_active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'settings';
 }
 ?>
 <div class="wrapper" id="mwb_gaq_setting_wrapper">

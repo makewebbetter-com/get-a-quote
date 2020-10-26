@@ -51,10 +51,10 @@ class Get_A_Quote_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		add_action('admin_menu', [ $this, 'quote_panel' ]);
-		add_action( 'init', [ $this, 'quote_post_type' ]);
-		add_action( 'init', [ $this, 'wporg_register_taxonomy_service' ]);
-		add_action( 'init', [ $this, 'wporg_register_taxonomy_quote_status' ]);
+		add_filter('admin_menu', [ $this, 'quote_panel' ]);
+		add_filter( 'init', [ $this, 'quote_post_type' ]);
+		add_filter( 'init', [ $this, 'gaq_register_taxonomy_service' ]);
+		add_filter( 'init', [ $this, 'gaq_register_taxonomy_quote_status' ]);
 
 	}
 
@@ -104,14 +104,14 @@ class Get_A_Quote_Admin {
 
 	}
 	public function quote_panel() {
-		add_menu_page('quote page title', 'GET A QUOTE', 'manage_options', 'quote-options', 'wps_quote_func');
-		add_submenu_page( 'quote-options', 'FAQ page title', 'FAQ', 'manage_options', 'quote-op-faq', 'wps_quote_func_faq');
+		add_menu_page('quote page title', 'GET A QUOTE', 'manage_options', 'quote-options', 'gaq_quote_func');
+		add_submenu_page( 'quote-options', 'FAQ page title', 'FAQ', 'manage_options', 'quote-op-faq', 'gaq_quote_func_faq');
 	}
 	/**
 	 * Wporg_custom_post_type
 	 */
 	public function quote_post_type() {
-		register_post_type( 'wporg_quotes',
+		register_post_type( 'quotes',
 			array(
 				'labels'      => array(
 					'name'          => __( 'Quotes', 'textdomain' ),
@@ -134,9 +134,9 @@ class Get_A_Quote_Admin {
 		);
 	}
 	/**
-	 * Wporg_register_taxonomy_service
+	 * Gaq_register_taxonomy_service
 	 */
-	function wporg_register_taxonomy_service() {
+	function gaq_register_taxonomy_service() {
 		$labels = [
 			'name'              => _x( 'Services', 'taxonomy general name' ),
 			'singular_name'     => _x( 'Service', 'taxonomy singular name' ),
@@ -158,12 +158,12 @@ class Get_A_Quote_Admin {
 			'query_var'         => true,
 			'rewrite'           => [ 'slug' => 'service' ],
 		];
-		register_taxonomy( 'service', [ 'wporg_quotes' ], $args );
+		register_taxonomy( 'service', [ 'quotes' ], $args );
 	}
 	/**
-	 * Wporg_register_taxonomy_quote_status
+	 * Gaq_register_taxonomy_quote_status
 	 */
-	function wporg_register_taxonomy_quote_status() {
+	function gaq_register_taxonomy_quote_status() {
 		$labels = [
 			'name'              => _x( 'Quote Status', 'taxonomy general name' ),
 			'singular_name'     => _x( 'Status', 'taxonomy singular name' ),
@@ -185,7 +185,7 @@ class Get_A_Quote_Admin {
 			'query_var'         => true,
 			'rewrite'           => [ 'slug' => 'Status' ],
 		];
-		register_taxonomy( 'Status', [ 'wporg_quotes' ], $args );
+		register_taxonomy( 'Status', [ 'quotes' ], $args );
 	}
 
 }

@@ -80,10 +80,10 @@ function run_get_a_quote() {
 
 }
 run_get_a_quote();
-function wps_quote_func() {
+function gaq_quote_func() {
 	include_once 'admin/partials/get-a-quote-admin-display.php';
 }
-function wps_quote_func_faq() {
+function gaq_quote_func_faq() {
 	echo '<div class="wrap"><div id="icon-options-general" class="icon32"><br></div>
 	<h2>FAQ</h2></div>';
 }
