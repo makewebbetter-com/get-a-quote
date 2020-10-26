@@ -10,18 +10,20 @@ if (!defined('ABSPATH')) {
 
 ?>
 <form action="" method="POST">
-	<div class="mwb_gaq_table">
+	<div class="mwb_gaq_taxonomy_table">
 	<h2> Settings </h2>
 		<table class="form-table mwb_gaq_setting">
 			<tbody>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
-						<label for="mwb_gaq_enable_plugin"><?php esc_html_e('Enable Plugin', 'get-a-quote'); ?></label>
+						<label for="mwb_gaq_enable_taxonomy_plugin"><?php esc_html_e('Enable Service Taxonomy', 'get-a-quote'); ?></label>
 					</th>
 					<td>
-						<label class="mwb_gaq_enable_plugin_label">
-							<input class="mwb_gaq_enable_plugin_input" type="checkbox" <?php echo ($mwb_gaq_enable_plugin == 'on') ? "checked='checked'" : ''; ?> name="mwb_wocuf_pro_enable_plugin">
-							<span class="mwb_gaq_enable_plugin_span"></span>
+						<label class="mwb_gaq_enable_taxonomy_plugin_label">
+                        <select class="mwb_gaq_select" name="select_from_visibility">	
+                            <option value="yes" <?php selected( $enable_services_taxonomy, 'yes' ); ?> ><?php esc_html_e( 'Yes', 'get-a-quote' ); ?></option>
+                            <option value="no" <?php selected( $enable_services_taxonomy, 'no' ); ?> ><?php esc_html_e( 'No', 'get-a-quote' ); ?></option>
+                        </select>
 						</label>
 					</td>
 				</tr>
@@ -32,7 +34,7 @@ if (!defined('ABSPATH')) {
 					<td>
 						<div class="mwb_gaq_visibility">
 							<?php
-							$global_product_discount = isset( $mwb_upsell_global_settings['vsiblity_gaq_setting'] ) ? $mwb_upsell_global_settings['vsiblity_gaq_setting'] : 'admin';
+							// $global_product_discount = isset( $mwb_upsell_global_settings['vsiblity_gaq_setting'] ) ? $mwb_upsell_global_settings['vsiblity_gaq_setting'] : 'admin';
 							?>
 
 					<select class="mwb_gaq_select" name="select_from_visibility">	
