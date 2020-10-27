@@ -13,7 +13,7 @@ $mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', array() )
 <form action="" method="POST">
 	<div class="mwb_gaq_taxonomy_table">
 	<h2> Taxonomy </h2>
-	<table class="form-table mwb_gaq_setting">
+	<table class="form-table mwb_gaq_taxonomy_setting">
 		<tbody>
 			<tr valign="top">
 				<th scope="row" class="titledesc">

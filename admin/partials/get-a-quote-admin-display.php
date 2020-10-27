@@ -44,10 +44,9 @@ echo "GET_A_QUOTE_VERSION";
 <?php
 
 if ( $active_tab == 'setting' ) {
-    //echo "Setting";
+
     include_once 'templates/mwb_gaq_setting.php';
 } elseif ( $active_tab == 'form-fields' ) {
-    echo "From Fields";
     include_once 'templates/mwb_gaq_form_fields.php';
 } elseif ( $active_tab == 'taxonomies' ) {
     include_once 'templates/mwb_gaq_taxonomies.php';
