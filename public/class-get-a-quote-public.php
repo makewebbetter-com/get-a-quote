@@ -100,20 +100,56 @@ class Get_A_Quote_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/get-a-quote-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+
+	/**
+	 * Quote_form
+	 * this function is used to print form and modify all its fields
+	 *
+	 * @return void
+	 */
 	public function Quote_form() {
-		$args = array(
-			'name' => 'Services',
-		);
-		$taxo = get_taxonomies( $args );
-		print_r( $taxo );
 
 		if ( isset( $_POST['qsubmit'] ) ) {
-			$mwb_gaq_form_fields_value = array();
+				$mwb_gaq_form_fields_value = array();
 
+				$mwb_gaq_form_fields_value['ffname'] = ! empty( $_POST['ffname'] ) ? sanitize_text_field( wp_unslash( $_POST['ffname'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqlname'] = ! empty( $_POST['fqlname'] ) ? sanitize_text_field( wp_unslash( $_POST['fqlname'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqaddress'] = ! empty( $_POST['fqaddress'] ) ? sanitize_text_field( wp_unslash( $_POST['fqaddress'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqcity'] = ! empty( $_POST['fqcity'] ) ? sanitize_text_field( wp_unslash( $_POST['fqcity'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqzipcode'] = ! empty( $_POST['fqzipcode'] ) ? sanitize_text_field( wp_unslash( $_POST['fqzipcode'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqcountry'] = ! empty( $_POST['fqcountry'] ) ? sanitize_text_field( wp_unslash( $_POST['fqcountry'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqstates'] = ! empty( $_POST['fqstates'] ) ? sanitize_text_field( wp_unslash( $_POST['fqstates'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqemail'] = ! empty( $_POST['fqemail'] ) ? sanitize_text_field( wp_unslash( $_POST['fqemail'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqphone'] = ! empty( $_POST['fqphone'] ) ? sanitize_text_field( wp_unslash( $_POST['fqphone'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqbudget'] = ! empty( $_POST['fqbudget'] ) ? sanitize_text_field( wp_unslash( $_POST['fqbudget'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['fqadd'] = ! empty( $_POST['fqadd'] ) ? sanitize_textarea_field( wp_unslash( $_POST['fqadd'] ) ) : '';
+
+				$mwb_gaq_form_fields_value['ffname'] = ! empty( $_POST['ffname'] ) ? sanitize_text_field( wp_unslash( $_POST['ffname'] ) ) : '';
+
+			if ( ! empty( $mwb_gaq_form_fields_value['ffname']) && ! empty( $mwb_gaq_form_fields_value['fqlname']) && ! empty( $mwb_gaq_form_fields_value['fqemail']) ) {
+				update_option( 'mwb_gaq_form_option_value', $mwb_gaq_form_fields_value );
+				?>
+					<div class="notice notice-success is-dismissible">
+						<p><strong><?php esc_html_e('Thank you', 'get-a-quote'); ?></strong></p>
+					</div>
+				<?php
+			}
 		}
 		$mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', array() );
 		$mwb_gaq_enable_form = get_option('mwb_gaq_form_enable');
 		if ( 'on' === $mwb_gaq_enable_form ) {
+			$mwb_gaq_form_values = get_option('mwb_gaq_form_option_value');
+			print_r( $mwb_gaq_form_values );
 			?>
 
 			<form action="" method="post">
@@ -122,11 +158,12 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>First Name</label><br />
+					<label><?php  esc_html_e( 'First Name', 'get-a-quote' ); ?></label><br />
 
-					<?php $ffname = isset( $mwb_upsell_global_settings['ffname'] ) ? $mwb_upsell_global_settings['ffname'] : ''; ?>
+					<?php $ffname = isset( $mwb_gaq_form_values['ffname'] ) ? $mwb_gaq_form_values['ffname'] : ''; ?>
 
-					<input type="text" name="ffname" pattern="[a-zA-Z0-9 ]+" value="<?php echo esc_html__( wp_unslash( $ffname ) ); ?>" size="40" placeholder="First Name" />
+					<input type="text" name="ffname" pattern="[a-zA-Z0-9 ]+" value="<?php  echo esc_html__( wp_unslash( $ffname ) ); ?>" size="40" placeholder="First Name" />
+					<?php if ( '' === $ffname ) { echo esc_html_e( '* Required Field', 'get-a-quote' ); } ?>
 				</p>
 
 			<?php } ?>
@@ -135,12 +172,12 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>Last Name</label><br />
+					<label><?php  esc_html_e( 'Last Name', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqlname = isset( $mwb_upsell_global_settings['fqlname'] ) ? $mwb_upsell_global_settings['fqlname'] : ''; ?>
+					<?php $fqlname = isset( $mwb_gaq_form_values['fqlname'] ) ? $mwb_gaq_form_values['fqlname'] : ''; ?>
 
 					<input type="text" name="fqlname" pattern="[a-zA-Z0-9 ]+" value="<?php echo esc_html__( wp_unslash( $fqlname ) ); ?>" size="40" placeholder="Last Name" />
-
+					<?php if ( '' === $fqlname ) { echo esc_html_e( '* Required Field', 'get-a-quote' ); } ?>
 				</p>
 
 			<?php } ?>
@@ -149,9 +186,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>Address</label><br />
+					<label><?php  esc_html_e( 'Address', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqaddress = isset( $mwb_upsell_global_settings['fqaddress'] ) ? $mwb_upsell_global_settings['fqaddress'] : ''; ?>
+					<?php $fqaddress = isset( $mwb_gaq_form_values['fqaddress'] ) ? $mwb_gaq_form_values['fqaddress'] : ''; ?>
 
 					<input type="text" name="fqaddress" value="<?php echo esc_html__( wp_unslash( $fqaddress ) ); ?>" size="40" placeholder="Address" />
 
@@ -162,9 +199,9 @@ class Get_A_Quote_Public {
 			<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_city_field'] ) { ?>
 
 				<p>
-					<label>City</label><br />
+					<label><?php  esc_html_e( 'City', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqcity = isset( $mwb_upsell_global_settings['fqcity'] ) ? $mwb_upsell_global_settings['fqcity'] : ''; ?>
+					<?php $fqcity = isset( $mwb_gaq_form_values['fqcity'] ) ? $mwb_gaq_form_values['fqcity'] : ''; ?>
 
 					<input type="text" name="fqcity" value="<?php echo esc_html__( wp_unslash( $fqcity ) ); ?>" size="40" placeholder="City" />
 
@@ -176,9 +213,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>Zipcode</label><br />
+					<label><?php  esc_html_e( 'Zipcode', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqzipcode = isset( $mwb_upsell_global_settings['fqzipcode'] ) ? $mwb_upsell_global_settings['fqzipcode'] : ''; ?>
+					<?php $fqzipcode = isset( $mwb_gaq_form_values['fqzipcode'] ) ? $mwb_gaq_form_values['fqzipcode'] : ''; ?>
 
 					<input type="text" name="fqzipcode" value="<?php echo esc_html__( wp_unslash( $fqzipcode ) ); ?>" size="40" placeholder="Zipcode" />
 
@@ -190,9 +227,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>Country</label><br />
+					<label><?php  esc_html_e( 'Country', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqcountry = isset( $mwb_upsell_global_settings['fqcountry'] ) ? $mwb_upsell_global_settings['fqcountry'] : ''; ?>
+					<?php $fqcountry = isset( $mwb_gaq_form_values['fqcountry'] ) ? $mwb_gaq_form_values['fqcountry'] : ''; ?>
 
 					<input type="text" name="fqcountry" value="<?php echo esc_html__( wp_unslash( $fqcountry ) ); ?>" size="40" placeholder="Country" />
 
@@ -204,9 +241,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>States</label><br />
+					<label><?php  esc_html_e( 'States', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqstates = isset( $mwb_upsell_global_settings['fqstates'] ) ? $mwb_upsell_global_settings['fqstates'] : ''; ?>
+					<?php $fqstates = isset( $mwb_gaq_form_values['fqstates'] ) ? $mwb_gaq_form_values['fqstates'] : ''; ?>
 
 					<input type="text" name="fqstates" value="<?php echo esc_html__( wp_unslash( $fqstates ) ); ?>" size="40" placeholder="States" />
 
@@ -217,12 +254,13 @@ class Get_A_Quote_Public {
 			<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_email_field'] ) { ?>
 
 				<p>
-					<label>Email</label><br />
 
-					<?php $fqemail = isset( $mwb_upsell_global_settings['fqemail'] ) ? $mwb_upsell_global_settings['fqemail'] : ''; ?>
+					<label><?php  esc_html_e( 'Email', 'get-a-quote' ); ?></label><br />
 
-					<input type="text" name="fqemail" value="<?php echo esc_html__( wp_unslash( $fqemail ) ); ?>" size="40" placeholder="Email" />
+					<?php $fqemail = isset( $mwb_gaq_form_values['fqemail'] ) ? $mwb_gaq_form_values['fqemail'] : ''; ?>
 
+					<input type="email" name="fqemail" value="<?php echo esc_html__( wp_unslash( $fqemail ) ); ?>" size="40" placeholder="Email" />
+					<?php if ( '' === $fqemail ) { echo esc_html_e( '* Required Field', 'get-a-quote' ); } ?>
 				</p>
 
 			<?php } ?>
@@ -231,9 +269,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>Phone</label><br />
+					<label><?php  esc_html_e( 'Phone', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqphone = isset( $mwb_upsell_global_settings['fqphone'] ) ? $mwb_upsell_global_settings['fqphone'] : ''; ?>
+					<?php $fqphone = isset( $mwb_gaq_form_values['fqphone'] ) ? $mwb_gaq_form_values['fqphone'] : ''; ?>
 
 					<input type="text" name="fqphone" value="<?php echo esc_html__( wp_unslash( $fqphone ) ); ?>" size="40" placeholder="Phone" />
 
@@ -244,9 +282,9 @@ class Get_A_Quote_Public {
 			<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_budget_field'] ) { ?>
 
 				<p>
-					<label>Budget</label><br />
+					<label><?php  esc_html_e( 'Budget', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqbudget = isset( $mwb_upsell_global_settings['fqbudget'] ) ? $mwb_upsell_global_settings['fqbudget'] : ''; ?>
+					<?php $fqbudget = isset( $mwb_gaq_form_values['fqbudget'] ) ? $mwb_gaq_form_values['fqbudget'] : ''; ?>
 
 					<input type="text" name="fqbudget" value="<?php echo esc_html__( wp_unslash( $fqbudget ) ); ?>" size="40" placeholder="Budget" />
 
@@ -258,9 +296,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label>Additional</label><br />
+					<label><?php  esc_html_e( 'Additional', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqadd = isset( $mwb_upsell_global_settings['fqadd'] ) ? $mwb_upsell_global_settings['fqadd'] : ''; ?>
+					<?php $fqadd = isset( $mwb_gaq_form_values['fqadd'] ) ? $mwb_gaq_form_values['fqadd'] : ''; ?>
 
 					<textarea name="fqadd" rows="3" cols="50" ><?php echo esc_html__( wp_unslash( $fqadd ) ); ?></textarea>
 
@@ -272,9 +310,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label> Max Size: 3MB</label><br />
+					<label><?php  esc_html_e( ' Max Size: 3MB', 'get-a-quote' ); ?></label><br />
 
-					<?php $fqfile = isset( $mwb_upsell_global_settings['fqfile'] ) ? $mwb_upsell_global_settings['fqfile'] : ''; ?>
+					<?php $fqfile = isset( $mwb_gaq_form_values['fqfile'] ) ? $mwb_gaq_form_values['fqfile'] : ''; ?>
 
 					<input type="button" name="fqfile" size="40" value="Upload File" />
 
@@ -289,5 +327,4 @@ class Get_A_Quote_Public {
 			<?php
 		}
 	}
-
 }
