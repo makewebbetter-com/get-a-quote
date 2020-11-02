@@ -110,34 +110,48 @@ class Get_A_Quote_Public {
 	public function Quote_form() {
 
 		if ( isset( $_POST['qsubmit'] ) ) {
-				$mwb_gaq_form_fields_value = array();
+				$mwb_gaq_form_data = array();
 
-				$mwb_gaq_form_fields_value['ffname'] = ! empty( $_POST['ffname'] ) ? sanitize_text_field( wp_unslash( $_POST['ffname'] ) ) : '';
+				$mwb_gaq_form_data['ffname'] = ! empty( $_POST['ffname'] ) ? sanitize_text_field( wp_unslash( $_POST['ffname'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqlname'] = ! empty( $_POST['fqlname'] ) ? sanitize_text_field( wp_unslash( $_POST['fqlname'] ) ) : '';
+				$mwb_gaq_form_data['fqlname'] = ! empty( $_POST['fqlname'] ) ? sanitize_text_field( wp_unslash( $_POST['fqlname'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqaddress'] = ! empty( $_POST['fqaddress'] ) ? sanitize_text_field( wp_unslash( $_POST['fqaddress'] ) ) : '';
+				$mwb_gaq_form_data['fqaddress'] = ! empty( $_POST['fqaddress'] ) ? sanitize_text_field( wp_unslash( $_POST['fqaddress'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqcity'] = ! empty( $_POST['fqcity'] ) ? sanitize_text_field( wp_unslash( $_POST['fqcity'] ) ) : '';
+				$mwb_gaq_form_data['fqcity'] = ! empty( $_POST['fqcity'] ) ? sanitize_text_field( wp_unslash( $_POST['fqcity'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqzipcode'] = ! empty( $_POST['fqzipcode'] ) ? sanitize_text_field( wp_unslash( $_POST['fqzipcode'] ) ) : '';
+				$mwb_gaq_form_data['fqzipcode'] = ! empty( $_POST['fqzipcode'] ) ? sanitize_text_field( wp_unslash( $_POST['fqzipcode'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqcountry'] = ! empty( $_POST['fqcountry'] ) ? sanitize_text_field( wp_unslash( $_POST['fqcountry'] ) ) : '';
+				$mwb_gaq_form_data['fqcountry'] = ! empty( $_POST['fqcountry'] ) ? sanitize_text_field( wp_unslash( $_POST['fqcountry'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqstates'] = ! empty( $_POST['fqstates'] ) ? sanitize_text_field( wp_unslash( $_POST['fqstates'] ) ) : '';
+				$mwb_gaq_form_data['fqstates'] = ! empty( $_POST['fqstates'] ) ? sanitize_text_field( wp_unslash( $_POST['fqstates'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqemail'] = ! empty( $_POST['fqemail'] ) ? sanitize_text_field( wp_unslash( $_POST['fqemail'] ) ) : '';
+				$mwb_gaq_form_data['fqemail'] = ! empty( $_POST['fqemail'] ) ? sanitize_text_field( wp_unslash( $_POST['fqemail'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqphone'] = ! empty( $_POST['fqphone'] ) ? sanitize_text_field( wp_unslash( $_POST['fqphone'] ) ) : '';
+				$mwb_gaq_form_data['fqphone'] = ! empty( $_POST['fqphone'] ) ? sanitize_text_field( wp_unslash( $_POST['fqphone'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqbudget'] = ! empty( $_POST['fqbudget'] ) ? sanitize_text_field( wp_unslash( $_POST['fqbudget'] ) ) : '';
+				$mwb_gaq_form_data['fqbudget'] = ! empty( $_POST['fqbudget'] ) ? sanitize_text_field( wp_unslash( $_POST['fqbudget'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['fqadd'] = ! empty( $_POST['fqadd'] ) ? sanitize_textarea_field( wp_unslash( $_POST['fqadd'] ) ) : '';
+				$mwb_gaq_form_data['fqadd'] = ! empty( $_POST['fqadd'] ) ? sanitize_textarea_field( wp_unslash( $_POST['fqadd'] ) ) : '';
 
-				$mwb_gaq_form_fields_value['ffname'] = ! empty( $_POST['ffname'] ) ? sanitize_text_field( wp_unslash( $_POST['ffname'] ) ) : '';
+				$mwb_gaq_form_data['fqfile'] = ! empty( $_POST['fqfile '] ) ? sanitize_text_field( wp_unslash( $_POST['fqfile'] ) ) : '';
 
-			if ( ! empty( $mwb_gaq_form_fields_value['ffname']) && ! empty( $mwb_gaq_form_fields_value['fqlname']) && ! empty( $mwb_gaq_form_fields_value['fqemail']) ) {
-				update_option( 'mwb_gaq_form_option_value', $mwb_gaq_form_fields_value );
+			if ( ! empty( $mwb_gaq_form_data['ffname'] ) && ! empty( $mwb_gaq_form_data['fqlname'] ) && ! empty( $mwb_gaq_form_data['fqemail'] ) ) {
+
+				$my_post_details = array(
+					'meta_input'   => array(
+						'form_value' => $mwb_gaq_form_data,
+					),
+					'post_author' => $mwb_gaq_form_data['ffname'],
+					'post_type'   => 'quotes',
+				);
+				if (wp_insert_post( $my_post_details )) {
+					$last_post_id = get_post();
+				print_r( $last_post_id );
+				} else {
+					echo 'Enter different';
+				}
+				// update_option( 'mwb_gaq_form_option_value', $mwb_gaq_form_data  ).
 				?>
 					<div class="notice notice-success is-dismissible">
 						<p><strong><?php esc_html_e('Thank you', 'get-a-quote'); ?></strong></p>
@@ -146,10 +160,11 @@ class Get_A_Quote_Public {
 			}
 		}
 		$mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', array() );
-		$mwb_gaq_enable_form = get_option('mwb_gaq_form_enable');
+		$mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable' );
 		if ( 'on' === $mwb_gaq_enable_form ) {
-			$mwb_gaq_form_values = get_option('mwb_gaq_form_option_value');
-			print_r( $mwb_gaq_form_values );
+			// $last_post_id = get_post();
+			// print_r( $last_post_id );
+			// $mwb_gaq_form_values = get_option( 'mwb_gaq_form_option_value' );
 			?>
 
 			<form action="" method="post">

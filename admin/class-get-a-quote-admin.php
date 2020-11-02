@@ -20,7 +20,8 @@
  * @subpackage Get_A_Quote/admin
  * @author     Make Web Better <plugins@makewebbetter.com>
  */
-class Get_A_Quote_Admin {
+class Get_A_Quote_Admin
+{
 
 	/**
 	 * The ID of this plugin.
@@ -47,14 +48,11 @@ class Get_A_Quote_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version)
+	{
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		add_filter('admin_menu', [ $this, 'quote_panel' ]);
-		add_filter( 'init', [ $this, 'quote_post_type' ]);
-		add_filter( 'init', [ $this, 'gaq_register_taxonomy_service' ]);
-		add_filter( 'init', [ $this, 'gaq_register_taxonomy_quote_status' ]);
 
 	}
 
@@ -63,7 +61,8 @@ class Get_A_Quote_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -77,10 +76,14 @@ class Get_A_Quote_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/get-a-quote-admin.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/get-a-quote-admin.css', array(), $this->version, 'all');
 	}
-
+	public function mwb_gaq_meta_inside() {
+		add_meta_box( 'mwb_gaq_meta1', __( 'Quotes', 'mwb_gaq' ), array( $this, 'custuom_meta_callback'), 'quotes' );
+	}
+	public function custuom_meta_callback( $post ) {
+		require_once plugin_dir_path( __FILE__ ) . 'partials/templates/mwb_gaq_custom_meta_box.php';
+	}
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
@@ -100,22 +103,42 @@ class Get_A_Quote_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/get-a-quote-admin.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/get-a-quote-admin.js', array('jquery'), $this->version, false);
 	}
+	/**
+	 * Quote_panel
+	 * to list menu and submenu on admin panel.
+	 *
+	 * @return void
+	 */
 	public function quote_panel() {
 		add_menu_page('quote page title', 'GET A QUOTE', 'manage_options', 'quote-options', 'gaq_quote_func');
-		add_submenu_page( 'quote-options', 'FAQ page title', 'FAQ', 'manage_options', 'quote-op-faq', 'gaq_quote_func_faq');
+		add_submenu_page('quote-options', 'FAQ page title', 'FAQ', 'manage_options', 'quote-op-faq', 'gaq_quote_func_faq');
 	}
 	/**
 	 * Wporg_custom_post_type
 	 */
 	public function quote_post_type() {
+		$labels = array(
+			'name' => __('Quotes', 'get-a-quote'),
+			'singular_name' => __('Quote', 'get-a-quote'),
+			'add_new' => __('Add New', 'get-a-quote'),
+			'add_new_item' => __('Add New Quote', 'get-a-quote'),
+			'edit_item' => __('Edit Quote', 'get-a-quote'),
+			'new_item' => __('New Quote', 'get-a-quote'),
+			'all_items' => __('All Quotes', 'get-a-quote'),
+			'view_item' => __('View Quote', 'get-a-quote'),
+			'search_items' => __('Search Quotes', 'get-a-quote'),
+			'not_found' => __('No Quotes Found', 'get-a-quote'),
+			'not_found_in_trash' => __('No Quotes Found In Trash', 'get-a-quote'),
+			'menu_name' => __('Quotes', 'get-a-quote'),
+		);
 		register_post_type( 'quotes',
 			array(
+				'supports'    => array( '' ),
 				'labels'      => array(
-					'name'          => __( 'Quotes', 'textdomain' ),
-					'singular_name' => __( 'Quote', 'textdomain' ),
+					'name'          => __('Quotes', 'get-a-quote'),
+					'singular_name' => __('Quote', 'get-a-quote'),
 				),
 				'public'              => true,
 				'show_ui'             => true,
@@ -128,27 +151,29 @@ class Get_A_Quote_Admin {
 				'has_archive'         => true,
 				'exclude_from_search' => false,
 				'publicly_queryable'  => true,
-				'capability_type'     => 'page',
-				'rewrite'     => array( 'slug' => 'Quotes' ), // my custom slug.
+				'capability_type'     => 'post',
+				'rewrite'     => array('slug' => 'Quotes'), // my custom slug.
 			)
 		);
 	}
+
 	/**
 	 * Gaq_register_taxonomy_service
 	 */
-	function gaq_register_taxonomy_service() {
+	function gaq_register_taxonomy_service()
+	{
 		$labels = [
-			'name'              => _x( 'Services', 'taxonomy general name' ),
-			'singular_name'     => _x( 'Service', 'taxonomy singular name' ),
-			'search_items'      => __( 'Search Services' ),
-			'all_items'         => __( 'All Services' ),
-			'parent_item'       => __( 'Parent Service' ),
-			'parent_item_colon' => __( 'Parent Service:' ),
-			'edit_item'         => __( 'Edit Service' ),
-			'update_item'       => __( 'Update Service' ),
-			'add_new_item'      => __( 'Add New Service' ),
-			'new_item_name'     => __( 'New Service Name' ),
-			'menu_name'         => __( 'Services' ),
+			'name'              => _x('Services', 'taxonomy general name'),
+			'singular_name'     => _x('Service', 'taxonomy singular name'),
+			'search_items'      => __('Search Services'),
+			'all_items'         => __('All Services'),
+			'parent_item'       => __('Parent Service'),
+			'parent_item_colon' => __('Parent Service:'),
+			'edit_item'         => __('Edit Service'),
+			'update_item'       => __('Update Service'),
+			'add_new_item'      => __('Add New Service'),
+			'new_item_name'     => __('New Service Name'),
+			'menu_name'         => __('Services'),
 		];
 		$args = [
 			'hierarchical'      => true, // make it hierarchical (like categories).
@@ -156,26 +181,27 @@ class Get_A_Quote_Admin {
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => [ 'slug' => 'service' ],
+			'rewrite'           => ['slug' => 'service'],
 		];
-		register_taxonomy( 'service', [ 'quotes' ], $args );
+		register_taxonomy('service', ['quotes'], $args);
 	}
 	/**
 	 * Gaq_register_taxonomy_quote_status
 	 */
-	function gaq_register_taxonomy_quote_status() {
+	function gaq_register_taxonomy_quote_status()
+	{
 		$labels = [
-			'name'              => _x( 'Quote Status', 'taxonomy general name' ),
-			'singular_name'     => _x( 'Status', 'taxonomy singular name' ),
-			'search_items'      => __( 'Search Status' ),
-			'all_items'         => __( 'All Status' ),
-			'parent_item'       => __( 'Parent Status' ),
-			'parent_item_colon' => __( 'Parent Status:' ),
-			'edit_item'         => __( 'Edit Status' ),
-			'update_item'       => __( 'Update Status' ),
-			'add_new_item'      => __( 'Add New Status' ),
-			'new_item_name'     => __( 'New Status Name' ),
-			'menu_name'         => __( 'Quote Statuses' ),
+			'name'              => _x('Quote Status', 'taxonomy general name'),
+			'singular_name'     => _x('Status', 'taxonomy singular name'),
+			'search_items'      => __('Search Status'),
+			'all_items'         => __('All Status'),
+			'parent_item'       => __('Parent Status'),
+			'parent_item_colon' => __('Parent Status:'),
+			'edit_item'         => __('Edit Status'),
+			'update_item'       => __('Update Status'),
+			'add_new_item'      => __('Add New Status'),
+			'new_item_name'     => __('New Status Name'),
+			'menu_name'         => __('Quote Statuses'),
 		];
 		$args = [
 			'hierarchical'      => true, // make it hierarchical (like categories).
@@ -183,9 +209,8 @@ class Get_A_Quote_Admin {
 			'show_ui'           => true,
 			'show_admin_column' => true,
 			'query_var'         => true,
-			'rewrite'           => [ 'slug' => 'Status' ],
+			'rewrite'           => ['slug' => 'Status'],
 		];
-		register_taxonomy( 'Status', [ 'quotes' ], $args );
+		register_taxonomy('Status', ['quotes'], $args);
 	}
-
 }
