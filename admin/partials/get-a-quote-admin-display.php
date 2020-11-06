@@ -16,42 +16,42 @@
 // <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 if ( ! defined( 'ABSPATH' ) ) {
 
-exit;
+	exit;
 }
 $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'Welcome';
 do_action( 'mwb_gaq_setting_tab_active' );
 if ( 'overview' == get_transient( 'mwb_gaq_default_settings_tab' ) ) {
 
-$mwb_membership_active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'settings';
+	$mwb_membership_active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'settings';
 }
 ?>
 <div class="wrapper" id="mwb_gaq_setting_wrapper">
 <h1 class="mwb_gaq_setting_title"><?php esc_html_e( 'Get a Quote', 'get-a-quote' ); ?>
-<span class="mwb_gaq_setting_title_version">
-<?php
-esc_html_e( 'v', 'get-a-quote' );
-echo "GET_A_QUOTE_VERSION";
-?>
-</span>
+	<span class="mwb_gaq_setting_title_version">
+		<?php
+		esc_html_e( 'v', 'get-a-quote' );
+		echo "GET_A_QUOTE_VERSION";
+		?>
+	</span>
 </h1>
 <nav class="nav-tab-wrapper woo-nav-tab-wrapper">
-    <a class="nav-tab <?php echo $active_tab == 'setting' ? 'nav-tab-active' : ''; ?>" href="?page=quote-options&tab=setting"><?php _e( 'Settings', 'get-a-quote' ); ?></a>
-    <a class="nav-tab <?php echo $active_tab == 'form-fields' ? 'nav-tab-active' : ''; ?>" href="?page=quote-options&tab=form-fields"><?php _e( 'Form Fields', 'get-a-quote' ); ?></a>
-    <a class="nav-tab <?php echo $active_tab == 'taxonomies' ? 'nav-tab-active' : ''; ?>" href="?page=quote-options&tab=taxonomies"><?php _e( 'Taxonomies', 'get-a-quote' ); ?></a>
+	<a class="nav-tab <?php echo $active_tab == 'setting' ? 'nav-tab-active' : ''; ?>" href="?page=quote-options&tab=setting"><?php _e( 'Settings', 'get-a-quote' ); ?></a>
+	<a class="nav-tab <?php echo $active_tab == 'form-fields' ? 'nav-tab-active' : ''; ?>" href="?page=quote-options&tab=form-fields"><?php _e( 'Form Fields', 'get-a-quote' ); ?></a>
+	<a class="nav-tab <?php echo $active_tab == 'taxonomies' ? 'nav-tab-active' : ''; ?>" href="?page=quote-options&tab=taxonomies"><?php _e( 'Taxonomies', 'get-a-quote' ); ?></a>
 
-    <?php do_action( 'mwb_gaq_setting_tab' ); ?>	
+	<?php do_action( 'mwb_gaq_setting_tab' ); ?>	
 </nav>
 <?php
 
 if ( $active_tab == 'setting' ) {
 
-    include_once 'templates/mwb_gaq_setting.php';
+	include_once 'templates/mwb_gaq_setting.php';
 } elseif ( $active_tab == 'form-fields' ) {
-    include_once 'templates/mwb_gaq_form_fields.php';
+	include_once 'templates/mwb_gaq_form_fields.php';
 } elseif ( $active_tab == 'taxonomies' ) {
-    include_once 'templates/mwb_gaq_taxonomies.php';
+	include_once 'templates/mwb_gaq_taxonomies.php';
 }
 
-    do_action( 'mwb_gaq_setting_tab_html' );
+do_action( 'mwb_gaq_setting_tab_html' );
 ?>
 </div>

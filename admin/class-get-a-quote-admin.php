@@ -163,17 +163,17 @@ class Get_A_Quote_Admin
 	function gaq_register_taxonomy_service()
 	{
 		$labels = [
-			'name'              => _x('Services', 'taxonomy general name'),
-			'singular_name'     => _x('Service', 'taxonomy singular name'),
-			'search_items'      => __('Search Services'),
-			'all_items'         => __('All Services'),
-			'parent_item'       => __('Parent Service'),
-			'parent_item_colon' => __('Parent Service:'),
-			'edit_item'         => __('Edit Service'),
-			'update_item'       => __('Update Service'),
-			'add_new_item'      => __('Add New Service'),
-			'new_item_name'     => __('New Service Name'),
-			'menu_name'         => __('Services'),
+			'name'              => _x( 'Services', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Service', 'taxonomy singular name' ),
+			'search_items'      => __( 'Search Services' ),
+			'all_items'         => __( 'All Services' ),
+			'parent_item'       => __( 'Parent Service' ),
+			'parent_item_colon' => __( 'Parent Service:' ),
+			'edit_item'         => __( 'Edit Service' ),
+			'update_item'       => __( 'Update Service' ),
+			'add_new_item'      => __( 'Add New Service' ),
+			'new_item_name'     => __( 'New Service Name' ),
+			'menu_name'         => __( 'Services' ),
 		];
 		$args = [
 			'hierarchical'      => true, // make it hierarchical (like categories).
@@ -183,7 +183,7 @@ class Get_A_Quote_Admin
 			'query_var'         => true,
 			'rewrite'           => ['slug' => 'service'],
 		];
-		register_taxonomy('service', ['quotes'], $args);
+		register_taxonomy( 'service', ['quotes'], $args );
 	}
 	/**
 	 * Gaq_register_taxonomy_quote_status
@@ -211,6 +211,6 @@ class Get_A_Quote_Admin
 			'query_var'         => true,
 			'rewrite'           => ['slug' => 'Status'],
 		];
-		register_taxonomy('Status', ['quotes'], $args);
+		register_taxonomy( 'Status', ['quotes'], $args );
 	}
 }

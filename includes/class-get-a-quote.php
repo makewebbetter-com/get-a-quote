@@ -153,10 +153,13 @@ class Get_A_Quote {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Get_A_Quote_Admin( $this->get_plugin_name(), $this->get_version() );
+		$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin' );
 		$this->loader->add_filter( 'admin_menu', $plugin_admin, 'quote_panel' );
-		$this->loader->add_filter( 'init', $plugin_admin, 'quote_post_type' );
-		$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_service' );
-		$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_quote_status' );
+		if ( 'on' === $mwb_gaq_enable_plugin ) {
+			$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_service' );
+			$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_quote_status' );
+			$this->loader->add_filter( 'init', $plugin_admin, 'quote_post_type' );
+		}
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'mwb_gaq_meta_inside' );

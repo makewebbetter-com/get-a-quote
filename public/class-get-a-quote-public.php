@@ -108,7 +108,7 @@ class Get_A_Quote_Public {
 	 * @return void
 	 */
 	public function Quote_form() {
-
+		$recent_post_id = 0;
 		if ( isset( $_POST['qsubmit'] ) ) {
 				$mwb_gaq_form_data = array();
 
@@ -144,17 +144,76 @@ class Get_A_Quote_Public {
 					),
 					'post_author' => $mwb_gaq_form_data['ffname'],
 					'post_type'   => 'quotes',
+					'post_status' => 'publish',
 				);
-				if (wp_insert_post( $my_post_details )) {
-					$last_post_id = get_post();
-				print_r( $last_post_id );
-				} else {
-					echo 'Enter different';
+				wp_insert_post( $my_post_details );
+
+				// $latest_books = wp_get_recent_post( $args );
+				$recent_posts = get_posts( array(
+					'fields'      => 'ids',
+					'post_type'   => 'quotes' )
+				);
+				// wp_get_recent_post()
+				$recent_post_id = $recent_posts[0];
+				print_r( $recent_post_id );
+				// Upload and Rename File
+				if ( isset( $_POST['submit'] ) )
+				{
+					$filename = $_FILES["file"]["name"];
+					$file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
+					$file_ext = substr($filename, strripos($filename, '.')); // get file name
+					$filesize = $_FILES["file"]["size"];
+					$allowed_file_types = array('.doc','.docx','.rtf','.pdf');	
+
+					if (in_array($file_ext,$allowed_file_types) && ($filesize < 200000))
+					{	
+						// Rename file
+						$newfilename = md5($file_basename) . $file_ext;
+						if (file_exists("upload/" . $newfilename))
+						{
+							// file already exists error
+							echo "You have already uploaded this file.";
+						}
+						else
+						{		
+							move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $newfilename);
+							echo "File uploaded successfully.";		
+						}
+					}
+					// plugin_dir_path( __FILE__ ) . 
+					elseif (empty($file_basename))
+					{	
+						// file selection error
+						echo "Please select a file to upload.";
+					} 
+					elseif ($filesize > 200000)
+					{	
+						// file size error
+						echo "The file you are trying to upload is too large.";
+					}
+					else
+					{
+						// file type error
+						echo "Only these file typs are allowed for upload: " . implode(', ',$allowed_file_types);
+						unlink($_FILES["file"]["tmp_name"]);
+					}
 				}
-				// update_option( 'mwb_gaq_form_option_value', $mwb_gaq_form_data  ).
+				}
+				// update_option( 'recent_post_id' ).
 				?>
+				</ul>
+				<!-- // $recent_posts = get_recent_posts();
+				// print_r( $recent_posts );
+				// echo $thePostID;
+				// update_option( 'mwb_gaq_form_option_value', $mwb_gaq_form_data  ). -->
 					<div class="notice notice-success is-dismissible">
 						<p><strong><?php esc_html_e('Thank you', 'get-a-quote'); ?></strong></p>
+					</div>
+				<?php
+			} else {
+				?>
+					<div class="notice-success is-dismissible">
+						<p><strong><?php esc_html_e('Issue in required Fields', 'get-a-quote'); ?></strong></p>
 					</div>
 				<?php
 			}
@@ -166,8 +225,9 @@ class Get_A_Quote_Public {
 			// print_r( $last_post_id );
 			// $mwb_gaq_form_values = get_option( 'mwb_gaq_form_option_value' );
 			?>
+			<?php $fqfile = isset( $mwb_gaq_form_values['fqfile'] ) ? $mwb_gaq_form_values['fqfile'] : ''; ?>
 
-			<form action="" method="post">
+			<form action="" method="post"  >
 
 			<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_fname_field'] ) { ?>
 
@@ -325,11 +385,9 @@ class Get_A_Quote_Public {
 
 				<p>
 
-					<label><?php  esc_html_e( ' Max Size: 3MB', 'get-a-quote' ); ?></label><br />
+					<label><?php  esc_html_e( ' Max Size: 3MB ', 'get-a-quote' ); ?></label><br>
 
-					<?php $fqfile = isset( $mwb_gaq_form_values['fqfile'] ) ? $mwb_gaq_form_values['fqfile'] : ''; ?>
-
-					<input type="button" name="fqfile" size="40" value="Upload File" />
+					<input type="file" name="fqfile" id="fileToUpload">
 
 				</p>
 

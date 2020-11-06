@@ -3,15 +3,28 @@
 /**
  * Exit if accessed directly
  */
-if (!defined('ABSPATH')) {
+if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
+if ( isset( $_POST['mwb_gaq_common_settings_save'] ) ) {
 
+	$mwb_gaq_setting = array();
 
+	$mwb_gaq_setting['mwb_gaq_enable_plugin'] = !empty($_POST['mwb_gaq_enable_plugin']) ? 'on' : 'off';
+
+	update_option( 'mwb_gaq_setting_visibility', $mwb_gaq_setting );
+	update_option( 'mwb_gaq_enable_plugin', $mwb_gaq_setting['mwb_gaq_enable_plugin'] ); ?>
+
+	<div class="notice notice-success is-dismissible">
+		<p><strong><?php _e('Settings saved', 'get-a-quote'); ?></strong></p>
+	</div>
+	<?php
+}
+$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', 'on' );
 ?>
 <form action="" method="POST">
 	<div class="mwb_gaq_table">
-	<h2> Settings </h2>
+		<h2> Settings </h2>
 		<table class="form-table mwb_gaq_setting">
 			<tbody>
 				<tr valign="top">
@@ -19,29 +32,18 @@ if (!defined('ABSPATH')) {
 						<label for="mwb_gaq_enable_plugin"><?php esc_html_e('Enable Plugin', 'get-a-quote'); ?></label>
 					</th>
 					<td>
+
 						<label class="mwb_gaq_enable_plugin_label">
-							<input class="mwb_gaq_enable_plugin_input" type="checkbox" <?php echo ($mwb_gaq_enable_plugin == 'on') ? "checked='checked'" : ''; ?> name="mwb_wocuf_pro_enable_plugin">
+							<input class="mwb_gaq_enable_plugin_input" type="checkbox" <?php echo ($mwb_gaq_enable_plugin == 'on') ? "checked='checked'" : ''; ?> name="mwb_gaq_enable_plugin">
 							<span class="mwb_gaq_enable_plugin_span"></span>
 						</label>
 					</td>
 				</tr>
-				<tr valign="top">
-					<th scope="row" class="titledesc">
-						<label><?php esc_html_e( 'Visibility', 'get-a-quote' ); ?></label>
-					</th>
-					<td>
-						<div class="mwb_gaq_visibility">
-							<?php
-							$global_product_discount = isset( $mwb_upsell_global_settings['vsiblity_gaq_setting'] ) ? $mwb_upsell_global_settings['vsiblity_gaq_setting'] : 'admin';
-							?>
-
-					<select class="mwb_gaq_select" name="select_from_visibility">	
-						<option value="yes" <?php selected( $remove_all_styles, 'yes' ); ?> ><?php esc_html_e( 'Yes', 'get-a-quote' ); ?></option>
-						<option value="no" <?php selected( $remove_all_styles, 'no' ); ?> ><?php esc_html_e( 'No', 'get-a-quote' ); ?></option>
-					</select></div>
-						<span class="mwb_upsell_global_description"><?php esc_html_e( 'To allow the visibility of form', 'get-a-quote' ); ?></span>
-					</td>
-				</tr>
+				<?php do_action('mwb_gaq_create_more_settings'); ?>
 			<tbody>
 		</table>
+		<p class="submit">
+			<input type="submit" value="<?php esc_html_e('Save Changes', 'get-a-quote'); ?>" class="button-primary save-button" name="mwb_gaq_common_settings_save" id="mwb_gaq_setting_save">
+		</p>
+	</div>
 </form>

@@ -1,4 +1,6 @@
-
+<?php
+// $details = get_post_meta();
+?>
 <table class="form-table">
 	<p class"lead"></p>
 	<tr>
@@ -44,6 +46,6 @@
 	</tr>
 	<tr>
 		<th><?php _e('Attachments', 'get-a-quote'); ?></th>
-		<td><input id="attachment" type="text" name="attachment" value=""><?php _e('Attach related files to the quote. Attachments does not have a default value. ', 'get-a-quote'); ?></td>
+		<td><input id="attachment" type="test" name="attachment" value=""><?php _e('Attach related files to the quote. Attachments does not have a default value. ', 'get-a-quote'); ?></td>
 	</tr>
 </table>
