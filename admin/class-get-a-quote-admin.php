@@ -48,8 +48,7 @@ class Get_A_Quote_Admin
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct($plugin_name, $version)
-	{
+	public function __construct( $plugin_name, $version) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
@@ -61,8 +60,7 @@ class Get_A_Quote_Admin
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles()
-	{
+	public function enqueue_styles() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -120,18 +118,18 @@ class Get_A_Quote_Admin
 	 */
 	public function quote_post_type() {
 		$labels = array(
-			'name' => __('Quotes', 'get-a-quote'),
-			'singular_name' => __('Quote', 'get-a-quote'),
-			'add_new' => __('Add New', 'get-a-quote'),
-			'add_new_item' => __('Add New Quote', 'get-a-quote'),
-			'edit_item' => __('Edit Quote', 'get-a-quote'),
-			'new_item' => __('New Quote', 'get-a-quote'),
-			'all_items' => __('All Quotes', 'get-a-quote'),
-			'view_item' => __('View Quote', 'get-a-quote'),
-			'search_items' => __('Search Quotes', 'get-a-quote'),
-			'not_found' => __('No Quotes Found', 'get-a-quote'),
-			'not_found_in_trash' => __('No Quotes Found In Trash', 'get-a-quote'),
-			'menu_name' => __('Quotes', 'get-a-quote'),
+			'name' 				 => __( 'Quotes', 'get-a-quote' ),
+			'singular_name' 	 => __( 'Quote', 'get-a-quote' ),
+			'add_new' 			 => __( 'Add New', 'get-a-quote' ),
+			'add_new_item'  	 => __( 'Add New Quote', 'get-a-quote' ),
+			'edit_item' 		 => __( 'Edit Quote', 'get-a-quote' ),
+			'new_item' 			 => __( 'New Quote', 'get-a-quote' ),
+			'all_items' 		 => __( 'All Quotes', 'get-a-quote' ),
+			'view_item' 		 => __( 'View Quote', 'get-a-quote' ),
+			'search_items'  	 => __( 'Search Quotes', 'get-a-quote' ),
+			'not_found' 		 => __( 'No Quotes Found', 'get-a-quote' ),
+			'not_found_in_trash' => __( 'No Quotes Found In Trash', 'get-a-quote' ),
+			'menu_name' 		 => __( 'Quotes', 'get-a-quote' ),
 		);
 		register_post_type( 'quotes',
 			array(
@@ -156,12 +154,10 @@ class Get_A_Quote_Admin
 			)
 		);
 	}
-
 	/**
 	 * Gaq_register_taxonomy_service
 	 */
-	function gaq_register_taxonomy_service()
-	{
+	public function gaq_register_taxonomy_service() {
 		$labels = [
 			'name'              => _x( 'Services', 'taxonomy general name' ),
 			'singular_name'     => _x( 'Service', 'taxonomy singular name' ),
@@ -188,8 +184,7 @@ class Get_A_Quote_Admin
 	/**
 	 * Gaq_register_taxonomy_quote_status
 	 */
-	function gaq_register_taxonomy_quote_status()
-	{
+	public function gaq_register_taxonomy_quote_status() {
 		$labels = [
 			'name'              => _x('Quote Status', 'taxonomy general name'),
 			'singular_name'     => _x('Status', 'taxonomy singular name'),

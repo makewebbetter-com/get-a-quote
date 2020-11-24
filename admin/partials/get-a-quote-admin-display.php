@@ -18,12 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	exit;
 }
-$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'Welcome';
+$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'setting';
 do_action( 'mwb_gaq_setting_tab_active' );
-if ( 'overview' == get_transient( 'mwb_gaq_default_settings_tab' ) ) {
 
-	$mwb_membership_active_tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'settings';
-}
 ?>
 <div class="wrapper" id="mwb_gaq_setting_wrapper">
 <h1 class="mwb_gaq_setting_title"><?php esc_html_e( 'Get a Quote', 'get-a-quote' ); ?>

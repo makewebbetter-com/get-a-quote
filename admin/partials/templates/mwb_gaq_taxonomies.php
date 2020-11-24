@@ -3,7 +3,7 @@
 /**
  * Exit if accessed directly
  */
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -63,7 +63,7 @@ $mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', array() )
 		<input type="submit" value="<?php _e( 'Save Changes', 'get-a-quote' ); ?>" class="button-primary save-button" name="mwb_gaq_taxonomies_common_settings_save" id="mwb_gaq_taxonomies_setting_save" >
 	</p>
 </form>
-<?php 
+<?php
 if ( isset( $_POST['mwb_gaq_taxonomies_common_settings_save'] ) ) {
 
 	$mwb_gaq_taxonomies_setting = array();

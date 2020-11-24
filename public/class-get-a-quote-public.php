@@ -134,14 +134,9 @@ class Get_A_Quote_Public {
 
 				$mwb_gaq_form_data['fqadd'] = ! empty( $_POST['fqadd'] ) ? sanitize_textarea_field( wp_unslash( $_POST['fqadd'] ) ) : '';
 
-				$mwb_gaq_form_data['fqfile'] = ! empty( $_POST['fqfile '] ) ? sanitize_text_field( wp_unslash( $_POST['fqfile'] ) ) : '';
-
 			if ( ! empty( $mwb_gaq_form_data['ffname'] ) && ! empty( $mwb_gaq_form_data['fqlname'] ) && ! empty( $mwb_gaq_form_data['fqemail'] ) ) {
 
 				$my_post_details = array(
-					'meta_input'   => array(
-						'form_value' => $mwb_gaq_form_data,
-					),
 					'post_author' => $mwb_gaq_form_data['ffname'],
 					'post_type'   => 'quotes',
 					'post_status' => 'publish',
@@ -150,55 +145,49 @@ class Get_A_Quote_Public {
 
 				// $latest_books = wp_get_recent_post( $args );
 				$recent_posts = get_posts( array(
-					'fields'      => 'ids',
-					'post_type'   => 'quotes' )
+					'fields'    => 'ids',
+					'post_type' => 'quotes' )
 				);
 				// wp_get_recent_post()
 				$recent_post_id = $recent_posts[0];
-				print_r( $recent_post_id );
-				// Upload and Rename File
-				if ( isset( $_POST['submit'] ) )
-				{
-					$filename = $_FILES["file"]["name"];
-					$file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
-					$file_ext = substr($filename, strripos($filename, '.')); // get file name
-					$filesize = $_FILES["file"]["size"];
-					$allowed_file_types = array('.doc','.docx','.rtf','.pdf');	
-
-					if (in_array($file_ext,$allowed_file_types) && ($filesize < 200000))
-					{	
-						// Rename file
-						$newfilename = md5($file_basename) . $file_ext;
-						if (file_exists("upload/" . $newfilename))
-						{
-							// file already exists error
-							echo "You have already uploaded this file.";
-						}
-						else
-						{		
-							move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $newfilename);
-							echo "File uploaded successfully.";		
-						}
-					}
-					// plugin_dir_path( __FILE__ ) . 
-					elseif (empty($file_basename))
-					{	
-						// file selection error
-						echo "Please select a file to upload.";
-					} 
-					elseif ($filesize > 200000)
-					{	
-						// file size error
-						echo "The file you are trying to upload is too large.";
-					}
-					else
-					{
-						// file type error
-						echo "Only these file typs are allowed for upload: " . implode(', ',$allowed_file_types);
-						unlink($_FILES["file"]["tmp_name"]);
+				//print_r( $recent_post_id );
+				$filename = $_FILES['file']['name'];
+				$file_basename = 'quote-' . $recent_post_id;
+				$file_ext = substr( $filename, strripos( $filename, '.' ) ); // get file name
+					// $filesize = $_FILES["file"]["size"];
+				$allowed_file_types = array( '.doc', '.docx', '.pdf' );
+				// && ( $filesize < 200000 )
+				if ( in_array( $file_ext, $allowed_file_types ) ) {
+					// Rename file.
+					$newfilename = md5($file_basename) . $file_ext;
+					$target_dir = plugin_dir_path( __FILE__ ) . 'public/uploads';
+					if ( file_exists( $target_dir . $newfilename ) ) {
+						// file already exists error
+						_e( "You have already uploaded this file." );
+					} else {
+						move_uploaded_file( wp_unslash( $_FILES['file']['tmp_name'] ), $target_dir . $newfilename );
+						_e( "File uploaded successfully." );
 					}
 				}
-				}
+				// 	// plugin_dir_path( __FILE__ ) . 
+				// 	elseif ( empty( $file_basename ))
+				// 	{	
+				// 		// file selection error
+				// 		echo "Please select a file to upload.";
+				// 	} 
+				// 	elseif ($filesize > 200000)
+				// 	{	
+				// 		// file size error
+				// 		echo "The file you are trying to upload is too large.";
+				// 	}
+				// 	else
+				// 	{
+				// 		// file type error
+				// 		echo "Only these file typs are allowed for upload: " . implode(', ',$allowed_file_types);
+				// 		unlink($_FILES["file"]["tmp_name"]);
+				// 	}
+				// }
+				// }
 				// update_option( 'recent_post_id' ).
 				?>
 				</ul>
@@ -207,13 +196,13 @@ class Get_A_Quote_Public {
 				// echo $thePostID;
 				// update_option( 'mwb_gaq_form_option_value', $mwb_gaq_form_data  ). -->
 					<div class="notice notice-success is-dismissible">
-						<p><strong><?php esc_html_e('Thank you', 'get-a-quote'); ?></strong></p>
+						<p><strong><?php esc_html_e( 'Thank you', 'get-a-quote' ); ?></strong></p>
 					</div>
 				<?php
 			} else {
 				?>
 					<div class="notice-success is-dismissible">
-						<p><strong><?php esc_html_e('Issue in required Fields', 'get-a-quote'); ?></strong></p>
+						<p><strong><?php esc_html_e( 'Issue in required Fields', 'get-a-quote' ); ?></strong></p>
 					</div>
 				<?php
 			}

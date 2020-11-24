@@ -3,7 +3,7 @@
 /**
  * Exit if accessed directly
  */
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -37,17 +37,17 @@ if ( isset( $_POST['mwb_gaq_form_fields_settings_save'] ) ) {
 
 	$mwb_gaq_form_fields_setting['select_for_fileup_field'] = ! empty( $_POST['select_for_fileup_field'] ) ? sanitize_text_field( $_POST['select_for_fileup_field'] ) : 'yes';
 
-	update_option('mwb_gaq_form_enable', $mwb_gaq_form_fields_setting['mwb_gaq_enable_form'] );
-	update_option('mwb_gaq_form_fields_options', $mwb_gaq_form_fields_setting);
+	update_option( 'mwb_gaq_form_enable', $mwb_gaq_form_fields_setting['mwb_gaq_enable_form'] );
+	update_option( 'mwb_gaq_form_fields_options', $mwb_gaq_form_fields_setting );
 ?>
 	<div class="notice notice-success is-dismissible">
-		<p><strong><?php esc_html_e('Settings saved', 'get-a-quote'); ?></strong></p>
+		<p><strong><?php esc_html_e( 'Settings saved', 'get-a-quote' ); ?></strong></p>
 	</div>
 <?php
 }
 
-$mwb_gaq_form_fields_option = get_option('mwb_gaq_form_fields_options', array());
-$mwb_gaq_enable_form = get_option('mwb_gaq_form_enable', 'on');
+$mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', array() );
+$mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 ?>
 
 <form action="" method="POST">
