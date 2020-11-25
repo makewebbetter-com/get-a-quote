@@ -166,6 +166,7 @@ class Get_A_Quote {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'mwb_gaq_meta_inside' );
+		$this->loader->add_action( 'save_post', $plugin_admin, 'mwb_gaq_update_quote' );
 	}
 
 	/**

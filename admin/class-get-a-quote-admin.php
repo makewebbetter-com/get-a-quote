@@ -133,8 +133,8 @@ class Get_A_Quote_Admin
 		);
 		register_post_type( 'quotes',
 			array(
-				'supports'    => array( '' ),
-				'labels'      => array(
+				'supports'   		  => array( '' ),
+				'labels'     		  => array(
 					'name'          => __('Quotes', 'get-a-quote'),
 					'singular_name' => __('Quote', 'get-a-quote'),
 				),
@@ -150,9 +150,13 @@ class Get_A_Quote_Admin
 				'exclude_from_search' => false,
 				'publicly_queryable'  => true,
 				'capability_type'     => 'post',
-				'rewrite'     => array('slug' => 'Quotes'), // my custom slug.
+				'rewrite'     		  => array('slug' => 'Quotes'), // my custom slug.
 			)
 		);
+	}
+	public function mwb_gaq_update_quote() {
+		
+		// echo '<pre>'; print_r( $_POST ); echo '</pre>'; die;
 	}
 	/**
 	 * Gaq_register_taxonomy_service
