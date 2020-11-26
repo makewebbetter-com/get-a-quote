@@ -155,8 +155,25 @@ class Get_A_Quote_Admin
 		);
 	}
 	public function mwb_gaq_update_quote() {
-		
-		// echo '<pre>'; print_r( $_POST ); echo '</pre>'; die;
+		$post_update_meta = array();
+		$post_id = $_POST['ID'];
+		$post_update_meta['ffname'] = $_POST['firstname'];
+		$post_update_meta['fqlname'] = $_POST['lastname'];
+		$post_update_meta['fqaddress'] = $_POST['address'];
+		$post_update_meta['fqcity'] = $_POST['city'];
+		$post_update_meta['fqzipcode'] = $_POST['zipcode'];
+		$post_update_meta['fqstates'] = $_POST['states'];
+		$post_update_meta['fqcountry'] = $_POST['country'];
+		$post_update_meta['fqemail'] = $_POST['email'];
+		$post_update_meta['fqphone'] = $_POST['phone'];
+		$post_update_meta['fqbudget'] = $_POST['budget'];
+		$post_update_meta['fqadd'] = $_POST['add'];
+		$post_update_meta['fqfilename'] = $_POST['attachment'];
+			// echo '<pre>'; print_r( $_POST ); echo '</pre>'; die;
+		if( ! empty( $post_update_meta )) {
+			update_post_meta($post_id, 'quotes_meta', $post_update_meta);
+			//echo '<pre>'; print_r( "Updated" ); echo '</pre>';
+		}
 	}
 	/**
 	 * Gaq_register_taxonomy_service
