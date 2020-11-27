@@ -80,6 +80,24 @@ class Get_A_Quote_Public
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/get-a-quote-public.css', array(), $this->version, 'all');
 
     }
+    
+    public function my_phpmailer_example( $phpmailer ) {
+
+        $phpmailer->isSMTP();
+        $phpmailer->Host = 'cedcoss.com';
+        $phpmailer->Port = 443; // could be different
+        /*$phpmailer->SMTPDebug = SMTP::DEBUG_SERVER;
+        $phpmailer->SMTPDebug = 1;*/ //Alternative to above constant
+        $phpmailer->Username = 'smtp@cedcoss.com'; // if required
+        $phpmailer->Password = 'pYaCEzJdWk1h'; // if required
+        $phpmailer->SMTPAuth = true; // if required
+        $phpmailer->SMTPSecure = 'ssl'; // enable if required, 'tls' is another possible value
+    }
+    //$to = 'Shaileshkumardubey@makewebbetter.com';
+    // $subject = 'The subject';
+    // $body = 'The email body content';
+    // $headers = array('Content-Type: text/html; charset=UTF-8','From: My Site Name &lt;support@example.com');
+    wp_mail( 'Shaileshkumardubey@makewebbetter.com', 'The subject' );
 
     /**
      * Register the JavaScript for the public-facing side of the site.
@@ -152,16 +170,18 @@ class Get_A_Quote_Public
                 $recent_posts = get_posts(array(
                     'fields' => 'ids',
                     'post_type' => 'quotes')
-				);
-				
+                );
+
                 // wp_get_recent_post()
-				$recent_post_id = $recent_posts[0];
-				// echo '<pre>'; print_r( $_POST ); echo '</pre>';
-                if( !empty( $_FILES['fqfiles']['name'] ) ) {
-					echo '<pre>'; print_r( $_FILES ); echo '</pre>';
-					// echo '<pre>'; print_r( $_POST['fqfile'] ); echo '</pre>';
+                $recent_post_id = $recent_posts[0];
+                // echo '<pre>'; print_r( $_POST ); echo '</pre>';
+                if (!empty($_FILES['fqfiles']['name'])) {
+                    echo '<pre>';
+                    print_r($_FILES);
+                    echo '</pre>';
+                    // echo '<pre>'; print_r( $_POST['fqfile'] ); echo '</pre>';
                     $errors = array();
-					$file_name = $_FILES['fqfile']['name'];
+                    $file_name = $_FILES['fqfile']['name'];
                     // $file_size   = $_FILES['fqfile']['size'];
                     $file_tmp = $_FILES['fqfile']['tmp_name'];
                     $file_type = $_FILES['fqfile']['type'];
@@ -169,19 +189,19 @@ class Get_A_Quote_Public
 
                     $extensions = array("pdf", "docx", "txt", "png");
                     //echo '<pre>'; print_r( $FILE ); echo '</pre>';
-					// die();
-					if( ! empty ($file_ext)) {
-						if (in_array($file_ext, $extensions) === false) {
-							$errors[] = "extension not allowed, please choose a pdf or docx file.";
-						}
-					}
+                    // die();
+                    if (!empty($file_ext)) {
+                        if (in_array($file_ext, $extensions) === false) {
+                            $errors[] = "extension not allowed, please choose a pdf or docx file.";
+                        }
+                    }
                     $log_dir = ABSPATH . "wp-content/uploads/quote-submission";
                     if (!is_dir($log_dir)) {
 
                         mkdir($log_dir, 0755, true);
-					}
+                    }
 
-					$mwb_gaq_form_data['fqfilename'] = '';
+                    $mwb_gaq_form_data['fqfilename'] = '';
 
                     if (empty($errors) == true) {
                         $mwb_gaq_form_data['fqfilename'] = "quote_" . $recent_post_id . "." . $file_ext;
@@ -195,16 +215,16 @@ class Get_A_Quote_Public
                     }
                 }
                 $data = array('quotes_meta' => $mwb_gaq_form_data);
-				update_post_meta($recent_post_id, 'quotes_meta', $data);
-				// $to = $mwb_gaq_form_data['fqemail'];
-				// $subject = "Thank you we recieved your query.";
-				// $headers = "Quotations";
-				// $message = 'Thank you for choosing us';
-				// $attachments = '';
-				// $bool = WC_Emails::send( $to, $subject, $message, $headers, $attachments );
-				// print_r( $bool );
-				$header = array( 'Content-Type: text/html; charset=UTF-8' );
-				wp_mail("shaileshkumardubey@makewebbetter.com", "Subject", "Message", $header);
+                update_post_meta($recent_post_id, 'quotes_meta', $data);
+                // $to = $mwb_gaq_form_data['fqemail'];
+                // $subject = "Thank you we recieved your query.";
+                // $headers = "Quotations";
+                // $message = 'Thank you for choosing us';
+                // $attachments = '';
+                // $bool = WC_Emails::send( $to, $subject, $message, $headers, $attachments );
+                // print_r( $bool );
+                $header = array('Content-Type: text/html; charset=UTF-8');
+                wp_mail("shaileshkumardubey@makewebbetter.com", "Subject", "Message", $header);
                 // print_r( $recent_post_id );
                 ?>
 				</ul>
@@ -240,7 +260,7 @@ class Get_A_Quote_Public
 					<?php $ffname = isset($mwb_gaq_form_values['ffname']) ? $mwb_gaq_form_values['ffname'] : '';?>
 
 					<input type="text" name="ffname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html__(wp_unslash($ffname)); ?>" size="40" placeholder="First Name" />
-				
+
 				</p>
 
 			<?php }?>
@@ -254,7 +274,7 @@ class Get_A_Quote_Public
 					<?php $fqlname = isset($mwb_gaq_form_values['fqlname']) ? $mwb_gaq_form_values['fqlname'] : '';?>
 
 					<input type="text" name="fqlname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html__(wp_unslash($fqlname)); ?>" size="40" placeholder="Last Name" />
-				
+
 				</p>
 
 			<?php }?>

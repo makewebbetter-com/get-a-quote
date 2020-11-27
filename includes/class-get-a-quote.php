@@ -106,6 +106,12 @@ class Get_A_Quote {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-loader.php';
 
 		/**
+		 * The class is responsible for global functions
+		 *  
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-global-functions.php';
+
+		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
@@ -153,10 +159,14 @@ class Get_A_Quote {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Get_A_Quote_Admin( $this->get_plugin_name(), $this->get_version() );
-		$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin' );
+		
+		$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', Get_A_Quote_Helper :: enabling_default_value( 'enable' )  );
+		
+
 		$this->loader->add_filter( 'admin_menu', $plugin_admin, 'quote_panel' );
 		if ( 'on' === $mwb_gaq_enable_plugin ) {
-			$mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', array() );
+
+			$mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', Get_A_Quote_Helper :: enabling_default_value( 'taxonomy' ) );
 			if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_services'] ) {
 				$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_service' ); }
 			if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_status'] ) {
@@ -167,6 +177,7 @@ class Get_A_Quote {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'mwb_gaq_meta_inside' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'mwb_gaq_update_quote' );
+		$this->loader->add_action('phpmailer_init', $plugin_admin, 'my_phpmailer_example' );
 	}
 
 	/**
