@@ -160,9 +160,7 @@ class Get_A_Quote {
 
 		$plugin_admin = new Get_A_Quote_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'manage_quotes_posts_columns', $plugin_admin, 'mwb_gaq_column' );
-
-		$this->loader->add_action( 'manage_quotes_posts_custom_column', $plugin_admin, 'mwb_gaq_fill_columns', 10, 2 );
+		$this->loader->add_action( 'manage_quotes_posts_columns', $plugin_admin, 'mwb_gaq_columns' );
 
 		$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', Get_A_Quote_Helper :: enabling_default_value( 'enable' )  );
 
