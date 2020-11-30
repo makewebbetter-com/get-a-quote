@@ -8,7 +8,8 @@ $details = get_post_meta( $data['ID'], 'quotes_meta', true );
 
 
 if (! empty ($details['quotes_meta'])) {
-	$details = json_decode(json_encode($details['quotes_meta']), true);}
+	$details = json_decode( json_encode( $details['quotes_meta'] ), true);
+}
 	//print_r( $details);
 ?>
 <form action="" method="POST" enctype="multipart/form-data" >
@@ -65,7 +66,7 @@ if (! empty ($details['quotes_meta'])) {
 		</tr>
 		<tr><?php $log_add = ABSPATH . "wp-content/uploads/quote-submission/"; ?>
 			<th><?php esc_html_e('Attachments', 'get-a-quote'); ?></th>
-			<td><input id="attachment" type="file" name="attachment" value="<?php echo esc_html( ! empty( $details['fqfilename'] ) ?  $details['fqfilename'] : '' ); ?>"><img src="<?php print_r( $log_add . $details['fqfilename'] ); ?>" alt="doc picture" width="500" height="600"></td>
+			<td><input id="attachment" type="file" name="attachment" value="<?php //echo esc_html( ! empty( $details['fqfilename'] ) ?  $details['fqfilename'] : '' ); ?>"><img src="<?php //print_r( $log_add . $details['fqfilename'] ); ?>" alt="doc picture" width="500" height="600"></td>
 		</tr>
 	</table>
 </form>

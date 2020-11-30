@@ -46,7 +46,8 @@ if ( isset( $_POST['mwb_gaq_form_fields_settings_save'] ) ) {
 <?php
 }
 
-$mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', array() );
+$mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', Get_A_Quote_Helper::enabling_default_value( 'form_fields' ) );
+
 $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 ?>
 
@@ -68,21 +69,21 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
-						<label for="mwb_gaq_attributes"><?php esc_html_e('Form Attributes', 'get-a-quote'); ?></th></label>
+						<label for="mwb_gaq_attributes"><?php esc_html_e('Form Attributes', 'get-a-quote'); ?></label>
 					<td>
 						<table class="form-attributes" border="1px">
 							<tbody>
 								<tr>
 									<th>
-										<label for="mwb_gaq_attributes_fields"><?php esc_html_e('Fields', 'get-a-quote'); ?></th></label>
+										<label for="mwb_gaq_attributes_fields"><?php esc_html_e('Fields', 'get-a-quote'); ?></label>
 									</th>
 									<th>
-										<label for="mwb_gaq_attributes_visibility"><?php esc_html_e('Visibility', 'get-a-quote'); ?></th></label>
+										<label for="mwb_gaq_attributes_visibility"><?php esc_html_e('Visibility', 'get-a-quote'); ?></label>
 									</th>
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('First Name', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('First Name', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show first name ' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_fname">
@@ -90,10 +91,10 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											<?php
 
 											$select_for_fname_field = ! empty( $mwb_gaq_form_fields_option['select_for_fname_field'] ) ? $mwb_gaq_form_fields_option['select_for_fname_field'] : '';
-
 											?>
 
 											<select class="mwb_gaq_fname_select" name="select_for_fname_field">
+												<option value="" <?php selected($select_for_fname_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_fname_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_fname_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -102,7 +103,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_lname_field"><?php esc_html_e('Last Name', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_lname_field"><?php esc_html_e('Last Name', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show last name ' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_lname">
@@ -114,6 +115,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_lname_select" name="select_for_lname_field">
+												<option value="" <?php selected($select_for_lname_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_lname_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_lname_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -122,7 +124,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('Address', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('Address', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show Address fields ' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_address">
@@ -134,6 +136,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_address_select" name="select_for_address_field">
+												<option value="" <?php selected($select_for_address_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_address_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_address_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -142,7 +145,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('City', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('City', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show City field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_city">
@@ -154,6 +157,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_city_select" name="select_for_city_field">
+												<option value="" <?php selected($select_for_city_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_city_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_city_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -162,7 +166,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('Zipcode', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('Zipcode', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show zipcode field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_zipcode">
@@ -174,6 +178,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_zipcode_select" name="select_for_zipcode_field">
+												<option value="" <?php selected($select_for_zipcode_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_zipcode_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_zipcode_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -182,7 +187,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('Country', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('Country', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show Country field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_country">
@@ -194,6 +199,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_country_select" name="select_for_country_field">
+												<option value="" <?php selected($select_for_country_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_country_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_country_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -202,7 +208,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('States', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('States', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show State field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_states">
@@ -214,6 +220,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_states_select" name="select_for_states_field">
+												<option value="" <?php selected($select_for_states_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_states_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_states_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -222,7 +229,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('Email', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('Email', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show Email field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_email">
@@ -234,6 +241,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_email_select" name="select_for_email_field">
+												<option value="" <?php selected($select_for_email_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_email_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_email_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -242,7 +250,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('Phone', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('Phone', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show Phone field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_phone">
@@ -254,6 +262,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_phone_select" name="select_for_phone_field">
+												<option value="" <?php selected($select_for_phone_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_phone_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_phone_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -262,7 +271,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('Budget', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('Budget', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show Budget field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_budget">
@@ -274,6 +283,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_budget_select" name="select_for_budget_field">
+												<option value="" <?php selected($select_for_budget_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_budget_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_budget_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -282,7 +292,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('Additional', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('Additional', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show Additional field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_additional">
@@ -294,6 +304,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_additional_select" name="select_for_additional_field">
+												<option value="" <?php selected($select_for_additional_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_additional_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_additional_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
@@ -302,7 +313,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 								</tr>
 								<tr>
 									<th scope="row" class="titledesc">
-										<label for="mwb_gaq_fname_field"><?php esc_html_e('File Upload', 'get-a-quote'); ?></th></label>
+										<label class="wp-tooltip-label" for="mwb_gaq_fname_field"><?php esc_html_e('File Upload', 'get-a-quote'); ?><?php Get_A_Quote_Helper::helpertip( 'To show File field' ); ?></label>
 									</th>
 									<td>
 										<label class="mwb_gaq_enable_fileup">
@@ -314,6 +325,7 @@ $mwb_gaq_enable_form = get_option( 'mwb_gaq_form_enable', 'on' );
 											?>
 
 											<select class="mwb_gaq_fileup_select" name="select_for_fileup_field">
+												<option value="" <?php selected($select_for_fileup_field, ''); ?>><?php esc_html_e('No Option Selected', 'get-a-quote'); ?></option>
 												<option value="yes" <?php selected($select_for_fileup_field, 'yes'); ?>><?php esc_html_e('Yes', 'get-a-quote'); ?></option>
 												<option value="no" <?php selected($select_for_fileup_field, 'no'); ?>><?php esc_html_e('No', 'get-a-quote'); ?></option>
 											</select>
