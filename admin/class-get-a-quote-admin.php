@@ -57,10 +57,44 @@ class Get_A_Quote_Admin
 	public function mwb_gaq_columns( $columns ) {
 		
 		$columns['post_type_view']   = '';
-		$columns['post_type_status'] = __( 'Membership Plan Status', 'membership-for-woocommerce' );
-		$columns['post_type_cost']   = __( 'Membership Plan Cost', 'membership-for-woocommerce' );
+		$columns['post_type_email'] = __( 'Email', 'get-a-quote' );
+		$columns['post_type_phone']   = __( 'phone', 'get-a-quote' );
 		
 		return $columns;
+	}
+	public function mwb_gaq_fill_columns( $column, $post_id ) {
+		switch ( $column ) {
+
+			/*case 'post_type_view':
+				?>
+
+				/*<a title="<?php echo esc_html__( 'Membership Id #', 'membership-for-woocommerce' ) . esc_html( $post_id ); ?>" href="admin-ajax.php?action=mwb_membership_for_woo_get_content&post_id=<?php echo $post_id; ?>" class="thickbox"><span class="dashicons dashicons-visibility"></span></a>
+
+				<?php
+				break;
+			*/
+			case 'post_type_email':
+				$details = get_post_meta( $post_id, 'quotes_meta', true );
+				$details = json_decode( json_encode( $details ), true );
+				if( isset( $details['fqemail'])) {
+					$email = $details['fqemail'];
+				} else {
+					$email = $details['quotes_meta']['fqemail'];
+				}
+				echo esc_html__( $email , 'get-a-quote' );
+				break;
+
+			case 'post_type_phone':
+				$details = get_post_meta( $post_id, 'quotes_meta', true );
+				$details = json_decode( json_encode( $details ), true );
+				if( isset( $details['fqphone'])) {
+					$phone = $details['fqphone'];
+				} else {
+					$phone = $details['quotes_meta']['fqphone'];
+				}
+				echo esc_html__( $phone , 'get-a-quote' );
+				break;
+		}
 	}
 	/**
 	 * Register the stylesheets for the admin area.

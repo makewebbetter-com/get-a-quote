@@ -162,6 +162,8 @@ class Get_A_Quote {
 
 		$this->loader->add_action( 'manage_quotes_posts_columns', $plugin_admin, 'mwb_gaq_columns' );
 
+		$this->loader->add_action( 'manage_quotes_posts_custom_column', $plugin_admin, 'mwb_gaq_fill_columns', 10, 2 );
+
 		$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', Get_A_Quote_Helper :: enabling_default_value( 'enable' )  );
 
 
