@@ -159,6 +159,7 @@ class Get_A_Quote {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Get_A_Quote_Admin( $this->get_plugin_name(), $this->get_version() );
+		
 
 		$this->loader->add_action( 'manage_quotes_posts_columns', $plugin_admin, 'mwb_gaq_columns' );
 
@@ -172,7 +173,9 @@ class Get_A_Quote {
 			//wp_mail( 'Shaileshkumardubey@makewebbetter.com', 'office', 'Working' );
 			$mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', Get_A_Quote_Helper :: enabling_default_value( 'taxonomy' ) );
 			if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_services'] ) {
-				$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_service' ); }
+				$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_service' );
+				//$this->loader->add_action( 'init', 'custom_taxonomy', 10);
+			}
 			if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_status'] ) {
 				$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_quote_status' ); }
 			$this->loader->add_filter( 'init', $plugin_admin, 'quote_post_type' );

@@ -154,6 +154,14 @@ class Get_A_Quote_Admin
 		add_menu_page('quote page title', 'GET A QUOTE', 'manage_options', 'quote-options', 'gaq_quote_func');
 		add_submenu_page('quote-options', 'FAQ page title', 'FAQ', 'manage_options', 'quote-op-faq', 'gaq_quote_func_faq');
 	}
+	// public function custom_taxonomy() {
+
+		
+	// }
+	 
+	// Hook into the 'init' action
+	
+	
 	/**
 	 * Wporg_custom_post_type
 	 */
@@ -242,6 +250,31 @@ class Get_A_Quote_Admin
 			'rewrite'           => ['slug' => 'service'],
 		];
 		register_taxonomy( 'service', ['quotes'], $args );
+		
+		wp_insert_term(
+			'Service A',   // the term 
+			'service', // the taxonomy
+			array(
+				'description' => 'A Type Service',
+				'slug'        => 'Service-A',
+			)
+		);
+		wp_insert_term(
+			'Service B',   // the term 
+			'service', // the taxonomy
+			array(
+				'description' => 'B Type Service',
+				'slug'        => 'Service-B',
+			)
+		);
+		wp_insert_term(
+			'Service C',   // the term 
+			'service', // the taxonomy
+			array(
+				'description' => 'C Type Service',
+				'slug'        => 'Service-C',
+			)
+		);
 	}
 	/**
 	 * Gaq_register_taxonomy_quote_status
@@ -269,5 +302,29 @@ class Get_A_Quote_Admin
 			'rewrite'           => ['slug' => 'Status'],
 		];
 		register_taxonomy( 'Status', ['quotes'], $args );
+		wp_insert_term(
+			'completed',   // the term 
+			'Status', // the taxonomy
+			array(
+				'description' => 'completed and returned',
+				'slug'        => 'completed',
+			)
+		);
+		wp_insert_term(
+			'Pending',   // the term 
+			'Status', // the taxonomy
+			array(
+				'description' => 'pending for view',
+				'slug'        => 'pending',
+			)
+		);
+		wp_insert_term(
+			'Viewing',   // the term 
+			'Status', // the taxonomy
+			array(
+				'description' => 'Under inspection',
+				'slug'        => 'Viewing',
+			)
+		);
 	}
 }
