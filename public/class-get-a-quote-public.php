@@ -23,211 +23,253 @@
 class Get_A_Quote_Public
 {
 
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
+    /**
+     * The ID of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $plugin_name    The ID of this plugin.
+     */
+    private $plugin_name;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
+    /**
+     * The version of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $version    The current version of this plugin.
+     */
+    private $version;
 
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
-	public function __construct($plugin_name, $version)
-	{
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since    1.0.0
+     * @param      string    $plugin_name       The name of the plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct($plugin_name, $version)
+    {
 
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+        $this->plugin_name = $plugin_name;
+        $this->version = $version;
 
-	}
+    }
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles()
-	{
+    /**
+     * Register the stylesheets for the public-facing side of the site.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_styles()
+    {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Get_A_Quote_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Get_A_Quote_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Get_A_Quote_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Get_A_Quote_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
 
-		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/get-a-quote-public.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/get-a-quote-public.css', array(), $this->version, 'all');
 
-	}
+    }
 
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts()
-	{
+    /**
+     * Register the JavaScript for the public-facing side of the site.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_scripts()
+    {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Get_A_Quote_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Get_A_Quote_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Get_A_Quote_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Get_A_Quote_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/sweet-alert.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/get-a-quote-public.js', array('jquery'), $this->version, false);
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/get-a-quote-public.js', array('jquery'), $this->version, false);
+    }
+    public function shortcodes()
+    {
 
-	}
-	public function shortcodes() {
+        add_shortcode('fform', [$this, 'Quote_form']);
+    }
+    /**
+     * Quote_form
+     * this function is used to print form and modify all its fields
+     *
+     * @return void
+     */
+    public function Quote_form()
+	{	//global $get_meta;
+		$get_meta = array();
+        $recent_post_id = 0;
+        if (isset($_POST['qsubmit'])) {
+            $mwb_gaq_form_data = array();
+			// echo '<pre>'; print_r( $_POST ); echo '</pre>';
+			// die();
+            $mwb_gaq_form_data['ffname'] = !empty($_POST['ffname']) ? sanitize_text_field(wp_unslash($_POST['ffname'])) : '';
 
-		add_shortcode('fform', [$this, 'Quote_form']);
-	}
-	/**
-	 * Quote_form
-	 * this function is used to print form and modify all its fields
-	 *
-	 * @return void
-	 */
-	public function Quote_form()
-	{
-		$recent_post_id = 0;
-		if (isset($_POST['qsubmit'])) {
-			$mwb_gaq_form_data = array();
+            $mwb_gaq_form_data['fqlname'] = !empty($_POST['fqlname']) ? sanitize_text_field(wp_unslash($_POST['fqlname'])) : '';
 
-			$mwb_gaq_form_data['ffname'] = !empty($_POST['ffname']) ? sanitize_text_field(wp_unslash($_POST['ffname'])) : '';
+            $mwb_gaq_form_data['fqaddress'] = !empty($_POST['fqaddress']) ? sanitize_text_field(wp_unslash($_POST['fqaddress'])) : '';
 
-			$mwb_gaq_form_data['fqlname'] = !empty($_POST['fqlname']) ? sanitize_text_field(wp_unslash($_POST['fqlname'])) : '';
+            $mwb_gaq_form_data['fqcity'] = !empty($_POST['fqcity']) ? sanitize_text_field(wp_unslash($_POST['fqcity'])) : '';
 
-			$mwb_gaq_form_data['fqaddress'] = !empty($_POST['fqaddress']) ? sanitize_text_field(wp_unslash($_POST['fqaddress'])) : '';
+            $mwb_gaq_form_data['fqzipcode'] = !empty($_POST['fqzipcode']) ? sanitize_text_field(wp_unslash($_POST['fqzipcode'])) : '';
 
-			$mwb_gaq_form_data['fqcity'] = !empty($_POST['fqcity']) ? sanitize_text_field(wp_unslash($_POST['fqcity'])) : '';
+            $mwb_gaq_form_data['fqcountry'] = !empty($_POST['fqcountry']) ? sanitize_text_field(wp_unslash($_POST['fqcountry'])) : '';
 
-			$mwb_gaq_form_data['fqzipcode'] = !empty($_POST['fqzipcode']) ? sanitize_text_field(wp_unslash($_POST['fqzipcode'])) : '';
+            $mwb_gaq_form_data['fqstates'] = !empty($_POST['fqstates']) ? sanitize_text_field(wp_unslash($_POST['fqstates'])) : '';
 
-			$mwb_gaq_form_data['fqcountry'] = !empty($_POST['fqcountry']) ? sanitize_text_field(wp_unslash($_POST['fqcountry'])) : '';
+            $mwb_gaq_form_data['fqemail'] = !empty($_POST['fqemail']) ? sanitize_text_field(wp_unslash($_POST['fqemail'])) : '';
 
-			$mwb_gaq_form_data['fqstates'] = !empty($_POST['fqstates']) ? sanitize_text_field(wp_unslash($_POST['fqstates'])) : '';
+            $mwb_gaq_form_data['fqphone'] = !empty($_POST['fqphone']) ? sanitize_text_field(wp_unslash($_POST['fqphone'])) : '';
 
-			$mwb_gaq_form_data['fqemail'] = !empty($_POST['fqemail']) ? sanitize_text_field(wp_unslash($_POST['fqemail'])) : '';
-
-			$mwb_gaq_form_data['fqphone'] = !empty($_POST['fqphone']) ? sanitize_text_field(wp_unslash($_POST['fqphone'])) : '';
-
-			$mwb_gaq_form_data['fqbudget'] = !empty($_POST['fqbudget']) ? sanitize_text_field(wp_unslash($_POST['fqbudget'])) : '';
+            $mwb_gaq_form_data['fqbudget'] = !empty($_POST['fqbudget']) ? sanitize_text_field(wp_unslash($_POST['fqbudget'])) : '';
 
 			$mwb_gaq_form_data['fqadd'] = !empty($_POST['fqadd']) ? sanitize_textarea_field(wp_unslash($_POST['fqadd'])) : '';
 
-			if (!empty($mwb_gaq_form_data['ffname']) && !empty($mwb_gaq_form_data['fqlname']) && !empty($mwb_gaq_form_data['fqemail'])) {
+			$mwb_gaq_form_data['taxonomy_for_service'] = !empty( $_POST['taxonomy_for_service'] ) ? sanitize_text_field( $_POST['taxonomy_for_service'] ) : '';
+			
 
-				$my_post_details = array(
-					'post_title' => $mwb_gaq_form_data['ffname'],
-					'post_type' => 'quotes',
-					'post_status' => 'publish',
-				);
-				wp_insert_post($my_post_details);
+            if ( !empty($mwb_gaq_form_data['ffname']) && !empty($mwb_gaq_form_data['taxonomy_for_service']) && !empty($mwb_gaq_form_data['fqlname']) && !empty($mwb_gaq_form_data['fqemail'])) {
 
-				// $latest_books = wp_get_recent_post( $args );
-				$recent_posts = get_posts(array(
-					'fields' => 'ids',
-					'post_type' => 'quotes')
-				);
+                $my_post_details = array(
+                    //'post_title' => $mwb_gaq_form_data['ffname'],
+                    'post_type' => 'quotes',
+                    'post_status' => 'publish',
+                );
+                wp_insert_post($my_post_details);
 
-				// wp_get_recent_post()
-				$recent_post_id = $recent_posts[0];
-				// echo '<pre>'; print_r( $_POST ); echo '</pre>';
-				if (!empty($_FILES['fqfiles']['name'])) {
-					echo '<pre>';
-					print_r($_FILES);
-					echo '</pre>';
-					// echo '<pre>'; print_r( $_POST['fqfile'] ); echo '</pre>';
-					$errors = array();
-					$file_name = $_FILES['fqfile']['name'];
-					// $file_size   = $_FILES['fqfile']['size'];
-					$file_tmp = $_FILES['fqfile']['tmp_name'];
-					$file_type = $_FILES['fqfile']['type'];
-					$file_ext = strtolower(end(explode('.', $_FILES['fqfile']['name'])));
+                // $latest_books = wp_get_recent_post( $args );
+                $post_id = Get_A_Quote_Helper::recent_post_id( );
+                
 
-					$extensions = array("pdf", "docx", "txt", "png");
-					//echo '<pre>'; print_r( $FILE ); echo '</pre>';
-					// die();
-					if (!empty($file_ext)) {
-						if (in_array($file_ext, $extensions) === false) {
-							$errors[] = "extension not allowed, please choose a pdf or docx file.";
-						}
-					}
-					$log_dir = ABSPATH . "wp-content/uploads/quote-submission";
-					if (!is_dir($log_dir)) {
+                if (!empty($_FILES['fqfiles']['name'])) {
+                    // echo '<pre>';
+                    // print_r($_FILES);
+                    // echo '</pre>';
+                    // echo '<pre>'; print_r( $_POST['fqfile'] ); echo '</pre>';
+                    $errors = array();
+                    $file_name = $_FILES['fqfiles']['name'];
+                    // $file_size   = $_FILES['fqfile']['size'];
+                    $file_tmp = $_FILES['fqfiles']['tmp_name'];
+                    $file_type = $_FILES['fqfiles']['type'];
+                    $file_ext = strtolower(end(explode('.', $_FILES['fqfiles']['name'])));
 
-						mkdir($log_dir, 0755, true);
-					}
+                    $extensions = array("pdf", "docx", "txt", "png");
+                    //echo '<pre>'; print_r( $FILE ); echo '</pre>';
+                    // die();
+                    if (!empty($file_ext)) {
+                        if (in_array($file_ext, $extensions) === false) {
+                            $errors[] = "extension not allowed, please choose a pdf or docx file.";
+                        }
+                    }
+                    $log_dir = ABSPATH . "wp-content/uploads/quote-submission";
+                    if (!is_dir($log_dir)) {
 
-					$mwb_gaq_form_data['fqfilename'] = '';
+                        mkdir($log_dir, 0755, true);
+                    }
 
-					if (empty($errors) == true) {
-						$mwb_gaq_form_data['fqfilename'] = "quote_" . $recent_post_id . "." . $file_ext;
-						move_uploaded_file($file_tmp, $log_dir . "/" . $mwb_gaq_form_data['fqfilename']);
-						echo "Success";
+                    $mwb_gaq_form_data['fqfilename'] = '';
 
-					} else {
-						echo "\t";
-						print_r($errors);
-						echo "\t";
-					}
-				}
-				$data = array('quotes_meta' => $mwb_gaq_form_data);
-				update_post_meta($recent_post_id, 'quotes_meta', $data);
+                    if (empty($errors) == true) {
+                        $mwb_gaq_form_data['fqfilename'] = "quote_" . $post_id . "." . $file_ext;
+                        move_uploaded_file($file_tmp, $log_dir . "/" . $mwb_gaq_form_data['fqfilename']);
+                        echo "Success";
 
-				?>
+                    } else {
+                        echo "\t";
+                        print_r($errors);
+                        echo "\t";
+                    }
+                }
+                $service = Get_A_Quote_Helper::detailed_post_array( $post_id );
+                $term_id = term_exists( $service['taxonomy_for_service'] );
+                wp_set_object_terms( $post_id, intval( $term_id ), 'service' );
+                update_post_meta($post_id, 'quotes_meta', $mwb_gaq_form_data);
+                
+                
+                // echo '<pre>'; print_r( $blog_title ); echo '</pre>';
+                // Exit function if not on front-end.
+                if (is_admin()) {
+                    return;
+                }
+                $mail = Get_A_Quote_Helper::email_sending( $post_id );
+                echo '<pre>'; print_r( $mail ); echo '</pre>';
+
+                ?>
 				</ul>
 					<div class="notice notice-success is-dismissible">
 						<p><strong><?php esc_html_e('Thank you', 'get-a-quote');?></strong></p>
 					</div>
 				<?php
 			} else {
-				?>
+                ?>
 					<div class="notice-success is-dismissible">
 						<p><strong><?php esc_html_e('Issue in required Fields', 'get-a-quote');?></strong></p>
 					</div>
 				<?php
 			}
-		}
-		$mwb_gaq_form_fields_option = get_option('mwb_gaq_form_fields_options', Get_A_Quote_Helper::enabling_default_value( 'form_fields' ) );
-		$mwb_gaq_enable_form = get_option('mwb_gaq_form_enable', 'on');
-		if ('on' === $mwb_gaq_enable_form) {
-
-			$fqfile = isset($mwb_gaq_form_values['fqfile']) ? $mwb_gaq_form_values['fqfile'] : '';?>
-
+        }
+        $mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', Get_A_Quote_Helper::enabling_default_value( 'form_fields' ) );
+        $mwb_gaq_enable_form = get_option('mwb_gaq_form_enable', 'on');
+        if ('on' === $mwb_gaq_enable_form) {
+			$recent_id_post = Get_A_Quote_Helper::recent_post_id( );
+			//echo '<pre>'; print_r( $recent_id_post ); echo '</pre>';
+            $fqfile = isset( $mwb_gaq_form_values['fqfile'] ) ? $mwb_gaq_form_values['fqfile'] : ''; ?>
+			<br />
 			<form action="" method="POST" enctype="multipart/form-data"  >
 
-			<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_fname_field'] ) {?>
+			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_fname_field']) {?>
 
+				<div class="custom-taxonomy-display">
+				<label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote');?></label><span class="required">*</span><br />
+					<?php
+					$taxonomies = get_terms( array(
+						'taxonomy'	 => 'service',
+						'hide_empty' => false,
+					) );
+					if( !empty( $taxonomies ) ) {
+						$taxonomies = json_decode( json_encode( $taxonomies ), true );
+					?>
+						<select class="mwb_gaq_taxonomy_display" name="taxonomy_for_service">
+						<?php $service_selected = isset($mwb_gaq_form_values['service_selected']) ? $mwb_gaq_form_values['service_selected'] : ''; 
+						foreach( $taxonomies as $values => $key ) {
+							//foreach( $key => $val)
+							
+							$name = $key["name"];
+							$slug = $key['slug']; ?>
+							<option value="<?php echo $slug; ?>" <?php selected( $service_selected, $slug ); ?> > <?php esc_html_e( $name, 'get-a-quote'); ?></option>
+							<?php
+						}
+						?>
+						</select>
+						<?php
+					}
+
+					?>
+					
+				</div>
+				<br />
 				<p>
 
-					<label><?php esc_html_e('First Name', 'get-a-quote');?></label><span class="required">*</span><br />
+					<label class="form_labels"><?php esc_html_e('First Name', 'get-a-quote');?></label><span class="required">*</span><br />
 
 					<?php $ffname = isset($mwb_gaq_form_values['ffname']) ? $mwb_gaq_form_values['ffname'] : '';?>
 
@@ -237,11 +279,11 @@ class Get_A_Quote_Public
 
 			<?php }?>
 
-			<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_lname_field'] ) {?>
+			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_lname_field']) {?>
 
 				<p>
 
-					<label><?php esc_html_e('Last Name', 'get-a-quote');?></label><span class="required">*</span><br />
+					<label class="form_labels"><?php esc_html_e('Last Name', 'get-a-quote');?></label><span class="required">*</span><br />
 
 					<?php $fqlname = isset($mwb_gaq_form_values['fqlname']) ? $mwb_gaq_form_values['fqlname'] : '';?>
 
@@ -255,7 +297,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e('Address', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('Address', 'get-a-quote');?></label><br />
 
 					<?php $fqaddress = isset($mwb_gaq_form_values['fqaddress']) ? $mwb_gaq_form_values['fqaddress'] : '';?>
 
@@ -268,7 +310,7 @@ class Get_A_Quote_Public
 			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_city_field']) {?>
 
 				<p>
-					<label><?php esc_html_e('City', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('City', 'get-a-quote');?></label><br />
 
 					<?php $fqcity = isset($mwb_gaq_form_values['fqcity']) ? $mwb_gaq_form_values['fqcity'] : '';?>
 
@@ -282,7 +324,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e('Zipcode', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('Zipcode', 'get-a-quote');?></label><br />
 
 					<?php $fqzipcode = isset($mwb_gaq_form_values['fqzipcode']) ? $mwb_gaq_form_values['fqzipcode'] : '';?>
 
@@ -296,7 +338,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e('Country', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('Country', 'get-a-quote');?></label><br />
 
 					<?php $fqcountry = isset($mwb_gaq_form_values['fqcountry']) ? $mwb_gaq_form_values['fqcountry'] : '';?>
 
@@ -310,7 +352,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e('States', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('States', 'get-a-quote');?></label><br />
 
 					<?php $fqstates = isset($mwb_gaq_form_values['fqstates']) ? $mwb_gaq_form_values['fqstates'] : '';?>
 
@@ -324,7 +366,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e('Email', 'get-a-quote');?></label><span class="required">*</span><br />
+					<label class="form_labels"><?php esc_html_e('Email', 'get-a-quote');?></label><span class="required">*</span><br />
 
 					<?php $fqemail = isset($mwb_gaq_form_values['fqemail']) ? $mwb_gaq_form_values['fqemail'] : '';?>
 
@@ -337,7 +379,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e('Phone', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('Phone', 'get-a-quote');?></label><br />
 
 					<?php $fqphone = isset($mwb_gaq_form_values['fqphone']) ? $mwb_gaq_form_values['fqphone'] : '';?>
 
@@ -350,7 +392,7 @@ class Get_A_Quote_Public
 			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_budget_field']) {?>
 
 				<p>
-					<label><?php esc_html_e('Budget', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('Budget', 'get-a-quote');?></label><br />
 
 					<?php $fqbudget = isset($mwb_gaq_form_values['fqbudget']) ? $mwb_gaq_form_values['fqbudget'] : '';?>
 
@@ -364,7 +406,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e('Additional', 'get-a-quote');?></label><br />
+					<label class="form_labels"><?php esc_html_e('Additional', 'get-a-quote');?></label><br />
 
 					<?php $fqadd = isset($mwb_gaq_form_values['fqadd']) ? $mwb_gaq_form_values['fqadd'] : '';?>
 
@@ -378,7 +420,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label><?php esc_html_e(' Max Size: 3MB ', 'get-a-quote');?></label><br>
+					<label class="form_labels"><?php esc_html_e(' Max Size: 3MB ', 'get-a-quote');?></label><br>
 
 					<input type="file" name="fqfiles" id="fileToUpload">
 
@@ -392,5 +434,5 @@ class Get_A_Quote_Public
 
 			<?php
 		}
-	}
+    }
 }

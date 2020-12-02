@@ -42,7 +42,7 @@ class Get_A_Quote_Activator
             'post_title' => __('Quote Form'),
 
 			'post_status' => 'publish',
-			
+	
 			'post_content' => '[fform]',
 
             'post_author' => $current_user->ID,
@@ -51,7 +51,7 @@ class Get_A_Quote_Activator
     	);
         // insert the post into the database
         $args = array(
-            'post_type'  => 'page',
+            'post_type'  => 'quotes',
             'post_title' => __('Quote Form'),
         );
         $quote_page = get_posts( $args );

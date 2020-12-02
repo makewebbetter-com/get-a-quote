@@ -39,18 +39,18 @@ class Get_A_Quote_Helper
 
             case 'form_fields':
                 $result = array(
-                    'select_for_fname_field'	  => 'yes',
-                    'select_for_lname_field' 	  => 'yes',
-                    'select_for_address_field' 	  => 'yes',
-                    'select_for_city_field' 	  => 'yes',
-                    'select_for_zipcode_field' 	  => 'yes',
-                    'select_for_country_field'	  => 'yes',
-                    'select_for_states_field' 	  => 'yes',
-                    'select_for_email_field' 	  => 'yes',
-                    'select_for_phone_field'	  => 'yes',
-                    'select_for_budget_field' 	  => 'yes',
+                    'select_for_fname_field' => 'yes',
+                    'select_for_lname_field' => 'yes',
+                    'select_for_address_field' => 'yes',
+                    'select_for_city_field' => 'yes',
+                    'select_for_zipcode_field' => 'yes',
+                    'select_for_country_field' => 'yes',
+                    'select_for_states_field' => 'yes',
+                    'select_for_email_field' => 'yes',
+                    'select_for_phone_field' => 'yes',
+                    'select_for_budget_field' => 'yes',
                     'select_for_additional_field' => 'yes',
-                    'select_for_fileup_field' 	  => 'yes',
+                    'select_for_fileup_field' => 'yes',
                 );
                 break;
         }
@@ -64,5 +64,42 @@ class Get_A_Quote_Helper
         }
     }
 
-// End of class.
+    public function detailed_post_array($post_id)
+    {
+
+        $post_details = get_post_meta($post_id, 'quotes_meta', true);
+        $post_details = json_decode(json_encode($post_details), true);
+        return $post_details;
+    }
+
+    public function recent_post_id()
+    {
+        $recent_posts = get_posts(array(
+            'fields' => 'ids',
+            'post_type' => 'quotes')
+        );
+        $recent_post_id = $recent_posts[0];
+
+        return $recent_post_id;
+    }
+
+    public function email_sending($post_id)
+    {
+        $sender = get_bloginfo('admin_email');
+        $details = Get_A_Quote_Helper::detailed_post_array($post_id);
+        $message = "Thank for using our service we will be get back to you soon.";
+        $headers = 'From: ' . $sender . "\r\n" .
+            'Reply-To: ' . $sender . "\r\n";
+        $subject = " Quotation Submitted ";
+        $send_to = $details['fqemail'];
+        // echo '<pre>'; print_r( $send_to ); echo '</pre>';
+        // die();
+        // $sent = wp_mail($send_to, $subject, strip_tags($message), $headers);
+        // echo '<pre>'; print_r( $sent ); echo '</pre>';
+        //if( $sent == 1 ) ? return 'Mail Sent' : return 'issue occured';
+        $value = ($sent == 1) ? 'Mail Sent' : 'Mail not Send';
+        return $value;
+    }
+
+    // End of class.
 }
