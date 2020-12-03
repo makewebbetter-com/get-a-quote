@@ -82,6 +82,14 @@ class Get_A_Quote_Helper
 
         return $recent_post_id;
     }
+    public function get_taxo( $taxo_name )
+    {
+        $t_id = $_POST['tax_input'][$taxo_name][1];
+        $t_name = get_term_by('id', $t_id, $taxo_name);
+        $t_name = json_decode( json_encode( $t_name), true );
+
+        return $t_name['name'];
+    }
 
     public function email_sending($post_id)
     {

@@ -6,7 +6,7 @@ json_decode(json_encode($post), true);
 $details = Get_A_Quote_Helper::detailed_post_array($data['ID']);
 
 ?>
-<form action="" method="POST" enctype="multipart/form-data" >
+<form action="<?php plugin_dir_url(__FILE__) . 'class-get-a-quote-admin.php' ?>" method="POST" enctype="multipart/form-data" >
 	<table class="form-table">
 
 		<tr>
@@ -16,8 +16,10 @@ $details = Get_A_Quote_Helper::detailed_post_array($data['ID']);
 		</tr>
 		<tr>
 			<th><?php esc_html_e('Type of Service', 'get-a-quote');?><span class="required">*</span></th>
-			<td><input id="service" type="text" name="service" required="required" value="<?php echo esc_html(!empty($details['taxonomy_for_service']) ? $details['taxonomy_for_service'] : ''); ?>"<?php echo esc_html(!empty($details['taxonomy_for_service']) ? 'readonly' : ''); ?>></td>
+			<td><input id="service" type="text" name="service" required="required" value="<?php echo esc_html(!empty($details['taxonomy_for_service']) ? $details['taxonomy_for_service'] : ''); ?>"<?php echo esc_html(!empty($details['taxonomy_for_service']) ? 'readonly' : ''); ?>>
+			<input id="Status" type="hidden" name="quote_status" required="required" value="<?php echo esc_html(!empty($details['quote_status']) ? $details['quote_status'] : ''); ?>"<?php echo esc_html(!empty($details['quote_status']) ? 'readonly' : ''); ?>></td>
 		</tr>
+
 		<tr>
 			<th><?php esc_html_e('First Name', 'get-a-quote');?><span class="required">*</span></th>
 			<td><input id="fname" type="text" name="firstname" required="required" value="<?php echo esc_html(!empty($details['ffname']) ? $details['ffname'] : ''); ?>"></td>
@@ -65,7 +67,7 @@ $details = Get_A_Quote_Helper::detailed_post_array($data['ID']);
 		</tr>
 		<tr>
 			<th><?php esc_html_e('Attached File', 'get-a-quote');?></th>
-			<td><b><Span><?php echo esc_html(!empty($details['fqfilename']) ? $details['fqfilename'] : 'No File Attached'); ?></span></b></td>
+			<td><b><Span><?php echo (!empty($details['fqfilename']) ? $details['fqfilename'] : '<input type="file" name="fqfiles" id="fileToUpload">' ); ?></span></b></td>
 		</tr>
 	</table>
 </form>

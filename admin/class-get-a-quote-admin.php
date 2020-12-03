@@ -201,12 +201,13 @@ class Get_A_Quote_Admin
             )
         );
     }
-    public function mwb_gaq_update_quote()
-    {
+    public function mwb_gaq_update_quote() {
         $post_update_meta = array();
 		$post_id = $_POST['ID'];
-		//echo '<pre>'; print_r( $_POST ); echo '</pre>';
-		//die();
+		// echo '<pre>'; print_r( plugin_dir_url(__FILE__) . 'class-get-a-quote-admin.php' ); echo '</pre>';
+        // die();
+        // echo '<pre>'; print_r( $_POST ); echo '</pre>';
+        // die();
         $post_update_meta['ffname'] = $_POST['firstname'];
         $post_update_meta['fqlname'] = $_POST['lastname'];
         $post_update_meta['fqaddress'] = $_POST['address'];
@@ -219,10 +220,48 @@ class Get_A_Quote_Admin
         $post_update_meta['fqbudget'] = $_POST['budget'];
         $post_update_meta['fqadd'] = $_POST['add'];
         $post_update_meta['fqfilename'] = $_POST['attachment'];
-        $post_update_meta['taxonomy_for_service'] = $_POST['service'];
+        $post_update_meta['taxonomy_for_service'] = Get_A_Quote_Helper::get_taxo('service');
+        $post_update_meta['quote_status'] = Get_A_Quote_Helper::get_taxo('Status');
+        
+		// if (!empty($_FILES['fqfiles']['name'])) {
+        //     // echo '<pre>'; print_r( $_FILES ); echo '</pre>';
+        //     // die();
+		// 	$errors = array();
+		// 	$file_name = $_FILES['fqfiles']['name'];
+		// 	// $file_size   = $_FILES['fqfile']['size'];
+		// 	$file_tmp = $_FILES['fqfiles']['tmp_name'];
+		// 	$file_type = $_FILES['fqfiles']['type'];
+		// 	$file_ext = strtolower(end(explode('.', $_FILES['fqfiles']['name'])));
+
+		// 	$extensions = array("pdf", "docx", "txt", "png");
+		// 	//echo '<pre>'; print_r( $FILE ); echo '</pre>';
+		// 	// die();
+		// 	if (!empty($file_ext)) {
+		// 		if (in_array($file_ext, $extensions) === false) {
+		// 			$errors[] = "extension not allowed, please choose a pdf or docx file.";
+		// 		}
+		// 	}
+		// 	$log_dir = ABSPATH . "wp-content/uploads/quote-submission";
+		// 	if (!is_dir($log_dir)) {
+
+		// 		mkdir($log_dir, 0755, true);
+		// 	}
+
+		// 	$mwb_gaq_form_data['fqfilename'] = '';
+
+		// 	if (empty($errors) == true) {
+		// 		$mwb_gaq_form_data['fqfilename'] = "quote_" . $post_id . "." . $file_ext;
+		// 		move_uploaded_file($file_tmp, $log_dir . "/" . $mwb_gaq_form_data['fqfilename']);
+		// 		echo "Success";
+
+		// 	} else {
+		// 		echo "\t";
+		// 		print_r($errors);
+		// 		echo "\t";
+		// 	}
+		// }
         if (!empty($post_update_meta)) {
 			update_post_meta($post_id, 'quotes_meta', $post_update_meta);
-			//echo '<pre>'; print_r( 'Updated Quote' ); echo '</pre>';
         }
     }
     /**

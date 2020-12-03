@@ -143,38 +143,32 @@ class Get_A_Quote_Public
             $mwb_gaq_form_data['fqbudget'] = !empty($_POST['fqbudget']) ? sanitize_text_field(wp_unslash($_POST['fqbudget'])) : '';
 
 			$mwb_gaq_form_data['fqadd'] = !empty($_POST['fqadd']) ? sanitize_textarea_field(wp_unslash($_POST['fqadd'])) : '';
-
-			$mwb_gaq_form_data['taxonomy_for_service'] = !empty( $_POST['taxonomy_for_service'] ) ? sanitize_text_field( $_POST['taxonomy_for_service'] ) : '';
-			
+            
+            $mwb_gaq_form_data['taxonomy_for_service'] = !empty( $_POST['taxonomy_for_service'] ) ? sanitize_text_field( $_POST['taxonomy_for_service'] ) : '';
+        
+            $mwb_gaq_form_data['quote_status'] = 'pending';
 
             if ( !empty($mwb_gaq_form_data['ffname']) && !empty($mwb_gaq_form_data['taxonomy_for_service']) && !empty($mwb_gaq_form_data['fqlname']) && !empty($mwb_gaq_form_data['fqemail'])) {
 
                 $my_post_details = array(
-                    //'post_title' => $mwb_gaq_form_data['ffname'],
+                    'post_title' => $mwb_gaq_form_data['ffname'],
                     'post_type' => 'quotes',
                     'post_status' => 'publish',
                 );
                 wp_insert_post($my_post_details);
 
-                // $latest_books = wp_get_recent_post( $args );
-                $post_id = Get_A_Quote_Helper::recent_post_id( );
-                
+                $post_id = Get_A_Quote_Helper::recent_post_id();
 
                 if (!empty($_FILES['fqfiles']['name'])) {
-                    // echo '<pre>';
-                    // print_r($_FILES);
-                    // echo '</pre>';
-                    // echo '<pre>'; print_r( $_POST['fqfile'] ); echo '</pre>';
+                   
                     $errors = array();
                     $file_name = $_FILES['fqfiles']['name'];
-                    // $file_size   = $_FILES['fqfile']['size'];
                     $file_tmp = $_FILES['fqfiles']['tmp_name'];
                     $file_type = $_FILES['fqfiles']['type'];
                     $file_ext = strtolower(end(explode('.', $_FILES['fqfiles']['name'])));
 
                     $extensions = array("pdf", "docx", "txt", "png");
-                    //echo '<pre>'; print_r( $FILE ); echo '</pre>';
-                    // die();
+
                     if (!empty($file_ext)) {
                         if (in_array($file_ext, $extensions) === false) {
                             $errors[] = "extension not allowed, please choose a pdf or docx file.";
@@ -199,9 +193,7 @@ class Get_A_Quote_Public
                         echo "\t";
                     }
                 }
-                $service = Get_A_Quote_Helper::detailed_post_array( $post_id );
-                $term_id = term_exists( $service['taxonomy_for_service'] );
-                wp_set_object_terms( $post_id, intval( $term_id ), 'service' );
+                
                 update_post_meta($post_id, 'quotes_meta', $mwb_gaq_form_data);
                 
                 
@@ -227,6 +219,17 @@ class Get_A_Quote_Public
 				<?php
 			}
         }
+        $service = Get_A_Quote_Helper::detailed_post_array( $post_id );
+        // echo '<pre>'; print_r( $service ); echo '</pre>';
+        // die();
+        if( !empty ($service['taxonomy_for_service'])) {
+            $term_id = term_exists( $service['taxonomy_for_service'] );
+            wp_set_object_terms( $post_id, intval( $term_id ), 'service' );
+        }
+        if( !empty ($service['quote_status'])) {
+            $term_id = term_exists( $service['quote_status'] );
+            wp_set_object_terms( $post_id, intval( $term_id ), 'Status' );
+        }
         $mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', Get_A_Quote_Helper::enabling_default_value( 'form_fields' ) );
         $mwb_gaq_enable_form = get_option('mwb_gaq_form_enable', 'on');
         if ('on' === $mwb_gaq_enable_form) {
@@ -239,7 +242,7 @@ class Get_A_Quote_Public
 			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_fname_field']) {?>
 
 				<div class="custom-taxonomy-display">
-				<label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote');?></label><span class="required">*</span><br />
+				    <label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote');?></label><span class="required">*</span><br />
 					<?php
 					$taxonomies = get_terms( array(
 						'taxonomy'	 => 'service',
@@ -262,10 +265,10 @@ class Get_A_Quote_Public
 						</select>
 						<?php
 					}
-
 					?>
-					
+
 				</div>
+
 				<br />
 				<p>
 
