@@ -1,7 +1,6 @@
 <?php
 
-$data = 
-json_decode(json_encode($post), true);
+$data = json_decode(json_encode($post), true);
 
 $details = Get_A_Quote_Helper::detailed_post_array($data['ID']);
 
@@ -66,8 +65,9 @@ $details = Get_A_Quote_Helper::detailed_post_array($data['ID']);
 			<span><?php ?></span>
 		</tr>
 		<tr>
-			<th><?php esc_html_e('Attached File', 'get-a-quote');?></th>
-			<td><b><Span><?php echo (!empty($details['fqfilename']) ? $details['fqfilename'] : '<input type="file" name="fqfiles" id="fileToUpload">' ); ?></span></b></td>
+			<th><?php esc_html_e('Attached File', 'get-a-quote');
+			$log = ABSPATH . "wp-content/uploads/quote-submission"; //echo '<pre>'; print_r( $log ); echo '</pre>';?></th>
+			<td><b><Span><?php echo (!empty($details['fqfilename']) ? $details['fqfilename'] . ' <a href="opendir(' . $log . ')">Open Folder Location</a>' : '<input type="file" name="fqfiles" id="fileToUpload">' ); ?></span></b></td>
 		</tr>
 	</table>
 </form>

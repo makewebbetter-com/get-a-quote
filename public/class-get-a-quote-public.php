@@ -202,9 +202,11 @@ class Get_A_Quote_Public
                 if (is_admin()) {
                     return;
                 }
-                $mail = Get_A_Quote_Helper::email_sending( $post_id );
-                echo '<pre>'; print_r( $mail ); echo '</pre>';
-
+                $email_activator = get_option( 'mwb_gaq_activate_email');
+                if( $email_activator == 'on' ) {
+                    $mail = Get_A_Quote_Helper::email_sending( $post_id );
+                    //echo '<pre>'; print_r( $mail ); echo '</pre>';
+                }
                 ?>
 				</ul>
 					<div class="notice notice-success is-dismissible">

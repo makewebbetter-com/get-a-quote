@@ -41,22 +41,25 @@ class Get_A_Quote_Activator
 
             'post_title' => __('Quote Form'),
 
-			'post_status' => 'publish',
-	
-			'post_content' => '[fform]',
+            'post_status' => 'publish',
+
+            'post_content' => '[fform]',
 
             'post_author' => $current_user->ID,
 
             'post_type' => 'page',
-    	);
+        );
         // insert the post into the database
         $args = array(
-            'post_type'  => 'quotes',
+            'post_type' => 'page',
             'post_title' => __('Quote Form'),
+            'post_status' => 'publish',
         );
-        $quote_page = get_posts( $args );
-        if( empty ( $quote_page ) ) {
-            
+        $quote_page = get_posts($args);
+        // echo '<pre>'; print_r( $quote_page ); echo '</pre>';
+        // die();
+        if (empty($quote_page)) {
+
             wp_insert_post($page);
         }
     }

@@ -114,7 +114,7 @@ class Get_A_Quote_Admin
     }
     public function mwb_gaq_meta_inside()
     {
-        add_meta_box('mwb_gaq_meta1', __('Quotes', 'mwb_gaq'), array($this, 'custuom_meta_callback'), 'quotes');
+        add_meta_box('mwb_gaq_meta1', __('Quote Details', 'mwb_gaq'), array($this, 'custuom_meta_callback'), 'quotes');
     }
     public function custuom_meta_callback($post)
     {

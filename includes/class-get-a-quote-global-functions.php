@@ -29,7 +29,7 @@ class Get_A_Quote_Helper
             case 'enable':
                 $result = 'on';
                 break;
-
+            
             case 'taxonomy':
                 $result = array(
                     'select_for_services' => 'yes',
@@ -92,22 +92,23 @@ class Get_A_Quote_Helper
     }
 
     public function email_sending($post_id)
-    {
-        $sender = get_bloginfo('admin_email');
-        $details = Get_A_Quote_Helper::detailed_post_array($post_id);
-        $message = "Thank for using our service we will be get back to you soon.";
-        $headers = 'From: ' . $sender . "\r\n" .
-            'Reply-To: ' . $sender . "\r\n";
-        $subject = " Quotation Submitted ";
-        $send_to = $details['fqemail'];
-        // echo '<pre>'; print_r( $send_to ); echo '</pre>';
+    {   
+        $options = get_option("mwb_gaq_email_fields_data");
+        // echo '<pre>'; print_r( $options ); echo '</pre>';
         // die();
-        // $sent = wp_mail($send_to, $subject, strip_tags($message), $headers);
-        // echo '<pre>'; print_r( $sent ); echo '</pre>';
-        //if( $sent == 1 ) ? return 'Mail Sent' : return 'issue occured';
+        $sender = !empty( $options['sender_email'] ) ? $options['sender_email'] : get_bloginfo('admin_email');
+        $details = Get_A_Quote_Helper::detailed_post_array($post_id);
+        $message = !empty( $options['emailmess'] ) ? $options['emailmess'] : 'Thank for using our service we will be get back to you soon. ';
+        $headers = 'From: ' . $sender . "\r\n" .
+                   'Reply-To: ' . $sender . "\r\n";
+        $subject = !empty( $options['email_subject'] ) ? $options['email_subject'] : 'Quotation Submitted';
+        $send_to = $details['fqemail'];
+        $sent = wp_mail($send_to, $subject, strip_tags($message), $headers);
         $value = ($sent == 1) ? 'Mail Sent' : 'Mail not Send';
         return $value;
     }
 
     // End of class.
 }
+
+                
