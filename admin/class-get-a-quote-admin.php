@@ -57,8 +57,6 @@ class Get_A_Quote_Admin
     }
     public function mwb_gaq_columns($columns)
     {
-
-        $columns['post_type_view'] = '';
         $columns['post_type_email'] = __('Email', 'get-a-quote');
         $columns['post_type_phone'] = __('phone', 'get-a-quote');
 
@@ -67,13 +65,6 @@ class Get_A_Quote_Admin
     public function mwb_gaq_fill_columns($column, $post_id)
     {
         switch ($column) {
-
-            /*case 'post_type_view':
-            ?>
-            /*<a title="<?php echo esc_html__( 'Membership Id #', 'membership-for-woocommerce' ) . esc_html( $post_id ); ?>" href="admin-ajax.php?action=mwb_membership_for_woo_get_content&post_id=<?php echo $post_id; ?>" class="thickbox"><span class="dashicons dashicons-visibility"></span></a>
-            <?php
-            break;
-             */
 
             case 'post_type_email':
                 $details = get_post_meta($post_id, 'quotes_meta', true);

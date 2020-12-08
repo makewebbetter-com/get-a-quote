@@ -49,12 +49,37 @@ class Get_A_Quote_Activator
 
             'post_type' => 'page',
         );
+        wp_insert_term(
+            'Service A', // the term
+            'service', // the taxonomy
+            array(
+                'description' => 'A Type Service',
+                'slug' => 'Service-A',
+            )
+        );
+        wp_insert_term(
+            'Service B', // the term
+            'service', // the taxonomy
+            array(
+                'description' => 'B Type Service',
+                'slug' => 'Service-B',
+            )
+        );
+        wp_insert_term(
+            'Service C', // the term
+            'service', // the taxonomy
+            array(
+                'description' => 'C Type Service',
+                'slug' => 'Service-C',
+            )
+        );
         // insert the post into the database
         $args = array(
             'post_type' => 'page',
             'post_title' => __('Quote Form'),
             'post_status' => 'publish',
         );
+        
         $quote_page = get_posts($args);
         // echo '<pre>'; print_r( $quote_page ); echo '</pre>';
         // die();

@@ -115,13 +115,14 @@ class Get_A_Quote_Public
      * @return void
      */
     public function Quote_form()
-	{	//global $get_meta;
-		$get_meta = array();
+	{ //global $get_meta;
+		
+        $get_meta = array();
         $recent_post_id = 0;
         if (isset($_POST['qsubmit'])) {
             $mwb_gaq_form_data = array();
-			// echo '<pre>'; print_r( $_POST ); echo '</pre>';
-			// die();
+            // echo '<pre>'; print_r( $_POST ); echo '</pre>';
+            // die();
             $mwb_gaq_form_data['ffname'] = !empty($_POST['ffname']) ? sanitize_text_field(wp_unslash($_POST['ffname'])) : '';
 
             $mwb_gaq_form_data['fqlname'] = !empty($_POST['fqlname']) ? sanitize_text_field(wp_unslash($_POST['fqlname'])) : '';
@@ -142,13 +143,13 @@ class Get_A_Quote_Public
 
             $mwb_gaq_form_data['fqbudget'] = !empty($_POST['fqbudget']) ? sanitize_text_field(wp_unslash($_POST['fqbudget'])) : '';
 
-			$mwb_gaq_form_data['fqadd'] = !empty($_POST['fqadd']) ? sanitize_textarea_field(wp_unslash($_POST['fqadd'])) : '';
-            
-            $mwb_gaq_form_data['taxonomy_for_service'] = !empty( $_POST['taxonomy_for_service'] ) ? sanitize_text_field( $_POST['taxonomy_for_service'] ) : '';
-        
+            $mwb_gaq_form_data['fqadd'] = !empty($_POST['fqadd']) ? sanitize_textarea_field(wp_unslash($_POST['fqadd'])) : '';
+
+            $mwb_gaq_form_data['taxonomy_for_service'] = !empty($_POST['taxonomy_for_service']) ? sanitize_text_field($_POST['taxonomy_for_service']) : '';
+
             $mwb_gaq_form_data['quote_status'] = 'pending';
 
-            if ( !empty($mwb_gaq_form_data['ffname']) && !empty($mwb_gaq_form_data['taxonomy_for_service']) && !empty($mwb_gaq_form_data['fqlname']) && !empty($mwb_gaq_form_data['fqemail'])) {
+            if (!empty($mwb_gaq_form_data['ffname']) && !empty($mwb_gaq_form_data['taxonomy_for_service']) && !empty($mwb_gaq_form_data['fqlname']) && !empty($mwb_gaq_form_data['fqemail'])) {
 
                 $my_post_details = array(
                     'post_title' => $mwb_gaq_form_data['ffname'],
@@ -160,7 +161,7 @@ class Get_A_Quote_Public
                 $post_id = Get_A_Quote_Helper::recent_post_id();
 
                 if (!empty($_FILES['fqfiles']['name'])) {
-                   
+
                     $errors = array();
                     $file_name = $_FILES['fqfiles']['name'];
                     $file_tmp = $_FILES['fqfiles']['tmp_name'];
@@ -193,18 +194,17 @@ class Get_A_Quote_Public
                         echo "\t";
                     }
                 }
-                
+
                 update_post_meta($post_id, 'quotes_meta', $mwb_gaq_form_data);
-                
-                
+
                 // echo '<pre>'; print_r( $blog_title ); echo '</pre>';
                 // Exit function if not on front-end.
                 if (is_admin()) {
                     return;
                 }
-                $email_activator = get_option( 'mwb_gaq_activate_email');
-                if( $email_activator == 'on' ) {
-                    $mail = Get_A_Quote_Helper::email_sending( $post_id );
+                $email_activator = get_option('mwb_gaq_activate_email');
+                if ($email_activator == 'on') {
+                    $mail = Get_A_Quote_Helper::email_sending($post_id);
                     //echo '<pre>'; print_r( $mail ); echo '</pre>';
                 }
                 ?>
@@ -214,67 +214,67 @@ class Get_A_Quote_Public
 					</div>
 				<?php
 			} else {
-                ?>
-					<div class="notice-success is-dismissible">
-						<p><strong><?php esc_html_e('Issue in required Fields', 'get-a-quote');?></strong></p>
-					</div>
-				<?php
+					?>
+						<div class="notice-success is-dismissible">
+							<p><strong><?php esc_html_e('Issue in required Fields', 'get-a-quote');?></strong></p>
+						</div>
+					<?php
 			}
         }
-        $service = Get_A_Quote_Helper::detailed_post_array( $post_id );
-        // echo '<pre>'; print_r( $service ); echo '</pre>';
-        // die();
-        if( !empty ($service['taxonomy_for_service'])) {
-            $term_id = term_exists( $service['taxonomy_for_service'] );
-            wp_set_object_terms( $post_id, intval( $term_id ), 'service' );
+        $service = Get_A_Quote_Helper::detailed_post_array($post_id);
+
+        if (!empty($service['taxonomy_for_service'])) {
+            $term_id = term_exists($service['taxonomy_for_service']);
+            wp_set_object_terms($post_id, intval($term_id), 'service');
         }
-        if( !empty ($service['quote_status'])) {
-            $term_id = term_exists( $service['quote_status'] );
-            wp_set_object_terms( $post_id, intval( $term_id ), 'Status' );
+        if (!empty($service['quote_status'])) {
+            $term_id = term_exists($service['quote_status']);
+            wp_set_object_terms($post_id, intval($term_id), 'Status');
         }
-        $mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', Get_A_Quote_Helper::enabling_default_value( 'form_fields' ) );
+        $mwb_gaq_form_fields_option = get_option('mwb_gaq_form_fields_options', Get_A_Quote_Helper::enabling_default_value('form_fields'));
         $mwb_gaq_enable_form = get_option('mwb_gaq_form_enable', 'on');
         if ('on' === $mwb_gaq_enable_form) {
-			$recent_id_post = Get_A_Quote_Helper::recent_post_id( );
-			//echo '<pre>'; print_r( $recent_id_post ); echo '</pre>';
-            $fqfile = isset( $mwb_gaq_form_values['fqfile'] ) ? $mwb_gaq_form_values['fqfile'] : ''; ?>
+            $recent_id_post = Get_A_Quote_Helper::recent_post_id();
+            //echo '<pre>'; print_r( $recent_id_post ); echo '</pre>';
+            $fqfile = isset($mwb_gaq_form_values['fqfile']) ? $mwb_gaq_form_values['fqfile'] : '';?>
 			<br />
 			<form action="" method="POST" enctype="multipart/form-data"  >
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_fname_field']) {?>
+			<?php
+			if ('yes' === $mwb_gaq_form_fields_option['select_for_fname_field']) {?>
 
 				<div class="custom-taxonomy-display">
-				    <label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote');?></label><span class="required">*</span><br />
-					<?php
-					$taxonomies = get_terms( array(
-						'taxonomy'	 => 'service',
-						'hide_empty' => false,
-					) );
-					if( !empty( $taxonomies ) ) {
-						$taxonomies = json_decode( json_encode( $taxonomies ), true );
-					?>
-						<select class="mwb_gaq_taxonomy_display" name="taxonomy_for_service">
-						<?php $service_selected = isset($mwb_gaq_form_values['service_selected']) ? $mwb_gaq_form_values['service_selected'] : ''; 
-						foreach( $taxonomies as $values => $key ) {
-							//foreach( $key => $val)
-							
-							$name = $key["name"];
-							$slug = $key['slug']; ?>
-							<option value="<?php echo $slug; ?>" <?php selected( $service_selected, $slug ); ?> > <?php esc_html_e( $name, 'get-a-quote'); ?></option>
-							<?php
-						}
-						?>
+					<label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote');?><span class="required">*</span></label><br />
+			<?php
+				$taxonomies = get_terms(array(
+								'taxonomy' => 'service',
+								'hide_empty' => false,
+							));
+							if (!empty($taxonomies)) {
+								$taxonomies = json_decode(json_encode($taxonomies), true);
+								?>
+									<select class="mwb_gaq_taxonomy_display" name="taxonomy_for_service">
+									<?php $service_selected = isset($mwb_gaq_form_values['service_selected']) ? $mwb_gaq_form_values['service_selected'] : '';
+								foreach ($taxonomies as $values => $key) {
+									//foreach( $key => $val)
+
+									$name = $key["name"];
+									$slug = $key['slug'];?>
+										<option value="<?php echo $slug; ?>" <?php selected($service_selected, $slug);?> > <?php esc_html_e($name, 'get-a-quote');?></option>
+										<?php
+							}
+            ?>
 						</select>
 						<?php
-					}
-					?>
+			}
+                ?>
 
 				</div>
 
 				<br />
 				<p>
 
-					<label class="form_labels"><?php esc_html_e('First Name', 'get-a-quote');?></label><span class="required">*</span><br />
+					<label class="form_labels"><?php esc_html_e('First Name', 'get-a-quote');?><span class="required">*</span></label><br />
 
 					<?php $ffname = isset($mwb_gaq_form_values['ffname']) ? $mwb_gaq_form_values['ffname'] : '';?>
 
@@ -288,7 +288,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label class="form_labels"><?php esc_html_e('Last Name', 'get-a-quote');?></label><span class="required">*</span><br />
+					<label class="form_labels"><?php esc_html_e('Last Name', 'get-a-quote');?><span class="required">*</span></label><br />
 
 					<?php $fqlname = isset($mwb_gaq_form_values['fqlname']) ? $mwb_gaq_form_values['fqlname'] : '';?>
 
@@ -342,13 +342,17 @@ class Get_A_Quote_Public
 			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_country_field']) {?>
 
 				<p>
-
 					<label class="form_labels"><?php esc_html_e('Country', 'get-a-quote');?></label><br />
-
-					<?php $fqcountry = isset($mwb_gaq_form_values['fqcountry']) ? $mwb_gaq_form_values['fqcountry'] : '';?>
-
-					<input type="text" name="fqcountry" value="<?php echo esc_html__(wp_unslash($fqcountry)); ?>" size="40" placeholder="Country" />
-
+					<?php $country_list = Get_A_Quote_Helper::mwb_gaq_get_country_list(); ?>
+					<select id="country_list_select" class="mwb_gaq_country_list_display" name="fqcountry">
+						<?php $fqcountry = isset($mwb_gaq_form_values['fqcountry']) ? $mwb_gaq_form_values['fqcountry'] : '';
+                        foreach ($country_list as $value => $key ) {?>			
+							<option value="<?php echo $key ?>" <?php selected($fqcountry, $value); ?> > <?php esc_html_e( $key, 'get-a-quote'); ?></option>
+							<?php
+                        } ?>
+							
+					</select>
+					<?php //echo '<pre>'; print_r( $fqcountry ); echo '</pre>'; ?>
 				</p>
 
 			<?php }?>
@@ -371,7 +375,7 @@ class Get_A_Quote_Public
 
 				<p>
 
-					<label class="form_labels"><?php esc_html_e('Email', 'get-a-quote');?></label><span class="required">*</span><br />
+					<label class="form_labels"><?php esc_html_e('Email', 'get-a-quote');?><span class="required">*</span></label><br />
 
 					<?php $fqemail = isset($mwb_gaq_form_values['fqemail']) ? $mwb_gaq_form_values['fqemail'] : '';?>
 
@@ -438,6 +442,6 @@ class Get_A_Quote_Public
 			</form>
 
 			<?php
-		}
+}
     }
 }
