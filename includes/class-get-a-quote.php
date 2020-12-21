@@ -128,6 +128,8 @@ class Get_A_Quote {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-get-a-quote-public.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/countryfunction.php';
+
 		$this->loader = new Get_A_Quote_Loader();
 
 	}
@@ -201,6 +203,8 @@ class Get_A_Quote {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_public, 'shortcodes' );
+		$this->loader->add_action( 'wp_ajax_ajax_count_state', $plugin_public, 'ajax_count_state' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ajax_count_state', $plugin_public, 'ajax_count_state' );
 
 	}
 

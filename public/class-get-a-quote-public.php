@@ -3,8 +3,8 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://makewebbetter.com
- * @since      1.0.0
+ * @link  https://makewebbetter.com
+ * @since 1.0.0
  *
  * @package    Get_A_Quote
  * @subpackage Get_A_Quote/public
@@ -26,27 +26,27 @@ class Get_A_Quote_Public
     /**
      * The ID of this plugin.
      *
-     * @since    1.0.0
-     * @access   private
-     * @var      string    $plugin_name    The ID of this plugin.
+     * @since  1.0.0
+     * @access private
+     * @var    string    $plugin_name    The ID of this plugin.
      */
     private $plugin_name;
 
     /**
      * The version of this plugin.
      *
-     * @since    1.0.0
-     * @access   private
-     * @var      string    $version    The current version of this plugin.
+     * @since  1.0.0
+     * @access private
+     * @var    string    $version    The current version of this plugin.
      */
     private $version;
 
     /**
      * Initialize the class and set its properties.
      *
-     * @since    1.0.0
-     * @param      string    $plugin_name       The name of the plugin.
-     * @param      string    $version    The version of this plugin.
+     * @since 1.0.0
+     * @param string $plugin_name The name of the plugin.
+     * @param string $version     The version of this plugin.
      */
     public function __construct($plugin_name, $version)
     {
@@ -59,7 +59,7 @@ class Get_A_Quote_Public
     /**
      * Register the stylesheets for the public-facing side of the site.
      *
-     * @since    1.0.0
+     * @since 1.0.0
      */
     public function enqueue_styles()
     {
@@ -83,7 +83,7 @@ class Get_A_Quote_Public
     /**
      * Register the JavaScript for the public-facing side of the site.
      *
-     * @since    1.0.0
+     * @since 1.0.0
      */
     public function enqueue_scripts()
     {
@@ -99,14 +99,40 @@ class Get_A_Quote_Public
          * between the defined hooks and the functions defined in this
          * class.
          */
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/sweet-alert.js', array('jquery'), $this->version, false);
+        //wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/sweet-alert.js', array('jquery'), $this->version, false);
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/get-a-quote-public.js', array('jquery'), $this->version, false);
+        wp_localize_script(
+            $this->plugin_name, 'ajax_url_global',
+            [
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce'       => wp_create_nonce('ajax_nonce'),
+
+            ]
+        );
 
     }
     public function shortcodes()
     {
 
         add_shortcode('fform', [$this, 'Quote_form']);
+    }
+    public function ajax_count_state()
+    {   
+        if(isset($_POST['action']) ) {
+            $name = $_POST['ID'];
+            //echo trim( $name, "0");
+            $states = array();
+            $states = mwb_gaq_get_country_states($name);
+            // echo '<pre>'; print_r( $states ); echo '</pre>';
+            $res = '';
+            foreach( $states as $key => $value ){
+                $res .= '<option value="' . $value . '">' . esc_html($value) . '</option>';
+            }
+            echo $res;
+            /*<option value="<?php echo $value ?>" <?php selected($fqcountry, $value); ?> > <?php esc_html_e( $key, 'get-a-quote'); ?></option>*/
+            // echo $name;
+        }
+        
     }
     /**
      * Quote_form
@@ -115,8 +141,9 @@ class Get_A_Quote_Public
      * @return void
      */
     public function Quote_form()
-	{ //global $get_meta;
-		
+    {
+        //global $get_meta;
+        
         $get_meta = array();
         $recent_post_id = 0;
         if (isset($_POST['qsubmit'])) {
@@ -208,18 +235,18 @@ class Get_A_Quote_Public
                     //echo '<pre>'; print_r( $mail ); echo '</pre>';
                 }
                 ?>
-				</ul>
-					<div class="notice notice-success is-dismissible">
-						<p><strong><?php esc_html_e('Thank you', 'get-a-quote');?></strong></p>
-					</div>
-				<?php
-			} else {
-					?>
-						<div class="notice-success is-dismissible">
-							<p><strong><?php esc_html_e('Issue in required Fields', 'get-a-quote');?></strong></p>
-						</div>
-					<?php
-			}
+                </ul>
+                    <div class="notice notice-success is-dismissible">
+                        <p><strong><?php esc_html_e('Thank you', 'get-a-quote');?></strong></p>
+                    </div>
+                <?php
+            } else {
+                ?>
+                        <div class="notice-success is-dismissible">
+                            <p><strong><?php esc_html_e('Issue in required Fields', 'get-a-quote');?></strong></p>
+                        </div>
+                <?php
+            }
         }
         $service = Get_A_Quote_Helper::detailed_post_array($post_id);
 
@@ -237,211 +264,212 @@ class Get_A_Quote_Public
             $recent_id_post = Get_A_Quote_Helper::recent_post_id();
             //echo '<pre>'; print_r( $recent_id_post ); echo '</pre>';
             $fqfile = isset($mwb_gaq_form_values['fqfile']) ? $mwb_gaq_form_values['fqfile'] : '';?>
-			<br />
-			<form action="" method="POST" enctype="multipart/form-data"  >
+            <br />
+            <form action="" class="front_form" method="POST" enctype="multipart/form-data"  >
 
-			<?php
-			if ('yes' === $mwb_gaq_form_fields_option['select_for_fname_field']) {?>
+            <?php
+            if ('yes' === $mwb_gaq_form_fields_option['select_for_fname_field']) {?>
 
-				<div class="custom-taxonomy-display">
-					<label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote');?><span class="required">*</span></label><br />
-			<?php
-				$taxonomies = get_terms(array(
-								'taxonomy' => 'service',
-								'hide_empty' => false,
-							));
-							if (!empty($taxonomies)) {
-								$taxonomies = json_decode(json_encode($taxonomies), true);
-								?>
-									<select class="mwb_gaq_taxonomy_display" name="taxonomy_for_service">
-									<?php $service_selected = isset($mwb_gaq_form_values['service_selected']) ? $mwb_gaq_form_values['service_selected'] : '';
-								foreach ($taxonomies as $values => $key) {
-									//foreach( $key => $val)
+                <div class="custom-taxonomy-display">
+                    <label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote');?><span class="required">*</span></label><br />
+                <?php
+                $taxonomies = get_terms(
+                    array(
+                                'taxonomy' => 'service',
+                                'hide_empty' => false,
+                    )
+                );
+                if (!empty($taxonomies)) {
+                    $taxonomies = json_decode(json_encode($taxonomies), true);
+                    ?>
+                                    <select class="mwb_gaq_taxonomy_display" name="taxonomy_for_service">
+                    <?php $service_selected = isset($mwb_gaq_form_values['service_selected']) ? $mwb_gaq_form_values['service_selected'] : '';
+                    foreach ($taxonomies as $values => $key) {
+                        //foreach( $key => $val)
 
-									$name = $key["name"];
-									$slug = $key['slug'];?>
-										<option value="<?php echo $slug; ?>" <?php selected($service_selected, $slug);?> > <?php esc_html_e($name, 'get-a-quote');?></option>
-										<?php
-							}
-            ?>
-						</select>
-						<?php
-			}
+                        $name = $key["name"];
+                        $slug = $key['slug'];?>
+                                        <option value="<?php echo $slug; ?>" <?php selected($service_selected, $slug);?> > <?php esc_html_e($name, 'get-a-quote');?></option>
+                        <?php
+                    }
+                    ?>
+                        </select>
+                    <?php
+                }
                 ?>
 
-				</div>
+                </div>
 
-				<br />
-				<p>
+                <br />
+                <p>
 
-					<label class="form_labels"><?php esc_html_e('First Name', 'get-a-quote');?><span class="required">*</span></label><br />
+                    <label class="form_labels"><?php esc_html_e('First Name', 'get-a-quote');?><span class="required">*</span></label><br />
 
-					<?php $ffname = isset($mwb_gaq_form_values['ffname']) ? $mwb_gaq_form_values['ffname'] : '';?>
+                <?php $ffname = isset($mwb_gaq_form_values['ffname']) ? $mwb_gaq_form_values['ffname'] : '';?>
 
-					<input type="text" name="ffname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html__(wp_unslash($ffname)); ?>" size="40" placeholder="First Name" />
+                    <input type="text" name="ffname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html__(wp_unslash($ffname)); ?>" size="40" placeholder="First Name" />
 
-				</p>
+                </p>
 
-			<?php }?>
+            <?php }?>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_lname_field']) {?>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_lname_field']) {?>
 
-				<p>
+                <p>
 
-					<label class="form_labels"><?php esc_html_e('Last Name', 'get-a-quote');?><span class="required">*</span></label><br />
+                    <label class="form_labels"><?php esc_html_e('Last Name', 'get-a-quote');?><span class="required">*</span></label><br />
 
-					<?php $fqlname = isset($mwb_gaq_form_values['fqlname']) ? $mwb_gaq_form_values['fqlname'] : '';?>
+                <?php $fqlname = isset($mwb_gaq_form_values['fqlname']) ? $mwb_gaq_form_values['fqlname'] : '';?>
 
-					<input type="text" name="fqlname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html__(wp_unslash($fqlname)); ?>" size="40" placeholder="Last Name" />
+                    <input type="text" name="fqlname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html__(wp_unslash($fqlname)); ?>" size="40" placeholder="Last Name" />
 
-				</p>
+                </p>
 
-			<?php }?>
+            <?php }?>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_address_field']) {?>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_address_field']) {?>
 
-				<p>
+                <p>
 
-					<label class="form_labels"><?php esc_html_e('Address', 'get-a-quote');?></label><br />
+                    <label class="form_labels"><?php esc_html_e('Address', 'get-a-quote');?></label><br />
 
-					<?php $fqaddress = isset($mwb_gaq_form_values['fqaddress']) ? $mwb_gaq_form_values['fqaddress'] : '';?>
+                <?php $fqaddress = isset($mwb_gaq_form_values['fqaddress']) ? $mwb_gaq_form_values['fqaddress'] : '';?>
 
-					<input type="text" name="fqaddress" value="<?php echo esc_html__(wp_unslash($fqaddress)); ?>" size="40" placeholder="Address" />
+                    <input type="text" name="fqaddress" value="<?php echo esc_html__(wp_unslash($fqaddress)); ?>" size="40" placeholder="Address" />
 
-				</p>
+                </p>
 
-			<?php }?>
+            <?php }?>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_city_field']) {?>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_city_field']) {?>
 
-				<p>
-					<label class="form_labels"><?php esc_html_e('City', 'get-a-quote');?></label><br />
+                <p>
+                    <label class="form_labels"><?php esc_html_e('City', 'get-a-quote');?></label><br />
 
-					<?php $fqcity = isset($mwb_gaq_form_values['fqcity']) ? $mwb_gaq_form_values['fqcity'] : '';?>
+                <?php $fqcity = isset($mwb_gaq_form_values['fqcity']) ? $mwb_gaq_form_values['fqcity'] : '';?>
 
-					<input type="text" name="fqcity" value="<?php echo esc_html__(wp_unslash($fqcity)); ?>" size="40" placeholder="City" />
+                    <input type="text" name="fqcity" value="<?php echo esc_html__(wp_unslash($fqcity)); ?>" size="40" placeholder="City" />
 
-				</p>
+                </p>
 
-			<?php }?>
+            <?php }?>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_zipcode_field']) {?>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_zipcode_field']) {?>
 
-				<p>
+                <p>
 
-					<label class="form_labels"><?php esc_html_e('Zipcode', 'get-a-quote');?></label><br />
+                    <label class="form_labels"><?php esc_html_e('Zipcode', 'get-a-quote');?></label><br />
 
-					<?php $fqzipcode = isset($mwb_gaq_form_values['fqzipcode']) ? $mwb_gaq_form_values['fqzipcode'] : '';?>
+                <?php $fqzipcode = isset($mwb_gaq_form_values['fqzipcode']) ? $mwb_gaq_form_values['fqzipcode'] : '';?>
 
-					<input type="text" name="fqzipcode" value="<?php echo esc_html__(wp_unslash($fqzipcode)); ?>" size="40" placeholder="Zipcode" />
+                    <input type="text" name="fqzipcode" value="<?php echo esc_html__(wp_unslash($fqzipcode)); ?>" size="40" placeholder="Zipcode" />
 
-				</p>
+                </p>
 
-			<?php }?>
+            <?php }?>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_country_field']) {?>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_country_field']) {?>
 
-				<p>
-					<label class="form_labels"><?php esc_html_e('Country', 'get-a-quote');?></label><br />
-					<?php $country_list = Get_A_Quote_Helper::mwb_gaq_get_country_list(); ?>
-					<select id="country_list_select" class="mwb_gaq_country_list_display" name="fqcountry">
-						<?php $fqcountry = isset($mwb_gaq_form_values['fqcountry']) ? $mwb_gaq_form_values['fqcountry'] : '';
-                        foreach ($country_list as $value => $key ) {?>			
-							<option value="<?php echo $key ?>" <?php selected($fqcountry, $value); ?> > <?php esc_html_e( $key, 'get-a-quote'); ?></option>
-							<?php
-                        } ?>
-							
-					</select>
-					<?php //echo '<pre>'; print_r( $fqcountry ); echo '</pre>'; ?>
-				</p>
+                <p>
+                    <label class="form_labels"><?php esc_html_e('Country', 'get-a-quote');?></label><br />
+                <?php $country_list = Get_A_Quote_Helper::mwb_gaq_get_country_list(); ?>
+                    <select id="country_list_select" class="mwb_gaq_country_list_display" name="fqcountry">
+                <?php $fqcountry = isset($mwb_gaq_form_values['fqcountry']) ? $mwb_gaq_form_values['fqcountry'] : '';
+                foreach ($country_list as $value => $key ) {?>            
+                            <option value="<?php echo $value ?>" <?php selected($fqcountry, $value); ?> > <?php esc_html_e($key, 'get-a-quote'); ?></option>
+                    <?php
+                } ?>
+                            
+                    </select>
+                <?php //echo '<pre>'; print_r( $fqcountry ); echo '</pre>'; ?>
+                </p>
 
-			<?php }?>
+            <?php }?>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_states_field']) {?>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_states_field']) {?>
 
-				<p>
+                <p>
 
-					<label class="form_labels"><?php esc_html_e('States', 'get-a-quote');?></label><br />
+                    <label class="form_labels_state"><?php esc_html_e('States', 'get-a-quote');?></label><br />
 
-					<?php $fqstates = isset($mwb_gaq_form_values['fqstates']) ? $mwb_gaq_form_values['fqstates'] : '';?>
+                    <select id="state_list" class="mwb_gaq_state_list_display" name="fqstate">
+                    </select>
+                
+                </p>
 
-					<input type="text" name="fqstates" value="<?php echo esc_html__(wp_unslash($fqstates)); ?>" size="40" placeholder="States" />
+            <?php } ?>
 
-				</p>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_email_field']) {?>
 
-			<?php }?>
+                <p>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_email_field']) {?>
+                    <label class="form_labels"><?php esc_html_e('Email', 'get-a-quote');?><span class="required">*</span></label><br />
 
-				<p>
+                <?php $fqemail = isset($mwb_gaq_form_values['fqemail']) ? $mwb_gaq_form_values['fqemail'] : '';?>
 
-					<label class="form_labels"><?php esc_html_e('Email', 'get-a-quote');?><span class="required">*</span></label><br />
+                    <input type="email" name="fqemail" required="required" value="<?php echo esc_html__(wp_unslash($fqemail)); ?>" size="40" placeholder="Email" />
+                </p>
 
-					<?php $fqemail = isset($mwb_gaq_form_values['fqemail']) ? $mwb_gaq_form_values['fqemail'] : '';?>
+            <?php }?>
 
-					<input type="email" name="fqemail" required="required" value="<?php echo esc_html__(wp_unslash($fqemail)); ?>" size="40" placeholder="Email" />
-				</p>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_phone_field']) {?>
 
-			<?php }?>
+                <p>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_phone_field']) {?>
+                    <label class="form_labels"><?php esc_html_e('Phone', 'get-a-quote');?></label><br />
 
-				<p>
+                <?php $fqphone = isset($mwb_gaq_form_values['fqphone']) ? $mwb_gaq_form_values['fqphone'] : '';?>
 
-					<label class="form_labels"><?php esc_html_e('Phone', 'get-a-quote');?></label><br />
+                    <input type="text" name="fqphone" value="<?php echo esc_html__(wp_unslash($fqphone)); ?>" size="40" placeholder="Phone" />
 
-					<?php $fqphone = isset($mwb_gaq_form_values['fqphone']) ? $mwb_gaq_form_values['fqphone'] : '';?>
+                </p>
 
-					<input type="text" name="fqphone" value="<?php echo esc_html__(wp_unslash($fqphone)); ?>" size="40" placeholder="Phone" />
+            <?php }?>
 
-				</p>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_budget_field']) {?>
 
-			<?php }?>
+                <p>
+                    <label class="form_labels"><?php esc_html_e('Budget', 'get-a-quote');?></label><br />
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_budget_field']) {?>
+                <?php $fqbudget = isset($mwb_gaq_form_values['fqbudget']) ? $mwb_gaq_form_values['fqbudget'] : '';?>
 
-				<p>
-					<label class="form_labels"><?php esc_html_e('Budget', 'get-a-quote');?></label><br />
+                    <input type="text" name="fqbudget" value="<?php echo esc_html__(wp_unslash($fqbudget)); ?>" size="40" placeholder="Budget" />
 
-					<?php $fqbudget = isset($mwb_gaq_form_values['fqbudget']) ? $mwb_gaq_form_values['fqbudget'] : '';?>
+                </p>
 
-					<input type="text" name="fqbudget" value="<?php echo esc_html__(wp_unslash($fqbudget)); ?>" size="40" placeholder="Budget" />
+            <?php }?>
 
-				</p>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_additional_field']) {?>
 
-			<?php }?>
+                <p>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_additional_field']) {?>
+                    <label class="form_labels"><?php esc_html_e('Additional', 'get-a-quote');?></label><br />
 
-				<p>
+                <?php $fqadd = isset($mwb_gaq_form_values['fqadd']) ? $mwb_gaq_form_values['fqadd'] : '';?>
 
-					<label class="form_labels"><?php esc_html_e('Additional', 'get-a-quote');?></label><br />
+                    <textarea name="fqadd" rows="3" cols="50" ><?php echo esc_html__(wp_unslash($fqadd)); ?></textarea>
 
-					<?php $fqadd = isset($mwb_gaq_form_values['fqadd']) ? $mwb_gaq_form_values['fqadd'] : '';?>
+                </p>
 
-					<textarea name="fqadd" rows="3" cols="50" ><?php echo esc_html__(wp_unslash($fqadd)); ?></textarea>
+            <?php }?>
 
-				</p>
+            <?php if ('yes' === $mwb_gaq_form_fields_option['select_for_fileup_field']) {?>
 
-			<?php }?>
+                <p>
 
-			<?php if ('yes' === $mwb_gaq_form_fields_option['select_for_fileup_field']) {?>
+                    <label class="form_labels"><?php esc_html_e(' Max Size: 3MB ', 'get-a-quote');?></label><br>
 
-				<p>
+                    <input type="file" name="fqfiles" id="fileToUpload">
 
-					<label class="form_labels"><?php esc_html_e(' Max Size: 3MB ', 'get-a-quote');?></label><br>
+                </p>
 
-					<input type="file" name="fqfiles" id="fileToUpload">
+            <?php }?>
 
-				</p>
+                <input type="submit" name="qsubmit" value="Submit">
 
-			<?php }?>
+            </form>
 
-				<input type="submit" name="qsubmit" value="Submit">
-
-			</form>
-
-			<?php
-}
+            <?php
+        }
     }
 }
