@@ -3,24 +3,25 @@
 /**
  * Exit if accessed directly
  */
-if ( !defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
-if ( isset( $_POST['mwb_gaq_common_settings_save'] ) ) {
+if (isset($_POST['mwb_gaq_common_settings_save'])) {
 
 	$mwb_gaq_setting = array();
 
 	$mwb_gaq_setting['mwb_gaq_enable_plugin'] = !empty($_POST['mwb_gaq_enable_plugin']) ? 'on' : 'off';
 
-	update_option( 'mwb_gaq_setting_visibility', $mwb_gaq_setting );
-	update_option( 'mwb_gaq_enable_plugin', $mwb_gaq_setting['mwb_gaq_enable_plugin'] ); ?>
+	update_option('mwb_gaq_setting_visibility', $mwb_gaq_setting);
+	update_option('mwb_gaq_enable_plugin', $mwb_gaq_setting['mwb_gaq_enable_plugin']);
+?>
 
 	<div class="notice notice-success is-dismissible">
 		<p><strong><?php _e('Settings saved', 'get-a-quote'); ?></strong></p>
 	</div>
-	<?php
+<?php
 }
-$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', 'on' );
+$mwb_gaq_enable_plugin = get_option('mwb_gaq_enable_plugin', 'on');
 ?>
 <form action="" method="POST">
 	<div class="mwb_gaq_table">

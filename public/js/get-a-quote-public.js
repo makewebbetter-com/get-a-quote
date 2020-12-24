@@ -16,7 +16,8 @@ jQuery(document).ready(function($) {
 
         	},
         	success: function(response){
-                $("#state_list").append(response);
+                    $("#state_list").html(response);
+                
         	}
         });
     });

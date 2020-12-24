@@ -27,7 +27,8 @@
  * @subpackage Get_A_Quote/includes
  * @author     Make Web Better <plugins@makewebbetter.com>
  */
-class Get_A_Quote {
+class Get_A_Quote
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -66,8 +67,9 @@ class Get_A_Quote {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
-		if ( defined( 'GET_A_QUOTE_VERSION' ) ) {
+	public function __construct()
+	{
+		if (defined('GET_A_QUOTE_VERSION')) {
 			$this->version = GET_A_QUOTE_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -78,7 +80,6 @@ class Get_A_Quote {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -97,41 +98,46 @@ class Get_A_Quote {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-get-a-quote-loader.php';
 
 		/**
 		 * The class is responsible for global functions
 		 *  
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-global-functions.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-get-a-quote-global-functions.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-get-a-quote-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-get-a-quote-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-get-a-quote-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-get-a-quote-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-get-a-quote-public.php';
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/countryfunction.php';
+
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/countryfunction.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/countryfunction.php';
 
 		$this->loader = new Get_A_Quote_Loader();
 
+
+		$this->loader = new Get_A_Quote_Loader();
 	}
 
 	/**
@@ -143,12 +149,12 @@ class Get_A_Quote {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function set_locale()
+	{
 
 		$plugin_i18n = new Get_A_Quote_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
 
 	/**
@@ -158,35 +164,37 @@ class Get_A_Quote {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks()
+	{
 
-		$plugin_admin = new Get_A_Quote_Admin( $this->get_plugin_name(), $this->get_version() );
-		
-
-		$this->loader->add_action( 'manage_quotes_posts_columns', $plugin_admin, 'mwb_gaq_columns' );
-
-		$this->loader->add_action( 'manage_quotes_posts_custom_column', $plugin_admin, 'mwb_gaq_fill_columns', 10, 2 );
-
-		$mwb_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', Get_A_Quote_Helper :: enabling_default_value( 'enable' )  );
+		$plugin_admin = new Get_A_Quote_Admin($this->get_plugin_name(), $this->get_version());
 
 
-		$this->loader->add_filter( 'admin_menu', $plugin_admin, 'quote_panel' );
-		if ( 'on' === $mwb_gaq_enable_plugin ) {
+		$this->loader->add_action('manage_quotes_posts_columns', $plugin_admin, 'mwb_gaq_columns');
+
+		$this->loader->add_action('manage_quotes_posts_custom_column', $plugin_admin, 'mwb_gaq_fill_columns', 10, 2);
+
+		$mwb_gaq_enable_plugin = get_option('mwb_gaq_enable_plugin', Get_A_Quote_Helper::enabling_default_value('enable'));
+
+		$this->loader->add_action('admin_menu', $plugin_admin, 'quote_panel');
+
+		if ('on' === $mwb_gaq_enable_plugin) {
 			//wp_mail( 'Shaileshkumardubey@makewebbetter.com', 'office', 'Working' );
-			$mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', Get_A_Quote_Helper :: enabling_default_value( 'taxonomy' ) );
-			if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_services'] ) {
-				$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_service' );
+			$mwb_gaq_taxonomies_option = get_option('mwb_gaq_taxonomies_options', Get_A_Quote_Helper::enabling_default_value('taxonomy'));
+			if ('yes' === $mwb_gaq_taxonomies_option['select_for_services']) {
+				$this->loader->add_filter('init', $plugin_admin, 'gaq_register_taxonomy_service');
 				//$this->loader->add_action( 'init', 'custom_taxonomy', 10);
 			}
-			if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_status'] ) {
-				$this->loader->add_filter( 'init', $plugin_admin, 'gaq_register_taxonomy_quote_status' ); }
-			$this->loader->add_filter( 'init', $plugin_admin, 'quote_post_type' );
+			if ('yes' === $mwb_gaq_taxonomies_option['select_for_status']) {
+				$this->loader->add_filter('init', $plugin_admin, 'gaq_register_taxonomy_quote_status');
+			}
+			$this->loader->add_filter('init', $plugin_admin, 'quote_post_type');
 		}
-		
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'mwb_gaq_meta_inside' );
-		$this->loader->add_action( 'save_post', $plugin_admin, 'mwb_gaq_update_quote' );
+
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'mwb_gaq_meta_inside');
+		$this->loader->add_action('save_post', $plugin_admin, 'mwb_gaq_update_quote');
 	}
 
 	/**
@@ -196,16 +204,24 @@ class Get_A_Quote {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks()
+	{
 
-		$plugin_public = new Get_A_Quote_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'init', $plugin_public, 'shortcodes' );
-		$this->loader->add_action( 'wp_ajax_ajax_count_state', $plugin_public, 'ajax_count_state' );
-		$this->loader->add_action( 'wp_ajax_nopriv_ajax_count_state', $plugin_public, 'ajax_count_state' );
+		$plugin_public = new Get_A_Quote_Public($this->get_plugin_name(), $this->get_version());
 
+		$plugin_public = new Get_A_Quote_Public($this->get_plugin_name(), $this->get_version());
+
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+		$this->loader->add_action('init', $plugin_public, 'shortcodes');
+		$this->loader->add_action('wp_ajax_ajax_count_state', $plugin_public, 'ajax_count_state');
+		$this->loader->add_action('wp_ajax_nopriv_ajax_count_state', $plugin_public, 'ajax_count_state');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+		$this->loader->add_action('init', $plugin_public, 'shortcodes');
+		$this->loader->add_action('wp_ajax_ajax_count_state', $plugin_public, 'ajax_count_state');
+		$this->loader->add_action('wp_ajax_nopriv_ajax_count_state', $plugin_public, 'ajax_count_state');
 	}
 
 	/**
@@ -213,7 +229,8 @@ class Get_A_Quote {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -224,7 +241,8 @@ class Get_A_Quote {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name()
+	{
 		return $this->plugin_name;
 	}
 
@@ -234,7 +252,8 @@ class Get_A_Quote {
 	 * @since     1.0.0
 	 * @return    Get_A_Quote_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
 
@@ -244,8 +263,8 @@ class Get_A_Quote {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
+	public function get_version()
+	{
 		return $this->version;
 	}
-
 }

@@ -81,10 +81,4 @@ function run_get_a_quote() {
 }
 run_get_a_quote();
 
-function gaq_quote_func() {
-	include_once plugin_dir_path( __FILE__ ) . 'admin/partials/get-a-quote-admin-display.php';
-}
-function gaq_quote_func_faq() {
-	echo '<div class="wrap"><div id="icon-options-general" class="icon32"><br></div>
-	<h2>FAQ</h2></div>';
-}
+
