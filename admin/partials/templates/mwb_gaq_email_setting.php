@@ -8,23 +8,23 @@ if (!defined('ABSPATH')) {
 }
 if (isset($_POST['mwb_gaq_email_fields_settings_save'])) {
 
-    $mwb_gaq_email_fields_settings = array();
+	$mwb_gaq_email_fields_settings = array();
 
-    $mwb_gaq_email_fields_settings['mwb_gaq_enable_email_setting'] = !empty($_POST['mwb_gaq_enable_email_setting']) ? 'on' : 'off';
+	$mwb_gaq_email_fields_settings['mwb_gaq_enable_email_setting'] = !empty( $_POST['mwb_gaq_enable_email_setting'] ) ? 'on' : 'off';
 
-    $mwb_gaq_email_fields_settings['sender_email'] = !empty($_POST['sender_email']) ? sanitize_text_field($_POST['sender_email']) : '';
+	$mwb_gaq_email_fields_settings['sender_email'] = !empty( $_POST['sender_email'] ) ? sanitize_text_field( $_POST['sender_email'] ) : '';
 
-    $mwb_gaq_email_fields_settings['email_reply'] = !empty($_POST['email_reply']) ? sanitize_text_field($_POST['email_reply']) : '';
+	$mwb_gaq_email_fields_settings['email_reply'] = !empty( $_POST['email_reply'] ) ? sanitize_text_field( $_POST['email_reply'] ) : '';
 
-    $mwb_gaq_email_fields_settings['email_subject'] = !empty($_POST['email_subject']) ? sanitize_text_field($_POST['email_subject']) : '';
+	$mwb_gaq_email_fields_settings['email_subject'] = !empty( $_POST['email_subject'] ) ? sanitize_text_field( $_POST['email_subject'] ) : '';
 
-    $mwb_gaq_email_fields_settings['emailmess'] = !empty($_POST['emailmess']) ? sanitize_textarea_field(wp_unslash($_POST['emailmess'])) : '';
+	$mwb_gaq_email_fields_settings['emailmess'] = !empty( $_POST['emailmess'] ) ? sanitize_textarea_field( wp_unslash( $_POST['emailmess'] ) ) : '';
 
-    update_option('mwb_gaq_activate_email', $mwb_gaq_email_fields_settings['mwb_gaq_enable_email_setting']);
-    update_option( 'mwb_gaq_email_fields_data', $mwb_gaq_email_fields_settings );
-    ?>
+	update_option( 'mwb_gaq_activate_email', $mwb_gaq_email_fields_settings['mwb_gaq_enable_email_setting'] );
+	update_option( 'mwb_gaq_email_fields_data', $mwb_gaq_email_fields_settings );
+	?>
 	<div class="notice notice-success is-dismissible">
-		<p><strong><?php esc_html_e('Settings saved', 'get-a-quote');?></strong></p>
+		<p><strong><?php esc_html_e( 'Settings saved', 'get-a-quote' );?></strong></p>
 	</div>
 <?php
 }

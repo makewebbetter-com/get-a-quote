@@ -80,5 +80,46 @@ function run_get_a_quote() {
 
 }
 run_get_a_quote();
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'mwb_gaq_plugin_action_links');
+/**
+ * Add Settings link if premium version is not available.
+ *
+ * @since    1.0.0
+ * @param    string $links link to admin arena of plugin.
+ */
+function mwb_gaq_plugin_action_links($links)
+{
 
+	$plugin_links = array(
+		'<a href="' . admin_url('admin.php?page=quote-sett') .
+			'">' . esc_html__('Settings', 'get-a-quote') . '</a>',
+		'<a class="mwb-ubo-lite-go-pro" style="background: #05d5d8; color: white; font-weight: 700; padding: 2px 5px; border: 1px solid #05d5d8; border-radius: 5px;" href="https://makewebbetter.com/product/woocommerce-upsell-order-bump-offer-pro/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home" target="_blank">' . esc_html__('GO PRO', 'get-a-quote') . '</a>',
+	);
+	return array_merge($plugin_links, $links);
+}
+add_filter('plugin_row_meta', 'mwb_gaq_plugin_row_meta', 10, 2);
 
+/**
+ * Add custom links for getting premium version.
+ *
+ * @param   string $links link to index file of plugin.
+ * @param   string $file index file of plugin.
+ *
+ * @since    1.0.0
+ */
+function mwb_gaq_plugin_row_meta($links, $file)
+{
+
+	if (strpos($file, 'get-a-quote.php') !== false) {
+
+		$row_meta = array(
+			'demo' => '<a href="https://demo.makewebbetter.com/woocommerce-upsell-order-bump-offer/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home" target="_blank">' . esc_html__('Demo', 'get-a-quote') . '</a>',
+			'doc' => '<a href="https://docs.makewebbetter.com/woocommerce-upsell-order-bump-offer/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home" target="_blank">' . esc_html__('Documentation', 'get-a-quote') . '</a>',
+			'support' => '<a href="https://makewebbetter.com/submit-query/" target="_blank">' . esc_html__('Support', 'get-a-quote') . '</a>',
+		);
+
+		return array_merge($links, $row_meta);
+	}
+
+	return (array) $links;
+}

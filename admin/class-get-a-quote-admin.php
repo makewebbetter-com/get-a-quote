@@ -196,8 +196,8 @@ class Get_A_Quote_Admin
 				'rewrite' => array('slug' => 'Quotes'), // my custom slug.
 			)
 		);
-		//add_posts_page('Quotes', 'GET A QUOTE', 'read', 'publ-in-section', 'wpdocs_my_plugin_function');
 	}
+
 	public function mwb_gaq_update_quote()
 	{
 		$post_update_meta = array();
@@ -216,7 +216,11 @@ class Get_A_Quote_Admin
 		$post_update_meta['fqfilename'] = $_POST['attachment'];
 		$post_update_meta['taxonomy_for_service'] = Get_A_Quote_Helper::get_taxo('service');
 		$post_update_meta['quote_status'] = Get_A_Quote_Helper::get_taxo('Status');
+		// $value = array(
+		// 	'post_title' => $_POST['firstname'],
+		// );
 		if (!empty($post_update_meta)) {
+			// wp_update_post($value);
 			update_post_meta($post_id, 'quotes_meta', $post_update_meta);
 		}
 	}
@@ -252,7 +256,7 @@ class Get_A_Quote_Admin
 			'Service A', // the term
 			'service', // the taxonomy
 			array(
-				'description' => 'A Type Service',
+				'description' => 'A Type Service',      
 				'slug' => 'Service-A',
 			)
 		);
