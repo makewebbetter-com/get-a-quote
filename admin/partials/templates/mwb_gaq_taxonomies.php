@@ -30,6 +30,41 @@ $mwb_gaq_taxonomies_option = get_option('mwb_gaq_taxonomies_options', array());
 		<h2> Taxonomy </h2>
 		<table class="form-table mwb_gaq_taxonomy_setting">
 			<tbody>
+				<tr>
+					<th><?php esc_html_e( 'Status', 'get-a-quote' ); ?></th>
+				</tr>
+				<tr>
+					<th><?php esc_html_e( 'Active Terms', 'get-a-quote' ); ?></th>
+				</tr>
+				<tr>
+					<div class="Status_taxo">
+						<?php $terms = get_terms(array(
+							'taxonomy' => 'Status',
+						));
+						foreach ($terms as $value => $key) {
+							echo '<th>' . $key->name . ' <a href="#">Delete</a></th>';
+						}
+						?>
+					</div>
+					<hr>
+				</tr>
+				<tr>
+					<th><?php esc_html_e( 'Service', 'get-a-quote' ); ?></th>
+				</tr>
+				<tr>
+					<th><?php esc_html_e( 'Active Terms', 'get-a-quote' ); ?></th>
+				</tr>
+				<tr>
+					<div class="Service_taxo">
+						<?php $terms = get_terms(array(
+							'taxonomy' => 'service',
+						));
+						foreach ( $terms as $value => $key ) {
+							echo '<th>' . $key->name . ' <a href="#">Delete</a></th>';
+						}
+						?>
+					</div>
+				</tr>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
 						<label for="mwb_gaq_enable_taxonomy_plugin"><?php esc_html_e('Enable Service Taxonomy', 'get-a-quote'); ?></label>
@@ -53,7 +88,7 @@ $mwb_gaq_taxonomies_option = get_option('mwb_gaq_taxonomies_options', array());
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
-						<label><?php esc_html_e('Enable Quote Status Taxonomy', 'get-a-quote'); ?></label>
+						<label><?php esc_html_e( 'Enable Quote Status Taxonomy', 'get-a-quote' ); ?></label>
 					</th>
 					<td>
 						<label class="mwb_gaq_enable_status_taxonomy_plugin_label">
@@ -71,38 +106,6 @@ $mwb_gaq_taxonomies_option = get_option('mwb_gaq_taxonomies_options', array());
 							<span class="mwb_upsell_global_description"><?php esc_html_e('To allow quote status taxonomy', 'get-a-quote'); ?></span>
 						</label>
 					</td>
-				</tr>
-				<tr>
-					<hr>
-					<h3>Service</h3>
-					<div class="Status_taxo">
-						<?php $terms = get_terms(array(
-							'taxonomy' => 'service',
-						));
-						foreach ($terms as $value => $key) {
-							echo '<pre>';
-							print_r($key->name);
-							echo '</pre>';
-						}
-						?>
-					</div>
-					<hr>
-				</tr>
-				<tr>
-					<h3>Status</h3>
-					<div class="Status_taxo">
-						<?php $terms = get_terms(array(
-							'taxonomy' => 'Status',
-						));
-						foreach ($terms as $value => $key) {
-							echo '<pre>';
-							print_r($key->name);
-							echo '</pre>';
-						}
-						?>
-					</div>
-					<hr>
-
 				</tr>
 			<tbody>
 		</table>

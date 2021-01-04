@@ -138,15 +138,15 @@ class Get_A_Quote_Public
 	public function Quote_form()
 	{
 		//global $get_meta;
-
+		$post_id ='';
 		$get_meta = array();
 		$recent_post_id = 0;
-		if (isset($_POST['qsubmit'])) {
+		if ( isset( $_POST['qsubmit'] ) ) {
 			$mwb_gaq_form_data = array();
 
-			$mwb_gaq_form_data['ffname'] = !empty($_POST['ffname']) ? sanitize_text_field(wp_unslash($_POST['ffname'])) : '';
+			$mwb_gaq_form_data['ffname'] = ! empty( $_POST['ffname'] ) ? sanitize_text_field(wp_unslash($_POST['ffname'])) : '';
 
-			$mwb_gaq_form_data['fqlname'] = !empty($_POST['fqlname']) ? sanitize_text_field(wp_unslash($_POST['fqlname'])) : '';
+			$mwb_gaq_form_data['fqlname'] = ! empty( $_POST['fqlname'] ) ? sanitize_text_field(wp_unslash($_POST['fqlname'])) : '';
 
 			$mwb_gaq_form_data['fqaddress'] = !empty($_POST['fqaddress']) ? sanitize_text_field(wp_unslash($_POST['fqaddress'])) : '';
 
