@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
@@ -35,7 +34,9 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'GET_A_QUOTE_VERSION', '1.0.0' );
+define( 'GAQ_VERSION', '1.0.0' );
+define( 'GAQ_TEXT_DOMAIN', 'get-a-quote' );
+
 
 /**
  * The code that runs during plugin activation.
@@ -80,24 +81,33 @@ function run_get_a_quote() {
 
 }
 run_get_a_quote();
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'mwb_gaq_plugin_action_links');
+
+
+/*****************************************
+	Plugin External Urls Code
+******************************************
+*/
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'mwb_gaq_plugin_action_links' );
+
 /**
  * Add Settings link if premium version is not available.
  *
  * @since    1.0.0
  * @param    string $links link to admin arena of plugin.
  */
-function mwb_gaq_plugin_action_links($links)
-{
+function mwb_gaq_plugin_action_links( $links ) {
+
+	$settings_tab = sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'admin.php?page=gaq-config' ) ), esc_html__( 'Settings', 'GAQ_TEXT_DOMAIN' ) );
+	$gopro_tab    = sprintf( '<a target="_blank" style="background: #05d5d8; color: white; font-weight: 700; padding: 2px 5px; border: 1px solid #05d5d8; border-radius: 5px;" href="%s">%s</a>', esc_url( 'https://makewebbetter.com/' ), esc_html__( 'GO PRO', 'GAQ_TEXT_DOMAIN' ) );
 
 	$plugin_links = array(
-		'<a href="' . admin_url('admin.php?page=quote-sett') .
-			'">' . esc_html__('Settings', 'get-a-quote') . '</a>',
-		'<a class="mwb-ubo-lite-go-pro" style="background: #05d5d8; color: white; font-weight: 700; padding: 2px 5px; border: 1px solid #05d5d8; border-radius: 5px;" href="https://makewebbetter.com/product/woocommerce-upsell-order-bump-offer-pro/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home" target="_blank">' . esc_html__('GO PRO', 'get-a-quote') . '</a>',
+		'settings_tab' => $settings_tab,
+		'gopro_tab'    => $gopro_tab,
 	);
-	return array_merge($plugin_links, $links);
+
+	return array_merge( $plugin_links, $links );
 }
-add_filter('plugin_row_meta', 'mwb_gaq_plugin_row_meta', 10, 2);
+add_filter( 'plugin_row_meta', 'mwb_gaq_plugin_row_meta', 10, 2 );
 
 /**
  * Add custom links for getting premium version.
@@ -107,19 +117,34 @@ add_filter('plugin_row_meta', 'mwb_gaq_plugin_row_meta', 10, 2);
  *
  * @since    1.0.0
  */
-function mwb_gaq_plugin_row_meta($links, $file)
-{
+function mwb_gaq_plugin_row_meta( $links, $file ) {
 
-	if (strpos($file, 'get-a-quote.php') !== false) {
+	if ( ! empty( $file ) && strpos( $file, 'get-a-quote.php' ) !== false ) {
 
-		$row_meta = array(
-			'demo' => '<a href="https://demo.makewebbetter.com/woocommerce-upsell-order-bump-offer/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home" target="_blank">' . esc_html__('Demo', 'get-a-quote') . '</a>',
-			'doc' => '<a href="https://docs.makewebbetter.com/woocommerce-upsell-order-bump-offer/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home" target="_blank">' . esc_html__('Documentation', 'get-a-quote') . '</a>',
-			'support' => '<a href="https://makewebbetter.com/submit-query/" target="_blank">' . esc_html__('Support', 'get-a-quote') . '</a>',
+		$additional_links = array(
+			esc_html__( 'Demo', 'GAQ_TEXT_DOMAIN' )    => 'https://demo.makewebbetter.com/woocommerce-upsell-order-bump-offer/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home',
+			esc_html__( 'Documentation', 'GAQ_TEXT_DOMAIN' ) => 'https://docs.makewebbetter.com/woocommerce-upsell-order-bump-offer/?utm_source=MWB-orderbump-home&utm_medium=MWB-home-page&utm_campaign=MWB-orderbump-home',
+			esc_html__( 'Support', 'GAQ_TEXT_DOMAIN' ) => 'https://makewebbetter.com/submit-query/',
 		);
 
-		return array_merge($links, $row_meta);
+		if ( ! empty( $additional_links ) && is_array( $additional_links ) ) {
+			$row_meta = array();
+			foreach ( $additional_links as $label => $url ) {
+				$row_meta[ strtolower( $label ) ] = sprintf( '<a href="%s">%s</a>', esc_url( $url ), esc_html( $label ) );
+			}
+		}
+
+		return array_merge( $links, $row_meta );
 	}
 
 	return (array) $links;
 }
+
+
+// add_action( 'init', 'my_event_wp_schedule' );
+// function my_event_wp_schedule() {
+// 	// print_r( wp_next_scheduled( 'bl_cron_hook' ) ); die;
+// 	echo '<pre>'; print_r( _get_cron_array() ); echo '</pre>'; die;
+// 	wp_schedule_event( time(), 'hourly', 'bl_cron' );
+// }
+

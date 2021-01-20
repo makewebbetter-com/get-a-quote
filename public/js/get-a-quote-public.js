@@ -1,23 +1,38 @@
+/**
+ * All of the code for your public-facing JavaScript source
+ * should reside in this file.
+ */
 jQuery(document).ready(function($) {
-    $('.form_labels_state').hide();
-    $('#state_list').hide();
-    
-    $("#country_list_select").on('change', function() {
-        var conceptName = $('#country_list_select').find(":selected").val();
-        $('.form_labels_state').show();
-        $('#state_list').show();
-        $.ajax({
-            type : 'POST',
-        	url : ajax_url_global.ajax_url,
-        	data : {
-        		ID : conceptName,
-        		action : 'ajax_count_state',
-        		_ajax_nonce : ajax_url_global.nonce,
 
+	const stateFieldLabel = $( '.form_labels_state' );
+	const stateField = $( '#state_list' );
+	stateFieldLabel.hide();
+	stateField.hide();
+    $( '#country_list_select' ).on( 'change', function() {
+	
+		const selected_country = $( '#country_list_select' ).find( ":selected" ).val();
+		// console.log( selected_country );
+        jQuery.ajax({
+            type : 'POST',
+        	url : ajax_globals.ajax_url,
+        	data : {
+        		selected_country : selected_country,
+        		action : 'trigger_states',
+        		_ajax_nonce : ajax_globals.nonce,
         	},
-        	success: function(response){
-                    $("#state_list").html(response);
-                
+        	success: function( response ) {
+				
+				response = JSON.parse( response );
+				console.log( 'true' == response.result );
+				if( 'true' == response.result ) {
+					stateField.html( response.html );
+					stateFieldLabel.show();
+					stateField.show();
+				}
+                else {
+					stateFieldLabel.hide();
+					stateField.hide();
+				}
         	}
         });
     });

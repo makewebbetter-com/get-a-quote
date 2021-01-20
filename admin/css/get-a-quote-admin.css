@@ -1,25 +1,133 @@
 /**
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
- */.wp-tooltip-label {
-    position: relative;
-    display: inline-block;
+ */
+#mwb_gaq_setting_wrapper .nav-tab-active, 
+#mwb_gaq_setting_wrapper .nav-tab-active:focus, 
+#mwb_gaq_setting_wrapper .nav-tab-active:focus:active,
+#mwb_gaq_setting_wrapper .nav-tab-active:hover {
+    border-bottom: 2px solid #FA7820 !important;
 }
-  
-.wp-tooltip-label .wp-tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
 
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
+#mwb_gaq_setting_wrapper .nav-tab {
+    background-color: #f1f1f1;
+    border: 0;
+    box-shadow: none;
 }
-  
-.wp-tooltip-label:hover .wp-tooltiptext {
-    visibility: visible;
+
+#mwb_gaq_setting_wrapper h2 {
+    font-size: 22px;
+    margin-top: 0;
 }
+
+.mwb_gaq_form_setting .titledesc {
+    padding-top: 10px;
+}
+
+#mwb_gaq_setting_wrapper input {
+    padding: 6px 20px;
+}
+
+.mwb_gaq_email_setting tr {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.mwb_gaq_email_setting tr:first-child {
+    display: block;
+}
+
+.mwb_gaq_email_setting td {
+    padding: 0;
+}
+
+.mwb_form_fields .active_form_fields label,
+#mwb_gaq_setting_wrapper   th label {
+    font-weight: 700;
+}
+
+.mwb_gaq_email_setting td input,
+.mwb_gaq_email_setting td textarea {
+	background-color: #f1f1f1;
+    width: 90%;
+}
+
+#mwb_gaq_setting_wrapper input[type=checkbox], 
+#mwb_gaq_setting_wrapper input[type=radio] {
+    width: 20px;
+    height: 20px;
+}
+
+#mwb_gaq_setting_wrapper input[type=checkbox]:checked {
+    outline: none;
+}
+
+#mwb_gaq_setting_wrapper input[type=checkbox]:checked::before {
+    margin: -0.1rem 0 0 -0.2rem;
+}
+
+.mwb_gaq_taxonomy_setting tbody {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.mwb_gaq_taxonomy_setting tbody tr {
+    flex: 0 0 100%;
+}
+
+.mwb_gaq_taxonomy_setting tbody tr {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 1px 9px 0px rgb(0 0 0 / 0.10);
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 44%;
+    margin: 10px 0;
+    max-width: 50%;
+    padding: 20px;
+}
+
+.mwb_gaq_taxonomy_setting tbody tr.terms th {
+    color: #4a5b67;
+}
+
+.mwb_gaq_taxonomy_setting tbody tr.terms th.header {
+    flex: 100%;
+    font-size: 20px;
+}
+
+.mwb_gaq_taxonomy_setting tbody tr.terms th.sub-heading {
+    font-size: 18px;
+}
+
+.mwb_gaq_taxonomy_setting tbody tr.terms .btn a {
+    background-color: #fa7820;
+    border-radius: 5px;
+    border: 1px solid #fa7820;
+    color: #f1f1f1;
+    padding: 6px 16px;
+    text-decoration: none;
+}
+
+.mwb_gaq_taxonomy_table .submit {
+    margin-left: 20px;
+}
+
+#mwb_gaq_setting_wrapper .save-button {
+    background: #FA7820;
+    border-color: #FA7820;
+}
+
+.mwb_gaq_table,
+.mwb_form_fields,
+.mwb_email_setting_form {
+	background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 1px 9px 0px rgb(0 0 0 / 0.10);
+    margin-top: 40px;
+    max-width: 50%;
+    padding: 20px;
+}
+

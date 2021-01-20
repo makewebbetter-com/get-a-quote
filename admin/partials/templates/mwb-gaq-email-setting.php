@@ -3,10 +3,13 @@
 /**
  * Exit if accessed directly
  */
-if (!defined('ABSPATH')) {
+if ( !defined('ABSPATH') ) {
     exit;
 }
-if (isset($_POST['mwb_gaq_email_fields_settings_save'])) {
+
+if ( ! empty( $_POST['mwb_gaq_email_fields_settings_save'] ) ) {
+
+	unset( $_POST['mwb_gaq_email_fields_settings_save'] );
 
 	$mwb_gaq_email_fields_settings = array();
 
@@ -22,18 +25,19 @@ if (isset($_POST['mwb_gaq_email_fields_settings_save'])) {
 
 	update_option( 'mwb_gaq_activate_email', $mwb_gaq_email_fields_settings['mwb_gaq_enable_email_setting'] );
 	update_option( 'mwb_gaq_email_fields_data', $mwb_gaq_email_fields_settings );
+	
 	?>
 	<div class="notice notice-success is-dismissible">
-		<p><strong><?php esc_html_e( 'Settings saved', 'get-a-quote' );?></strong></p>
+		<p><strong><?php esc_html_e( 'Settings saved', GAQ_TEXT_DOMAIN );?></strong></p>
 	</div>
-<?php
+	<?php
 }
 
 $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 
 ?>
 
-<form action="" method="POST">
+<form class="mwb_email_setting_form" action="" method="POST">
 	<div class="wp-tooltip-label">
 		<div class="mwb_gaq_email_sett_table">
 			<h2> Email Fields </h2>
@@ -41,7 +45,7 @@ $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 				<tbody>
 					<tr valign="top">
 						<th scope="row" class="titledesc">
-							<label><?php esc_html_e('Activate Email', 'get-a-quote');?></label>
+							<label><?php esc_html_e('Activate Email', GAQ_TEXT_DOMAIN);?></label>
 						</th>
 						<td>
 							<label class="mwb_gaq_enable_email">
@@ -53,7 +57,7 @@ $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="titledesc">
-							<label><?php esc_html_e('Sender email', 'get-a-quote');?>
+							<label><?php esc_html_e('Sender email', GAQ_TEXT_DOMAIN);?>
 						</th>
 						<td>
 							<label class="mwb_gaq_sender_email">
@@ -63,7 +67,7 @@ $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="titledesc">
-							<label class="mwb_gaq_reply_to"><?php esc_html_e('Reply to', 'get-a-quote');?></label>
+							<label class="mwb_gaq_reply_to"><?php esc_html_e('Reply to', GAQ_TEXT_DOMAIN);?></label>
 						</th>
 						<td>
 							<label class="mwb_gaq_email_reply_to">
@@ -73,7 +77,7 @@ $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 					</tr>
 					<tr valign="top">
 						<th scope="row" class="titledesc">
-							<label ><?php esc_html_e('Email Subject', 'get-a-quote');?></label>
+							<label ><?php esc_html_e('Email Subject', GAQ_TEXT_DOMAIN);?></label>
 						</th>
 						<td>
 							<label class="mwb_gaq_email_subject">
@@ -84,7 +88,7 @@ $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 
 					<tr>
 						<th scope="row" class="titledesc">
-							<label ><?php esc_html_e('Message', 'get-a-quote');?></label>
+							<label ><?php esc_html_e( 'Message', GAQ_TEXT_DOMAIN );?></label>
 						</th>
 						<td>
 							<label class="mwb_gaq_email_message">
@@ -97,7 +101,7 @@ $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 		</div>
 	</div>
 	<p class="submit">
-		<input type="submit" value="<?php _e('Save Changes', 'get-a-quote');?>" class="button-primary save-button" name="mwb_gaq_email_fields_settings_save" id="mwb_gaq_email_fields_setting_save">
+		<input type="submit" value="<?php esc_html_e( 'Save Changes', GAQ_TEXT_DOMAIN );?>" class="button-primary save-button" name="mwb_gaq_email_fields_settings_save" id="mwb_gaq_email_fields_setting_save">
 	</p>
 </form>
 

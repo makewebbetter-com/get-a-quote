@@ -20,8 +20,7 @@
  * @subpackage Get_A_Quote/includes
  * @author     Make Web Better <plugins@makewebbetter.com>
  */
-class Get_A_Quote_Activator
-{
+class Get_A_Quote_Activator {
 
 	/**
 	 * Short Description. (use period)
@@ -30,62 +29,50 @@ class Get_A_Quote_Activator
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate()
-	{
-		if (!current_user_can('activate_plugins')) {
+	public static function activate() {
+
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
-		$current_user = wp_get_current_user();
+		// Register the Default Page.
+		self::insert_default_posts();
+	}
 
-		$page = array(
+	/**
+	 * Register the Default Page.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function insert_default_posts() {
 
-			'post_title' => __('Quote Form'),
-
+		/**
+		 * Search and Insert default quote page if not avaiable.
+		 */
+		$args       =
+		array(
+			'post_title'  => 'Quote Form',
+			'post_type'   => 'page',
 			'post_status' => 'publish',
-
-			'post_content' => '[fform]',
-
-			'post_author' => $current_user->ID,
-
-			'post_type' => 'page',
+			'meta_key'    => '_mwb_gaq_default_page',
 		);
-		wp_insert_term(
-			'Service A', // the term
-			'service', // the taxonomy
-			array(
-				'description' => 'A Type Service',
-				'slug' => 'Service-A',
-			)
-		);
-		wp_insert_term(
-			'Service B', // the term
-			'service', // the taxonomy
-			array(
-				'description' => 'B Type Service',
-				'slug' => 'Service-B',
-			)
-		);
-		wp_insert_term(
-			'Service C', // the term
-			'service', // the taxonomy
-			array(
-				'description' => 'C Type Service',
-				'slug' => 'Service-C',
-			)
-		);
-		// insert the post into the database
-		$args = array(
-			'post_type' => 'quotes',
-			'post_title' => __('Quote Form'),
-			'post_status' => 'publish',
-		);
+		$quote_page = get_posts( $args );
 
-		$quote_page = get_posts($args);
-		// echo '<pre>'; print_r( $quote_page ); echo '</pre>';
-		// die();
-		if (empty($quote_page)) {
+		if ( empty( $quote_page ) ) {
 
-			wp_insert_post($page);
+			$default_page = array(
+				'post_title'   => esc_html__( 'Quote Form', 'GAQ_TEXT_DOMAIN' ),
+				'post_status'  => 'publish',
+				'post_content' => esc_html( '[gaq_form_fields]' ),
+				'post_author'  => get_current_user_id(),
+				'post_type'    => 'page',
+				'meta_input'   => array(
+					'_mwb_gaq_default_page'  => 'true'
+				),
+			);
+
+			wp_insert_post( $default_page );
 		}
 	}
+
+	// End of Class.
 }
