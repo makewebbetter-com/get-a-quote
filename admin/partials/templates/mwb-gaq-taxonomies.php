@@ -6,7 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 if ( isset( $_POST['mwb_gaq_taxonomies_common_settings_save'] ) ) {
+
 	check_admin_referer( 'gaq_admin_taxo', 'gaq_admin_taxo_nonce' );
+
 	$mwb_gaq_taxonomies_setting = array();
 
 	$mwb_gaq_taxonomies_setting['select_for_services'] = ! empty( $_POST['select_for_services'] ) ? sanitize_text_field( wp_unslash( $_POST['select_for_services'] ) ) : '';
@@ -44,7 +46,7 @@ $mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', array() )
 						);
 						foreach ( $terms as $value => $key ) {
 							$val = ! empty( $key->name ) ? $key->name : 'empty';
-							echo sprintf( '<pre> %s </pre>', $val );
+							echo sprintf( '<pre> %s </pre>', esc_html( $val ) );
 						}
 						?>
 					</div>
@@ -64,14 +66,14 @@ $mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', array() )
 						);
 						foreach ( $terms as $value => $key ) {
 							$val = ! empty( $key->name ) ? $key->name : 'empty';
-							echo sprintf( '<pre> %s </pre>', $val );
+							echo sprintf( '<pre> %s </pre>', esc_html( $val ) );
 						}
 						?>
 					</div>
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
-						<label for="mwb_gaq_enable_taxonomy_plugin"><?php esc_html_e('Enable Service Taxonomy', 'GAQ_TEXT_DOMAIN'); ?></label>
+						<label for="mwb_gaq_enable_taxonomy_plugin"><?php esc_html_e( 'Enable Service Taxonomy', 'GAQ_TEXT_DOMAIN' ); ?></label>
 					</th>
 					<td>
 						<label class="mwb_gaq_enable_service_taxonomy_plugin_label">

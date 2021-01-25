@@ -255,7 +255,7 @@ class Get_A_Quote_Admin {
 	public function quote_config_screen() {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/get-a-quote-config-display.php';
 	}
-
+	
 	/**
 	 * Quote Sub-Menu panel Screen.
 	 *
@@ -300,19 +300,19 @@ class Get_A_Quote_Admin {
 		 */
 		$args = array(
 			array(
-				'label'       =>	esc_html__( 'Service A', 'GAQ_TEXT_DOMAIN' ),
-				'description' =>	esc_html__( 'A Type Service', 'GAQ_TEXT_DOMAIN' ),
-				'slug'        =>	esc_html__( 'service-a', 'GAQ_TEXT_DOMAIN' ),
+				'label'       => esc_html__( 'Service A', 'GAQ_TEXT_DOMAIN' ),
+				'description' => esc_html__( 'A Type Service', 'GAQ_TEXT_DOMAIN' ),
+				'slug'        => esc_html__( 'service-a', 'GAQ_TEXT_DOMAIN' ),
 			),
 			array(
-				'label'		  =>	esc_html__( 'Service B', 'GAQ_TEXT_DOMAIN' ),
-				'description' =>	esc_html__( 'B Type Service', 'GAQ_TEXT_DOMAIN' ),
-				'slug'		  =>	esc_html__( 'service-b', 'GAQ_TEXT_DOMAIN' ),
+				'label'       => esc_html__( 'Service B', 'GAQ_TEXT_DOMAIN' ),
+				'description' => esc_html__( 'B Type Service', 'GAQ_TEXT_DOMAIN' ),
+				'slug'        => esc_html__( 'service-b', 'GAQ_TEXT_DOMAIN' ),
 			),
 			array(
-				'label'		  =>	esc_html__( 'Service C', 'GAQ_TEXT_DOMAIN' ),
-				'description' =>	esc_html__( 'C Type Service', 'GAQ_TEXT_DOMAIN' ),
-				'slug'		  =>	esc_html__( 'service-c', 'GAQ_TEXT_DOMAIN' ),
+				'label'       => esc_html__( 'Service C', 'GAQ_TEXT_DOMAIN' ),
+				'description' => esc_html__( 'C Type Service', 'GAQ_TEXT_DOMAIN' ),
+				'slug'        => esc_html__( 'service-c', 'GAQ_TEXT_DOMAIN' ),
 			),
 		);
 
@@ -354,19 +354,19 @@ class Get_A_Quote_Admin {
 		 */
 		$args = array(
 			array(
-				'label'			=>	esc_html__( 'Viewing', 'GAQ_TEXT_DOMAIN' ),
-				'description'   =>	esc_html__( 'Under Inspection', 'GAQ_TEXT_DOMAIN' ),
-				'slug'			=>	esc_html__( 'viewing', 'GAQ_TEXT_DOMAIN' ),
+				'label'       => esc_html__( 'Viewing', 'GAQ_TEXT_DOMAIN' ),
+				'description' => esc_html__( 'Under Inspection', 'GAQ_TEXT_DOMAIN' ),
+				'slug'        => esc_html__( 'viewing', 'GAQ_TEXT_DOMAIN' ),
 			),
 			array(
-				'label'			=>	esc_html__( 'Completed', 'GAQ_TEXT_DOMAIN' ),
-				'description'	=>	esc_html__( 'Completed And Returned', 'GAQ_TEXT_DOMAIN' ),
-				'slug'			=>	esc_html__( 'completed', 'GAQ_TEXT_DOMAIN' ),
+				'label'       => esc_html__( 'Completed', 'GAQ_TEXT_DOMAIN' ),
+				'description' => esc_html__( 'Completed And Returned', 'GAQ_TEXT_DOMAIN' ),
+				'slug'        => esc_html__( 'completed', 'GAQ_TEXT_DOMAIN' ),
 			),
 			array(
-				'label'			=>	esc_html__( 'Pending', 'GAQ_TEXT_DOMAIN' ),
-				'description'	=>	esc_html__( 'Pending For Review', 'GAQ_TEXT_DOMAIN' ),
-				'slug'			=>	esc_html__( 'pending', 'GAQ_TEXT_DOMAIN' ),
+				'label'       => esc_html__( 'Pending', 'GAQ_TEXT_DOMAIN' ),
+				'description' => esc_html__( 'Pending For Review', 'GAQ_TEXT_DOMAIN' ),
+				'slug'        => esc_html__( 'pending', 'GAQ_TEXT_DOMAIN' ),
 			),
 		);
 

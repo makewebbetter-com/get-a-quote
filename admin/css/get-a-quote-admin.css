@@ -8,6 +8,10 @@
 #mwb_gaq_setting_wrapper .nav-tab-active:hover {
     border-bottom: 2px solid #FA7820 !important;
 }
+.edit-section-wrapper {
+    background-color :  #FA7820;
+    color :  #4a5b67;
+}
 
 #mwb_gaq_setting_wrapper .nav-tab {
     background-color: #f1f1f1;
@@ -40,11 +44,6 @@
 
 .mwb_gaq_email_setting td {
     padding: 0;
-}
-
-.mwb_form_fields .active_form_fields label,
-#mwb_gaq_setting_wrapper   th label {
-    font-weight: 700;
 }
 
 .mwb_gaq_email_setting td input,
@@ -119,7 +118,12 @@
     background: #FA7820;
     border-color: #FA7820;
 }
-
+.mwb_form_fields {
+    margin: auto;
+    width: 80%;
+    border: 2px solid black;
+    padding: 10px;
+  }
 .mwb_gaq_table,
 .mwb_form_fields,
 .mwb_email_setting_form {
