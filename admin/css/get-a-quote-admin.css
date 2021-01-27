@@ -2,15 +2,12 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-#mwb_gaq_setting_wrapper .nav-tab-active, 
-#mwb_gaq_setting_wrapper .nav-tab-active:focus, 
+
+#mwb_gaq_setting_wrapper .nav-tab-active,
+#mwb_gaq_setting_wrapper .nav-tab-active:focus,
 #mwb_gaq_setting_wrapper .nav-tab-active:focus:active,
 #mwb_gaq_setting_wrapper .nav-tab-active:hover {
     border-bottom: 2px solid #FA7820 !important;
-}
-.edit-section-wrapper {
-    background-color :  #FA7820;
-    color :  #4a5b67;
 }
 
 #mwb_gaq_setting_wrapper .nav-tab {
@@ -48,11 +45,11 @@
 
 .mwb_gaq_email_setting td input,
 .mwb_gaq_email_setting td textarea {
-	background-color: #f1f1f1;
+    background-color: #f1f1f1;
     width: 90%;
 }
 
-#mwb_gaq_setting_wrapper input[type=checkbox], 
+#mwb_gaq_setting_wrapper input[type=checkbox],
 #mwb_gaq_setting_wrapper input[type=radio] {
     width: 20px;
     height: 20px;
@@ -118,16 +115,18 @@
     background: #FA7820;
     border-color: #FA7820;
 }
+
 .mwb_form_fields {
     margin: auto;
     width: 80%;
     border: 2px solid black;
     padding: 10px;
-  }
+}
+
 .mwb_gaq_table,
 .mwb_form_fields,
 .mwb_email_setting_form {
-	background-color: #ffffff;
+    background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0px 1px 9px 0px rgb(0 0 0 / 0.10);
     margin-top: 40px;
@@ -135,3 +134,259 @@
     padding: 20px;
 }
 
+
+/* .edit-section-wrapper {
+    background-color: #FA7820;
+    border: 1px solid black;
+    color: #4a5b67;
+} */
+
+
+/* form field css start*/
+
+.mwb_gaq__modal-wrapper {
+    background-color: #fff;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99999;
+    overflow: auto;
+}
+
+.mwb_gaq_transform_body {
+    overflow: hidden;
+}
+
+.mwb_gaq_container {
+    align-items: flex-start;
+    display: flex;
+    margin: auto;
+    max-width: 1200px;
+    overflow: hidden;
+    padding: 15px;
+}
+
+.mwb_gaq__header {
+    background-color: #EBEDEE;
+    display: flex;
+    position: relative;
+}
+
+nav.navbar.navbar-expand-sm.navbar-light {
+    align-items: flex-start;
+}
+
+.mwb_gaq__modal-wrapper .navbar {
+    margin: 0px auto;
+    max-width: 90%;
+}
+
+.mwb_gaq__modal-wrapper .navbar .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.mwb_gaq__cross {
+    align-items: center;
+    background-color: #fa7820;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 74px;
+}
+
+.mwb_gaq__cross svg {
+    color: #ffffff;
+}
+
+.mwb_gaq__modal-wrapper .navbar-light .navbar-nav .nav-link {
+    box-shadow: none;
+    color: #4a5b67;
+}
+
+.navbar-collapse-wrapper {
+    margin-right: auto;
+}
+
+.mwb_gaq__modal-wrapper .navbar-light .navbar-nav li {
+    margin-right: 30px;
+    position: relative;
+}
+
+#mwb_gaq__publishbutton {
+    border-radius: 4px;
+    border-style: dotted;
+    padding: 6px 12px;
+    color: #4a5b67;
+}
+
+#mwb_gaq__publishbutton:focus {
+    outline: none;
+}
+
+.mwb_gaq__form {
+    flex: 0 0 100%;
+    max-width: 800px;
+    transition: .3s linear all;
+}
+
+.mwb_gaq_container.active .mwb_gaq__form {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.mwb_gaq__form_title {
+    display: flex;
+    justify-content: space-around;
+    max-width: 200px;
+    padding: 20px;
+}
+
+.mwb_gaq__form .form-group {
+    margin-bottom: 20px;
+}
+
+.mwb_gaq__form .form-group label {
+    margin-bottom: 25px;
+}
+
+.mwb_gaq__form__submit-button {
+    background-color: #4a5b67;
+    border-radius: 4px;
+    border: none;
+    color: #ffffff;
+    padding: 8px 26px;
+}
+
+.mwb_gaq_container.active .mwb_gaq__commonFields {
+    transform: translateX(0);
+}
+
+.mwb_gaq__commonFields {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 50%;
+    justify-content: flex-start;
+    max-width: 50%;
+    margin-left: 15px;
+    padding: 15px;
+    position: relative;
+    transform: translateX(100%);
+    transition: .3s linear all;
+    clear: both;
+}
+
+#mwb_gaq_commonFields_group {
+    align-items: center;
+    background: #4a5b67;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    flex: 0 0 50%;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-right: 0px;
+    max-width: 46%;
+    padding: 10px;
+    position: relative;
+}
+
+#mwb_gaq_commonFields_icon {
+    position: absolute;
+    left: 5px;
+}
+
+#mwb_gaq_commonFields_icon svg {
+    color: #ffffff;
+    font-size: 30px;
+}
+
+#mwb_gaq_commonFields_group:nth-child(2n) {
+    margin-right: 20px;
+}
+
+.mwb_gaq_open__drawerwrapper {
+    position: relative;
+}
+
+.mwb_gaq_open__drawer {
+    background-color: #fa7820;
+    border-radius: 50%;
+    bottom: 10px;
+    cursor: pointer;
+    height: 60px;
+    position: fixed;
+    right: 20px;
+    width: 60px;
+}
+
+.mwb_gaq_open__drawerwrapper a:focus {
+    box-shadow: none;
+}
+
+a.mwb_gaq_open__drawer svg {
+    color: #ffffff;
+    left: 8px;
+    position: absolute;
+    top: 6px;
+}
+
+.mwb_gaq_close__drawer {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 100%;
+    justify-content: flex-end;
+}
+
+.mwb_gaq_close__drawer button {
+    background-color: #fa7820;
+    border-radius: 4px;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-right: 25px;
+    padding: 6px 12px;
+}
+
+.mwb_gaq_close__drawer button:focus {
+    outline: none;
+}
+
+
+/* media query start */
+
+@media only screen and (max-width:767px) {
+    .mwb_gaq_container.active .mwb_gaq__form {
+        flex: 0 0 100%;
+        max-width: 100%;
+        transform: translateX(calc(-100% - 25px));
+    }
+    .mwb_gaq_container.active .mwb_gaq__commonFields {
+        transform: translateX(-100%);
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .mwb_gaq__commonFields {
+        padding: 0px;
+        margin-left: 0px;
+    }
+    .mwb_gaq_close__drawer button {
+        margin-right: 5px;
+    }
+    .mwb_gaq_commonFields_icon svg {
+        font-size: 20px;
+    }
+}
+
+
+/* media query end */
+
+
+/* form field css end */

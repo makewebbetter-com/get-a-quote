@@ -73,8 +73,20 @@ class Get_A_Quote_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		$screen        = get_current_screen();
+		$valid_screens = array(
+			'get-a-quote_page_gaq-config',
+		);
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/get-a-quote-admin.css', array(), $this->version, 'all' );
+		if ( isset( $screen->id ) ) {
+			$pagescreen = $screen->id;
+
+			if ( in_array( $pagescreen, $valid_screens, true ) ) {
+				wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/get-a-quote-admin.css', array(), $this->version, 'all' );
+				wp_enqueue_style( 'bootstrap-css', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), $this->version, 'all' );
+				wp_enqueue_style( 'all-font-css', plugin_dir_url( __FILE__ ) . 'css/all.css', array(), $this->version, 'all' );
+			}
+		}
 
 	}
 
@@ -98,6 +110,9 @@ class Get_A_Quote_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/get-a-quote-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'bootsrap-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js.map', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'all-js', plugin_dir_url( __FILE__ ) . 'js/all.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'bootsrap-map', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -255,7 +270,7 @@ class Get_A_Quote_Admin {
 	public function quote_config_screen() {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/get-a-quote-config-display.php';
 	}
-	
+
 	/**
 	 * Quote Sub-Menu panel Screen.
 	 *
@@ -338,7 +353,8 @@ class Get_A_Quote_Admin {
 			'new_item_name'     => esc_html__( 'New Status Name', 'GAQ_TEXT_DOMAIN' ),
 			'menu_name'         => esc_html__( 'Quote Statuses', 'GAQ_TEXT_DOMAIN' ),
 		);
-		$args = array(
+		$args   =
+		array(
 			'hierarchical'      => true,
 			'labels'            => $labels,
 			'show_ui'           => true,
