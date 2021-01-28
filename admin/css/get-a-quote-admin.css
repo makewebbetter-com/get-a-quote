@@ -281,7 +281,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
     clear: both;
 }
 
-#mwb_gaq_commonFields_group {
+.mwb_gaq_commonFields_group {
     align-items: center;
     background: #4a5b67;
     border-radius: 4px;
@@ -307,7 +307,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
     font-size: 30px;
 }
 
-#mwb_gaq_commonFields_group:nth-child(2n) {
+.mwb_gaq_commonFields_group:nth-child(2n) {
     margin-right: 20px;
 }
 

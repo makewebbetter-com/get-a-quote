@@ -76,6 +76,7 @@ class Get_A_Quote_Admin {
 		$screen        = get_current_screen();
 		$valid_screens = array(
 			'get-a-quote_page_gaq-config',
+			'toplevel_page_gaq-settings-screen',
 		);
 
 		if ( isset( $screen->id ) ) {
