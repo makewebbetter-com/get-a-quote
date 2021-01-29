@@ -247,12 +247,15 @@ nav.navbar.navbar-expand-sm.navbar-light {
     padding: 20px;
 }
 
-.mwb_gaq__form .form-group {
+.mwb_gaq__form .form-control {
     margin-bottom: 20px;
+    margin-top: 20px;
+
 }
 
-.mwb_gaq__form .form-group label {
-    margin-bottom: 25px;
+.mwb_gaq__form .form-group label,
+.mwb-gaq-fields-label {
+    font-weight: 600;
 }
 
 .mwb_gaq__form__submit-button {
