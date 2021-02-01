@@ -170,7 +170,7 @@
 }
 
 .mwb_gaq__header {
-    background-color: #EBEDEE;
+    background-color: #ffffff;
     display: flex;
     position: relative;
 }
@@ -240,6 +240,11 @@ nav.navbar.navbar-expand-sm.navbar-light {
     max-width: 50%;
 }
 
+.mwb_gaq_container.inactive .mwb_gaq__form {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
 .mwb_gaq__form_title {
     display: flex;
     justify-content: space-around;
@@ -270,6 +275,24 @@ nav.navbar.navbar-expand-sm.navbar-light {
     transform: translateX(0);
 }
 
+.mwb_gaq_container.inactive .mwb_gaq_edit_container {
+    transform: translateX(-80%);
+}
+
+.mwb_gaq_edit_container {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 50%;
+    justify-content: flex-start;
+    max-width: 50%;
+    margin-left: 15px;
+    padding: 15px;
+    position: relative;
+    transform: translateX(200%);
+    transition: .3s linear all;
+    clear: both;
+}
+
 .mwb_gaq__commonFields {
     display: flex;
     flex-wrap: wrap;
@@ -283,7 +306,35 @@ nav.navbar.navbar-expand-sm.navbar-light {
     transition: .3s linear all;
     clear: both;
 }
+.mwb_gaq_edit_fields {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 50%;
+    justify-content: flex-start;
+    max-width: 50%;
+    margin-left: 15px;
+    padding: 15px;
+    position: relative;
+    transform: translateX(100%);
+    transition: .3s linear all;
+    clear: both;
+}
 
+.mwb_gaq_commonFields_group_inactive {
+    align-items: center;
+    background: #4a5b67;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    flex: 0 0 50%;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-right: 0px;
+    max-width: 46%;
+    padding: 10px;
+    position: relative;
+}
 .mwb_gaq_commonFields_group {
     align-items: center;
     background: #4a5b67;
@@ -371,10 +422,24 @@ a.mwb_gaq_open__drawer svg {
         max-width: 100%;
         transform: translateX(calc(-100% - 25px));
     }
+    .mwb_gaq_container.inactive .mwb_gaq__form {
+        flex: 0 0 100%;
+        max-width: 100%;
+        transform: translateX(calc(-200% - 25px));
+    }
+    .mwb_gaq_container.inactive .mwb_gaq_edit_container {
+        transform: translateX(-200%);
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
     .mwb_gaq_container.active .mwb_gaq__commonFields {
         transform: translateX(-100%);
         flex: 0 0 100%;
         max-width: 100%;
+    }
+    .mwb_gaq_edit_container {
+        padding: 0px;
+        margin-left: 0px;
     }
     .mwb_gaq__commonFields {
         padding: 0px;
