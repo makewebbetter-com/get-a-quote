@@ -87,14 +87,14 @@
 			<a href="#" class="mwb_gaq_open__drawer"><i class="fa fa-plus fa-3x"></i></a>
 		</div>
 		<div class="mwb_gaq_edit_container">
-			<div class='mwb_gaq_edit_form_fields' class="mwb_gaq_edit_fields">
+			<div class='mwb_gaq_edit_form_fields' id="mwb_gaq_edit_fields">
 				<button id="mwb_gaq_close_form_editer">Done</button>
 				<br>
 				<hr>
 				<label for="field_name">Name</label><br>
 				<input type="text" data-key="" id="field_name" value="" class="field" placeholder="name"><br>
 				<label for="field_place_name">Placeholder-Name</label><br>
-				<input type="text" data-key="" id="field_place_name" valu="" class="field" placeholder="place">
+				<input type="text" data-key="" id="field_place_name" value="" class="field" placeholder="place">
 			</div>
 		</div>
 	</div>

@@ -3,7 +3,8 @@ jQuery(document).ready(function($) {
     /**
      * Constants.
      */
-    const label = '<lable for="{{fields-id-here}}" class="{{field}}">{{fields-label-here}}</label><i id="{{fields-scope}}" class="fas fa-trash-alt icon_del"></i><i data-id="{{scope}}" class="far fa-edit icon_edit"></i>';
+    const label = '<lable for="{{fields-id-here}}" id="{{field-lname}}">{{fields-label-here}}</label>';
+    const icons = '<i id="{{fields-scope}}" class="fas fa-trash-alt icon_del"></i><i data-id="{{scope}}" class="far fa-edit icon_edit"></i>';
     const wrapper = '<div id="form-group-{{fields-scope-here}}" class="form-group"></div>';
 
     /**
@@ -17,7 +18,6 @@ jQuery(document).ready(function($) {
         jQuery('.mwb_gaq__modal-wrapper').css('overflow', 'hidden');
     });
 
-    
     // drawer query start
     jQuery('.mwb_gaq_open__drawer').on('click', function() {
         removecls( jQuery(this), 'inactive');
@@ -42,8 +42,8 @@ jQuery(document).ready(function($) {
         var attrt = jQuery( this ).data();
         var val = "#";
         attrt = val.concat( attrt.key );
-        // console.log(  );
         jQuery(attrt).attr("placeholder", $(this).val());
+        jQuery(attrt).setAttribute( "placeholder",$(this).val() );
 	}); 
 
     //for deleting the div using Icon.
@@ -58,29 +58,49 @@ jQuery(document).ready(function($) {
 
     //for editing the value using the edit logo.
     jQuery('#mwb_gaq_close_form_editer').on('click', function() {
+        // var pnode = $(jQuery(this)[0].parentNode);
+        // var pchild = jQuery( pnode ).children();
+        // $( pchild ).each(function( index ) {
+        //     if ( jQuery( this ).data().key !== undefined) {
+        //         var dattr = jQuery( this ).data().key;
+        //         console.log( dattr );
+        //     }
+        // });
         removecls( jQuery(this), 'inactive');
     });
 
+    //Edit icon operation will open the side div and display the edit fields
     jQuery(document).on("click", ".icon_edit", function() {
+        // if (jQuery(this).parents('.mwb_gaq_container')[0].className == 'mwb_gaq_container inactive' ) {
+        //     // console.log( jQuery(this).parents('.mwb_gaq_container')[0].className );
+        //     // console.log( $("#field_name").data('key') );
+        //     // console.log( $("#field_name").attr('value') );
+        //     // console.log( $("#field_place_name").data('key') );
+        //     // console.log( $("#field_place_name").attr('value') );
+        // }
         removecls( jQuery(this), 'active');
         addcls( jQuery(this), 'inactive' );
         var attrs = jQuery( this ).data();
         var classname = '#form-group-';
         var result = classname.concat( attrs.id );
-        child = jQuery( result ).children();
+        var child = jQuery( result ).children();
+        edit_call( child);
+    });
+
+    function edit_call( child ) {
         $( child ).each(function( index ) {
             if( ( $( this ).text() ) != "" ) {
-                $("#field_name").attr("value", $( this ).text());
-                // console.log($( this )[0].id );
+                console.log( $( this ).data("key") );
+                $("#field_name").val( $( this ).text() );
                 $("#field_name").attr("data-key", $( this )[0].id);
             }
             if ( ( $( this )[0].placeholder ) !== undefined ) {
-                // console.log( $( this )[0] );
+                console.log( $( this ).data("key") );
                 $("#field_place_name").attr("data-key", $( this )[0].id);
-                $("#field_place_name").attr("value", $( this )[0].placeholder);
+                $("#field_place_name").val( $( this )[0].placeholder);
             }
         });
-    });
+    }
 
     //remove the class.
     function removecls( obj, cname ) {
@@ -126,19 +146,21 @@ jQuery(document).ready(function($) {
                     break;
                 case 'label':
                     newLabel = label.replace( "{{fields-id-here}}", attrs.id );
-                    newLabel = newLabel.replace( "{{field}}", attrs.lname );
+                    newLabel = newLabel.replace( "{{field-lname}}", attrs.lname );
                     newLabel = newLabel.replace( "{{fields-label-here}}", attrs.label );
-                    newLabel = newLabel.replace( "{{fields-scope}}", attrs.scope );
-                    newLabel = newLabel.replace( "{{scope}}", attrs.scope );
+                    newIcon = icons.replace( "{{fields-scope}}", attrs.scope );
+                    newIcon = newIcon.replace( "{{scope}}", attrs.scope );
                     break;
                 default:
                     break;
             }    
         });
         newWrapper = wrapper.replace( "{{fields-scope-here}}", attrs.scope );  
+        var iconHTML = $( newIcon );
         var labelHTML = $(newLabel);
         var divHTML = $(newWrapper);
         divHTML.append(labelHTML);
+        divHTML.append(iconHTML);
         divHTML.append(newElement);
         jQuery("#append-form ").append(divHTML);
     }
