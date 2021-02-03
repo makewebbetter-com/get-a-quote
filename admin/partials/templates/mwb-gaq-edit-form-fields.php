@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<form class="form-inline" >
-			<a href="?page=gaq-config&tab=form-fields" class="btn btn-info" id="mwb_gaq__publishbutton">Publish</a>
+			<a href="#" class="btn btn-info" id="mwb_gaq__publishbutton">Publish</a>
 		</form>
 	</nav>
 	<div class="mwb_gaq__form_title">
@@ -46,41 +46,45 @@
 			<div class="mwb_gaq_close__drawer">
 				<button id="mqb_gaq_close__drawer">Done</button>
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_first_name" data-lname="flname" data-ftype="input" data-type="text" data-name="ffname" data-id="fname" data-placeholder="First Name" data-size="40" data-class="form-control" data-required="required" data-scope="sfirstname" data-label="First Name" >
+			<div class="mwb_gaq_commonFields_group mwb_form_first_name" data-lname="flname" data-ftype="input" data-type="text" data-name="ffname" data-id="fname" data-placeholder="First Name" data-class="form-control" data-required="required" data-scope="sfirstname" data-label="First Name" >
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="fas fa-file-signature"></span></div>
 				First name
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_city" data-ftype="input" data-lname="clname" data-type="text" data-name="fcityname" data-id="city" data-placeholder="City name here" data-size="40" data-class="form-control" data-scope="scityname" data-label="City">
+			<div class="mwb_gaq_commonFields_group mwb_form_city" data-ftype="input" data-lname="clname" data-type="text" data-name="fcityname" data-id="city" data-placeholder="City name here" data-class="form-control" data-scope="scityname" data-label="City">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="fas fa-search-location"></span></div>
 				City
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_email" data-ftype="input" data-lname="elname" data-type="email" data-name="email" data-required="required" data-id="email" data-placeholder="Email here" data-size="40" data-class="form-control" data-scope="ssemail" data-label="Email">
+			<div class="mwb_gaq_commonFields_group mwb_form_email" data-ftype="input" data-lname="elname" data-type="email" data-name="email" data-required="required" data-id="email" data-placeholder="Email here" data-class="form-control" data-scope="ssemail" data-label="Email">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="far fa-envelope-open"></span></div>
 				Email			
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_file" data-ftype="input" data-lname="flfile"  data-type="file" data-name="ffiles" data-id="files" data-class="form-control" data-scope="sfile" data-label="File">
+			<div class="mwb_gaq_commonFields_group mwb_form_file" data-ftype="input" data-lname="flfile" data-type="file" data-name="ffiles" data-id="files" data-class="form-control" data-scope="sfile" data-label="File">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="fas fa-file-alt"></span></div>
 				File		
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_country" data-ftype="input" data-lname="colname"  data-type="text" data-name="fcountry" data-placeholder="Enter Country Name" data-id="fcountry" data-class="form-control" data-scope="scountry" data-label="Country">
+			<div class="mwb_gaq_commonFields_group mwb_form_country" data-ftype="input" data-lname="colname" data-type="text" data-name="fcountry" data-placeholder="Enter Country Name" data-id="fcountry" data-class="form-control" data-scope="scountry" data-label="Country">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="far fa-flag"></span></div>
 				Country		
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_zipcode" data-inputmode="numeric"  data-lname="zlname" data-pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" data-placeholder="Zipcode here" data-ftype="input" data-type="text" data-name="zipcode" data-id="zipcodes" data-class="form-control" data-scope="szipcode" data-label="Zipcode">
+			<div class="mwb_gaq_commonFields_group mwb_form_zipcode" data-inputmode="numeric" data-lname="zlname" data-pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" data-placeholder="Zipcode here" data-ftype="input" data-type="text" data-name="zipcode" data-id="zipcodes" data-class="form-control" data-scope="szipcode" data-label="Zipcode">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="far fa-address-card"></span></div>
 				Zipcode		
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_states" data-ftype="input"  data-lname="slname"  data-type="text" data-name="fstates" data-placeholder="Enter States Name" data-id="fstates" data-class="form-control" data-scope="sstates" data-label="States">
+			<div class="mwb_gaq_commonFields_group mwb_form_states" data-ftype="input" data-lname="slname" data-type="text" data-name="fstates" data-placeholder="Enter States Name" data-id="fstates" data-class="form-control" data-scope="sstates" data-label="States">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="fas fa-flag-usa"></span></div>
 				States		
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_budget" data-ftype="input" data-lname="blname"  data-type="number" data-name="fbudget" data-placeholder="Budget" data-id="fbudget" data-class="form-control" data-scope="sbudget" data-label="Budget">
+			<div class="mwb_gaq_commonFields_group mwb_form_budget" data-ftype="input" data-lname="blname" data-type="number" data-name="fbudget" data-placeholder="Budget" data-id="fbudget" data-class="form-control" data-scope="sbudget" data-label="Budget">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="fas fa-dollar-sign"></span></div>
 				Budget	
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-lname="plname"  data-type="tel" data-required="required" data-name="phone" data-placeholder="123-45-67-890" data-pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3}" data-id="phone" data-class="form-control" data-scope="sphone" data-label="Phone Number">
+			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-lname="plname" data-type="tel" data-required="required" data-name="phone" data-placeholder="123-45-67-890" data-pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3}" data-id="phone" data-class="form-control" data-scope="sphone" data-label="Phone Number">
 				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="fas fa-mobile-alt"></span></div>
 				Phone	
+			</div>
+			<div class="mwb_gaq_commonFields_group mwb_form_addon" data-ftype="textarea" data-lname="alname" data-name="additional" data-id="addon" data-class="form-control" data-scope="sadd" data-label="Additional Info">
+				<div id="mwb_gaq_commonFields_icon" ><span id='icon_span' class="fas fa-question-circle"></span></div>
+				Additional	
 			</div>
 		</div>
 		<div class="mwb_gaq_open__drawerwrapper">
@@ -88,13 +92,14 @@
 		</div>
 		<div class="mwb_gaq_edit_container">
 			<div class='mwb_gaq_edit_form_fields' id="mwb_gaq_edit_fields">
-				<button id="mwb_gaq_close_form_editer">Done</button>
 				<br>
 				<hr>
-				<label for="field_name">Name</label><br>
+				<label for="field_name" id="field-name">Name</label><br>
 				<input type="text" data-key="" id="field_name" value="" class="field" placeholder="name"><br>
-				<label for="field_place_name">Placeholder-Name</label><br>
+				<label for="field_place_name" id="field-place-name">Placeholder-Name</label><br>
 				<input type="text" data-key="" id="field_place_name" value="" class="field" placeholder="place">
+				<hr>
+				<button id="mwb_gaq_close_form_editer" data-id="mwb_gaq_edit_fields">Done</button>
 			</div>
 		</div>
 	</div>

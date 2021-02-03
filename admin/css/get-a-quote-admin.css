@@ -15,7 +15,9 @@
     border: 0;
     box-shadow: none;
 }
-
+.mwb_gaq_open__drawer:hover {
+    transform: scale(1.2);
+}
 #mwb_gaq_setting_wrapper h2 {
     font-size: 22px;
     margin-top: 0;
@@ -258,8 +260,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
 
 }
 
-.mwb_gaq__form .form-group label,
-.mwb-gaq-fields-label {
+.form-group-fields #append-form label {
     font-weight: 600;
 }
 
@@ -276,7 +277,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
 }
 
 .mwb_gaq_container.inactive .mwb_gaq_edit_container {
-    transform: translateX(-80%);
+    transform: translateX(-100%);
 }
 
 .mwb_gaq_edit_container {
@@ -288,7 +289,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
     margin-left: 15px;
     padding: 15px;
     position: relative;
-    transform: translateX(200%);
+    transform: translateX(100%);
     transition: .3s linear all;
     clear: both;
 }
