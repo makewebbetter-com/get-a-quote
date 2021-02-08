@@ -15,10 +15,10 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavId">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Form Fields <span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="admin.php?page=gaq-config&tab=form-fields&form_action=edit">Form Fields <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Preview Form</a>
+						<a class="nav-link preview_form" href="?page=gaq-config&tab=form-fields&form_action=preview">Preview Form</a>
 					</li>
 				</ul>
 			</div>
@@ -39,7 +39,7 @@
 						<input id="name" type="text" required="required" placeholder="Enter your name" class="form-control">
 					</div>
 				</div>
-				<a href="#" class="mwb_gaq__form__submit btn btn-info">Submit</a>
+				<a href="#" class="mwb_gaq__form__submit btn btn-info">Submit Button</a>
 			</form>
 		</div>
 		<div id="mwb_gaq_commonFields" class="mwb_gaq__commonFields">

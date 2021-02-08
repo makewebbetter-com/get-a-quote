@@ -90,6 +90,10 @@
 .mwb_gaq_taxonomy_setting tbody tr.terms th {
     color: #4a5b67;
 }
+.mwb_gaq__form__submit {
+    display: flex;
+    margin-left: 300px;
+}
 
 .mwb_gaq_taxonomy_setting tbody tr.terms th.header {
     flex: 100%;

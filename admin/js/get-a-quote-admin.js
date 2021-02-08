@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
 	const label = '<label for="{{fields-id-here}}" id="{{field-lname}}">{{fields-label-here}}</label>';
 	const icons = '<i id="{{fields-scope}}" class="fas fa-trash-alt icon_del"></i><i data-id="{{scope}}" class="far fa-edit icon_edit"></i>';
 	const wrapper = '<div id="form-group-{{fields-scope-here}}" class="form-group"></div>';
-
+	
 	/**
 	 * Add Class to body when builder is initiated.
 	 */
@@ -178,42 +178,45 @@ jQuery(document).ready(function ($) {
 	}
 
 	//Data sending to the front-end form.
-	jQuery('#mwb_gaq__publishbutton').on('click', function () {
+	jQuery('#mwb_gaq__publishbutton').on('click', function() {
 		var IDs = [];
+		Form_on_submit = jQuery('#append-form').children();
+		console.log( Form_on_submit );
 		$(jQuery('#append-form').children()).each(function (index) {
-			// console.log( $( this ).children() );
 			$($(this).children()).each(function (inde) {
-				if ( $(this).text() != '' && $(this)[0].id != '' ) {
-					var labelID = $(this)[0].id;
-					var labelTEXT = $(this).text();
-					IDs.push({labelID, labelTEXT});
-					// console.log( lko );
-					// console.log( 'hello' );
-					// IDs[lko]['labeltext']= txt;
-					// IDs.push({ name : txt });
-					// console.log($(this).text());
-				}
-				if ( $(this)[0].placeholder != undefined && $(this)[0].placeholder != '' ) {
-					var inputID = $(this)[0].id;
-					var inputPHOLDER = $(this)[0].placeholder;
-					IDs.push({inputID, inputPHOLDER});
-					// var lko = $(this)[0].id;
-					// var place = $(this)[0].placeholder;
-					// IDs[lko]['placeholder']= place;
-					// IDs[lko][].push({ placeholder : place });
-					// console.log($(this)[0].placeholder);
+				if ( $(this)[0].localName != 'svg' ){
+					if( text = $(this).text() && $(this)[0].localName == 'label' ){
+						var ltext = $(this).text();
+						var lid = $(this)[0].id;
+						var ltype = $(this)[0].localName;
+						IDs.push({lid, ltext, ltype});
+					}
+					if( $(this)[0].placeholder != undefined && $(this)[0].id != '' ) {
+						// console.log($(this));
+						var placeholder = $(this)[0].placeholder;
+						var required = $(this)[0].required;
+						var iid = $(this)[0].id;
+						var ftype = $(this)[0].localName;
+						var itype = $(this)[0].type;
+						var pattern = $(this)[0].pattern;
+						IDs.push({iid, pattern, placeholder, ftype, itype, required});
+					}
 				}
 			})
 		})
-		console.log( IDs );
-		// jQuery.ajax({
-        //     type : 'POST',
-		// 	url : ajax_globals.ajax_url,
-		// 	action : 'trigger_states',
-        // 	data : IDs,
-		// 	},
-		// 	success: function( response ) {}
-		// });
+		// console.log(IDs);
+		$.ajax({
+            type : 'POST',
+        	url  : ajax_form_edit.ajax_url,
+        	data : {
+				datalist    : IDs,
+        		action      : 'trigger_edit_form_data',
+        		_ajax_nonce : ajax_form_edit.nonce,
+        	},
+        	success: function( ) {
+				alert( "Ajax Gone" );
+        	}
+        });
 	});
 
 	// End of scripts.	

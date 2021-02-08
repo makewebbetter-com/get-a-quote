@@ -11,6 +11,12 @@
  * @subpackage Get_A_Quote/public/partials
  */
 
+// $form_settings = get_option('mwb_gaq_edit_form_data');
+// echo '<pre>'; print_r( $form_settings ); echo '</pre>';
+// $form_settings = json_decode($form_settings);
+// foreach( $form_settings as $key => $value) {
+// 	echo '<pre>'; print_r( $value->inputID ); echo '</pre>';
+// }
 global $p_id;
 $p_id = '';
 if ( isset( $_POST['qsubmit'] ) ) {
@@ -122,204 +128,12 @@ if ( 'on' === $mwb_gaq_enable_form ) {
 			$fqfile = isset( $mwb_gaq_form_values['fqfile'] ) ? $mwb_gaq_form_values['fqfile'] : '';
 	?>
 	<br />
-	<form action="" class="" method="POST" enctype="multipart/form-data">
+	<form action="" class="active-from" method="POST" enctype="multipart/form-data">
 	<?php
 	wp_nonce_field( 'gaq_public_form', 'gaq_public_form_nonce' );
 	if ( 'yes' === $mwb_gaq_form_fields_option['select_for_fname_field'] ) {
 		?>
-		<div class="custom-taxonomy-display">
-			<label class="form_labels"><?php esc_html_e( 'Type Of Service', 'GAQ_TEXT_DOMAIN' ); ?><span class="required">*</span></label><br />
-			<?php
-			$taxonomies = get_terms(
-				array(
-					'taxonomy'   => 'service',
-					'hide_empty' => false,
-				)
-			);
-			if ( ! empty( $taxonomies ) ) {
-				$taxonomies = json_decode( wp_json_encode( $taxonomies ), true );
-				?>
-				<select class="mwb_gaq_taxonomy_display" name="taxonomy_for_service">
-					<?php
-					$service_selected = isset( $mwb_gaq_form_values['service_selected'] ) ? $mwb_gaq_form_values['service_selected'] : '';
-					foreach ( $taxonomies as $values => $key ) {
-						$name = $key['name'];
-						$slug = $key['slug'];
-						?>
-						<option value="<?php echo esc_html( $name ); ?>" <?php selected( $service_selected, $slug ); ?>> <?php echo esc_html( $name ); ?></option>
-						<?php
-					}
-					?>
-				</select>
-				<?php
-			}
-			?>
-		</div>
-
-		<br />
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( 'First Name', 'GAQ_TEXT_DOMAIN' ); ?><span class="required">*</span></label><br />
-
-			<?php $ffname = isset( $mwb_gaq_form_values['ffname'] ) ? $mwb_gaq_form_values['ffname'] : ''; ?>
-
-			<input type="text" name="ffname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html( wp_unslash( $ffname ) ); ?>" size="40" placeholder="First Name" />
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_lname_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( 'Last Name', 'GAQ_TEXT_DOMAIN' ); ?><span class="required">*</span></label><br />
-
-			<?php $fqlname = isset( $mwb_gaq_form_values['fqlname'] ) ? $mwb_gaq_form_values['fqlname'] : ''; ?>
-
-			<input type="text" name="fqlname" pattern="[a-zA-Z0-9 ]+" required="required" value="<?php echo esc_html( wp_unslash( $fqlname ) ); ?>" size="40" placeholder="Last Name" />
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_address_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( 'Address', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-
-			<?php $fqaddress = isset( $mwb_gaq_form_values['fqaddress'] ) ? $mwb_gaq_form_values['fqaddress'] : ''; ?>
-
-			<input type="text" name="fqaddress" value="<?php echo esc_html( wp_unslash( $fqaddress ) ); ?>" size="40" placeholder="Address" />
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_city_field'] ) { ?>
-
-		<p>
-			<label class="form_labels"><?php esc_html_e( 'City', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-
-			<?php $fqcity = isset( $mwb_gaq_form_values['fqcity'] ) ? $mwb_gaq_form_values['fqcity'] : ''; ?>
-
-			<input type="text" name="fqcity" value="<?php echo esc_html( wp_unslash( $fqcity ) ); ?>" size="40" placeholder="City" />
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_zipcode_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( 'Zipcode', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-
-			<?php $fqzipcode = isset( $mwb_gaq_form_values['fqzipcode'] ) ? $mwb_gaq_form_values['fqzipcode'] : ''; ?>
-
-			<input type="text" name="fqzipcode" value="<?php echo esc_html( $fqzipcode ); ?>" size="40" placeholder="Zipcode" />
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_country_field'] ) { ?>
-
-		<p>
-			<label class="form_labels"><?php esc_html_e( 'Country', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-			<?php $country_list = GAQCountryManager::get_instance()->get_country_list(); ?>
-			<select id="country_list_select" class="mwb_gaq_country_list_display" name="fqcountry">
-				<?php
-				$fqcountry = isset( $mwb_gaq_form_values['fqcountry'] ) ? $mwb_gaq_form_values['fqcountry'] : '';
-				foreach ( $country_list as $value => $key ) {
-					?>
-					<option value= "<?php echo esc_html( $value ); ?>" <?php selected( $fqcountry, $key ); ?>><?php echo esc_html( $key ); ?></option>
-					<?php
-				}
-				?>
-			</select>
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_states_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels_state"><?php esc_html_e( 'States', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-
-			<select id="state_list" class="mwb_gaq_state_list_display" name="fqstates">
-			</select>
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_email_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( 'Email', 'GAQ_TEXT_DOMAIN' ); ?><span class="required">*</span></label><br />
-
-			<?php $fqemail = isset( $mwb_gaq_form_values['fqemail'] ) ? $mwb_gaq_form_values['fqemail'] : ''; ?>
-
-			<input type="email" name="fqemail" required="required" value="<?php echo esc_html( wp_unslash( $fqemail ) ); ?>" size="40" placeholder="Email" />
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_phone_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( 'Phone', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-
-			<?php $fqphone = isset( $mwb_gaq_form_values['fqphone'] ) ? $mwb_gaq_form_values['fqphone'] : ''; ?>
-
-			<input type="text" name="fqphone" value="<?php echo esc_html( wp_unslash( $fqphone ) ); ?>" size="40" placeholder="Phone" />
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_budget_field'] ) { ?>
-
-		<p>
-			<label class="form_labels"><?php esc_html_e( 'Budget', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-
-			<?php $fqbudget = isset( $mwb_gaq_form_values['fqbudget'] ) ? $mwb_gaq_form_values['fqbudget'] : ''; ?>
-
-			<input type="text" name="fqbudget" value="<?php echo esc_html( wp_unslash( $fqbudget ) ); ?>" size="40" placeholder="Budget" />
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_additional_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( 'Additional', 'GAQ_TEXT_DOMAIN' ); ?></label><br />
-
-			<?php $fqadd = isset( $mwb_gaq_form_values['fqadd'] ) ? $mwb_gaq_form_values['fqadd'] : ''; ?>
-
-			<textarea name="fqadd" rows="3" cols="50"><?php echo esc_html( wp_unslash( $fqadd ) ); ?></textarea>
-
-		</p>
-
-		<?php } ?>
-
-		<?php if ( 'yes' === $mwb_gaq_form_fields_option['select_for_fileup_field'] ) { ?>
-
-		<p>
-
-			<label class="form_labels"><?php esc_html_e( ' Max Size: 3MB ', 'GAQ_TEXT_DOMAIN' ); ?></label><br>
-
-			<input type="file" name="fqfiles" id="fileToUpload">
-
-		</p>
-
+		<div class="active-front-form"></div>
 		<?php } ?>
 
 		<input type="submit" name="qsubmit" value="Submit">
