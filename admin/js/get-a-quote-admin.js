@@ -336,3 +336,74 @@ jQuery(document).ready(function($) {
 		jQuery(".mwb_display_form ").append( $(p) );
     }
 })
+
+jQuery(document).ready(function($) {
+    var status = taxonomy_values.status;
+    var service = taxonomy_values.service;
+    if( status != '' ) {
+        for (i = 0; i < status.length; i++) {
+            // console.log(status[i]);
+            $('.mwb_gaq_status_terms ').append( "<th class='mwb_active_terms_status' id="+status[i].term_id+">"+status[i].name+"<i class='fas fa-minus-square'></i></th>");
+        }
+    }
+    if( service != '' ) {
+        for (i = 0; i < service.length; i++) {
+            // console.log(service[i]);
+            $('.service_terms ').append( "<th class='mwb_active_terms_service' id="+service[i].term_id+">"+service[i].name+"<i class='fas fa-minus-circle'></i></th>");
+        }
+    }
+
+    $('#add_service_terms').on('click', function () {
+        $('#mwb_service_add_div').show();
+        $('#mwb_status_add_div').hide();
+        $('#add_status_terms').show();
+        $(this).hide();
+    })
+    $('#add_status_terms').on('click', function () {
+        $('#mwb_status_add_div').show();
+        $('#mwb_service_add_div').hide();
+        $('#add_status_terms').show();
+        $(this).hide();
+    })
+    
+    $('.close').on('click', function () {
+        $('.center').hide();
+        $('#add_status_terms').show();
+        $('#add_service_terms').show();
+    })
+
+    $('.mwb_active_terms_status').on('click', function(){
+        // console.log($(this).attr('id'));
+        var id = $(this)[0].id;
+        if( id != '') {
+            removeTaxo( id, 'status');
+        }
+    });
+    $('.mwb_active_terms_service').on('click', function(){
+        var id = $(this)[0].id;
+        // console.log($(this)[0].id);
+        if( id != '') {
+            removeTaxo( id, 'service');
+        }
+    });
+});
+
+
+//sending Ajax for taxonomy deletion
+function removeTaxo( term_id, taxoname ) {
+    console.log(term_id);
+    console.log(taxoname);
+    $.ajax({
+        type: 'POST',
+        url: ajax_form_edit.ajax_url,
+        data: {
+            term_name: term_id,
+            taxonomy_name: taxoname,
+            action: 'trigger_edit_form_data',
+            _ajax_nonce: ajax_form_edit.nonce,
+        },
+        success: function(response) {
+            alert(response);
+        }
+    });
+}

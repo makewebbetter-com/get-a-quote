@@ -95,14 +95,14 @@ if ( isset( $_POST['qsubmit'] ) ) {
             if ( is_admin() ) {
                 return;
             }
-            $email_activator = get_option( 'mwb_gaq_activate_email' );
-            if ( 'on' === $email_activator ) {
-                $mail = $this->gaq_helper->email_sending( $p_id );
+            $email_activator = get_option('mwb_gaq_activate_email');
+            if ('on' === $email_activator) {
+                $mail = $this->gaq_helper->email_sending($p_id);
             }
             ?>
             </ul>
             <div class="notice notice-success is-dismissible">
-                <p><strong><?php esc_html_e( 'Thank you', 'GAQ_TEXT_DOMAIN' ); ?></strong></p>
+                <p><strong><?php esc_html_e('Thank you', 'GAQ_TEXT_DOMAIN'); ?></strong></p>
             </div>
             <?php
         }
@@ -119,15 +119,14 @@ $mwb_gaq_form_fields_option = get_option( 'mwb_gaq_form_fields_options', $this->
 $mwb_gaq_enable_form        = get_option( 'mwb_gaq_form_enable', 'on' );
 if ( 'on' === $mwb_gaq_enable_form ) {
     $recent_id_post = $this->gaq_helper->recent_post_id();
-            $fqfile = isset( $mwb_gaq_form_values['fqfile'] ) ? $mwb_gaq_form_values['fqfile'] : '';
+            $fqfile = isset($mwb_gaq_form_values['fqfile']) ? $mwb_gaq_form_values['fqfile'] : '';
     ?>
     <br />
     <form action="" class="active-from" method="POST" enctype="multipart/form-data">
-    <?php wp_nonce_field( 'gaq_public_form', 'gaq_public_form_nonce' );?>
+    <?php wp_nonce_field('gaq_public_form', 'gaq_public_form_nonce');?>
         <div class="active-front-form">
         </div>
-        <input type="submit" id="form_submit" name="qsubmit" value="Submit">
+        <button type="submit" name="qsubmit" id="form_submit">Submit</button>
     </form>
-
     <?php
 }

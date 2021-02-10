@@ -79,9 +79,12 @@ jQuery(document).ready(function($) {
 	}
 });
 
-//form Submission Process.
-jQuery('#form_submit').on('click',function($){
-	alert( $('#form_submit').length );
+//form Submission Process
+jQuery('.active-from').on('submit',function(e){
+	e.preventDefault();
+	jQuery('#form_submit').on('click',function(e){
+		alert( $('#form_submit').length );
+	})
 })
 
 //Ajax For States
@@ -90,7 +93,6 @@ jQuery('#form_submit').on('click',function($){
 // 	const stateField = $( '#state_list' );
 // 	stateFieldLabel.hide();
 // 	stateField.hide();
-
 //     $( '#country_list_select' ).on( 'change', function() {
 // 		const selected_country = $( '#country_list_select' ).find( ":selected" ).val();
 //         jQuery.ajax({

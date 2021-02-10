@@ -125,6 +125,26 @@ class Get_A_Quote_Admin
                 'nonce'    => wp_create_nonce('mwb_gaq_edit_form_nonce'),
             )
         );
+        $terms_service = get_terms(
+            array(
+                'taxonomy'   => 'service',
+                'hide_empty' => false,
+            )
+        );
+        $terms_status = get_terms(
+            array(
+                'taxonomy'   => 'status',
+                'hide_empty' => false,
+            )
+        );
+        wp_localize_script(
+            $this->plugin_name,
+            'taxonomy_values',
+            array(
+                'service' => $terms_service,
+                'status'  => $terms_status,
+            )
+        );
         $form_value = empty( get_option('mwb_gaq_save_form_data') ) ? '' : get_option('mwb_gaq_save_form_data') ;
         wp_localize_script(
             $this->plugin_name,
@@ -474,15 +494,25 @@ class Get_A_Quote_Admin
         check_ajax_referer('mwb_gaq_edit_form_nonce', '_ajax_nonce');
 
         if (isset($_POST['action'])) {
+
             if (isset($_POST['datalist'])) {
+
                 $resultf = $_POST['datalist'];
                 update_option('mwb_gaq_edit_form_data', $resultf);
                 echo json_encode($resultf);
+
             }
             if (isset($_POST['savinglist'])) {
+
                 $results = $_POST['savinglist'];
                 update_option('mwb_gaq_save_form_data', $results);
                 echo json_encode($results);
+
+            }
+            if (isset($_POST['term_name']) && isset($_POST['taxonomy_name'])) {
+
+                $resultt = wp_delete_term($_POST['term_name'], $_POST['taxonomy_name']);
+                echo json_encode($resultt);
             }
             wp_die();
         }
