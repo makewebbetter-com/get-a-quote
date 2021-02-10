@@ -15,9 +15,11 @@
     border: 0;
     box-shadow: none;
 }
+
 .mwb_gaq_open__drawer:hover {
     transform: scale(1.2);
 }
+
 #mwb_gaq_setting_wrapper h2 {
     font-size: 22px;
     margin-top: 0;
@@ -89,10 +91,6 @@
 
 .mwb_gaq_taxonomy_setting tbody tr.terms th {
     color: #4a5b67;
-}
-.mwb_gaq__form__submit {
-    display: flex;
-    margin-left: 300px;
 }
 
 .mwb_gaq_taxonomy_setting tbody tr.terms th.header {
@@ -196,7 +194,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
 
 .mwb_gaq__cross {
     align-items: center;
-    background-color: #fa7820;
+    background-color: #4a5b67;
     bottom: 0;
     display: flex;
     justify-content: center;
@@ -224,14 +222,14 @@ nav.navbar.navbar-expand-sm.navbar-light {
     position: relative;
 }
 
-#mwb_gaq__publishbutton {
+.mwb_gaq__publishbutton {
     border-radius: 4px;
     border-style: dotted;
     padding: 6px 12px;
     color: #4a5b67;
 }
 
-#mwb_gaq__publishbutton:focus {
+.mwb_gaq__publishbutton:focus {
     outline: none;
 }
 
@@ -239,6 +237,26 @@ nav.navbar.navbar-expand-sm.navbar-light {
     flex: 0 0 100%;
     max-width: 800px;
     transition: .3s linear all;
+}
+
+.mwb_gaq__form .mwb_gaq__form--group {
+    position: relative;
+}
+
+.mwb_gaq__icon--del {
+    position: absolute;
+    right: 40px;
+    cursor: pointer;
+    color: #000000;
+    text-decoration: none;
+}
+
+.mwb_gaq__icon--edit {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #000000;
+    text-decoration: none;
 }
 
 .mwb_gaq_container.active .mwb_gaq__form {
@@ -258,23 +276,23 @@ nav.navbar.navbar-expand-sm.navbar-light {
     padding: 20px;
 }
 
-.mwb_gaq__form .form-control {
+.form-control {
     margin-bottom: 20px;
     margin-top: 20px;
-
 }
 
 .form-group-fields #append-form label {
     font-weight: 600;
 }
 
-.mwb_gaq__form__submit-button {
+
+/* .mwb_gaq__form__submit-button {
     background-color: #4a5b67;
     border-radius: 4px;
     border: none;
     color: #ffffff;
     padding: 8px 26px;
-}
+} */
 
 .mwb_gaq_container.active .mwb_gaq__commonFields {
     transform: translateX(0);
@@ -285,17 +303,17 @@ nav.navbar.navbar-expand-sm.navbar-light {
 }
 
 .mwb_gaq_edit_container {
-    display: flex;
-    flex-wrap: wrap;
     flex: 0 0 50%;
-    justify-content: flex-start;
     max-width: 50%;
-    margin-left: 15px;
-    padding: 15px;
+    padding: 0px 15px;
     position: relative;
     transform: translateX(100%);
     transition: .3s linear all;
     clear: both;
+}
+
+.mwb_gaq_edit_form_fields label {
+    font-weight: 600;
 }
 
 .mwb_gaq__commonFields {
@@ -311,6 +329,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
     transition: .3s linear all;
     clear: both;
 }
+
 .mwb_gaq_edit_fields {
     display: flex;
     flex-wrap: wrap;
@@ -340,6 +359,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
     padding: 10px;
     position: relative;
 }
+
 .mwb_gaq_commonFields_group {
     align-items: center;
     background: #4a5b67;
@@ -356,12 +376,12 @@ nav.navbar.navbar-expand-sm.navbar-light {
     position: relative;
 }
 
-#mwb_gaq_commonFields_icon {
+.mwb_gaq_commonFields_icon {
     position: absolute;
     left: 5px;
 }
 
-#mwb_gaq_commonFields_icon svg {
+.mwb_gaq_commonFields_icon svg {
     color: #ffffff;
     font-size: 30px;
 }
@@ -375,7 +395,7 @@ nav.navbar.navbar-expand-sm.navbar-light {
 }
 
 .mwb_gaq_open__drawer {
-    background-color: #fa7820;
+    background-color: #4a5b67;
     border-radius: 50%;
     bottom: 10px;
     cursor: pointer;
@@ -404,10 +424,10 @@ a.mwb_gaq_open__drawer svg {
 }
 
 .mwb_gaq_close__drawer button {
-    background-color: #fa7820;
+    background-color: #0DCAF0;
     border-radius: 4px;
     border: none;
-    color: #ffffff;
+    color: #000000;
     font-size: 16px;
     margin-bottom: 20px;
     margin-right: 25px;
@@ -433,7 +453,7 @@ a.mwb_gaq_open__drawer svg {
         transform: translateX(calc(-200% - 25px));
     }
     .mwb_gaq_container.inactive .mwb_gaq_edit_container {
-        transform: translateX(-200%);
+        transform: translateX(-150%);
         flex: 0 0 100%;
         max-width: 100%;
     }
@@ -458,6 +478,14 @@ a.mwb_gaq_open__drawer svg {
     }
 }
 
+/*Preview page CSS*/
+.mwb_display_form {
+    margin: auto;
+    width: 50%;
+    border: 3px;
+    padding: 10px;
+}
+  
 
 /* media query end */
 

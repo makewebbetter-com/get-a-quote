@@ -12,20 +12,18 @@
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavId">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item active">
-						<a class="nav-link" href="admin.php?page=gaq-config&tab=form-fields&form_action=edit">Form Fields <span class="sr-only">(current)</span></a>
-					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="?page=gaq-config&tab=form-fields&form_action=preview">Preview Form</a>
+						<b><a class="nav-link" href="?page=gaq-config&tab=form-fields&form_action=preview">Preview Form</a></b>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<form class="form-inline" >
-			<a href="#" class="btn btn-info" id="mwb_gaq__publishbutton">Publish</a>
+			<a href="admin.php?page=gaq-config&tab=form-fields&form_action=edit" class="btn btn-info" id="mwb_gaq__publishbutton">Back</a>
 		</form>
 	</nav>
-    <div class='mwb_display_form'>
-        <a class="click_to_see" href="#">View</a>
-    </div>
+	<div class="mwb_gaq__form">
+		<div class='mwb_display_form'>
+		</div>
+	</div>
 </div>

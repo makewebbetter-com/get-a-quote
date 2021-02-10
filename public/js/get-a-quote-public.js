@@ -6,25 +6,21 @@ jQuery(document).ready(function($) {
 	/**
 	 * Constants Of all the list
 	 */
-	// const label = '<label for="{{fields-id-here}}" id="{{field-lname}}">{{fields-label-here}}</label>';
-	// const icons = '<i id="{{fields-scope}}" class="fas fa-trash-alt icon_del"></i><i data-id="{{scope}}" class="far fa-edit icon_edit"></i>';
 	const wrapp = '<div id="form-group-{{fields-scope-here}}" class="form-group"></div>';
 
 	var iterval=[];
 	iterval = (php_vars.converted);
 	if ( iterval != null && iterval != '' ) {
-		appendNewlement( iterval );
+		show_form_to_frontend( iterval );
 	} else {
-		console.log('No Field Found');
 		var p = '<p> No Field Selected </p>';
 		$('.active-front-form').append( $(p) );
 	}
 	/**
 	 * Library Functions here.
 	 */
-
 	// Add new field to form.
-	function appendNewlement(iternal) {
+	function show_form_to_frontend(iternal) {
 		console.log(iternal);
 		for(var i = 0; i < iternal.length; i++) {
 			attrs= iternal[i];
@@ -78,41 +74,46 @@ jQuery(document).ready(function($) {
 			if ( labelfield != undefined && inputfield != undefined ) {
 				$('.active-front-form').append( labelfield );
 				$('.active-front-form').append( inputfield );
-				$('.active-front-form').append( '<br>' );
-			}
+				$('.active-front-form').append( '<br>' );}
 		}
 	}
 });
 
-jQuery(document).ready(function($) {
-	const stateFieldLabel = $( '.form_labels_state' );
-	const stateField = $( '#state_list' );
-	stateFieldLabel.hide();
-	stateField.hide();
-
-    $( '#country_list_select' ).on( 'change', function() {
-		const selected_country = $( '#country_list_select' ).find( ":selected" ).val();
-        jQuery.ajax({
-            type : 'POST',
-        	url : ajax_globals.ajax_url,
-        	data : {
-        		selected_country : selected_country,
-        		action : 'trigger_states',
-        		_ajax_nonce : ajax_globals.nonce,
-        	},
-        	success: function( response ) {
-				response = JSON.parse( response );
-				console.log( 'true' == response.result );
-				if( 'true' == response.result ) {
-					stateField.html( response.html );
-					stateFieldLabel.show();
-					stateField.show();
-				}
-                else {
-					stateFieldLabel.hide();
-					stateField.hide();
-				}
-        	}
-        });
-    });
+//form Submission Process.
+jQuery('#form_submit').on('click',function($){
+	alert( $('#form_submit').length );
 })
+
+//Ajax For States
+// jQuery(document).ready(function($) {
+// 	const stateFieldLabel = $( '.form_labels_state' );
+// 	const stateField = $( '#state_list' );
+// 	stateFieldLabel.hide();
+// 	stateField.hide();
+
+//     $( '#country_list_select' ).on( 'change', function() {
+// 		const selected_country = $( '#country_list_select' ).find( ":selected" ).val();
+//         jQuery.ajax({
+//             type : 'POST',
+//         	url : ajax_globals.ajax_url,
+//         	data : {
+//         		selected_country : selected_country,
+//         		action : 'trigger_states',
+//         		_ajax_nonce : ajax_globals.nonce,
+//         	},
+//         	success: function( response ) {
+// 				response = JSON.parse( response );
+// 				console.log( 'true' == response.result );
+// 				if( 'true' == response.result ) {
+// 					stateField.html( response.html );
+// 					stateFieldLabel.show();
+// 					stateField.show();
+// 				}
+//                 else {
+// 					stateFieldLabel.hide();
+// 					stateField.hide();
+// 				}
+//         	}
+//         });
+//     });
+// })

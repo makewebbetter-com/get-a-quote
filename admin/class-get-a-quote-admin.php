@@ -125,10 +125,10 @@ class Get_A_Quote_Admin
                 'nonce'    => wp_create_nonce('mwb_gaq_edit_form_nonce'),
             )
         );
-        $form_value = empty( get_option('mwb_gaq_edit_form_data') ) ? '' : get_option('mwb_gaq_edit_form_data') ;
+        $form_value = empty( get_option('mwb_gaq_save_form_data') ) ? '' : get_option('mwb_gaq_save_form_data') ;
         wp_localize_script(
             $this->plugin_name,
-            'form_vairiables',
+            'form_variables',
             array(
                 'converted' => $form_value,
             )
@@ -413,7 +413,6 @@ class Get_A_Quote_Admin
                 'slug'        => esc_html__('pending', 'GAQ_TEXT_DOMAIN'),
             ),
         );
-
         $this->gaq_helper->insert_default_quote_taxonomies($args, 'status');
     }
 
@@ -474,10 +473,17 @@ class Get_A_Quote_Admin
         // Nonce verification.
         check_ajax_referer('mwb_gaq_edit_form_nonce', '_ajax_nonce');
 
-        if (! empty($_POST['action']) ) {
-            $result = $_POST['datalist'];
-            update_option('mwb_gaq_edit_form_data', $result);
-            echo json_encode($result);
+        if (isset($_POST['action'])) {
+            if (isset($_POST['datalist'])) {
+                $resultf = $_POST['datalist'];
+                update_option('mwb_gaq_edit_form_data', $resultf);
+                echo json_encode($resultf);
+            }
+            if (isset($_POST['savinglist'])) {
+                $results = $_POST['savinglist'];
+                update_option('mwb_gaq_save_form_data', $results);
+                echo json_encode($results);
+            }
             wp_die();
         }
     }
