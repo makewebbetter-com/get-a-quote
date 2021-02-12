@@ -67,7 +67,7 @@ class Get_A_Quote {
      * @since    1.0.0
      */
     public function __construct() {
-        if ( defined( 'GAQ_VERSION' ) ) {
+        if (defined('GAQ_VERSION')) {
             $this->version = GAQ_VERSION;
         } else {
             $this->version = '1.0.0';
@@ -102,34 +102,34 @@ class Get_A_Quote {
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-get-a-quote-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-i18n.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-get-a-quote-i18n.php';
 
         /**
          * The class responsible for defining all helper function to manipulate with requests and data.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-helper.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-get-a-quote-helper.php';
 
         /**
          * The class responsible for defining all helper function to manipulate with requests and data.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-country-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-get-a-quote-country-loader.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-get-a-quote-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-get-a-quote-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-get-a-quote-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-get-a-quote-public.php';
 
         $this->loader = new Get_A_Quote_Loader();
 
@@ -150,7 +150,7 @@ class Get_A_Quote {
 
         $plugin_i18n = new Get_A_Quote_i18n();
 
-        $this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+        $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 
     }
 
@@ -163,41 +163,40 @@ class Get_A_Quote {
      */
     private function define_admin_hooks() {
 
-        $plugin_admin = new Get_A_Quote_Admin( $this->get_plugin_name(), $this->get_version() );
+        $plugin_admin = new Get_A_Quote_Admin($this->get_plugin_name(), $this->get_version());
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-        // Add custom columns to show submission details.
-        $this->loader->add_action( 'manage_quotes_posts_columns', $plugin_admin, 'add_gaq_columns' );
-        $this->loader->add_action( 'manage_quotes_posts_custom_column', $plugin_admin, 'fill_gaq_columns', 10, 2 );
+        // Add custom columns to show submission details and editing post row action.
+        $this->loader->add_filter('manage_quotes_posts_columns', $plugin_admin, 'add_gaq_columns');
+        $this->loader->add_action('manage_quotes_posts_custom_column', $plugin_admin, 'fill_gaq_columns', 10, 2);
+        $this->loader->add_action('post_row_actions', $plugin_admin, 'fill_cols', 10, 2);
 
         // Add Meta boxes to submission at admin panel.
-        $this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'insert_gaq_metabox' );
+        $this->loader->add_action('add_meta_boxes', $plugin_admin, 'insert_gaq_metabox');
 
         // Add/Update submission at admin panel.
-        $this->loader->add_action( 'save_post', $plugin_admin, 'update_quote_callback' );
+        $this->loader->add_action('save_post', $plugin_admin, 'update_quote_callback');
 
         // Register a menu.
-        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_quote_menu' );
+        $this->loader->add_action('admin_menu', $plugin_admin, 'add_quote_menu');
 
-        $is_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', $this->gaq_helper->enabling_default_value( 'enable' ) );
-        if ( 'on' === $is_gaq_enable_plugin ) {
+        $is_gaq_enable_plugin = get_option('mwb_gaq_enable_plugin', $this->gaq_helper->enabling_default_value('enable'));
+        if ('on' === $is_gaq_enable_plugin) {
+            $mwb_gaq_taxonomies_option = get_option('mwb_gaq_taxonomies_options', $this->gaq_helper->enabling_default_value('taxonomy'));
 
-            $mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', $this->gaq_helper->enabling_default_value( 'taxonomy' ) );
-
-            if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_services'] ) {
-                $this->loader->add_action( 'init', $plugin_admin, 'register_default_taxonomy' );
+            if ('yes' === $mwb_gaq_taxonomies_option['select_for_services']) {
+                $this->loader->add_action('init', $plugin_admin, 'register_default_taxonomy');
             }
 
-            if ( 'yes' === $mwb_gaq_taxonomies_option['select_for_status'] ) {
-                $this->loader->add_action( 'init', $plugin_admin, 'register_default_taxonomy_quote_status' );
+            if ('yes' === $mwb_gaq_taxonomies_option['select_for_status']) {
+                $this->loader->add_action('init', $plugin_admin, 'register_default_taxonomy_quote_status');
             }
 
-            $this->loader->add_action( 'init', $plugin_admin, 'register_post_type_quote' );
+            $this->loader->add_action('init', $plugin_admin, 'register_post_type_quote');
         }
-        $this->loader->add_action( 'wp_ajax_trigger_edit_form_data', $plugin_admin, 'trigger_edit_form_data' );
-        $this->loader->add_action( 'wp_ajax_nopriv_trigger_edit_form_data', $plugin_admin, 'trigger_edit_form_data' );
+        $this->loader->add_action('wp_ajax_trigger_edit_form_data', $plugin_admin, 'trigger_edit_form_data');
+        $this->loader->add_action('wp_ajax_nopriv_trigger_edit_form_data', $plugin_admin, 'trigger_edit_form_data');
     }
 
     /**
@@ -209,20 +208,23 @@ class Get_A_Quote {
      */
     private function define_public_hooks() {
 
-        $plugin_public = new Get_A_Quote_Public( $this->get_plugin_name(), $this->get_version() );
+        $plugin_public = new Get_A_Quote_Public($this->get_plugin_name(), $this->get_version());
 
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-        $is_gaq_enable_plugin = get_option( 'mwb_gaq_enable_plugin', $this->gaq_helper->enabling_default_value( 'enable' ) );
-        if ( 'on' === $is_gaq_enable_plugin ) {
+        $is_gaq_enable_plugin =
+        get_option('mwb_gaq_enable_plugin', $this->gaq_helper->enabling_default_value('enable'));
+        if ('on' === $is_gaq_enable_plugin) {
             // Register the required shortcodes.
-            $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+            $this->loader->add_action('init', $plugin_public, 'register_shortcodes');
         }
 
         // Register the Callback for Country fetching ajax.
-        $this->loader->add_action( 'wp_ajax_trigger_states', $plugin_public, 'trigger_states' );
-        $this->loader->add_action( 'wp_ajax_nopriv_trigger_states', $plugin_public, 'trigger_states' );
+        // $this->loader->add_action('wp_ajax_trigger_states', $plugin_public, 'trigger_states');
+        // $this->loader->add_action('wp_ajax_nopriv_trigger_states', $plugin_public, 'trigger_states');
+        $this->loader->add_action('wp_ajax_trigger_form_submission', $plugin_public, 'trigger_form_submission');
+        $this->loader->add_action('wp_ajax_nopriv_trigger_form_submission', $plugin_public, 'trigger_form_submission');
     }
 
     /**

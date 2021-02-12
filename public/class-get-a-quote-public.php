@@ -109,8 +109,8 @@ class Get_A_Quote_Public {
             $this->plugin_name,
             'ajax_globals',
             array(
-                'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( 'mwb_gaq_security' ),
+                'ajax_url'              => admin_url('admin-ajax.php'),
+                'form_submission_nonce' => wp_create_nonce('mwb_gaq_security'),
             )
         );
         $form_value = empty( get_option('mwb_gaq_edit_form_data') ) ? '' : get_option('mwb_gaq_edit_form_data');
@@ -146,35 +146,38 @@ class Get_A_Quote_Public {
      *
      * @since    1.0.0
      */
-    public function trigger_states() {
+    public function trigger_form_submission() {
 
         // Nonce verification.
         check_ajax_referer( 'mwb_gaq_security', '_ajax_nonce' );
 
-        if ( ! empty( $_POST['action'] ) ) {
-
-            $selected_country = ! empty( $_POST['selected_country'] ) ? sanitize_text_field( wp_unslash( $_POST['selected_country'] ) ) : '';
-
-            $states = GAQCountryManager::get_instance()->country_states( $selected_country );
-
-            if ( ! empty( $states ) && is_array( $states ) ) {
-                $opt_html = '';
-                foreach ($states as $key => $value) {
-                    $opt_html .= '<option value="' . $value . '">' . esc_html( $value ) . '</option>';
-                }
-                $result = array(
-                    'result' => 'true',
-                    'html'   => $opt_html,
-                );
-            } else {
-                $result = array(
-                    'result' => 'false',
-                    'html'   => '',
-                );
-            }
-            echo json_encode($result);
+        $result = "Form Submission AJAX";
+        echo json_encode($result);
             wp_die();
-        }
+        // if ( ! empty( $_POST['action'] ) ) {
+
+        //     $selected_country = ! empty( $_POST['selected_country'] ) ? sanitize_text_field( wp_unslash( $_POST['selected_country'] ) ) : '';
+
+        //     $states = GAQCountryManager::get_instance()->country_states( $selected_country );
+
+        //     if ( ! empty( $states ) && is_array( $states ) ) {
+        //         $opt_html = '';
+        //         foreach ($states as $key => $value) {
+        //             $opt_html .= '<option value="' . $value . '">' . esc_html( $value ) . '</option>';
+        //         }
+        //         $result = array(
+        //             'result' => 'true',
+        //             'html'   => $opt_html,
+        //         );
+        //     } else {
+        //         $result = array(
+        //             'result' => 'false',
+        //             'html'   => '',
+        //         );
+        //     }
+        //     echo json_encode($result);
+        //     wp_die();
+        // }
     }
     // End of class.
 }

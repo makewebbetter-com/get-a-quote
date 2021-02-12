@@ -108,8 +108,9 @@ if ( isset( $_POST['qsubmit'] ) ) {
         }
     } else {
         ?>
+        
         <div class="notice-fail is-dismissible">
-            <p><strong><?php esc_html_e( 'Issue in required Fields', 'GAQ_TEXT_DOMAIN' ); ?></strong></p>
+            <p><strong><?php //esc_html_e( 'Issue in required Fields', 'GAQ_TEXT_DOMAIN' ); ?></strong></p>
         </div>
         <?php
     }
@@ -122,11 +123,13 @@ if ( 'on' === $mwb_gaq_enable_form ) {
             $fqfile = isset($mwb_gaq_form_values['fqfile']) ? $mwb_gaq_form_values['fqfile'] : '';
     ?>
     <br />
+    <div class='error_div'>
+    </div>
     <form action="" class="active-from" method="POST" enctype="multipart/form-data">
-    <?php wp_nonce_field('gaq_public_form', 'gaq_public_form_nonce');?>
-        <div class="active-front-form">
+    <?php //wp_nonce_field('gaq_public_form', 'gaq_public_form_nonce');?>
+        <div class="active-front-form mwb_gaq__form--group">
         </div>
-        <button type="submit" name="qsubmit" id="form_submit">Submit</button>
+        <button type="button" name="qsubmit" id="form_submit">Submit</button>
     </form>
     <?php
 }

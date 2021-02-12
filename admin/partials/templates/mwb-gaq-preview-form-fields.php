@@ -13,7 +13,7 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavId">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item">
-						<b><a class="nav-link" href="?page=gaq-config&tab=form-fields&form_action=preview">Preview Form</a></b>
+						<b>Preview Form</b>
 					</li>
 				</ul>
 			</div>

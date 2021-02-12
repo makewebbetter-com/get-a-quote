@@ -23,7 +23,7 @@ do_action( 'mwb_gaq_setting_tab_active' );
     <h1 class="mwb_gaq_setting_title"><?php esc_html_e( 'Get a Quote', 'GAQ_TEXT_DOMAIN' ); ?>
         <span class="mwb_gaq_setting_title_version">
             <?php
-            sprintf( '%s V %s', esc_html__( 'Get A Quote', 'GAQ_TEXT_DOMAIN' ), esc_html( 'GAQ_VERSION' ) );
+            sprintf('%s V %s', 'Get A Quote', 'GAQ_VERSION');
             ?>
         </span>
     </h1>

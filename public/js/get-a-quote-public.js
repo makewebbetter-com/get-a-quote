@@ -12,25 +12,21 @@ jQuery(document).ready(function($) {
 	iterval = (php_vars.converted);
 	if ( iterval != null && iterval != '' ) {
 		show_form_to_frontend( iterval );
-	} else {
-		var p = '<p> No Field Selected </p>';
-		$('.active-front-form').append( $(p) );
 	}
 	/**
 	 * Library Functions here.
 	 */
 	// Add new field to form.
 	function show_form_to_frontend(iternal) {
-		console.log(iternal);
 		for(var i = 0; i < iternal.length; i++) {
 			attrs= iternal[i];
 			if ( attrs.ltype == 'label' ) {
 				var newElelabel = document.createElement(attrs.ltype.toUpperCase());
 				jQuery.each(attrs, function (key) {
 					switch (key) {
-						case 'lid':
-							newElelabel.setAttribute('id', attrs.lid);
-							newWrap = $(wrapp.replace("{{fields-scope-here}}", attrs.lid));
+						case 'lclass':
+							newElelabel.setAttribute("class", attrs.lclass);
+							newWrap = $(wrapp.replace("{{fields-scope-here}}", attrs.lclass));
 							break;
 						case 'ltext':
 							$(newElelabel).text(attrs.ltext);
@@ -51,11 +47,15 @@ jQuery(document).ready(function($) {
 							} else{
 								break;
 							}
+						case 'name':
 						case 'placeholder':
 							newEleinput.setAttribute(key , value);
 							break;
 						case 'iid':
 							newEleinput.setAttribute('id', attrs.iid);
+							break;
+						case 'iclass':
+							newEleinput.setAttribute('class', attrs.iclass);
 							break;
 						case 'pattern':
 							if( value != ''){
@@ -74,48 +74,56 @@ jQuery(document).ready(function($) {
 			if ( labelfield != undefined && inputfield != undefined ) {
 				$('.active-front-form').append( labelfield );
 				$('.active-front-form').append( inputfield );
-				$('.active-front-form').append( '<br>' );}
+				$('.active-front-form').append( '<br>' );
+				}
 		}
 	}
+
+	/**
+	 * Form Submission
+	 */
+	jQuery('#form_submit').on('click',function(){
+		jQuery('.error_div')[0].innerHTML='';
+		// //console.log(jQuery('.active-front-form')[0].children);
+		var Form_data = [];
+		jQuery(jQuery('.active-front-form')[0].children).each(function(index){
+			if( jQuery(this)[0].localName == 'input' || jQuery(this)[0].localName == 'textarea' ){
+				// //console.log(jQuery(this)[0].name);
+				var req = jQuery(this)[0].required;
+				var name = jQuery(this)[0].name;
+				var value = jQuery(this)[0].value;
+				if ( req == true && value != '' ) {
+					Form_data.push({name, value});
+				} else {
+					jQuery('.error_div').append( name+ ' Is Required.');
+					return false;
+				}
+			}
+		});
+		if( jQuery('.error_div')[0].innerHTML == ''){
+			jQuery.ajax({
+				type: 'POST',
+				url: ajax_globals.ajax_url,
+				data: {
+					datalist: Form_data,
+					action: 'trigger_form_submission',
+					_ajax_nonce: ajax_globals.form_submission_nonce,
+				},
+				success: function(response) {
+					alert(response);
+				}
+			});
+		}
+		return false;
+	});
 });
 
-//form Submission Process
-jQuery('.active-from').on('submit',function(e){
-	e.preventDefault();
-	jQuery('#form_submit').on('click',function(e){
-		alert( $('#form_submit').length );
-	})
+jQuery(document).ready(function($) {
+	if( $('.active-front-form')[0].childElementCount > 2){
+		$($('.active-front-form')[0].children).each(function(index){
+			if( $(this)[0].localName == 'input' || $(this)[0].localName == 'textarea' ){
+				// //console.log($(this));
+			}
+		})
+	}
 })
-
-//Ajax For States
-// jQuery(document).ready(function($) {
-// 	const stateFieldLabel = $( '.form_labels_state' );
-// 	const stateField = $( '#state_list' );
-// 	stateFieldLabel.hide();
-// 	stateField.hide();
-//     $( '#country_list_select' ).on( 'change', function() {
-// 		const selected_country = $( '#country_list_select' ).find( ":selected" ).val();
-//         jQuery.ajax({
-//             type : 'POST',
-//         	url : ajax_globals.ajax_url,
-//         	data : {
-//         		selected_country : selected_country,
-//         		action : 'trigger_states',
-//         		_ajax_nonce : ajax_globals.nonce,
-//         	},
-//         	success: function( response ) {
-// 				response = JSON.parse( response );
-// 				console.log( 'true' == response.result );
-// 				if( 'true' == response.result ) {
-// 					stateField.html( response.html );
-// 					stateFieldLabel.show();
-// 					stateField.show();
-// 				}
-//                 else {
-// 					stateFieldLabel.hide();
-// 					stateField.hide();
-// 				}
-//         	}
-//         });
-//     });
-// })

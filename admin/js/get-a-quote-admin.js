@@ -1,7 +1,7 @@
 /**
  * Constants.
  */
-const label = '<label for="{{fields-id-here}}" data-id="{{field-lname}}" class="form-labels">{{fields-label-here}}</label>';
+const label = '<label for="{{fields-id-here}}" id="{{field-id-lname}}" data-id="{{field-lname}}" class="form-labels">{{fields-label-here}}</label>';
 const icons = '<a class="mwb_gaq__icon--del"><i id="{{fields-scope}}" class="fas fa-trash-alt icon_del"></i></a><a class="mwb_gaq__icon--edit"><i data-id="{{scope}}" class="far fa-edit icon_edit"></i></a>';
 const wrapper = '<div id="form-group-{{fields-scope-here}}" class="mwb_gaq__form--group"></div>';
 const lab = '<label class="form-labels">{{fields-label-here}}</label>';
@@ -43,7 +43,7 @@ function previewNewlement(attrs = []) {
     var divHTML = jQuery(wrap);
     divHTML.append(labelHTML);
     divHTML.append(newElement);
-    // console.log( divHTML);
+    // //console.log( divHTML);
     jQuery(".mwb_display_form ").append(divHTML);    
 }
 /**
@@ -51,6 +51,7 @@ function previewNewlement(attrs = []) {
  */
 // Add new field to form.
 function appendNewlement(attrs = []) {
+    // //console.log(attrs);
     var newElement = document.createElement(attrs.ftype.toUpperCase());
     jQuery.each(attrs, function(key, value) {
         switch (key) {
@@ -72,6 +73,7 @@ function appendNewlement(attrs = []) {
             case 'label':
                 newLabel = label.replace("{{fields-id-here}}", attrs.id);
                 newLabel = newLabel.replace("{{field-lname}}", attrs.scope);
+                newLabel = newLabel.replace("{{field-id-lname}}", attrs.lname);
                 newLabel = newLabel.replace("{{fields-label-here}}", attrs.label);
                 newIcon = icons.replace("{{fields-scope}}", attrs.scope);
                 newIcon = newIcon.replace("{{scope}}", attrs.scope);
@@ -126,7 +128,7 @@ jQuery(document).ready(function($) {
 
     //Edit icon operation will open the side div and display the edit fields
     jQuery(document).on("click", ".icon_edit", function() {
-        $('.mwb_gaq_edit_container').load();
+        // $('.mwb_gaq_edit_container').load();
         removecls(jQuery(this), 'active');
         addcls(jQuery(this), 'inactive');
         var attrs = jQuery(this).data();
@@ -140,8 +142,10 @@ jQuery(document).ready(function($) {
     function edit_call(child) {
         $(child).each(function(index) {
             if ($(this)[0].localName == 'label') {
+            // //console.log($(this)[0].id);
                 $("#field_name").val($(this).text());
                 $("#field_name").attr("data-key", $(this)[0].id);
+                // $("#field_name").attr("data-key", $(this).attr("data-id"));
             }
             if ($(this)[0].localName == 'input') {
                 if ($(this)[0].placeholder == '') {
@@ -171,7 +175,6 @@ jQuery(document).ready(function($) {
     jQuery('.mwb_gaq_commonFields_group').on('click', function() {
 
         var attrs = jQuery(this).data();
-        // console.log(attrs);
         appendNewlement(attrs);
     });
 
@@ -208,6 +211,7 @@ jQuery(document).ready(function($) {
                 var nid = $(this).attr("data-key");
                 var temp = "#";
                 nid = temp.concat(nid);
+                // //console.log(nid);
                 if ($(this).attr('placeholder') == 'name') {
 
                     $(nid).text($(this).val());
@@ -229,6 +233,7 @@ jQuery(document).ready(function($) {
             var cls = 'form-control';
             var ftype = $(divinput)[0].localName
             var id = $(divinput)[0].id;
+            var lname = $(divlabel)[0].id;
             var label = $(divlabel).text();
             var name = $(divinput)[0].id;
             var pattern = '';
@@ -246,7 +251,7 @@ jQuery(document).ready(function($) {
             var scope = $(divlabel).data('id');
             var type = $(divinput)[0].type;
             
-            IDs.push({cls, ftype, id, label, name, pattern, placeholder, required, scope, type});
+            IDs.push({cls, ftype, lname, id, label, name, pattern, placeholder, required, scope, type});
         })
         if( IDs == [] ){
             IDs= 'No Values';
@@ -273,18 +278,21 @@ jQuery(document).ready(function($) {
                     if ($(this)[0].localName != 'svg') {
                         if (text = $(this).text() && $(this)[0].localName == 'label') {
                             var ltext = $(this).text();
-                            var lid = $(this)[0].id;
+                            var lclass = $(this)[0].className;
                             var ltype = $(this)[0].localName;
-                            IDs.push({ lid, ltext, ltype });
+                            IDs.push({ lclass, ltext, ltype });
                         }
                         if ($(this)[0].placeholder != undefined && $(this)[0].id != '') {
+                            //console.log($(this));
                             var placeholder = $(this)[0].placeholder;
+                            var name = $(this)[0].name;
                             var required = $(this)[0].required;
                             var iid = $(this)[0].id;
                             var ftype = $(this)[0].localName;
                             var itype = $(this)[0].type;
+                            var iclass = $(this)[0].className;
                             var pattern = $(this)[0].pattern;
-                            IDs.push({ iid, pattern, placeholder, ftype, itype, required });
+                            IDs.push({ iid, pattern, placeholder, ftype, itype, name, required, iclass });
                         }
                     }
                 })
@@ -299,15 +307,13 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 // alert(response);
-                // alert("Ajax Gone");
             }
         });
     });
-    
+
     // End of scripts.	
 });
 jQuery(document).ready(function($) {
-    // console.log($( '#append-form')[0].childElementCount);
     var data = form_variables.converted;
     if ( data != null && data != '' ) {
         if( $( '#append-form').length > 0 ){
@@ -342,13 +348,11 @@ jQuery(document).ready(function($) {
     var service = taxonomy_values.service;
     if( status != '' ) {
         for (i = 0; i < status.length; i++) {
-            // console.log(status[i]);
             $('.mwb_gaq_status_terms ').append( "<th class='mwb_active_terms_status' id="+status[i].term_id+">"+status[i].name+"<i class='fas fa-minus-square'></i></th>");
         }
     }
     if( service != '' ) {
         for (i = 0; i < service.length; i++) {
-            // console.log(service[i]);
             $('.service_terms ').append( "<th class='mwb_active_terms_service' id="+service[i].term_id+">"+service[i].name+"<i class='fas fa-minus-circle'></i></th>");
         }
     }
@@ -373,7 +377,6 @@ jQuery(document).ready(function($) {
     })
 
     $('.mwb_active_terms_status').on('click', function(){
-        // console.log($(this).attr('id'));
         var id = $(this)[0].id;
         if( id != '') {
             removeTaxo( id, 'status');
@@ -381,18 +384,15 @@ jQuery(document).ready(function($) {
     });
     $('.mwb_active_terms_service').on('click', function(){
         var id = $(this)[0].id;
-        // console.log($(this)[0].id);
         if( id != '') {
             removeTaxo( id, 'service');
         }
     });
 });
 
-
 //sending Ajax for taxonomy deletion
 function removeTaxo( term_id, taxoname ) {
-    console.log(term_id);
-    console.log(taxoname);
+
     $.ajax({
         type: 'POST',
         url: ajax_form_edit.ajax_url,

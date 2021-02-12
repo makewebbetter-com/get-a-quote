@@ -162,10 +162,28 @@ class Get_A_Quote_Admin
      */
     public function add_gaq_columns($columns)
     {
-
-        $columns['post_type_email'] = esc_html__('Email', 'GAQ_TEXT_DOMAIN');
-        $columns['post_type_phone'] = esc_html__('phone', 'GAQ_TEXT_DOMAIN');
+        unset($columns['title']);
+        unset($columns['taxonomy-service']);
+        unset($columns['taxonomy-status']);
+        unset($columns['date']);
+        $columns['post_type_name']   = esc_html__('First Name', 'GAQ_TEXT_DOMAIN');
+        $columns['taxonomy-service'] = esc_html__('Quote Service', 'GAQ_TEXT_DOMAIN');
+        $columns['taxonomy-status']  = esc_html__('Quote Status', 'GAQ_TEXT_DOMAIN');
+        $columns['post_type_email']  = esc_html__('Email', 'GAQ_TEXT_DOMAIN');
+        $columns['post_type_phone']  = esc_html__('phone', 'GAQ_TEXT_DOMAIN');
+        $columns['date']             = esc_html__('Date', 'GAQ_TEXT_DOMAIN');
         return $columns;
+    }
+
+    /**
+     * fill_cols
+     */
+    public function fill_cols($actions, $post) {
+        if ($post->post_type=='quotes') {
+            unset($actions['inline hide-if-no-js']);
+            unset($actions['view']);
+        }
+        return $actions;
     }
 
     /**
@@ -175,7 +193,7 @@ class Get_A_Quote_Admin
      */
     public function fill_gaq_columns($column, $post_id)
     {
-
+        // echo '<pre>'; print_r( $post_id ); echo '</pre>'; die();
         $details = get_post_meta($post_id, 'quotes_meta', true);
         $details = json_decode(wp_json_encode($details), true);
 
@@ -185,7 +203,12 @@ class Get_A_Quote_Admin
                 $email = !empty($details['fqemail']) ? $details['fqemail'] : '';
                 echo esc_html($email);
                 break;
-
+            case 'post_type_name':
+                $fname = !empty($details['ffname']) ? $details['ffname'] : '';
+                $address = '<a href="' . admin_url('post.php?post=' . $post_id . '&amp;action=edit') . '"
+                ><strong>' . $fname . '</strong></a>';
+                echo $address;
+                break;
             case 'post_type_phone':
                 $phone = !empty($details['fqphone']) ? $details['fqphone'] : '';
                 echo esc_html($phone);
@@ -220,26 +243,26 @@ class Get_A_Quote_Admin
      */
     public function update_quote_callback()
     {
-
-        if (!is_admin()) {
-            return;
-        }
-        // Return if doing autosave.
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return;
-        }
-
-        // Return if doing ajax.
-        if (defined('DOING_AJAX') && DOING_AJAX) {
-            return;
-        }
-
-        // Return on post trash, quick-edit.
-        if (!empty($_GET['action']) && 'trash' === $_GET['action']) {
-            return;
-        }
         // Nonce verification.
-        check_admin_referer('gaq_meta_box_nonce', 'gaq_meta_nonce');
+        //check_admin_referer('gaq_meta_box_nonce', 'gaq_meta_nonce');
+
+        // if (!is_admin()) {
+        //     return;
+        // }
+        // // Return if doing autosave.
+        // if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        //     return;
+        // }
+
+        // // // Return if doing ajax.
+        // if (defined('DOING_AJAX') && DOING_AJAX) {
+        //     return;
+        // }
+
+        // // Return on post trash, quick-edit.
+        // if (!empty($_GET['action']) && 'trash' === $_GET['action']) {
+        //     return;
+        // }
 
         // quotes post is updated here.
         if (isset($_POST['firstname'])) {
@@ -494,20 +517,16 @@ class Get_A_Quote_Admin
         check_ajax_referer('mwb_gaq_edit_form_nonce', '_ajax_nonce');
 
         if (isset($_POST['action'])) {
-
+            
             if (isset($_POST['datalist'])) {
-
                 $resultf = $_POST['datalist'];
                 update_option('mwb_gaq_edit_form_data', $resultf);
                 echo json_encode($resultf);
-
             }
             if (isset($_POST['savinglist'])) {
-
                 $results = $_POST['savinglist'];
                 update_option('mwb_gaq_save_form_data', $results);
                 echo json_encode($results);
-
             }
             if (isset($_POST['term_name']) && isset($_POST['taxonomy_name'])) {
 
