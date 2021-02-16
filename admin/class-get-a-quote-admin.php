@@ -88,7 +88,7 @@ class Get_A_Quote_Admin
             if (in_array($pagescreen, $valid_screens, true)) {
                 wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/get-a-quote-admin.css', array(), $this->version, 'all');
                 wp_enqueue_style('bootstrap-css', plugin_dir_url(__FILE__) . 'css/bootstrap.min.css', array(), $this->version, 'all');
-                wp_enqueue_style('all-font-css', plugin_dir_url(__FILE__) . 'css/all.css', array(), $this->version, 'all');
+                // wp_enqueue_style('all-font-css', plugin_dir_url(__FILE__) . 'css/all.css', array(), $this->version, 'all');
             }
         }
     }
@@ -113,7 +113,8 @@ class Get_A_Quote_Admin
          * class.
          */
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/get-a-quote-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/get-a-quote-admin.js', array('jquery', 'sweetalert'), $this->version, false);
+        wp_enqueue_script('sweetalert', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js', array( 'jquery' ), $this->version, false);
         wp_enqueue_script('bootsrap-js', plugin_dir_url(__FILE__) . 'js/bootstrap.min.js.map', array('jquery'), $this->version, false);
         wp_enqueue_script('all-js', plugin_dir_url(__FILE__) . 'js/all.js', array('jquery'), $this->version, false);
         wp_enqueue_script('bootsrap-map', plugin_dir_url(__FILE__) . 'js/bootstrap.min.js', array('jquery'), $this->version, false);
@@ -200,17 +201,17 @@ class Get_A_Quote_Admin
         switch ($column) {
 
             case 'post_type_email':
-                $email = !empty($details['fqemail']) ? $details['fqemail'] : '';
+                $email = !empty($details['Email']) ? $details['Email'] : '';
                 echo esc_html($email);
                 break;
             case 'post_type_name':
-                $fname = !empty($details['ffname']) ? $details['ffname'] : '';
+                $fname = !empty($details['firstname']) ? $details['firstname'] : '';
                 $address = '<a href="' . admin_url('post.php?post=' . $post_id . '&amp;action=edit') . '"
                 ><strong>' . $fname . '</strong></a>';
                 echo $address;
                 break;
             case 'post_type_phone':
-                $phone = !empty($details['fqphone']) ? $details['fqphone'] : '';
+                $phone = !empty($details['Phone']) ? $details['Phone'] : '';
                 echo esc_html($phone);
                 break;
         }
@@ -243,45 +244,20 @@ class Get_A_Quote_Admin
      */
     public function update_quote_callback()
     {
-        // Nonce verification.
-        //check_admin_referer('gaq_meta_box_nonce', 'gaq_meta_nonce');
-
-        // if (!is_admin()) {
-        //     return;
-        // }
-        // // Return if doing autosave.
-        // if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        //     return;
-        // }
-
-        // // // Return if doing ajax.
-        // if (defined('DOING_AJAX') && DOING_AJAX) {
-        //     return;
-        // }
-
-        // // Return on post trash, quick-edit.
-        // if (!empty($_GET['action']) && 'trash' === $_GET['action']) {
-        //     return;
-        // }
-
+        // echo '<pre>'; print_r( $_POST ); echo '</pre>'; die();
         // quotes post is updated here.
         if (isset($_POST['firstname'])) {
             $post_update_meta                         = array();
             $post_id                                  = get_the_ID();
-            $post_update_meta['ffname']               = !empty($_POST['firstname']) ? sanitize_text_field(wp_unslash($_POST['firstname'])) : '';
-            $post_update_meta['fqlname']              = !empty($_POST['lastname']) ? sanitize_text_field(wp_unslash($_POST['lastname'])) : '';
-            $post_update_meta['fqaddress']            = !empty($_POST['address']) ? sanitize_text_field(wp_unslash($_POST['address'])) : '';
-            $post_update_meta['fqcity']               = !empty($_POST['city']) ? sanitize_text_field(wp_unslash($_POST['city'])) : '';
-            $post_update_meta['fqzipcode']            = !empty($_POST['zipcode']) ? sanitize_text_field(wp_unslash($_POST['zipcode'])) : '';
-            $post_update_meta['fqstates']             = !empty($_POST['states']) ? sanitize_text_field(wp_unslash($_POST['states'])) : '';
-            $post_update_meta['fqcountry']            = !empty($_POST['country']) ? sanitize_text_field(wp_unslash($_POST['country'])) : '';
-            $post_update_meta['fqemail']              = !empty($_POST['email']) ? sanitize_text_field(wp_unslash($_POST['email'])) : '';
-            $post_update_meta['fqphone']              = !empty($_POST['phone']) ? sanitize_text_field(wp_unslash($_POST['phone'])) : '';
-            $post_update_meta['fqbudget']             = !empty($_POST['budget']) ? sanitize_text_field(wp_unslash($_POST['budget'])) : '';
-            $post_update_meta['fqadd']                = !empty($_POST['add']) ? sanitize_text_field(wp_unslash($_POST['add'])) : '';
-            $post_update_meta['fqfilename']           = !empty($_POST['attachment']) ? sanitize_text_field(wp_unslash($_POST['attachment'])) : '';
-            $post_update_meta['taxonomy_for_service'] = $this->gaq_helper->get_taxo('service');
-            $post_update_meta['taxonomy_for_status']  = $this->gaq_helper->get_taxo('status');
+            $post_update_meta['firstname']               = !empty($_POST['firstname']) ? sanitize_text_field(wp_unslash($_POST['firstname'])) : '';
+            $post_update_meta['Cityname']               = !empty($_POST['Cityname']) ? sanitize_text_field(wp_unslash($_POST['Cityname'])) : '';
+            $post_update_meta['Zipcode']            = !empty($_POST['Zipcode']) ? sanitize_text_field(wp_unslash($_POST['Zipcode'])) : '';
+            $post_update_meta['States']             = !empty($_POST['States']) ? sanitize_text_field(wp_unslash($_POST['States'])) : '';
+            $post_update_meta['Country']            = !empty($_POST['Country']) ? sanitize_text_field(wp_unslash($_POST['Country'])) : '';
+            $post_update_meta['Email']              = !empty($_POST['Email']) ? sanitize_text_field(wp_unslash($_POST['Email'])) : '';
+            $post_update_meta['Phone']              = !empty($_POST['Phone']) ? sanitize_text_field(wp_unslash($_POST['Phone'])) : '';
+            $post_update_meta['Budget']             = !empty($_POST['Budget']) ? sanitize_text_field(wp_unslash($_POST['Budget'])) : '';
+            $post_update_meta['Additional']                = !empty($_POST['Additional']) ? sanitize_text_field(wp_unslash($_POST['Additional'])) : '';
 
             if (!empty($post_update_meta)) {
                 update_post_meta($post_id, 'quotes_meta', $post_update_meta);
@@ -380,29 +356,13 @@ class Get_A_Quote_Admin
         );
 
         register_taxonomy('service', 'quotes', $args);
-
-        /**
-         * Taxonomy registered. Now can add our custom ones.
-         */
-        $args = array(
+        $register = array(
             array(
-                'label'       => esc_html__('Service A', 'GAQ_TEXT_DOMAIN'),
-                'description' => esc_html__('A Type Service', 'GAQ_TEXT_DOMAIN'),
-                'slug'        => esc_html__('service-a', 'GAQ_TEXT_DOMAIN'),
-            ),
-            array(
-                'label'       => esc_html__('Service B', 'GAQ_TEXT_DOMAIN'),
-                'description' => esc_html__('B Type Service', 'GAQ_TEXT_DOMAIN'),
-                'slug'        => esc_html__('service-b', 'GAQ_TEXT_DOMAIN'),
-            ),
-            array(
-                'label'       => esc_html__('Service C', 'GAQ_TEXT_DOMAIN'),
-                'description' => esc_html__('C Type Service', 'GAQ_TEXT_DOMAIN'),
-                'slug'        => esc_html__('service-c', 'GAQ_TEXT_DOMAIN'),
+            'label'       => esc_html__('Quotation', 'GAQ_TEXT_DOMAIN'),
+            'description' => esc_html__('Quote', 'GAQ_TEXT_DOMAIN'),
             ),
         );
-
-        $this->gaq_helper->insert_default_quote_taxonomies($args);
+        $this->gaq_helper->insert_default_quote_taxonomies($register, 'service');
     }
 
     /**
@@ -436,27 +396,13 @@ class Get_A_Quote_Admin
 
         register_taxonomy('status', 'quotes', $args);
 
-        /**
-         * Taxonomy registered. Now can add our custom ones.
-         */
-        $args = array(
+        $register = array(
             array(
-                'label'       => esc_html__('Viewing', 'GAQ_TEXT_DOMAIN'),
-                'description' => esc_html__('Under Inspection', 'GAQ_TEXT_DOMAIN'),
-                'slug'        => esc_html__('viewing', 'GAQ_TEXT_DOMAIN'),
-            ),
-            array(
-                'label'       => esc_html__('Completed', 'GAQ_TEXT_DOMAIN'),
-                'description' => esc_html__('Completed And Returned', 'GAQ_TEXT_DOMAIN'),
-                'slug'        => esc_html__('completed', 'GAQ_TEXT_DOMAIN'),
-            ),
-            array(
-                'label'       => esc_html__('Pending', 'GAQ_TEXT_DOMAIN'),
-                'description' => esc_html__('Pending For Review', 'GAQ_TEXT_DOMAIN'),
-                'slug'        => esc_html__('pending', 'GAQ_TEXT_DOMAIN'),
+            'label'       => esc_html__('Pending', 'GAQ_TEXT_DOMAIN'),
+            'description' => esc_html__('Pending For Review', 'GAQ_TEXT_DOMAIN'),
             ),
         );
-        $this->gaq_helper->insert_default_quote_taxonomies($args, 'status');
+        $this->gaq_helper->insert_default_quote_taxonomies($register, 'status');
     }
 
     /**
@@ -521,15 +467,16 @@ class Get_A_Quote_Admin
             if (isset($_POST['datalist'])) {
                 $resultf = $_POST['datalist'];
                 update_option('mwb_gaq_edit_form_data', $resultf);
+                $resultf = 'success';
                 echo json_encode($resultf);
             }
             if (isset($_POST['savinglist'])) {
                 $results = $_POST['savinglist'];
                 update_option('mwb_gaq_save_form_data', $results);
+                $results = 'form saved';
                 echo json_encode($results);
             }
             if (isset($_POST['term_name']) && isset($_POST['taxonomy_name'])) {
-
                 $resultt = wp_delete_term($_POST['term_name'], $_POST['taxonomy_name']);
                 echo json_encode($resultt);
             }

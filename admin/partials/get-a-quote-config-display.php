@@ -48,15 +48,21 @@ do_action( 'mwb_gaq_setting_tab_active' );
         include_once 'templates/mwb-gaq-email-setting.php';
     }
     $form = isset( $_GET['form_action'] ) ? $_GET['form_action'] : '';
+    
     if ( 'edit' === $form ) {
+        echo '<style>#wpadminbar{
+            display:none;
+        }</style>';
         include_once 'templates/mwb-gaq-edit-form-fields.php';
         echo "<script type='text/javascript' > document.body.className+=' folded'; </script>";
     }
     if ( 'preview' === $form ) {
+        echo '<style>#wpadminbar{
+            display:none;
+        }</style>';
         include_once 'templates/mwb-gaq-preview-form-fields.php';
     }
-
-    do_action( 'mwb_gaq_setting_tab_html' );
+    do_action('mwb_gaq_setting_tab_html');
 
     ?>
 </div>

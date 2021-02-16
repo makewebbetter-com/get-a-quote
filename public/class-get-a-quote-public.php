@@ -103,14 +103,14 @@ class Get_A_Quote_Public {
          * between the defined hooks and the functions defined in this
          * class.
          */
-        wp_enqueue_script( 'mwb_gaq_sweet_alert', plugin_dir_url( __FILE__ ) . 'js/sweet-alert.js', array( 'jquery' ), $this->version, false );
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/get-a-quote-public.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script('sweetalert', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js', array( 'jquery' ), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/get-a-quote-public.js', array('jquery'), $this->version, false);
         wp_localize_script(
             $this->plugin_name,
             'ajax_globals',
             array(
-                'ajax_url'              => admin_url('admin-ajax.php'),
-                'form_submission_nonce' => wp_create_nonce('mwb_gaq_security'),
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce'    => wp_create_nonce('mwb_gaq_security'),
             )
         );
         $form_value = empty( get_option('mwb_gaq_edit_form_data') ) ? '' : get_option('mwb_gaq_edit_form_data');
@@ -147,37 +147,91 @@ class Get_A_Quote_Public {
      * @since    1.0.0
      */
     public function trigger_form_submission() {
+        if (isset($_POST['action'])) {
+            $result = $_POST;
+            foreach ($result as $key => $value) {
+                if ($key != 'action') {
+                    $data[$key] = $value;
+                }
+            }
+            if (isset($data['firstname'])) {
+                $my_post_details = array(
+                    'post_title'  => $data['firstname'],
+                    'post_type'   => 'quotes',
+                    'post_status' => 'publish',
+                );
+            }
+            $post_id = wp_insert_post($my_post_details);
 
-        // Nonce verification.
-        check_ajax_referer( 'mwb_gaq_security', '_ajax_nonce' );
+            //file upload procedure begin.
+            if (isset($_FILES['Files']['name'])) {
+                $err        = array();
+                $file_name  = isset($_FILES['Files']['name']) ?
+                    sanitize_textarea_field(wp_unslash($_FILES['Files']['name'])) : '';
 
-        $result = "Form Submission AJAX";
-        echo json_encode($result);
+                $file_tmp   = isset($_FILES['Files']['tmp_name']) ?
+                    sanitize_textarea_field(wp_unslash($_FILES['Files']['tmp_name'])) : '';
+
+                $file_type  = isset($_FILES['Files']['type']) ?
+                    sanitize_textarea_field(wp_unslash($_FILES['Files']['type'])) : '';
+
+                $file_ext   = wp_check_filetype(basename($file_name), null);
+
+                $extensions = array( 'png', 'jpeg', 'jpg' );
+
+                if (! empty($file_ext['ext'])) {
+                    if (!in_array($file_ext['ext'], $extensions, true)) {
+                        $err['ext'] = 'extension not allowed, please choose a pdf or docx file.';
+                    }
+                }
+                $loc = '/wp-content/uploads/quote-submission';
+                $log_dir = ABSPATH . '/wp-content/uploads/quote-submission';
+                if (! is_dir($log_dir)) {
+                    mkdir($log_dir, 0755, true);
+                }
+                if (empty($err)) {
+                    $new_file_name = 'quote_' . $post_id . '.' . $file_ext['ext'];
+                    $loc = $loc . '/' . $new_file_name;
+                    $file_add  = $log_dir . '/' . $new_file_name;
+                    move_uploaded_file($file_tmp, $file_add);
+                    if (! empty($file_add)) {
+                        $this->gaq_helper->create_attachment($post_id, $file_add);
+                        $data['filename'] = $new_file_name;
+                        $data['filelink'] = $loc;
+                        $response = 'Success';
+                        $email_activator = get_option('mwb_gaq_activate_email');
+                        if ('on' === $email_activator) {
+                            $mail = $this->gaq_helper->email_sending($p_id);
+                        }
+                    }
+                } else {
+                    $response = 'Failed';
+                    print_r($err);
+                }
+            } //file upload procedure end.
+
+            // Mail sending.
+            if (isset($data['Email'])) {
+                $email_activator = get_option('mwb_gaq_activate_email');
+                if ('on' === $email_activator) {
+                    $mail = $this->gaq_helper->email_sending($post_id);
+                    $respo = 'mail sent';
+                }
+            } //mail sending end here
+
+            //formdata pushing to DB.
+            if (! empty($data)) {
+                $data['status_taxo'] = 'pending';
+                update_post_meta($post_id, 'quotes_meta', $data);
+                $response = 'updated';
+                $this->gaq_helper->set_taxonomy($post_id);
+            }
+
+            //ajax response here.
+            // print_r($data);
+            echo json_encode($response);
             wp_die();
-        // if ( ! empty( $_POST['action'] ) ) {
-
-        //     $selected_country = ! empty( $_POST['selected_country'] ) ? sanitize_text_field( wp_unslash( $_POST['selected_country'] ) ) : '';
-
-        //     $states = GAQCountryManager::get_instance()->country_states( $selected_country );
-
-        //     if ( ! empty( $states ) && is_array( $states ) ) {
-        //         $opt_html = '';
-        //         foreach ($states as $key => $value) {
-        //             $opt_html .= '<option value="' . $value . '">' . esc_html( $value ) . '</option>';
-        //         }
-        //         $result = array(
-        //             'result' => 'true',
-        //             'html'   => $opt_html,
-        //         );
-        //     } else {
-        //         $result = array(
-        //             'result' => 'false',
-        //             'html'   => '',
-        //         );
-        //     }
-        //     echo json_encode($result);
-        //     wp_die();
-        // }
+        }
     }
     // End of class.
 }

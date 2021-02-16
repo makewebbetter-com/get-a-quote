@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 			attrs= iternal[i];
 			if ( attrs.ltype == 'label' ) {
 				var newElelabel = document.createElement(attrs.ltype.toUpperCase());
-				jQuery.each(attrs, function (key) {
+				$.each(attrs, function (key) {
 					switch (key) {
 						case 'lclass':
 							newElelabel.setAttribute("class", attrs.lclass);
@@ -38,7 +38,7 @@ jQuery(document).ready(function($) {
 			}
 			if ( attrs.ftype == 'input' || attrs.ftype == 'textarea'  ) {
 				var newEleinput = document.createElement(attrs.ftype.toUpperCase());
-				jQuery.each(attrs, function (key, value) {
+				$.each(attrs, function (key, value) {
 					switch (key) {
 						case 'required':
 							if( value == 'true'){
@@ -48,6 +48,8 @@ jQuery(document).ready(function($) {
 								break;
 							}
 						case 'name':
+							newEleinput.setAttribute('name', attrs.name);
+							break;
 						case 'placeholder':
 							newEleinput.setAttribute(key , value);
 							break;
@@ -82,48 +84,27 @@ jQuery(document).ready(function($) {
 	/**
 	 * Form Submission
 	 */
-	jQuery('#form_submit').on('click',function(){
-		jQuery('.error_div')[0].innerHTML='';
-		// //console.log(jQuery('.active-front-form')[0].children);
-		var Form_data = [];
-		jQuery(jQuery('.active-front-form')[0].children).each(function(index){
-			if( jQuery(this)[0].localName == 'input' || jQuery(this)[0].localName == 'textarea' ){
-				// //console.log(jQuery(this)[0].name);
-				var req = jQuery(this)[0].required;
-				var name = jQuery(this)[0].name;
-				var value = jQuery(this)[0].value;
-				if ( req == true && value != '' ) {
-					Form_data.push({name, value});
-				} else {
-					jQuery('.error_div').append( name+ ' Is Required.');
-					return false;
+	$(document).on('submit', 'form#formdata', function(e){
+		e.preventDefault();
+		var form_data = new FormData(this);
+		form_data.append( "action", "trigger_form_submission" );
+		console.log(form_data);
+		$.ajax({
+			url         : ajax_globals.ajax_url,
+			type        : "POST",
+			data        : form_data,
+			dataType    : 'json',
+			contentType : false,
+			processData : false,
+			success : function( response ) {
+				// console.log(response);
+				if( response == 'Success' || response == 'updated' ) {
+					swal("Successfully Submitted!", "", "success");
+				}
+				if( response == 'Failed') {
+					swal("Oops...", "Something went wrong!", "error");
 				}
 			}
 		});
-		if( jQuery('.error_div')[0].innerHTML == ''){
-			jQuery.ajax({
-				type: 'POST',
-				url: ajax_globals.ajax_url,
-				data: {
-					datalist: Form_data,
-					action: 'trigger_form_submission',
-					_ajax_nonce: ajax_globals.form_submission_nonce,
-				},
-				success: function(response) {
-					alert(response);
-				}
-			});
-		}
-		return false;
 	});
 });
-
-jQuery(document).ready(function($) {
-	if( $('.active-front-form')[0].childElementCount > 2){
-		$($('.active-front-form')[0].children).each(function(index){
-			if( $(this)[0].localName == 'input' || $(this)[0].localName == 'textarea' ){
-				// //console.log($(this));
-			}
-		})
-	}
-})

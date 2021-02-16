@@ -5,7 +5,7 @@
 		<div class="mwb_gaq__logo">
 			<img src="https://mwblive-0obrejwqde.netdna-ssl.com/wp-content/uploads/2018/12/mwb-logo.png" alt="mwb-logo">
 		</div>
-		<a href='?page=gaq-config&tab=form-fields' class="mwb_gaq__cross"><i class="fa fa-times fa-3x"></i></a>
+		<a href='?page=gaq-config&tab=form-fields' class="mwb_gaq__cross"><i class="fa fa-times fa-3x " id='addclass'></i></a>
 	</div>
 	<nav class="navbar navbar-expand-sm navbar-light ">
 		<div class="navbar-collapse-wrapper">
@@ -34,12 +34,6 @@
 		<div id="mwb_gaq__form" class="mwb_gaq__form">
 			<form method="post" class="form-group-fields">
 				<div id="append-form">
-					<!-- <div id="form-group-sname" class="mwb_gaq__form--group">
-						<label for="name" id="nlname">Name*</label>
-						<a class="mwb_gaq__icon--del"><i id="sname" class="fas fa-trash-alt icon_del"></i></a>
-						<a class="mwb_gaq__icon--edit"><i data-id="sname" class="far fa-edit icon_edit"></i></a>
-						<input id="name" type="text" required="required" placeholder="Enter your name" class="form-control">
-					</div> -->
 				</div>
 				<a href="#" class="mwb_gaq__form__submit btn btn-info">Save Form</a>
 			</form>
@@ -90,7 +84,7 @@
 			</div>
 		</div>
 		<div class="mwb_gaq_open__drawerwrapper">
-			<a href="#" class="mwb_gaq_open__drawer"><i class="fa fa-plus fa-3x"></i></a>
+			<a href="#" class="mwb_gaq_open__drawer"><i class="fa fa-plus fa-3x "></i></a>
 		</div>
 		<div class="mwb_gaq_edit_container">
 			<div class='mwb_gaq_edit_form_fields' id="mwb_gaq_edit_fields">			

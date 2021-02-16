@@ -3,7 +3,7 @@
 		<div class="mwb_gaq__logo">
 			<img src="https://mwblive-0obrejwqde.netdna-ssl.com/wp-content/uploads/2018/12/mwb-logo.png" alt="mwb-logo">
 		</div>
-		<a href='?page=gaq-config&tab=form-fields' class="mwb_gaq__cross"><i class="fa fa-times fa-3x"></i></a>
+		<a href='?page=gaq-config&tab=form-fields' class="mwb_gaq__cross"><i class="fa fa-times fa-3x " id='addclass'></i></a>
 	</div>
     <nav class="navbar navbar-expand-sm navbar-light ">
 		<div class="navbar-collapse-wrapper">

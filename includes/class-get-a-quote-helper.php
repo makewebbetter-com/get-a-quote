@@ -40,7 +40,7 @@ class Get_A_Quote_Helper {
      */
     public static function get_instance() {
 
-        if ( is_null( self::$instance ) ) {
+        if (is_null(self::$instance)) {
             self::$instance = new self();
         }
 
@@ -55,8 +55,8 @@ class Get_A_Quote_Helper {
      * @since 1.0.0
      * @return array  $result selected options.
      */
-    public function enabling_default_value( $option ) {
-        switch ( $option ) {
+    public function enabling_default_value($option) {
+        switch ($option) {
 
             case 'enable':
                 $result = 'on';
@@ -95,9 +95,9 @@ class Get_A_Quote_Helper {
      * @param  string $message provides the message to be displayed in helpertip.
      * @since 1.0.0
      */
-    public function helpertip( $message = '' ) {
-        if ( ! empty( $message ) ) {
-            echo '<span class="wp-tooltiptext">' . esc_html( $message ) . '</span>';
+    public function helpertip($message = '') {
+        if (! empty($message)) {
+            echo '<span class="wp-tooltiptext">' . esc_html($message) . '</span>';
         }
     }
 
@@ -108,35 +108,35 @@ class Get_A_Quote_Helper {
      * @param  string $p_id he ID of the post this attachment is for.
      * @return void
      */
-    public function create_attachment( $p_id, $file_add ) {
+    public function create_attachment($p_id, $file_add) {
 
         // Check the type of file. We'll use this as the 'post_mime_type'.
-        $filetype = wp_check_filetype( basename( $file_add ), null );
+        $filetype = wp_check_filetype(basename($file_add), null);
 
         // Get the path to the upload directory.
         $upload_dir = wp_upload_dir();
 
         // Prepare an array of post data for the attachment.
         $attachment = array(
-            'guid'           => $upload_dir['url'] . '/' . basename( $file_add ),
+            'guid'           => $upload_dir['url'] . '/' . basename($file_add),
             'post_mime_type' => $filetype['type'],
-            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $file_add ) ),
+            'post_title'     => preg_replace('/\.[^.]+$/', '', basename($file_add)),
             'post_content'   => '',
             'post_status'    => 'inherit',
         );
 
         // Insert the attachment.
-        $attach_id = wp_insert_attachment( $attachment, $file_add, $p_id );
+        $attach_id = wp_insert_attachment($attachment, $file_add, $p_id);
 
         // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
-        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
 
         // Generate the metadata for the attachment, and update the database record.
-        $attach_data = wp_generate_attachment_metadata( $attach_id, $file_add );
+        $attach_data = wp_generate_attachment_metadata($attach_id, $file_add);
 
-        wp_update_attachment_metadata( $attach_id, $attach_data );
+        wp_update_attachment_metadata($attach_id, $attach_data);
 
-        set_post_thumbnail( $p_id, $attach_id );
+        set_post_thumbnail($p_id, $attach_id);
     }
     /**
      * Return all quote saved data.
@@ -145,21 +145,10 @@ class Get_A_Quote_Helper {
      * @since 1.0.0
      * @return array $post_details Submission data.
      */
-    public function detailed_post_array( $post_id ) {
-        $post_details = get_post_meta( $post_id, 'quotes_meta', true );
-        $post_details = json_decode( wp_json_encode( $post_details ), true );
+    public function detailed_post_array($post_id) {
+        $post_details = get_post_meta($post_id, 'quotes_meta', true);
         return $post_details;
     }
-    /**
-     * Is_phone_num
-     *
-     * @param [type] $phone
-     * @return boolean
-     */
-    public static function validate_form_fields( $mwb_gaq_form_data = array() ) {
-        
-    }
-
 
     /**
      * Return all quote saved data.
@@ -174,7 +163,7 @@ class Get_A_Quote_Helper {
                 'post_type' => 'quotes',
             )
         );
-        if ( ! empty( $recent_posts ) ) {
+        if (! empty($recent_posts)) {
             $recent_post_id = $recent_posts[0];
             return $recent_post_id;
         }
@@ -186,44 +175,17 @@ class Get_A_Quote_Helper {
      * @param  string $id provides the id of the post.
      * @since 1.0.0
      */
-    public function set_taxonomy( $id ) {
-
+    public function set_taxonomy($id)
+    {
         $service = $this->detailed_post_array($id);
-        if (! empty($service['taxonomy_for_service'])) {
-            $term_id = term_exists($service['taxonomy_for_service']);
-            wp_set_object_terms($id, intval($term_id), 'service');
+        if (! empty($service['taxo_service'])) {
+            $service_id = term_exists($service['taxo_service']);
+            wp_set_object_terms($id, intval($service_id), 'service');
         }
-        if (! empty($service['taxonomy_for_status'])) {
-            $term_id = term_exists($service['taxonomy_for_status']);
-            wp_set_object_terms($id, intval($term_id), 'status');
-        }
-    }
-
-    /**
-     * Return term name of the given taxonomy name.
-     *
-     * @param  string $taxo_name provides the taxonomy name of which we return the term name.
-     * @since 1.0.0
-     * @return array  $post_details Submission data.
-     */
-    public function get_taxo($taxo_name) {
-        //check_admin_referer( 'gaq_meta_box_nonce', 'gaq_meta_nonce' );
-        if (!is_admin()) {
-            return;
-        }
-        if ( isset( $_POST['tax_input'] ) ) {
-            $tax_value = ! empty( $_POST['tax_input'][ $taxo_name ] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['tax_input'][ $taxo_name ] ) ) : '';
-            $term      = '';
-            $term_name = '';
-            foreach ( $tax_value as $val => $key ) {
-                if ( '0' !== $key ) {
-                    $term = get_term_by( 'id', $key, $taxo_name );
-                }
-            }
-            $term = json_decode( wp_json_encode( $term ), true );
-            if ( ! empty( $term['name'] ) ) {
-                return $term['name'];
-            }
+        
+        if (! empty($service['status_taxo'])) {
+            $status_id = term_exists($service['status_taxo']);
+            wp_set_object_terms($id, intval($status_id), 'status');
         }
     }
 
@@ -237,15 +199,15 @@ class Get_A_Quote_Helper {
     public function email_sending($post_id) {
 
         $options = get_option('mwb_gaq_email_fields_data');
-        $sender  = ! empty( $options['sender_email'] ) ? $options['sender_email'] : get_bloginfo( 'admin_email' );
-        $details = $this->detailed_post_array( $post_id );
-        $message = ! empty( $options['emailmess'] ) ? $options['emailmess'] : 'Thank for using our service we will be get back to you soon. ';
+        $sender  = ! empty($options['sender_email']) ? $options['sender_email'] : get_bloginfo('admin_email');
+        $details = $this->detailed_post_array($post_id);
+        $message = ! empty($options['emailmess']) ? $options['emailmess'] : 'Thank for using our service we will be get back to you soon. ';
         $headers = 'From: ' . $sender . "\r\n" .
             'Reply-To: ' . $sender . "\r\n";
-        $subject = ! empty( $options['email_subject'] ) ? $options['email_subject'] : 'Quotation Submitted';
+        $subject = ! empty($options['email_subject']) ? $options['email_subject'] : 'Quotation Submitted';
         $send_to = $details['fqemail'];
-        $sent    = wp_mail( $send_to, $subject, wp_strip_all_tags( $message ), wp_strip_all_tags( $headers ) );
-        $value   = ( 1 === 1 ) ? 'Mail Sent' : 'Mail not Send';
+        $sent    = wp_mail($send_to, $subject, wp_strip_all_tags($message), wp_strip_all_tags($headers));
+        $value   = (1 === 1) ? 'Mail Sent' : 'Mail not Send';
         return $value;
     }
 
@@ -258,18 +220,17 @@ class Get_A_Quote_Helper {
      */
     public function insert_default_quote_taxonomies($args = array(), $type = 'service') {
 
-        if ( ! empty( $args ) && is_array( $args ) ) {
-            foreach ( $args as $key => $value ) {
+        if (! empty($args) && is_array($args)) {
+            foreach ($args as $key => $value) {
                 try {
                     $_terms =
                     array(
                         'description' => $value['description'],
-                        'slug'        => $value['slug'],
                     );
-                    wp_insert_term( $value['label'], $type, $_terms );
-                } catch ( \Throwable $th ) {
+                    wp_insert_term($value['label'], $type, $_terms);
+                } catch (\Throwable $th) {
                     // Add issues to a logger class later.
-                    echo esc_html( $th->getMessage() );
+                    echo esc_html($th->getMessage());
                 }
             }
         }

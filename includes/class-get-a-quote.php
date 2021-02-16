@@ -223,6 +223,8 @@ class Get_A_Quote {
         // Register the Callback for Country fetching ajax.
         // $this->loader->add_action('wp_ajax_trigger_states', $plugin_public, 'trigger_states');
         // $this->loader->add_action('wp_ajax_nopriv_trigger_states', $plugin_public, 'trigger_states');
+
+        //formsubmission
         $this->loader->add_action('wp_ajax_trigger_form_submission', $plugin_public, 'trigger_form_submission');
         $this->loader->add_action('wp_ajax_nopriv_trigger_form_submission', $plugin_public, 'trigger_form_submission');
     }

@@ -7,7 +7,6 @@ const wrapper = '<div id="form-group-{{fields-scope-here}}" class="mwb_gaq__form
 const lab = '<label class="form-labels">{{fields-label-here}}</label>';
 const wrap = '<div class="mwb_gaq__form--group"></div>';
 
-
 /**
  * 
  * To show preview form
@@ -43,7 +42,6 @@ function previewNewlement(attrs = []) {
     var divHTML = jQuery(wrap);
     divHTML.append(labelHTML);
     divHTML.append(newElement);
-    // //console.log( divHTML);
     jQuery(".mwb_display_form ").append(divHTML);    
 }
 /**
@@ -51,7 +49,6 @@ function previewNewlement(attrs = []) {
  */
 // Add new field to form.
 function appendNewlement(attrs = []) {
-    // //console.log(attrs);
     var newElement = document.createElement(attrs.ftype.toUpperCase());
     jQuery.each(attrs, function(key, value) {
         switch (key) {
@@ -128,7 +125,6 @@ jQuery(document).ready(function($) {
 
     //Edit icon operation will open the side div and display the edit fields
     jQuery(document).on("click", ".icon_edit", function() {
-        // $('.mwb_gaq_edit_container').load();
         removecls(jQuery(this), 'active');
         addcls(jQuery(this), 'inactive');
         var attrs = jQuery(this).data();
@@ -173,9 +169,26 @@ jQuery(document).ready(function($) {
 
     // Insertion of new fields in form.
     jQuery('.mwb_gaq_commonFields_group').on('click', function() {
-
         var attrs = jQuery(this).data();
-        appendNewlement(attrs);
+        var checker = '';
+        $(jQuery('#append-form').children()).each(function(index) {
+            $($(this).children()).each(function(inde) {
+                if ($(this)[0].localName != 'svg') {
+                    if ($(this)[0].localName != 'label') {
+                        if( $(this)[0].id != '' ){
+                            if( $(this)[0].id == attrs.id ){
+                                checker = 'true';
+                            }
+                        }
+                    }
+                }
+            })
+        })
+        if( checker != 'true' ) {
+            appendNewlement(attrs)
+        } else {
+            swal("Already in the Form", "", "error");
+        }
     });
 
     // Add class to body on builder open.
@@ -211,7 +224,6 @@ jQuery(document).ready(function($) {
                 var nid = $(this).attr("data-key");
                 var temp = "#";
                 nid = temp.concat(nid);
-                // //console.log(nid);
                 if ($(this).attr('placeholder') == 'name') {
 
                     $(nid).text($(this).val());
@@ -223,7 +235,6 @@ jQuery(document).ready(function($) {
             }
         });
     }
-
     //Data saving on the save form button.
     jQuery('.mwb_gaq__form__submit').on('click', function() {
         var IDs = [];
@@ -235,7 +246,7 @@ jQuery(document).ready(function($) {
             var id = $(divinput)[0].id;
             var lname = $(divlabel)[0].id;
             var label = $(divlabel).text();
-            var name = $(divinput)[0].id;
+            var name = $(divinput)[0].name;
             var pattern = '';
             if ( $(divinput)[0].pattern != '' && $(divinput)[0].pattern != undefined ){
                 pattern = $(divinput)[0].pattern;
@@ -265,7 +276,7 @@ jQuery(document).ready(function($) {
                 _ajax_nonce: ajax_form_edit.nonce,
             },
             success: function( response ) {
-                // alert(response);
+                swal("Submitted", "Successfully Submitted","success");
             }
         });
     });
@@ -273,6 +284,7 @@ jQuery(document).ready(function($) {
     //Data sending to the front-end form.
     jQuery('.mwb_gaq__publishbutton').on('click', function() {
         var IDs = [];
+        var fdata= '';
         $(jQuery('#append-form').children()).each(function(index) {
                 $($(this).children()).each(function(inde) {
                     if ($(this)[0].localName != 'svg') {
@@ -286,6 +298,10 @@ jQuery(document).ready(function($) {
                             //console.log($(this));
                             var placeholder = $(this)[0].placeholder;
                             var name = $(this)[0].name;
+                            console.log(name);
+                            if ( name == 'firstname'){
+                                fdata = 'true';
+                            }
                             var required = $(this)[0].required;
                             var iid = $(this)[0].id;
                             var ftype = $(this)[0].localName;
@@ -297,18 +313,24 @@ jQuery(document).ready(function($) {
                     }
                 })
             })
-        $.ajax({
-            type: 'POST',
-            url: ajax_form_edit.ajax_url,
-            data: {
-                datalist: IDs,
-                action: 'trigger_edit_form_data',
-                _ajax_nonce: ajax_form_edit.nonce,
-            },
-            success: function(response) {
-                // alert(response);
+            // console.log(IDs);
+            if ( fdata == 'true' ){
+                $.ajax({
+                    type: 'POST',
+                    url: ajax_form_edit.ajax_url,
+                    data: {
+                        datalist: IDs,
+                        action: 'trigger_edit_form_data',
+                        _ajax_nonce: ajax_form_edit.nonce,
+                    },
+                    success: function(response) {
+                        swal("Published!", "Also save the form", "success")
+                        console.log(response);
+                    }
+                });
+            } else {
+                swal("Oops...", "Please Select first name field!", "error");
             }
-        });
     });
 
     // End of scripts.	
@@ -323,9 +345,6 @@ jQuery(document).ready(function($) {
                 }
             }
         }
-    } else {
-        var p = '<p> No Field Selected </p>';
-		jQuery("#append-form ").append( $(p) );
     }
     var dataforpreview = form_variables.converted;
     if ( dataforpreview != null && dataforpreview != '' ) {
@@ -337,9 +356,6 @@ jQuery(document).ready(function($) {
             }
             jQuery(".mwb_display_form ").append('<a href="#" class="btn btn-info">Submit</a>');
         }
-    } else {
-        var p = '<p> No Field Selected </p>';
-		jQuery(".mwb_display_form ").append( $(p) );
     }
 })
 
@@ -348,12 +364,12 @@ jQuery(document).ready(function($) {
     var service = taxonomy_values.service;
     if( status != '' ) {
         for (i = 0; i < status.length; i++) {
-            $('.mwb_gaq_status_terms ').append( "<th class='mwb_active_terms_status' id="+status[i].term_id+">"+status[i].name+"<i class='fas fa-minus-square'></i></th>");
+            $('.mwb_gaq_status_terms ').append( "<th class='mwb_active_terms_status' id="+status[i].term_id+">"+status[i].name+"<i class='far fa-times-circle fa-spin' style='font-size:20px'></i></th>");
         }
     }
     if( service != '' ) {
         for (i = 0; i < service.length; i++) {
-            $('.service_terms ').append( "<th class='mwb_active_terms_service' id="+service[i].term_id+">"+service[i].name+"<i class='fas fa-minus-circle'></i></th>");
+            $('.service_terms ').append( "<th class='mwb_active_terms_service' id="+service[i].term_id+">"+service[i].name+"<i class='far fa-times-circle fa-spin' style='font-size:20px'></i></th>");
         }
     }
 
@@ -388,6 +404,12 @@ jQuery(document).ready(function($) {
             removeTaxo( id, 'service');
         }
     });
+    $('#addclass').mouseover(
+		function(){ $(this).addClass('fa-spin') }
+	);
+    $('#addclass').mouseout(
+		function(){ $(this).removeClass('fa-spin') }
+	);
 });
 
 //sending Ajax for taxonomy deletion
@@ -403,7 +425,7 @@ function removeTaxo( term_id, taxoname ) {
             _ajax_nonce: ajax_form_edit.nonce,
         },
         success: function(response) {
-            alert(response);
+            window.location['reload']();
         }
     });
 }
