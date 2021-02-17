@@ -184,8 +184,8 @@ class Get_A_Quote_Public {
                         $err['ext'] = 'extension not allowed, please choose a pdf or docx file.';
                     }
                 }
-                $loc = '/wp-content/uploads/quote-submission';
-                $log_dir = ABSPATH . '/wp-content/uploads/quote-submission';
+                $loc = site_url() . '/wp-content/uploads/quote-submission';
+                $log_dir = WP_CONTENT_DIR . '/uploads/quote-submission';
                 if (! is_dir($log_dir)) {
                     mkdir($log_dir, 0755, true);
                 }

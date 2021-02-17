@@ -244,21 +244,24 @@ class Get_A_Quote_Admin
      */
     public function update_quote_callback()
     {
-        // echo '<pre>'; print_r( $_POST ); echo '</pre>'; die();
         // quotes post is updated here.
+        $details = $this->gaq_helper->detailed_post_array(get_the_ID());
         if (isset($_POST['firstname'])) {
-            $post_update_meta                         = array();
-            $post_id                                  = get_the_ID();
-            $post_update_meta['firstname']               = !empty($_POST['firstname']) ? sanitize_text_field(wp_unslash($_POST['firstname'])) : '';
-            $post_update_meta['Cityname']               = !empty($_POST['Cityname']) ? sanitize_text_field(wp_unslash($_POST['Cityname'])) : '';
-            $post_update_meta['Zipcode']            = !empty($_POST['Zipcode']) ? sanitize_text_field(wp_unslash($_POST['Zipcode'])) : '';
-            $post_update_meta['States']             = !empty($_POST['States']) ? sanitize_text_field(wp_unslash($_POST['States'])) : '';
-            $post_update_meta['Country']            = !empty($_POST['Country']) ? sanitize_text_field(wp_unslash($_POST['Country'])) : '';
-            $post_update_meta['Email']              = !empty($_POST['Email']) ? sanitize_text_field(wp_unslash($_POST['Email'])) : '';
-            $post_update_meta['Phone']              = !empty($_POST['Phone']) ? sanitize_text_field(wp_unslash($_POST['Phone'])) : '';
-            $post_update_meta['Budget']             = !empty($_POST['Budget']) ? sanitize_text_field(wp_unslash($_POST['Budget'])) : '';
-            $post_update_meta['Additional']                = !empty($_POST['Additional']) ? sanitize_text_field(wp_unslash($_POST['Additional'])) : '';
-
+            $post_update_meta                  = array();
+            $post_id                           = get_the_ID();
+            $post_update_meta['firstname']     = !empty($_POST['firstname']) ? sanitize_text_field(wp_unslash($_POST['firstname'])) : '';
+            $post_update_meta['taxo_service']  = $this->gaq_helper->get_taxonomy('service');
+            $post_update_meta['status_taxo']  = $this->gaq_helper->get_taxonomy('status');
+            $post_update_meta['Cityname']      = !empty($_POST['Cityname']) ? sanitize_text_field(wp_unslash($_POST['Cityname'])) : '';
+            $post_update_meta['Zipcode']       = !empty($_POST['Zipcode']) ? sanitize_text_field(wp_unslash($_POST['Zipcode'])) : '';
+            $post_update_meta['States']        = !empty($_POST['States']) ? sanitize_text_field(wp_unslash($_POST['States'])) : '';
+            $post_update_meta['Country']       = !empty($_POST['Country']) ? sanitize_text_field(wp_unslash($_POST['Country'])) : '';
+            $post_update_meta['Email']         = !empty($_POST['Email']) ? sanitize_text_field(wp_unslash($_POST['Email'])) : '';
+            $post_update_meta['Phone']         = !empty($_POST['Phone']) ? sanitize_text_field(wp_unslash($_POST['Phone'])) : '';
+            $post_update_meta['Budget']        = !empty($_POST['Budget']) ? sanitize_text_field(wp_unslash($_POST['Budget'])) : '';
+            $post_update_meta['Additional']    = !empty($_POST['Additional']) ? sanitize_text_field(wp_unslash($_POST['Additional'])) : '';
+            $post_update_meta['filename']      = !empty($details['filename']) ? sanitize_text_field(wp_unslash($details['filename'])) : '';
+            $post_update_meta['filelink']      = !empty($details['filelink']) ? sanitize_text_field(wp_unslash($details['filelink'])) : '';
             if (!empty($post_update_meta)) {
                 update_post_meta($post_id, 'quotes_meta', $post_update_meta);
             }
@@ -452,7 +455,6 @@ class Get_A_Quote_Admin
             )
         );
     }
-
     /**
      * Trigger_edit_form_data
      * It is for  the edit form setting.
@@ -483,6 +485,5 @@ class Get_A_Quote_Admin
             wp_die();
         }
     }
-
     // End of Class.
 }

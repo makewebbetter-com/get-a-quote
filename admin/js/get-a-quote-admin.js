@@ -360,6 +360,18 @@ jQuery(document).ready(function($) {
 })
 
 jQuery(document).ready(function($) {
+    
+    $('#copytoclipTxt').on('click', function(){
+        var cls = document.getElementById("copytoclipTxt");
+        cls.select();
+        cls.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        console.log(cls.value)
+        alert("Copied");
+    })
+});
+
+jQuery(document).ready(function($) {
     var status = taxonomy_values.status;
     var service = taxonomy_values.service;
     if( status != '' ) {

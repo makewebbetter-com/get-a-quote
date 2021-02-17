@@ -190,6 +190,29 @@ class Get_A_Quote_Helper {
     }
 
     /**
+     * Get_taxonomy it gets the value of the taxo term.
+     *
+     * @param  string $taxoname provides the name of the taxonomy.
+     * @since 1.0.0
+     */
+    public function get_taxonomy($taxoname)
+    {
+        if (isset($_POST['tax_input'])) {
+            $term_id = '';
+            $tax = $_POST['tax_input'];
+            foreach ($tax[$taxoname] as $key => $value) {
+                if ($value != 0) {
+                    $term_id = $value;
+                }
+            }
+            $term = get_term_by('id', $term_id, $taxoname);
+            if( isset( $term->name)){
+                return $term->name;
+            }
+        }
+    }
+
+    /**
      * Email_sending
      *
      * @param string $post_id it provides the post id to send the mail.
