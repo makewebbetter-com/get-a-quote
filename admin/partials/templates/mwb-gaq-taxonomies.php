@@ -54,12 +54,11 @@ $mwb_gaq_taxonomies_option = get_option('mwb_gaq_taxonomies_options', array());
                             <?php
                             $select_for_status = ! empty($mwb_gaq_taxonomies_option['select_for_status']) ? $mwb_gaq_taxonomies_option['select_for_status'] : '';
                             ?>
-                            <select class="mwb_gaq_select" name="select_for_status">
+                            <select class="mwb_gaq_select" id='select_status' name="select_for_status">
                                 <option value="yes" <?php selected($select_for_status, 'yes'); ?>><?php esc_html_e('Yes', 'GAQ_TEXT_DOMAIN'); ?></option>
                                 <option value="no" <?php selected($select_for_status, 'no'); ?>><?php esc_html_e('No', 'GAQ_TEXT_DOMAIN'); ?></option>
                             </select>
                         </label><br>
-                       <!--  <span class="mwb_upsell_global_description"><?php //esc_html_e('To allow quote status', 'GAQ_TEXT_DOMAIN'); ?></span> -->
                     </td>
                 </tr>
                 <tr valign="top">
@@ -71,12 +70,11 @@ $mwb_gaq_taxonomies_option = get_option('mwb_gaq_taxonomies_options', array());
                             <?php
                             $select_for_services = ! empty($mwb_gaq_taxonomies_option['select_for_services']) ? $mwb_gaq_taxonomies_option['select_for_services'] : '';
                             ?>
-                            <select class="mwb_gaq_select" name="select_for_services">
+                            <select class="mwb_gaq_select" id='select_service' name="select_for_services">
                                 <option value="yes" <?php selected($select_for_services, 'yes'); ?>><?php esc_html_e('Yes', 'GAQ_TEXT_DOMAIN'); ?></option>
                                 <option value="no" <?php selected($select_for_services, 'no'); ?>><?php esc_html_e('No', 'GAQ_TEXT_DOMAIN'); ?></option>
                             </select>
                         </label><br>
-                        <!-- <span class="mwb_upsell_global_description"><?php //esc_html_e('To allow quote services type', 'GAQ_TEXT_DOMAIN'); ?></span> -->
                     </td>
                 </tr>
                 <tr class="mwb_gaq_status_terms terms">

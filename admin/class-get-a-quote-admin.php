@@ -168,8 +168,13 @@ class Get_A_Quote_Admin
         unset($columns['taxonomy-status']);
         unset($columns['date']);
         $columns['post_type_name']   = esc_html__('First Name', 'GAQ_TEXT_DOMAIN');
-        $columns['taxonomy-service'] = esc_html__('Quote Service', 'GAQ_TEXT_DOMAIN');
-        $columns['taxonomy-status']  = esc_html__('Quote Status', 'GAQ_TEXT_DOMAIN');
+        $value = get_option('mwb_gaq_taxonomies_options');
+        if ($value['select_for_services'] == 'yes'){
+            $columns['taxonomy-service'] = esc_html__('Quote Service', 'GAQ_TEXT_DOMAIN');
+        }
+        if ($value['select_for_status'] == 'yes'){
+            $columns['taxonomy-status']  = esc_html__('Quote Status', 'GAQ_TEXT_DOMAIN');
+        }
         $columns['post_type_email']  = esc_html__('Email', 'GAQ_TEXT_DOMAIN');
         $columns['post_type_phone']  = esc_html__('phone', 'GAQ_TEXT_DOMAIN');
         $columns['date']             = esc_html__('Date', 'GAQ_TEXT_DOMAIN');
@@ -254,7 +259,7 @@ class Get_A_Quote_Admin
             $post_update_meta['status_taxo']  = $this->gaq_helper->get_taxonomy('status');
             $post_update_meta['Cityname']      = !empty($_POST['Cityname']) ? sanitize_text_field(wp_unslash($_POST['Cityname'])) : '';
             $post_update_meta['Zipcode']       = !empty($_POST['Zipcode']) ? sanitize_text_field(wp_unslash($_POST['Zipcode'])) : '';
-            $post_update_meta['States']        = !empty($_POST['States']) ? sanitize_text_field(wp_unslash($_POST['States'])) : '';
+            $post_update_meta['State']        = !empty($_POST['State']) ? sanitize_text_field(wp_unslash($_POST['State'])) : '';
             $post_update_meta['Country']       = !empty($_POST['Country']) ? sanitize_text_field(wp_unslash($_POST['Country'])) : '';
             $post_update_meta['Email']         = !empty($_POST['Email']) ? sanitize_text_field(wp_unslash($_POST['Email'])) : '';
             $post_update_meta['Phone']         = !empty($_POST['Phone']) ? sanitize_text_field(wp_unslash($_POST['Phone'])) : '';

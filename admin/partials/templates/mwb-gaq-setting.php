@@ -29,10 +29,9 @@ $mwb_gaq_enable_plugin = get_option('mwb_gaq_enable_plugin', 'on');
             <tbody>
                 <tr valign="top">
                     <th scope="row" class="titledesc">
-                        <label for="mwb_gaq_enable_plugin"><?php esc_html_e('Enable Plugin', 'get-a-quote'); ?></label>
+                        <label for="mwb_gaq_enable_plugin"><?php esc_html_e('Enable Quote Form', 'get-a-quote'); ?></label>
                     </th>
                     <td>
-
                         <label class="mwb_gaq_enable_plugin_label">
                             <input class="mwb_gaq_enable_plugin_input" type="checkbox" <?php echo ($mwb_gaq_enable_plugin == 'on') ? "checked='checked'" : ''; ?> name="mwb_gaq_enable_plugin">
                             <span class="mwb_gaq_enable_plugin_span"></span>

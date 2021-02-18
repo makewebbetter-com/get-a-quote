@@ -138,10 +138,8 @@ jQuery(document).ready(function($) {
     function edit_call(child) {
         $(child).each(function(index) {
             if ($(this)[0].localName == 'label') {
-            // //console.log($(this)[0].id);
                 $("#field_name").val($(this).text());
                 $("#field_name").attr("data-key", $(this)[0].id);
-                // $("#field_name").attr("data-key", $(this).attr("data-id"));
             }
             if ($(this)[0].localName == 'input') {
                 if ($(this)[0].placeholder == '') {
@@ -150,9 +148,12 @@ jQuery(document).ready(function($) {
                 } else {
                     $("#field_place_name").show();
                     $("#field-place-name").show();
+                    $("#field_place_name").attr("data-key", $(this)[0].id);
+                    $("#field_place_name").val($(this)[0].placeholder);
                 }
-                $("#field_place_name").attr("data-key", $(this)[0].id);
-                $("#field_place_name").val($(this)[0].placeholder);
+            } else if ($(this)[0].localName == 'textarea' || $(this)[0].localName == 'file' ){
+                $("#field_place_name").hide();
+                $("#field-place-name").hide();
             }
         });
     }
@@ -372,6 +373,26 @@ jQuery(document).ready(function($) {
 });
 
 jQuery(document).ready(function($) {
+
+    var sat = document.getElementById("select_status");
+    if( sat != null){
+        var sat_val = sat.options[sat.selectedIndex].value;
+        if (sat_val == 'no' ) {
+            $('.mwb_gaq_status_terms').hide();
+        } else if (sat_val == 'yes' ) {
+            $('.mwb_gaq_status_terms').show();
+        }
+    }
+    var serv = document.getElementById("select_service");
+    if( serv != null){
+        var sev_val = serv.options[serv.selectedIndex].value;
+        if (sev_val == 'no' ) {
+            $('.service_terms').hide();
+        } else if (sev_val == 'yes' ) {
+            $('.service_terms').show();
+        }
+    }
+
     var status = taxonomy_values.status;
     var service = taxonomy_values.service;
     if( status != '' ) {

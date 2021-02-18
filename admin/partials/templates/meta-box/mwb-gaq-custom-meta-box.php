@@ -83,11 +83,11 @@ if (! empty($details['fqcountry'])) {
         <tr>
             <th>
             <?php
-            esc_html_e('States', 'GAQ_TEXT_DOMAIN');
+            esc_html_e('State', 'GAQ_TEXT_DOMAIN');
             ?>
             </th>
-            <td><input id="states" type="text" name="States"
-                    value="<?php echo esc_html(! empty($details['States']) ? $details['States'] : ''); ?>">
+            <td><input id="State" type="text" name="State"
+                    value="<?php echo esc_html(! empty($details['State']) ? $details['State'] : ''); ?>">
             </td>
         </tr>
         <tr>
@@ -109,6 +109,7 @@ if (! empty($details['fqcountry'])) {
                     value="<?php echo esc_html(! empty($details['Additional']) ? $details['Additional'] : ''); ?>">
             </td>
         </tr>
+        <?php if ($details['status'] == 'true'){?>
         <tr>
             <th>
             <?php
@@ -129,5 +130,6 @@ if (! empty($details['fqcountry'])) {
                 </span></b>
             </td>
         </tr>
+        <?php }?>
     </table>
 </form>

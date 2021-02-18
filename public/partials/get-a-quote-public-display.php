@@ -25,11 +25,12 @@ $taxonomies = get_terms(
 <div class='error_div'>
 </div>
 <form action="" class="active-from" id='formdata' method="POST" enctype="multipart/form-data">
-    <label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote'); ?></label><br />
-        <?php
-        if (!empty($taxonomies)) {
-            $taxonomies = json_decode(json_encode($taxonomies), true);
+    <?php
+    if (!empty($taxonomies)) {
+        $taxonomies = json_decode(json_encode($taxonomies), true);
+        if (!isset($taxonomies['errors'])) {
             ?>
+            <label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote'); ?></label><br />
             <select class="mwb_gaq_taxonomy_display" name="taxo_service">
             <?php
             foreach ($taxonomies as $values => $key) {?>
@@ -40,7 +41,8 @@ $taxonomies = get_terms(
             </select>
             <?php
         }
-        ?>
+    }
+    ?>
     <div class="active-front-form mwb_gaq__form--group">
     </div>
     <button type="submit" name="qsubmit" id="form_submit">Submit</button>

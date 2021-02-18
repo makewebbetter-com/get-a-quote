@@ -56,7 +56,7 @@ class Get_A_Quote_Public {
      * @param      string    $plugin_name       The name of the plugin.
      * @param      string    $version    The version of this plugin.
      */
-    public function __construct( $plugin_name, $version ) {
+    public function __construct($plugin_name, $version) {
 
         $this->plugin_name = $plugin_name;
         $this->version     = $version;
@@ -76,7 +76,6 @@ class Get_A_Quote_Public {
          * An instance of this class should be passed to the run() function
          * defined in Get_A_Quote_Loader as all of the hooks are defined
          * in that particular class.
-         *
          * The Get_A_Quote_Loader will then create the relationship
          * between the defined hooks and the functions defined in this
          * class.
@@ -138,7 +137,12 @@ class Get_A_Quote_Public {
      * @since    1.0.0
      */
     public function quote_form_fields() {
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/get-a-quote-public-display.php';
+        $is_gaq_enable_plugin = get_option('mwb_gaq_enable_plugin');
+        if ('on' === $is_gaq_enable_plugin) {
+            require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/get-a-quote-public-display.php';
+        } else {
+            return '';
+        }
     }
 
     /**
@@ -154,77 +158,88 @@ class Get_A_Quote_Public {
                     $data[$key] = $value;
                 }
             }
-            if (isset($data['firstname'])) {
-                $my_post_details = array(
-                    'post_title'  => $data['firstname'],
-                    'post_type'   => 'quotes',
-                    'post_status' => 'publish',
-                );
-            }
-            $post_id = wp_insert_post($my_post_details);
-
-            //file upload procedure begin.
-            if (isset($_FILES['Files']['name'])) {
-                $err        = array();
-                $file_name  = isset($_FILES['Files']['name']) ?
-                    sanitize_textarea_field(wp_unslash($_FILES['Files']['name'])) : '';
-
-                $file_tmp   = isset($_FILES['Files']['tmp_name']) ?
-                    sanitize_textarea_field(wp_unslash($_FILES['Files']['tmp_name'])) : '';
-
-                $file_type  = isset($_FILES['Files']['type']) ?
-                    sanitize_textarea_field(wp_unslash($_FILES['Files']['type'])) : '';
-
-                $file_ext   = wp_check_filetype(basename($file_name), null);
-
-                $extensions = array( 'png', 'jpeg', 'jpg' );
-
-                if (! empty($file_ext['ext'])) {
-                    if (!in_array($file_ext['ext'], $extensions, true)) {
-                        $err['ext'] = 'extension not allowed, please choose a pdf or docx file.';
-                    }
+            $err = $this->gaq_helper->valiDation($data);
+            if (!isset($err['action'])) {
+                if (isset($err['firstname'])) {
+                    $my_post_details = array(
+                        'post_title'  => $err['firstname'],
+                        'post_type'   => 'quotes',
+                        'post_status' => 'publish',
+                    );
                 }
-                $loc = site_url() . '/wp-content/uploads/quote-submission';
-                $log_dir = WP_CONTENT_DIR . '/uploads/quote-submission';
-                if (! is_dir($log_dir)) {
-                    mkdir($log_dir, 0755, true);
-                }
-                if (empty($err)) {
-                    $new_file_name = 'quote_' . $post_id . '.' . $file_ext['ext'];
-                    $loc = $loc . '/' . $new_file_name;
-                    $file_add  = $log_dir . '/' . $new_file_name;
-                    move_uploaded_file($file_tmp, $file_add);
-                    if (! empty($file_add)) {
-                        $this->gaq_helper->create_attachment($post_id, $file_add);
-                        $data['filename'] = $new_file_name;
-                        $data['filelink'] = $loc;
-                        $response = 'Success';
-                        $email_activator = get_option('mwb_gaq_activate_email');
-                        if ('on' === $email_activator) {
-                            $mail = $this->gaq_helper->email_sending($p_id);
+                $post_id = wp_insert_post($my_post_details);
+                $file_err = array();
+                //file upload procedure begin.
+                if (!empty($_FILES['Files']['name'])) {
+                    $data['status'] = 'true';
+                    $file_name  = isset($_FILES['Files']['name']) ?
+                        sanitize_textarea_field(wp_unslash($_FILES['Files']['name'])) : '';
+
+                    $file_tmp   = isset($_FILES['Files']['tmp_name']) ?
+                        sanitize_textarea_field(wp_unslash($_FILES['Files']['tmp_name'])) : '';
+
+                    $file_type  = isset($_FILES['Files']['type']) ?
+                        sanitize_textarea_field(wp_unslash($_FILES['Files']['type'])) : '';
+
+                    $file_ext   = wp_check_filetype(basename($file_name), null);
+
+                    $extensions = array( 'png', 'jpeg', 'jpg' );
+
+                    if (! empty($file_ext['ext'])) {
+                        if (!in_array($file_ext['ext'], $extensions, true)) {
+                            echo json_encode('extension not allowed, please choose a "png", "jpeg", "jpg" file.');
+                            wp_delete_post($post_id);
+                            wp_die();
                         }
                     }
+                    $loc = site_url() . '/wp-content/uploads/quote-submission';
+                    $log_dir = WP_CONTENT_DIR . '/uploads/quote-submission';
+                    if (! is_dir($log_dir)) {
+                        mkdir($log_dir, 0755, true);
+                    }
+                    if (empty($err)) {
+                        $new_file_name = 'quote_' . $post_id . '.' . $file_ext['ext'];
+                        $loc = $loc . '/' . $new_file_name;
+                        $file_add  = $log_dir . '/' . $new_file_name;
+                        move_uploaded_file($file_tmp, $file_add);
+                        if (! empty($file_add)) {
+                            $this->gaq_helper->create_attachment($post_id, $file_add);
+                            $data['filename'] = $new_file_name;
+                            $data['filelink'] = $loc;
+                            $response = 'Success';
+                            $email_activator = get_option('mwb_gaq_activate_email');
+                            if ('on' === $email_activator) {
+                                $mail = $this->gaq_helper->email_sending($p_id);
+                            }
+                        }
+                    } else {
+                        $response = 'Failed';
+                        print_r($err);
+                    }
                 } else {
-                    $response = 'Failed';
-                    print_r($err);
-                }
-            } //file upload procedure end.
+                    $data['status'] = 'false';
+                }//file upload procedure end.
 
-            // Mail sending.
-            if (isset($data['Email'])) {
-                $email_activator = get_option('mwb_gaq_activate_email');
-                if ('on' === $email_activator) {
-                    $mail = $this->gaq_helper->email_sending($post_id);
-                    $respo = 'mail sent';
+                //formdata pushing to DB.
+                if (! empty($data)) {
+                    $data['status_taxo'] = 'pending';
+                    update_post_meta($post_id, 'quotes_meta', $data);
+                    // Mail sending.
+                    if (! empty($data['Email'] && isset($data['Email']))) {
+                        $email_activator = get_option('mwb_gaq_activate_email');
+                        if ('on' === $email_activator) {
+                            $mail = $this->gaq_helper->email_sending($post_id);
+                            $respo = 'mail sent';
+                        }
+                    } //mail sending end here
+                    $response = 'updated';
+                    $this->gaq_helper->set_taxonomy($post_id);
                 }
-            } //mail sending end here
-
-            //formdata pushing to DB.
-            if (! empty($data)) {
-                $data['status_taxo'] = 'pending';
-                update_post_meta($post_id, 'quotes_meta', $data);
-                $response = 'updated';
-                $this->gaq_helper->set_taxonomy($post_id);
+            } else {
+                foreach ($err as $key => $value) {
+                    $response = $err[$key];
+                    break;
+                }
             }
 
             //ajax response here.

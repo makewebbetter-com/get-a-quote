@@ -66,15 +66,15 @@
 				<div class="mwb_gaq_commonFields_icon" ><span class="far fa-address-card"></span></div>
 				Zipcode		
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_states" data-ftype="input" data-type="text" data-lname="statelabel" data-name="States" data-placeholder="Enter States Name" data-id="fstates" data-class="form-control" data-scope="sstates" data-label="States">
+			<div class="mwb_gaq_commonFields_group mwb_form_State" data-ftype="input" data-type="text" data-lname="statelabel" data-name="State" data-placeholder="Enter State Name" data-id="fState" data-class="form-control" data-scope="sState" data-label="State">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-flag-usa"></span></div>
-				States		
+				State		
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_budget" data-ftype="input" data-type="number" data-lname="budgetlabel" data-name="Budget" data-placeholder="Budget" data-id="fbudget" data-class="form-control" data-scope="sbudget" data-label="Budget">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-dollar-sign"></span></div>
 				Budget	
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-type="tel" data-required="required" data-lname="phonelabel" data-name="Phone" data-placeholder="123-45-67-890" data-pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3}" data-id="phone" data-class="form-control" data-scope="sphone" data-label="Phone Number">
+			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-type="tel" data-required="required" data-lname="phonelabel" data-name="Phone" data-placeholder="+86 800 555 1234" data-pattern="^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" data-id="phone" data-class="form-control" data-scope="sphone" data-label="Phone Number">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-mobile-alt"></span></div>
 				Phone	
 			</div>

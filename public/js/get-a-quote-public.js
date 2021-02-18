@@ -97,12 +97,10 @@ jQuery(document).ready(function($) {
 			contentType : false,
 			processData : false,
 			success : function( response ) {
-				// console.log(response);
 				if( response == 'Success' || response == 'updated' ) {
 					swal("Successfully Submitted!", "", "success");
-				}
-				if( response == 'Failed') {
-					swal("Oops...", "Something went wrong!", "error");
+				} else {
+					swal("Oops...", response, "error");
 				}
 			}
 		});

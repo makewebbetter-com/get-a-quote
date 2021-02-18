@@ -213,12 +213,8 @@ class Get_A_Quote {
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-        $is_gaq_enable_plugin =
-        get_option('mwb_gaq_enable_plugin', $this->gaq_helper->enabling_default_value('enable'));
-        if ('on' === $is_gaq_enable_plugin) {
-            // Register the required shortcodes.
-            $this->loader->add_action('init', $plugin_public, 'register_shortcodes');
-        }
+        // Register the required shortcodes.
+        $this->loader->add_action('init', $plugin_public, 'register_shortcodes');
 
         // Register the Callback for Country fetching ajax.
         // $this->loader->add_action('wp_ajax_trigger_states', $plugin_public, 'trigger_states');

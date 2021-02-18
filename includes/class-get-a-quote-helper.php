@@ -77,7 +77,7 @@ class Get_A_Quote_Helper {
                     'select_for_city_field'       => 'yes',
                     'select_for_zipcode_field'    => 'yes',
                     'select_for_country_field'    => 'yes',
-                    'select_for_states_field'     => 'yes',
+                    'select_for_State_field'     => 'yes',
                     'select_for_email_field'      => 'yes',
                     'select_for_phone_field'      => 'yes',
                     'select_for_budget_field'     => 'yes',
@@ -170,6 +170,108 @@ class Get_A_Quote_Helper {
     }
 
     /**
+     * Validation
+    */
+    public static function valiDation($data)
+    {
+        $err = array();
+        $filtered = array();
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'firstname':
+                    $name = $data['firstname'];
+                    $name = trim($name, ' ');
+                    $name = filter_var($name, FILTER_SANITIZE_STRING);
+                    if ($name == '') {
+                        $err[$key] = esc_html__('Firstname is empty', 'get-a-quote');
+                        break;
+                    } elseif (is_numeric($name)) {
+                        $err[$key] = esc_html__('Firstname is to be character or alpha numeric', 'get-a-quote');
+                        break;
+                    } else {
+                        $filtered[$key] = $name;
+                        break;
+                    }
+
+                case 'Phone':
+                    $phone = $data['Phone'];
+                    $phone = trim($phone, ' ');
+                    $phone = trim($phone, '-');
+                    $phone = filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
+                    if (ctype_alpha($phone)) {
+                        $err[$key] = esc_html__('Phone is not Number', 'get-a-quote');
+                        break;
+                    } elseif (strlen($phone) < 10 || strlen($phone) > 14) {
+                        $err[$key] = esc_html__('Phone to less than 14 and more then 10 digits', 'get-a-quote');
+                        break;
+                    } else {
+                        $filtered[$key] = $phone;
+                        break;
+                    }
+                
+                case 'Cityname':
+                    $city = $data['Cityname'];
+                    $city = trim($city, '-');
+                    if (!ctype_alpha($city)) {
+                        $err[$key] = esc_html__('Only characters are allowed in City.', 'get-a-quote');
+                        break;
+                    } else {
+                        $filtered[$key] = $city;
+                        break;
+                    }
+
+                case 'Zipcode':
+                    $zcode = $data['Zipcode'];
+                    $zcode = trim($zcode, '-');
+                    $zcode = trim($zcode, '.');
+                    if (!preg_match('#[0-9]{5}#', $zcode)) {
+                        $err[$key] = esc_html__('Only numbers are allowed in City.', 'get-a-quote');
+                        break;
+                    } elseif (strlen($zcode) > 7 || strlen($zcode) < 4) {
+                        $err[$key] = esc_html__('Zipcode to be less than 7 and more then 4 digits.', 'get-a-quote');
+                        break;
+                    } else {
+                        $filtered[$key] = $zcode;
+                        break;
+                    }
+
+                case 'State':
+                    $state = $data['State'];
+                    if (is_numeric($state)) {
+                        $err[$key] = esc_html__('Only numbers are not allowed in State.', 'get-a-quote');
+                        break;
+                    } else {
+                        $filtered[$key] = $state;
+                        break;
+                    }
+
+                case 'Country':
+                    $country = $data['Country'];
+                    if (is_numeric($country)) {
+                        $err[$key] = esc_html__('Only numbers are not allowed in Country.', 'get-a-quote');
+                        break;
+                    } else {
+                        $filtered[$key] = $country;
+                        break;
+                    }
+                case 'Budget':
+                    $bud = abs($data['Budget']);
+                    $filtered[$key] = $bud;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        if (!empty($err)) {
+            $err['action'] = 'Error Found';
+            return $err;
+        } else {
+            return $filtered;
+        }
+    }
+
+    /**
      * Set_taxonomy it sets the value of the taxo term.
      *
      * @param  string $id provides the id of the post.
@@ -178,12 +280,12 @@ class Get_A_Quote_Helper {
     public function set_taxonomy($id)
     {
         $service = $this->detailed_post_array($id);
-        if (! empty($service['taxo_service'])) {
+        if (! empty($service['taxo_service']) && isset($service['taxo_service'])) {
             $service_id = term_exists($service['taxo_service']);
             wp_set_object_terms($id, intval($service_id), 'service');
         }
         
-        if (! empty($service['status_taxo'])) {
+        if (! empty($service['status_taxo']) && (isset($service['status_taxo']))) {
             $status_id = term_exists($service['status_taxo']);
             wp_set_object_terms($id, intval($status_id), 'status');
         }
@@ -200,14 +302,16 @@ class Get_A_Quote_Helper {
         if (isset($_POST['tax_input'])) {
             $term_id = '';
             $tax = $_POST['tax_input'];
-            foreach ($tax[$taxoname] as $key => $value) {
-                if ($value != 0) {
-                    $term_id = $value;
+            if (isset($tax[$taxoname])) {
+                foreach ($tax[$taxoname] as $key => $value) {
+                    if ($value != 0) {
+                        $term_id = $value;
+                    }
                 }
-            }
-            $term = get_term_by('id', $term_id, $taxoname);
-            if( isset( $term->name)){
-                return $term->name;
+                $term = get_term_by('id', $term_id, $taxoname);
+                if (isset($term->name)) {
+                    return $term->name;
+                }
             }
         }
     }
@@ -223,15 +327,19 @@ class Get_A_Quote_Helper {
 
         $options = get_option('mwb_gaq_email_fields_data');
         $sender  = ! empty($options['sender_email']) ? $options['sender_email'] : get_bloginfo('admin_email');
+
         $details = $this->detailed_post_array($post_id);
+
         $message = ! empty($options['emailmess']) ? $options['emailmess'] : 'Thank for using our service we will be get back to you soon. ';
+        
         $headers = 'From: ' . $sender . "\r\n" .
             'Reply-To: ' . $sender . "\r\n";
+        
         $subject = ! empty($options['email_subject']) ? $options['email_subject'] : 'Quotation Submitted';
-        $send_to = $details['fqemail'];
+        
+        $send_to = $details['Email'];
         $sent    = wp_mail($send_to, $subject, wp_strip_all_tags($message), wp_strip_all_tags($headers));
-        $value   = (1 === 1) ? 'Mail Sent' : 'Mail not Send';
-        return $value;
+        return ($sent == 1) ? 'Mail Sent' : 'Mail not Send';
     }
 
     /**
