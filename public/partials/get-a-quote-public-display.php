@@ -4,47 +4,55 @@
  *
  * This file is used to markup the public-facing aspects of the plugin.
  *
- * @link       https://makewebbetter.com
+ * @link       https://makewebbetter.com/
  * @since      1.0.0
  *
- * @package    Get_A_Quote
- * @subpackage Get_A_Quote/public/partials
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/public/partials
  */
+
 ?>
+
+<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<div class="notice notice-success is-dismissible success-div">
+<p><?php esc_html_e( 'Successfully Submitted!', 'get-a-quote' ); ?></p>
+</div>
+<div class="notice notice-warning is-dismissible error-div">
+</div>
 <?php
-$mwb_gaq_form_data['taxonomy_for_service'] = isset($_POST['taxonomy_for_service']) ?
-    sanitize_text_field(wp_unslash($_POST['taxonomy_for_service'])) : '';
-$mwb_gaq_form_data['taxonomy_for_status'] = 'Pending';
+$mwb_gaq_form_data['taxonomy_for_service'] = isset( $_POST['taxonomy_for_service'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy_for_service'] ) ) : '';
+$mwb_gaq_form_data['taxonomy_for_status']  = 'Pending';
 $taxonomies = get_terms(
-    array(
-        'taxonomy' => 'service',
-        'hide_empty' => false,
-    )
+	array(
+		'taxonomy'   => 'service',
+		'hide_empty' => false,
+	)
 );
+
 ?>
 <div class='error_div'>
 </div>
 <form action="" class="active-from" id='formdata' method="POST" enctype="multipart/form-data">
-    <?php
-    if (!empty($taxonomies)) {
-        $taxonomies = json_decode(json_encode($taxonomies), true);
-        if (!isset($taxonomies['errors'])) {
-            ?>
-            <label class="form_labels"><?php esc_html_e('Type Of Service', 'get-a-quote'); ?></label><br />
-            <select class="mwb_gaq_taxonomy_display" name="taxo_service">
-            <?php
-            foreach ($taxonomies as $values => $key) {?>
-                <option value="<?php echo $key['slug']; ?>" <?php selected($key['slug']); ?>> <?php esc_html_e($key["name"], 'get-a-quote'); ?></option>
-                <?php
-            }
-            ?>
-            </select>
-            <?php
-        }
-    }
-    ?>
-    <div class="active-front-form mwb_gaq__form--group">
-    </div>
-    <button type="submit" name="qsubmit" id="form_submit">Submit</button>
+	<?php
+	if ( ! empty( $taxonomies ) ) {
+		$taxonomies = json_decode( json_encode( $taxonomies ), true );
+		if ( ! isset( $taxonomies['errors'] ) ) {
+			?>
+			<label class="form_labels"><?php esc_html_e( 'Type Of Service', 'get-a-quote' ); ?></label><br />
+			<select class="mwb_gaq_taxonomy_display" name="taxo_service">
+			<?php
+			foreach ( $taxonomies as $values => $key ) {
+				?>
+				<option value="<?php echo $key['slug']; ?>" <?php selected( $key['slug'] ); ?>> <?php esc_html_e( $key['name'], 'get-a-quote' ); ?></option>
+				<?php
+			}
+			?>
+			</select>
+			<?php
+		}
+	}
+	?>
+	<div class="active-front-form mwb_gaq__form--group">
+	</div>
+	<button type="submit" name="qsubmit" id="form_submit">Submit</button>
 </form>
-
