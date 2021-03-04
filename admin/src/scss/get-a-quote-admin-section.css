@@ -1,0 +1,60 @@
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:focus {
+    box-shadow: none!important;
+    outline: none!important;
+}
+
+select,
+select:focus {
+    border-color: #2196f3!important;
+    color: #000000!important;
+}
+
+option {
+    color: #000000;
+}
+
+input[type=submit].button,
+a.page-title-action,
+a:focus,
+input[type=submit].button:focus {
+    border-color: #2196f3!important;
+    color: #2196f3!important;
+}
+
+.tablenav .actions {
+    padding: 5px 20px 0 0;
+}
+
+.wp-list-table {
+    margin: 20px 0;
+}
+
+.table-view-list thead,
+.table-view-list tfoot {
+    background: #59B0F6;
+}
+
+.table-view-list thead tr th,
+.table-view-list thead tr th a,
+.table-view-list tfoot tr th,
+.table-view-list tfoot tr th a {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.alternate,
+.striped>tbody>:nth-child(odd),
+ul.striped>:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.table-view-list tbody td,
+.table-view-list tbody td a {
+    color: #000000;
+}
