@@ -151,11 +151,14 @@ class Get_a_quote {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'package/rest-api/class-get-a-quote-rest-api.php';
 
-		//The class is responsible for the common hooks used between admin and public area.
+		// The class is responsible for the common hooks used between admin and public area.
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'common/class-get-a-quote-common.php';
 
-		//The class responsible for defining all helper function to manipulate with requests and data.
+		// The class responsible for defining all helper function to manipulate with requests and data.
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-helper.php';
+
+		// This class is responsible for the country-data-managing.
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-country-manager.php';
 
 		$this->loader = new Get_a_quote_Loader();
 
@@ -210,8 +213,6 @@ class Get_a_quote {
 		/*MY WORK ON NEW BOILER PLATE*/
 
 		// to register submenu for faq.
-		$this->loader->add_filter( 'mwb_add_plugins_menus_array', $gaq_plugin_admin, 'gaq_add_quote_submenu_faq', 15 );
-
 		$this->loader->add_filter( 'mwb_gaq_plugin_standard_admin_settings_tabs', $gaq_plugin_admin, 'gaq_adding_tabs', 10 );
 		$this->loader->add_filter( 'gaq_taxonomies_settings_array', $gaq_plugin_admin, 'gaq_admin_taxonomies_settings_page', 10 );
 		$this->loader->add_filter( 'gaq_email_settings_array', $gaq_plugin_admin, 'gaq_admin_email_settings_page', 10 );
@@ -263,6 +264,10 @@ class Get_a_quote {
 		$this->loader->add_action( 'wp_ajax_nopriv_trigger_edit_form_data', $gaq_plugin_common, 'trigger_edit_form_data' );
 		$this->loader->add_action( 'wp_ajax_trigger_form_submission', $gaq_plugin_common, 'trigger_form_submission' );
 		$this->loader->add_action( 'wp_ajax_nopriv_trigger_form_submission', $gaq_plugin_common, 'trigger_form_submission' );
+		$this->loader->add_action( 'wp_ajax_trigger_country_list', $gaq_plugin_common, 'trigger_country_list' );
+		$this->loader->add_action( 'wp_ajax_nopriv_trigger_country_list', $gaq_plugin_common, 'trigger_country_list' );
+		$this->loader->add_action( 'wp_ajax_trigger_country_list_public', $gaq_plugin_common, 'trigger_country_list_public' );
+		$this->loader->add_action( 'wp_ajax_nopriv_trigger_country_list_public', $gaq_plugin_common, 'trigger_country_list_public' );
 
 	}
 	/**
@@ -769,7 +774,6 @@ class Get_a_quote {
 					case 'button':
 						?>
 					<div class="mwb-form-group">
-						<div class="mwb-form-group__label"></div>
 						<div class="mwb-form-group__control">
 							<button class="mdc-button mdc-button--raised" name="<?php echo esc_attr( $gaq_component['id'] ); ?>"
 								id="<?php echo esc_attr( $gaq_component['id'] ); ?>"> <span class="mdc-button__ripple"></span>

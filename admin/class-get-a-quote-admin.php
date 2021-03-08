@@ -53,6 +53,7 @@ class Get_a_quote_Admin
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->gaq_helper  = Get_A_Quote_Helper::get_instance();
+		$this->gaq_country = GAQCountryManager::get_instance();
 	}
 
 	/**
@@ -192,7 +193,7 @@ class Get_a_quote_Admin
 	public function gaq_admin_submenu_page( $menus = array() )
 	{
 		$menus[] = array(
-			'name'      => __( 'get-a-quote', 'get-a-quote' ),
+			'name'      => __( 'Get-A-Quote', 'get-a-quote' ),
 			'slug'      => 'get_a_quote_menu',
 			'menu_link' => 'get_a_quote_menu',
 			'instance'  => $this,
@@ -200,24 +201,6 @@ class Get_a_quote_Admin
 		);
 		return $menus;
 	}
-
-	/**
-	 * get-a-quote gaq_add_quote_submenu_faq.
-	 *
-	 * @since 1.0.0
-	 * @param array $menus Marketplace menus.
-	 */
-	public function gaq_add_quote_submenu_faq( $args = array() )
-	{
-		$args[] = array(
-			'name'      => 'FAQ',
-			'menu_link' => 'gaq-faq',
-			'instance'  => $this,
-			'function'  => 'quote_faq_screen',
-		);
-		return $args;
-	}
-
 
 	/**
 	 * get-a-quote mwb_plugins_listing_page.
@@ -536,7 +519,7 @@ class Get_a_quote_Admin
 				'id'          => 'mwb_gaq_taxonomies_common_settings_save',
 				'name'        => 'mwb_gaq_taxonomies_common_settings_save',
 				'button_text' => __( 'Save Changes', 'get-a-quote' ),
-				'class'       => 'gaq-button-class button-primary save-button',
+				'class'       => 'gaq-button-class button-primary save-button taxonomy-save',
 			),
 		);
 		return $gaq_settings_template;
@@ -637,12 +620,12 @@ class Get_a_quote_Admin
 	 */
 	public function update_quote_callback()
 	{
+		// echo '<pre>'; print_r( $_POST ); echo '</pre>'; die();
 		// quotes post is updated here.
 		$details = $this->gaq_helper->detailed_post_array( get_the_ID() );
 		if (isset( $_POST['firstname']) ) {
 			$post_update_meta                 = array();
 			$post_id                          = get_the_ID();
-			$post_update_meta['firstname']    = !empty( $_POST['firstname']) ? sanitize_text_field(wp_unslash( $_POST['firstname']) ) : '';
 			$post_update_meta['taxo_service'] = $this->gaq_helper->get_taxonomy( 'service' );
 			$post_update_meta['status_taxo']  = $this->gaq_helper->get_taxonomy( 'status' );
 			$post_update_meta['Cityname']     = !empty( $_POST['Cityname']) ? sanitize_text_field(wp_unslash( $_POST['Cityname']) ) : '';
@@ -654,8 +637,9 @@ class Get_a_quote_Admin
 			$post_update_meta['Budget']       = !empty( $_POST['Budget']) ? sanitize_text_field(wp_unslash( $_POST['Budget']) ) : '';
 			$post_update_meta['Additional']   = !empty( $_POST['Additional']) ? sanitize_text_field(wp_unslash( $_POST['Additional']) ) : '';
 			$post_update_meta['filename']     = !empty( $details['filename']) ? sanitize_text_field(wp_unslash( $details['filename']) ) : '';
+			$post_update_meta['status']     = !empty( $details['status']) ? sanitize_text_field(wp_unslash( $details['status']) ) : '';
 			$post_update_meta['filelink']     = !empty( $details['filelink']) ? sanitize_text_field(wp_unslash( $details['filelink']) ) : '';
-			if (!empty( $post_update_meta) ) {
+			if ( ! empty( $post_update_meta ) ) {
 				update_post_meta( $post_id, 'quotes_meta', $post_update_meta);
 			}
 		}

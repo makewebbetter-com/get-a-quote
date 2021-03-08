@@ -1,5 +1,18 @@
 <?php
 $details = $this->gaq_helper->detailed_post_array( get_the_ID() );
+$countryarray = $this->gaq_helper->mwb_gaq_get_country_list();
+foreach ( $countryarray as $key => $value ) {
+	if ( $details['Country'] === $key ) {
+		$state = $this->gaq_country->country_states( $key );
+		foreach ( $state as $skey => $svalue ) {
+			if ( $details['State'] === $skey ) {
+				$details['State'] = $svalue;
+			}
+		}
+		$details['Country'] = $value;
+	}
+}
+
 ?>
 <form action="<?php plugin_dir_url( __FILE__ ) . 'class-get-a-quote-admin.php'; ?>" method="POST" enctype="multipart/form-data">
 	<table class="table">
@@ -113,6 +126,11 @@ $details = $this->gaq_helper->detailed_post_array( get_the_ID() );
 					<?php
 					$file = ! empty( $details['filename'] ) ? $details['filename'] : '';
 					if ( ! empty( $file ) ) {
+						?>
+						<input type='hidden' name='filename' value='<?php echo $details['status']; ?>'>
+						<input type='hidden' name='filename' value='<?php echo $details['filename']; ?>'>
+						<input type='hidden' name='filelink' value='<?php echo $details['filelink']; ?>'>
+						<?php
 						echo ( sprintf( '<a href="%s" target="_blank">%s</a>', esc_html( $details['filelink'] ), esc_html__( 'Open File', 'get-a-quote' ) ) );
 					} else {
 						esc_html_e( 'No File Selected', 'get-a-quote' );

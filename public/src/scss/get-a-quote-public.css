@@ -2,3 +2,11 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+ .form-control {
+    margin-bottom: 20px;
+    margin-top: 5px;
+    width: 30%;
+}
+.active-from{
+    width: 45%;
+}

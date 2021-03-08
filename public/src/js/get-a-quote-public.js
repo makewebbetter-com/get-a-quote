@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 				});
 				var labelfield = $( newElelabel);
 			}
-			if ( attrs.ftype == 'input' || attrs.ftype == 'textarea'  ) {
+			if ( attrs.ftype == 'input' || attrs.ftype == 'textarea' ||  attrs.ftype == 'select' ) {
 				var newEleinput = document.createElement(attrs.ftype.toUpperCase());
 				$.each(attrs, function (key, value) {
 					switch (key) {
@@ -75,14 +75,89 @@ jQuery(document).ready(function($) {
 							break;
 					}
 				});
-				var inputfield = $( newEleinput);
+				var inputfield = $( newEleinput );
 			}
 			if ( labelfield != undefined && inputfield != undefined ) {
 				$('.active-front-form').append( labelfield );
 				$('.active-front-form').append( inputfield );
-				$('.active-front-form').append( '<br>' );
+			}
+			if( inputfield != undefined ){
+				if( inputfield[0].localName == 'select' ){
+
+					jQuery.ajax({
+
+						type: 'POST',
+			
+						url: gaq_public_param.ajaxurl,
+			
+						data: {
+			
+							message: 'get_country_list',
+			
+							action: 'trigger_country_list_public',
+			
+							_ajax_nonce: gaq_public_param.nonce,
+			
+						},
+			
+						success: function(response) {
+							response = JSON.parse( response );
+							jQuery.each(response, function(key, value) {
+								jQuery("#fcountry").append('<option value=' + key + '>' + value + '</option>');
+							})
+						}
+					});
 				}
+			}
 		}
+	}
+
+	/**
+	 * if country fiels is displaying
+	*/
+	if( $('#fcountry').length > 0 ){
+		$('#fcountry').on('change', function(){
+			$('#fstate').hide();
+			var con = $('#fcountry').find(":selected").val();
+
+			if ( con != '' ){
+
+				jQuery.ajax({
+
+					type: 'POST',
+		
+					url: gaq_public_param.ajaxurl,
+		
+					data: {
+						
+						country: con,
+
+						message: 'get_state_list',
+		
+						action: 'trigger_country_list_public',
+		
+						_ajax_nonce: gaq_public_param.nonce,
+		
+					},
+		
+					success: function(response) {
+
+						if ( response != 'false' ) {
+
+							$('<select id="fstate" class="form-select form-control" name="State">').insertAfter('#fcountry');
+							
+							response = JSON.parse( response );
+						
+							jQuery.each(response, function(key, value) {
+						
+								jQuery("#fstate").append('<option value=' + key + '>' + value + '</option>');
+							
+							})
+						}
+					}
+				});
+			}
+		})
 	}
 
 	/**
@@ -103,13 +178,13 @@ jQuery(document).ready(function($) {
 				if( response == 'Success' || response == 'updated' ) {
 					$('.error-div').hide();
 					$('.success-div').show();
+					$('.success-div').html('<b><i class="fas fa-check"></i>Successfully Submitted!</b>');
 					$("html, body").animate({ scrollTop: 70 }, "slow");
-					// swal("Successfully Submitted!", "", "success");
 				} else {
+					$('.success-div').hide();
 					$('.error-div').show();
 					$("html, body").animate({ scrollTop: 100 }, "slow");
-					$('.error-div').append(response);
-					// swal("Oops...", response, "error");
+					$('.error-div').html('<b>*' + response + '</b>');
 				}
 			}
 		});

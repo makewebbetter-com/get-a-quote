@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Provide a public-facing view for the plugin
  *
@@ -14,13 +15,11 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<div class="notice notice-success is-dismissible success-div">
-<p><?php esc_html_e( 'Successfully Submitted!', 'get-a-quote' ); ?></p>
-</div>
-<div class="notice notice-warning is-dismissible error-div">
-</div>
+<p class="notice notice-success is-dismissible success-div"></p>
+<p class="error-div">
+</p>
 <?php
-$mwb_gaq_form_data['taxonomy_for_service'] = isset( $_POST['taxonomy_for_service'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy_for_service'] ) ) : '';
+$mwb_gaq_form_data['taxonomy_for_service'] = isset($_POST['taxonomy_for_service']) ? sanitize_text_field(wp_unslash($_POST['taxonomy_for_service'])) : '';
 $mwb_gaq_form_data['taxonomy_for_status']  = 'Pending';
 $taxonomies = get_terms(
 	array(
@@ -38,15 +37,15 @@ $taxonomies = get_terms(
 		$taxonomies = json_decode( json_encode( $taxonomies ), true );
 		if ( ! isset( $taxonomies['errors'] ) ) {
 			?>
-			<label class="form_labels"><?php esc_html_e( 'Type Of Service', 'get-a-quote' ); ?></label><br />
-			<select class="mwb_gaq_taxonomy_display" name="taxo_service">
-			<?php
-			foreach ( $taxonomies as $values => $key ) {
-				?>
-				<option value="<?php echo $key['slug']; ?>" <?php selected( $key['slug'] ); ?>> <?php esc_html_e( $key['name'], 'get-a-quote' ); ?></option>
+			<label class="form-labels"><?php esc_html_e( 'Type Of Service', 'get-a-quote' ); ?></label><br />
+			<select class="mwb_gaq_taxonomy_display form-select form-control" name="taxo_service">
 				<?php
-			}
-			?>
+				foreach ( $taxonomies as $values => $key ) {
+					?>
+					<option class='dropdown-item' value="<?php echo $key['slug']; ?>" <?php selected($key['slug']); ?>> <?php esc_html_e($key['name'], 'get-a-quote'); ?></option>
+				<?php
+				}
+				?>
 			</select>
 			<?php
 		}

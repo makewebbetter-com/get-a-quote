@@ -16,7 +16,7 @@
  * Plugin URI:        https://makewebbetter.com/product/get-a-quote/
  * Description:       Provides a quote option to request the type of services provided by their store, through the procedure of the form submission.
  * Version:           1.0.0
- * Author:            makewebbetter
+ * Author:            MakeWebBetter
  * Author URI:        https://makewebbetter.com/
  * Text Domain:       get-a-quote
  * Domain Path:       /languages

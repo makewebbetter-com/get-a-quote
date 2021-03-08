@@ -15,72 +15,68 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavId">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item active">
-						<a class="nav-link" href="admin.php?page=gaq-config&tab=form-fields&form_action=edit">Form Fields <span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="admin.php?page=gaq-config&tab=form-fields&form_action=edit"><?php esc_html_e( 'Form Fields', 'get-a-quote' ); ?><span class="sr-only"><?php esc_html_e( '(current)', 'get-a-quote' ); ?></span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link preview_form" href="?page=get_a_quote_menu&gaq_tab=get-a-quote-form-fields-preview">Preview Form</a>
+						<a class="nav-link preview_form" href="?page=get_a_quote_menu&gaq_tab=get-a-quote-form-fields-preview"><?php esc_html_e( 'Preview Form', 'get-a-quote' ); ?></a>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<form class="form-inline" >
-			<a href="#" class="mwb_gaq__publishbutton btn btn-info">Publish</a>
+			<a href="#" class="mwb_gaq__publishbutton btn btn-info"><?php esc_html_e( 'Publish', 'get-a-quote' ); ?></a>
 		</form>
 	</nav>
 	<div class="mwb_gaq__form_title">
-		<h2>Get A Quote</h2>
+		<h2><?php esc_html_e( 'Get A Quote', 'get-a-quote' ); ?></h2>
 	</div>
 	<div class="mwb_gaq_container">
 		<div id="mwb_gaq__form" class="mwb_gaq__form">
 			<form method="post" class="form-group-fields">
 				<div id="append-form">
 				</div>
-				<a href="#" class="mwb_gaq__form__submit btn btn-info">Save Form</a>
+				<a href="#" class="mwb_gaq__form__submit btn btn-info"><?php esc_html_e( 'Save Form', 'get-a-quote' ); ?></a>
 			</form>
 		</div>
 		<div id="mwb_gaq_commonFields" class="mwb_gaq__commonFields">
 			<div class="mwb_gaq_close__drawer">
-				<button id="mqb_gaq_close__drawer">Done</button>
+				<button id="mqb_gaq_close__drawer"><?php esc_html_e( 'Done', 'get-a-quote' ); ?></button>
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_first_name" data-ftype="input" data-type="text" data-lname="firstnamelabel" data-name="firstname" data-id="fname" data-placeholder="First Name" data-class="form-control" data-required="required" data-scope="sfirstname" data-label="First Name" >
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-file-signature"></span></div>
-				First name
+				<?php esc_html_e( 'First name', 'get-a-quote' ); ?>
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_city" data-ftype="input" data-type="text" data-lname="citylabel" data-name="Cityname" data-id="city" data-placeholder="City name here" data-class="form-control" data-scope="scityname" data-label="City">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-search-location"></span></div>
-				City
+				<?php esc_html_e( 'City', 'get-a-quote' ); ?>
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_email" data-ftype="input" data-type="email" data-lname="emaillabel" data-name="Email" data-required="required" data-id="email" data-placeholder="Email here" data-class="form-control" data-scope="ssemail" data-label="Email">
 				<div class="mwb_gaq_commonFields_icon" ><span class="far fa-envelope-open"></span></div>
-				Email			
+				<?php esc_html_e( 'Email', 'get-a-quote' ); ?>			
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_file" data-ftype="input" data-type="file" data-lname="fileslabel" data-name="Files" data-id="files" data-class="form-control" data-scope="sfile" data-label="File">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-file-alt"></span></div>
-				File		
+				<?php esc_html_e( 'File', 'get-a-quote' ); ?>			
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_country" data-ftype="input" data-type="text" data-lname="countrylabel" data-name="Country" data-placeholder="Enter Country Name" data-id="fcountry" data-class="form-control" data-scope="scountry" data-label="Country">
+			<div class="mwb_gaq_commonFields_group mwb_form_country" data-ftype="Select" data-lname="countrylabel" data-name="Country" data-id="fcountry" data-class="form-control" data-scope="scountry" data-label="Country">
 				<div class="mwb_gaq_commonFields_icon" ><span class="far fa-flag"></span></div>
-				Country		
+				<?php esc_html_e( 'Country', 'get-a-quote' ); ?>			
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_zipcode" data-pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" data-placeholder="Zipcode here" data-ftype="input" data-type="text" data-lname="zipcodelabel" data-name="Zipcode" data-id="zipcodes" data-class="form-control" data-scope="szipcode" data-label="Zipcode">
 				<div class="mwb_gaq_commonFields_icon" ><span class="far fa-address-card"></span></div>
-				Zipcode		
-			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_State" data-ftype="input" data-type="text" data-lname="statelabel" data-name="State" data-placeholder="Enter State Name" data-id="fState" data-class="form-control" data-scope="sState" data-label="State">
-				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-flag-usa"></span></div>
-				State		
+				<?php esc_html_e( 'Zipcode', 'get-a-quote' ); ?>			
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_budget" data-ftype="input" data-type="number" data-lname="budgetlabel" data-name="Budget" data-placeholder="Budget" data-id="fbudget" data-class="form-control" data-scope="sbudget" data-label="Budget">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-dollar-sign"></span></div>
-				Budget	
+				<?php esc_html_e( 'Budget', 'get-a-quote' ); ?>			
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-type="tel" data-required="required" data-lname="phonelabel" data-name="Phone" data-placeholder="+86 800 555 1234" data-pattern="^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" data-id="phone" data-class="form-control" data-scope="sphone" data-label="Phone Number">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-mobile-alt"></span></div>
-				Phone	
+				<?php esc_html_e( 'Phone', 'get-a-quote' ); ?>			
 			</div>
 			<div class="mwb_gaq_commonFields_group mwb_form_addon" data-ftype="textarea" data-lname="addlabel" data-name="Additional" data-id="addon" data-class="form-control" data-scope="sadd" data-label="Additional Info">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-question-circle"></span></div>
-				Additional	
+				<?php esc_html_e( 'Additional', 'get-a-quote' ); ?>	
 			</div>
 		</div>
 		<div class="mwb_gaq_open__drawerwrapper">
@@ -88,11 +84,11 @@
 		</div>
 		<div class="mwb_gaq_edit_container">
 			<div class='mwb_gaq_edit_form_fields' id="mwb_gaq_edit_fields">			
-				<label for="field_name" id="field-name">Name</label>
+				<label for="field_name" id="field-name"><?php esc_html_e( 'Name', 'get-a-quote' ); ?></label>
 				<input type="text" data-key="" id="field_name" value="" class="field form-control" placeholder="name">
-				<label for="field_place_name" id="field-place-name">Placeholder-Name</label>
+				<label for="field_place_name" id="field-place-name"><?php esc_html_e( 'Placeholder-Name', 'get-a-quote' ); ?></label>
 				<input type="text" data-key="" id="field_place_name" value="" class="field  form-control" placeholder="place">		
-				<button id="mwb_gaq_close_form_editer" data-id="mwb_gaq_edit_fields" class="btn btn-info">Done</button>
+				<button id="mwb_gaq_close_form_editer" data-id="mwb_gaq_edit_fields" class="btn btn-info"><?php esc_html_e( 'Done', 'get-a-quote' ); ?></button>
 			</div>
 		</div>
 	</div>

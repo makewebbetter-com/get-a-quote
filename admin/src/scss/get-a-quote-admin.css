@@ -9,6 +9,66 @@
 /* 
 my css-husain */
 
+@keyframes easy {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.notice-success, #message {
+    background-color: #2196f3a6;
+    margin: 30px auto;
+    border: none;
+    max-width: 271px;
+    width: 100%;
+    padding: 9px 35px;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    animation: easy 0.5s ease-in-out 0.1s forwards;
+}
+
+button.notice-dismiss {
+    position: absolute;
+    top: -13px;
+    background: #ffffff;
+    border-radius: 50%;
+    right: -11px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)!important;
+    padding: 5px;
+}
+
+.notice-success p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.notice-dismiss:before {
+    background: 0 0;
+    color: #0a0a0a;
+    content: "\2715";
+    display: block;
+    font: normal 19px/15px dashicons;
+    speak: never;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.notice-dismiss:hover:before {
+    color: #000000;
+}
+as
+.taxonomy_button{
+    max-width: 297px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
 .button-primary,
 button {
     border: none!important;
@@ -339,12 +399,17 @@ nav.navbar.navbar-expand-sm.navbar-light {
     flex: 0 0 50%;
     max-width: 50%;
 }
-
+.taxonomy-save{
+    max-width: 280px;
+    margin: 0 auto;
+}
 .mwb_gaq__form_title {
     display: flex;
     justify-content: space-around;
-    max-width: 200px;
+    max-width: 300px;
     padding: 20px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .form-control {
