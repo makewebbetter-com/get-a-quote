@@ -90,7 +90,7 @@ class Get_a_quote {
 		$this->get_a_quote_locale();
 
 		if ( is_admin() ) {
-			$this->get_a_quote_admin_hooks();
+			$this->Get_A_Quote_Admin_hooks();
 		} else {
 			$this->get_a_quote_public_hooks();
 		}
@@ -106,7 +106,7 @@ class Get_a_quote {
 	 *
 	 * - Get_a_quote_Loader. Orchestrates the hooks of the plugin.
 	 * - Get_a_quote_i18n. Defines internationalization functionality.
-	 * - Get_a_quote_Admin. Defines all hooks for the admin area.
+	 * - Get_A_Quote_Admin. Defines all hooks for the admin area.
 	 * - Get_a_quote_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
@@ -190,9 +190,9 @@ class Get_a_quote {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function get_a_quote_admin_hooks() {
+	private function Get_A_Quote_Admin_hooks() {
 
-		$gaq_plugin_admin = new Get_a_quote_Admin( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
+		$gaq_plugin_admin = new Get_A_Quote_Admin( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $gaq_plugin_admin, 'gaq_admin_enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $gaq_plugin_admin, 'gaq_admin_enqueue_scripts' );

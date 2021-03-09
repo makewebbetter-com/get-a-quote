@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provide a public-facing view for the plugin
  *
@@ -13,15 +12,20 @@
  */
 
 ?>
-
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <p class="notice notice-success is-dismissible success-div"></p>
 <p class="error-div">
 </p>
 <?php
-$mwb_gaq_form_data['taxonomy_for_service'] = isset($_POST['taxonomy_for_service']) ? sanitize_text_field(wp_unslash($_POST['taxonomy_for_service'])) : '';
-$mwb_gaq_form_data['taxonomy_for_status']  = 'Pending';
-$taxonomies = get_terms(
+if ( isset( $_POST['form_nonce'] ) ) {
+	$form_nonce = sanitize_text_field( wp_unslash( $_POST['form_nonce'] ) );
+	if ( wp_verify_nonce( $form_nonce, 'frontend-form-nonce' ) ) {
+		$mwb_gaq_form_data['taxonomy_for_service'] = isset( $_POST['taxonomy_for_service'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy_for_service'] ) ) : '';
+		$mwb_gaq_form_data['taxonomy_for_status']  = 'Pending';
+	}
+}
+
+$taxonomies                                = get_terms(
 	array(
 		'taxonomy'   => 'service',
 		'hide_empty' => false,
@@ -29,9 +33,9 @@ $taxonomies = get_terms(
 );
 
 ?>
-<div class='error_div'>
-</div>
+
 <form action="" class="active-from" id='formdata' method="POST" enctype="multipart/form-data">
+	<input type="hidden" name="form_nonce" value="<?php echo wp_create_nonce('frontend-form-nonce'); ?>"/>
 	<?php
 	if ( ! empty( $taxonomies ) ) {
 		$taxonomies = json_decode( json_encode( $taxonomies ), true );
@@ -53,5 +57,5 @@ $taxonomies = get_terms(
 	?>
 	<div class="active-front-form mwb_gaq__form--group">
 	</div>
-	<button type="submit" name="qsubmit" id="form_submit">Submit</button>
+	<button type="submit" class="btn btn-dark" name="qsubmit" id="form_submit">Submit</button>
 </form>

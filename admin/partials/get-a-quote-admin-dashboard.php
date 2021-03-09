@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $gaq_mwb_gaq_obj;
 $gaq_active_tab   = isset( $_GET['gaq_tab'] ) ? sanitize_key( $_GET['gaq_tab'] ) : 'get-a-quote-general';
-if( $gaq_active_tab == 'get-a-quote-form-fields-edit' || $gaq_active_tab == 'get-a-quote-form-fields-preview' ){
+if ( 'get-a-quote-form-fields-edit' === $gaq_active_tab || 'get-a-quote-form-fields-preview' === $gaq_active_tab ) {
 	echo '<style>#wpadminbar{
 		display:none;
 	}</style>';
@@ -59,18 +59,18 @@ $gaq_default_tabs = $gaq_mwb_gaq_obj->mwb_gaq_plug_default_tabs();
 
 	<section class="mwb-section">
 		<div>
-			<?php 
-				do_action( 'mwb_gaq_before_general_settings_form' );
-				// if submenu is directly clicked on woocommerce.
-				if ( empty( $gaq_active_tab ) ) {
-					$gaq_active_tab = 'mwb_gaq_plug_general';
-				}
-				// look for the path based on the tab id in the admin templates.
-				$gaq_tab_content_path = 'admin/partials/' . $gaq_active_tab . '.php';
+			<?php
+			do_action( 'mwb_gaq_before_general_settings_form' );
+			// if submenu is directly clicked on woocommerce.
+			if ( empty( $gaq_active_tab ) ) {
+				$gaq_active_tab = 'mwb_gaq_plug_general';
+			}
+			// look for the path based on the tab id in the admin templates.
+			$gaq_tab_content_path = 'admin/partials/' . $gaq_active_tab . '.php';
 
-				$gaq_mwb_gaq_obj->mwb_gaq_plug_load_template( $gaq_tab_content_path );
+			$gaq_mwb_gaq_obj->mwb_gaq_plug_load_template( $gaq_tab_content_path );
 
-				do_action( 'mwb_gaq_after_general_settings_form' ); 
+			do_action( 'mwb_gaq_after_general_settings_form' );
 			?>
 		</div>
 	</section>

@@ -406,7 +406,7 @@ class GAQCountryManager {
 	 */
 	private function united_states_list() {
 		$states = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'AL' => 'Alabama',
 			'AK' => 'Alaska',
 			'AZ' => 'Arizona',
@@ -486,7 +486,7 @@ class GAQCountryManager {
 	 */
 	private function angola_provinces_list() {
 		$provinces = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'BGO' => 'Bengo',
 			'BGU' => 'Benguela',
 			'BIE' => 'Bié',
@@ -518,7 +518,7 @@ class GAQCountryManager {
 	 */
 	private function provinces_list() {
 		$provinces = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'AB' => 'Alberta',
 			'BC' => 'British Columbia',
 			'MB' => 'Manitoba',
@@ -545,7 +545,7 @@ class GAQCountryManager {
 	 */
 	private function australian_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'ACT' => 'Australian Capital Territory',
 			'NSW' => 'New South Wales',
 			'NT'  => 'Northern Territory',
@@ -567,7 +567,7 @@ class GAQCountryManager {
 	 */
 	private function bangladeshi_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'BAG' => 'Bagerhat',
 			'BAN' => 'Bandarban',
 			'BAR' => 'Barguna',
@@ -645,7 +645,7 @@ class GAQCountryManager {
 	 */
 	private function brazil_states_list() {
 		$states = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'AC' => 'Acre',
 			'AL' => 'Alagoas',
 			'AP' => 'Amap&aacute;',
@@ -686,7 +686,7 @@ class GAQCountryManager {
 	 */
 	private function bulgarian_states_list() {
 		$states = array(
-			''      => 'Select an option',
+			''      => 'Select State',
 			'BG-01' => 'Blagoevgrad',
 			'BG-02' => 'Burgas',
 			'BG-08' => 'Dobrich',
@@ -728,7 +728,7 @@ class GAQCountryManager {
 	 */
 	private function hong_kong_states_list() {
 		$states = array(
-			''                => 'Select an option',
+			''                => 'Select State',
 			'HONG KONG'       => 'Hong Kong Island',
 			'KOWLOON'         => 'Kowloon',
 			'NEW TERRITORIES' => 'New Territories'
@@ -745,7 +745,7 @@ class GAQCountryManager {
 	 */
 	private function hungary_states_list() {
 		$states = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'BK' => 'Bács-Kiskun',
 			'BE' => 'Békés',
 			'BA' => 'Baranya',
@@ -779,7 +779,7 @@ class GAQCountryManager {
 	 */
 	private function japanese_states_list() {
 		$states = array(
-			''     => 'Select an option',
+			''     => 'Select State',
 			'JP01' => 'Hokkaido',
 			'JP02' => 'Aomori',
 			'JP03' => 'Iwate',
@@ -840,7 +840,7 @@ class GAQCountryManager {
 	 */
 	private function chinese_states_list() {
 		$states = array(
-			''     => 'Select an option',
+			''     => 'Select State',
 			'CN1'  => 'Yunnan / &#20113;&#21335;',
 			'CN2'  => 'Beijing / &#21271;&#20140;',
 			'CN3'  => 'Tianjin / &#22825;&#27941;',
@@ -886,7 +886,7 @@ class GAQCountryManager {
 	 */
 	private function united_kingdom_states_list() {
 		$states = array(
-			''	    	 => 'Select an option',
+			''	    	 => 'Select State',
 			'GB-ABE' => 'Aberdeen City',
 			'GB-ABD' => 'Aberdeenshire',
 			'GB-ANS' => 'Angus',
@@ -1117,7 +1117,7 @@ class GAQCountryManager {
 	 */
 	private function new_zealand_states_list() {
 		$states = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'AK' => 'Auckland',
 			'BP' => 'Bay of Plenty',
 			'CT' => 'Canterbury',
@@ -1147,7 +1147,7 @@ class GAQCountryManager {
 	 */
 	private function peruvian_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'CAL' => 'El Callao',
 			'LMA' => 'Municipalidad Metropolitana de Lima',
 			'AMA' => 'Amazonas',
@@ -1187,7 +1187,7 @@ class GAQCountryManager {
 	 */
 	private function indonesian_states_list() {
 		$states  = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'AC' => 'Daerah Istimewa Aceh',
 			'SU' => 'Sumatera Utara',
 			'SB' => 'Sumatera Barat',
@@ -1235,7 +1235,7 @@ class GAQCountryManager {
 	 */
 	private function indian_states_list() {
 		$states = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'AP' => 'Andhra Pradesh',
 			'AR' => 'Arunachal Pradesh',
 			'AS' => 'Assam',
@@ -1285,7 +1285,7 @@ class GAQCountryManager {
 	 */
 	private function iranian_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'KHZ' => 'Khuzestan',
 			'THR' => 'Tehran',
 			'ILM' => 'Ilaam',
@@ -1330,7 +1330,7 @@ class GAQCountryManager {
 	 */
 	private function italian_states_list() {
 		$states = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'AG' => 'Agrigento',
 			'AL' => 'Alessandria',
 			'AN' => 'Ancona',
@@ -1454,7 +1454,7 @@ class GAQCountryManager {
 	 */
 	private function malaysian_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'JHR' => 'Johor',
 			'KDH' => 'Kedah',
 			'KTN' => 'Kelantan',
@@ -1484,7 +1484,7 @@ class GAQCountryManager {
 	 */
 	private function mexican_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'DIF' => 'Distrito Federal',
 			'JAL' => 'Jalisco',
 			'NLE' => 'Nuevo Le&oacute;n',
@@ -1530,7 +1530,7 @@ class GAQCountryManager {
 	 */
 	private function nepalese_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'ILL' => 'Illam',
 			'JHA' => 'Jhapa',
 			'PAN' => 'Panchthar',
@@ -1619,7 +1619,7 @@ class GAQCountryManager {
 	 */
 	private function south_african_states_list() {
 		$states = array(
-			''    => 'Select an option',
+			''    => 'Select State',
 			'EC'  => 'Eastern Cape',
 			'FS'  => 'Free State',
 			'GP'  => 'Gauteng',
@@ -1642,7 +1642,7 @@ class GAQCountryManager {
 	 */
 	private function thailand_states_list() {
 		$states = array(
-			''      => 'Select an option',
+			''      => 'Select State',
 			'TH-37' => 'Amnat Charoen (&#3629;&#3635;&#3609;&#3634;&#3592;&#3648;&#3592;&#3619;&#3636;&#3597;)',
 			'TH-15' => 'Ang Thong (&#3629;&#3656;&#3634;&#3591;&#3607;&#3629;&#3591;)',
 			'TH-14' => 'Ayutthaya (&#3614;&#3619;&#3632;&#3609;&#3588;&#3619;&#3624;&#3619;&#3637;&#3629;&#3618;&#3640;&#3608;&#3618;&#3634;)',
@@ -1733,7 +1733,7 @@ class GAQCountryManager {
 	 */
 	private function turkey_states_list() {
 		$states = array(
-			''     => 'Select an option',
+			''     => 'Select State',
 			'TR01' => 'Adana',
 			'TR02' => 'Ad&#305;yaman',
 			'TR03' => 'Afyon',
@@ -1828,7 +1828,7 @@ class GAQCountryManager {
 	 */
 	private function spain_states_list() {
 		$states = array(
-			''   => 'Select an option',
+			''   => 'Select State',
 			'C'  => __( 'A Coru&ntilde;a', 'mwb_gaq-plugins' ),
 			'VI' => __( 'Araba', 'mwb_gaq-plugins' ),
 			'AB' => __( 'Albacete', 'mwb_gaq-plugins' ),

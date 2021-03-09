@@ -1,15 +1,30 @@
 <?php
-$details = $this->gaq_helper->detailed_post_array( get_the_ID() );
+/**
+ * Provide a admin-facing view for the plugin
+ *
+ * This file is used to markup the admin-facing aspects of the plugin.
+ *
+ * @link       https://makewebbetter.com/
+ * @since      1.0.0
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/admin/partials/meta-box
+ */
+
+$details      = $this->gaq_helper->detailed_post_array( get_the_ID() );
 $countryarray = $this->gaq_helper->mwb_gaq_get_country_list();
-foreach ( $countryarray as $key => $value ) {
-	if ( $details['Country'] === $key ) {
-		$state = $this->gaq_country->country_states( $key );
-		foreach ( $state as $skey => $svalue ) {
-			if ( $details['State'] === $skey ) {
-				$details['State'] = $svalue;
+if ( ! empty( $countryarray ) ) {
+	foreach ( $countryarray as $key => $value ) {
+		if ( ! empty( $details['Country'] ) ) {
+			if ( $details['Country'] === $key ) {
+				$state = $this->gaq_country->country_states( $key );
+				foreach ( $state as $skey => $svalue ) {
+					if ( $details['State'] === $skey ) {
+						$details['State'] = $svalue;
+					}
+				}
+				$details['Country'] = $value;
 			}
 		}
-		$details['Country'] = $value;
 	}
 }
 
@@ -113,7 +128,7 @@ foreach ( $countryarray as $key => $value ) {
 				value="<?php echo esc_html( ! empty( $details['Additional'] ) ? $details['Additional'] : '' ); ?>">
 			</td>
 		</tr>
-		<?php if ( isset( $details['status'] ) && $details['status'] == 'true' ) { ?>
+		<?php if ( isset( $details['status'] ) && 'true' === $details['status'] ) { ?>
 		<tr>
 			<th>
 			<?php
@@ -127,9 +142,9 @@ foreach ( $countryarray as $key => $value ) {
 					$file = ! empty( $details['filename'] ) ? $details['filename'] : '';
 					if ( ! empty( $file ) ) {
 						?>
-						<input type='hidden' name='filename' value='<?php echo $details['status']; ?>'>
-						<input type='hidden' name='filename' value='<?php echo $details['filename']; ?>'>
-						<input type='hidden' name='filelink' value='<?php echo $details['filelink']; ?>'>
+						<input type='hidden' name='filename' value='<?php echo esc_html( $details['status'] ); ?>'>
+						<input type='hidden' name='filename' value='<?php echo esc_html( $details['filename'] ); ?>'>
+						<input type='hidden' name='filelink' value='<?php echo esc_html( $details['filelink'] ); ?>'>
 						<?php
 						echo ( sprintf( '<a href="%s" target="_blank">%s</a>', esc_html( $details['filelink'] ), esc_html__( 'Open File', 'get-a-quote' ) ) );
 					} else {

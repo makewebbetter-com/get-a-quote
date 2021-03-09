@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -20,8 +19,7 @@
  * @subpackage Get_a_quote/admin
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_Admin
-{
+class Get_A_Quote_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -48,8 +46,7 @@ class Get_a_quote_Admin
 	 * @param      string $plugin_name       The name of this plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version )
-	{
+	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->gaq_helper  = Get_A_Quote_Helper::get_instance();
@@ -65,10 +62,10 @@ class Get_a_quote_Admin
 	public function gaq_admin_enqueue_styles( $hook ) {
 		$screen = get_current_screen();
 
-		if ( isset( $screen->id ) && 'edit-quotes' == $screen->id) {
+		if ( isset( $screen->id ) && 'edit-quotes' === $screen->id) {
 			wp_enqueue_style( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'admin/src/scss/get-a-quote-admin-section.css', array(), $this->version, 'all' );
 		}
-		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' == $screen->id || 'quotes' ==  $screen->id ) {
+		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' === $screen->id ) {
 			wp_enqueue_style( 'bootstrap-css', GET_A_QUOTE_DIR_URL . 'admin/src/scss/bootstrap.min.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'mwb-gaq-select2-css', GET_A_QUOTE_DIR_URL . 'package/lib/select-2/get-a-quote-select2.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-css', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.css', array(), time(), 'all' );
@@ -88,7 +85,7 @@ class Get_a_quote_Admin
 	 */
 	public function gaq_admin_enqueue_scripts( $hook ) {
 		$screen = get_current_screen();
-		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' ==  $screen->id ) {
+		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' === $screen->id ) {
 			wp_enqueue_script( 'mwb-gaq-select2', GET_A_QUOTE_DIR_URL . 'package/lib/select-2/get-a-quote-select2.js', array( 'jquery' ), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-js', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.js', array(), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-js2', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-v5.0-web.min.js', array(), time(), false );
@@ -154,14 +151,13 @@ class Get_a_quote_Admin
 	 *
 	 * @since    1.0.0
 	 */
-	public function gaq_options_page()
-	{
+	public function gaq_options_page() {
 		global $submenu;
 		if ( empty( $GLOBALS['admin_page_hooks']['mwb-plugins'] ) ) {
 			add_menu_page( __( 'MakeWebBetter', 'get-a-quote' ), __( 'MakeWebBetter', 'get-a-quote' ), 'manage_options', 'mwb-plugins', array( $this, 'mwb_plugins_listing_page' ), GET_A_QUOTE_DIR_URL . 'admin/src/images/mwb-logo.png', 15 );
 			$gaq_menus = apply_filters( 'mwb_add_plugins_menus_array', array() );
-			if ( is_array( $gaq_menus ) && !empty( $gaq_menus ) ) {
-				foreach ( $gaq_menus as $gaq_key => $gaq_value) {
+			if ( is_array( $gaq_menus ) && ! empty( $gaq_menus ) ) {
+				foreach ( $gaq_menus as $gaq_key => $gaq_value ) {
 					add_submenu_page( 'mwb-plugins', $gaq_value['name'], $gaq_value['name'], 'manage_options', $gaq_value['menu_link'], array( $gaq_value['instance'], $gaq_value['function']) );
 				}
 			}
@@ -173,25 +169,22 @@ class Get_a_quote_Admin
 	 *
 	 * @since   1.0.0
 	 */
-	public function mwb_gaq_remove_default_submenu()
-	{
+	public function mwb_gaq_remove_default_submenu() {
 		global $submenu;
-		if (is_array( $submenu) && array_key_exists( 'mwb-plugins', $submenu) ) {
-			if (isset( $submenu['mwb-plugins'][0]) ) {
-				unset( $submenu['mwb-plugins'][0]);
+		if ( is_array( $submenu ) && array_key_exists( 'mwb-plugins', $submenu ) ) {
+			if ( isset( $submenu['mwb-plugins'][0] ) ) {
+				unset( $submenu['mwb-plugins'][0] );
 			}
 		}
 	}
 
-
 	/**
-	 * get-a-quote gaq_admin_submenu_page.
+	 * Gaq_admin_submenu_page.
 	 *
 	 * @since 1.0.0
 	 * @param array $menus Marketplace menus.
 	 */
-	public function gaq_admin_submenu_page( $menus = array() )
-	{
+	public function gaq_admin_submenu_page( $menus = array() ) {
 		$menus[] = array(
 			'name'      => __( 'Get-A-Quote', 'get-a-quote' ),
 			'slug'      => 'get_a_quote_menu',
@@ -203,12 +196,11 @@ class Get_a_quote_Admin
 	}
 
 	/**
-	 * get-a-quote mwb_plugins_listing_page.
+	 * Mwb_plugins_listing_page.
 	 *
 	 * @since 1.0.0
 	 */
-	public function mwb_plugins_listing_page()
-	{
+	public function mwb_plugins_listing_page() {
 		$active_marketplaces = apply_filters( 'mwb_add_plugins_menus_array', array() );
 		if ( is_array( $active_marketplaces ) && ! empty( $active_marketplaces ) ) {
 			require GET_A_QUOTE_DIR_PATH . 'admin/partials/welcome.php';
@@ -216,7 +208,7 @@ class Get_a_quote_Admin
 	}
 
 	/**
-	 * get-a-quote admin menu page.
+	 * Admin menu page.
 	 *
 	 * @since    1.0.0
 	 */
@@ -226,7 +218,7 @@ class Get_a_quote_Admin
 
 
 	/**
-	 * get-a-quote admin menu page.
+	 * Admin menu page.
 	 *
 	 * @since    1.0.0
 	 * @param array $gaq_settings_general Settings fields.
@@ -262,7 +254,7 @@ class Get_a_quote_Admin
 
 
 	/**
-	 * get-a-quote support page tabs.
+	 * Support page tabs.
 	 *
 	 * @since    1.0.0
 	 * @param    Array $mwb_gaq_support Settings fields.
@@ -285,18 +277,17 @@ class Get_a_quote_Admin
 			),
 		);
 
-		return apply_filters( 'mwb_gaq_add_support_content', $mwb_gaq_support);
+		return apply_filters( 'mwb_gaq_add_support_content', $mwb_gaq_support );
 	}
 
 	/**
-	 * get-a-quote save tab settings.
+	 * Save tab settings.
 	 *
 	 * @since 1.0.0
 	 */
-	public function gaq_admin_save_tab_settings()
-	{
+	public function gaq_admin_save_tab_settings() {
 		global $gaq_mwb_gaq_obj;
-		if (isset( $_POST['mwb_gaq_setting_save']) ) {
+		if ( isset( $_POST['mwb_gaq_setting_save'] ) ) {
 
 			$mwb_gaq_gen_flag = false;
 
@@ -306,11 +297,11 @@ class Get_a_quote_Admin
 			if ( isset( $gaq_button_index ) && ( null === $gaq_button_index || '' === $gaq_button_index ) ) {
 				$gaq_button_index = array_search( 'button', array_column( $gaq_genaral_settings, 'type' ), true );
 			}
-			if ( isset( $gaq_button_index) && '' !== $gaq_button_index ) {
+			if ( isset( $gaq_button_index ) && '' !== $gaq_button_index ) {
 				unset( $gaq_genaral_settings[ $gaq_button_index ] );
 				if ( is_array( $gaq_genaral_settings ) && ! empty( $gaq_genaral_settings ) ) {
-					foreach ( $gaq_genaral_settings as $gaq_genaral_setting) {
-						if (isset( $gaq_genaral_setting['id'] ) && '' !== $gaq_genaral_setting['id'] ) {
+					foreach ( $gaq_genaral_settings as $gaq_genaral_setting ) {
+						if ( isset( $gaq_genaral_setting['id'] ) && '' !== $gaq_genaral_setting['id'] ) {
 							if ( isset( $_POST[ $gaq_genaral_setting['id'] ] ) ) {
 								update_option( $gaq_genaral_setting['id'], $_POST[ $gaq_genaral_setting['id'] ] );
 							} else {
@@ -530,8 +521,7 @@ class Get_a_quote_Admin
 	 *
 	 * @since    1.0.0
 	 */
-	public function insert_gaq_metabox()
-	{
+	public function insert_gaq_metabox() {
 		add_meta_box( 'mwb_gaq_meta_box', esc_html__( 'Quote Details', 'get-a-quote' ), array( $this, 'gaq_metabox_callback' ), 'quotes' );
 	}
 
@@ -545,11 +535,13 @@ class Get_a_quote_Admin
 	}
 
 	/**
+	 * Add_gaq_columns.
 	 * Register custom Columns for the post details.
 	 *
+	 * @param array $columns list of columns.
 	 * @since    1.0.0
 	 */
-	public function add_gaq_columns( $columns )	{
+	public function add_gaq_columns( $columns ) {
 		unset( $columns['title'] );
 		unset( $columns['taxonomy-service'] );
 		unset( $columns['taxonomy-status'] );
@@ -575,19 +567,22 @@ class Get_a_quote_Admin
 	}
 
 	/**
+	 * Fill_gaq_columns.
 	 * Register custom Columns for the post details.
 	 *
+	 * @param array  $column list of columns.
+	 * @param  string $post_id list of id.
 	 * @since    1.0.0
 	 */
 	public function fill_gaq_columns( $column, $post_id ) {
 		$details = get_post_meta( $post_id, 'quotes_meta', true );
 		$details = json_decode( wp_json_encode( $details ), true );
 
-		switch ( $column) {
+		switch ( $column ) {
 
 			case 'post_type_email':
-				$email = !empty( $details['Email']) ? $details['Email'] : '';
-				echo esc_html( $email);
+				$email = !empty( $details['Email'] ) ? $details['Email'] : '';
+				echo esc_html( $email );
 				break;
 			case 'post_type_name':
 				$fname   = !empty( $details['firstname']) ? $details['firstname'] : '';
@@ -628,6 +623,7 @@ class Get_a_quote_Admin
 			$post_id                          = get_the_ID();
 			$post_update_meta['taxo_service'] = $this->gaq_helper->get_taxonomy( 'service' );
 			$post_update_meta['status_taxo']  = $this->gaq_helper->get_taxonomy( 'status' );
+			$post_update_meta['firstname']     = !empty( $_POST['firstname']) ? sanitize_text_field(wp_unslash( $_POST['firstname']) ) : '';
 			$post_update_meta['Cityname']     = !empty( $_POST['Cityname']) ? sanitize_text_field(wp_unslash( $_POST['Cityname']) ) : '';
 			$post_update_meta['Zipcode']      = !empty( $_POST['Zipcode']) ? sanitize_text_field(wp_unslash( $_POST['Zipcode']) ) : '';
 			$post_update_meta['State']        = !empty( $_POST['State']) ? sanitize_text_field(wp_unslash( $_POST['State']) ) : '';

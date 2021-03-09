@@ -1,6 +1,17 @@
+<?php
 /**
-*
-*/
+ * Provide a admin-facing view for the plugin
+ *
+ * This file is used to markup the admin-facing aspects of the plugin.
+ *
+ * @link       https://makewebbetter.com/
+ * @since      1.0.0
+ *
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/admin/partials
+ */
+
+?>
 <div class="mwb_gaq__modal-wrapper">
 	<div class="mwb_gaq__header">
 		<div class="mwb_gaq__logo">
@@ -16,13 +27,13 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavId">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item">
-						<b><?php esc_html_e('Preview Form', 'get-a-quote'); ?></b>
+						<b><?php esc_html_e( 'Preview Form', 'get-a-quote' ); ?></b>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<form class="form-inline">
-			<a href="?page=get_a_quote_menu&gaq_tab=get-a-quote-form-fields-edit" class="btn btn-info" id="mwb_gaq__publishbutton"><?php esc_html_e('Back', 'get-a-quote'); ?></a>
+			<a href="?page=get_a_quote_menu&gaq_tab=get-a-quote-form-fields-edit" class="btn btn-info" id="mwb_gaq__publishbutton"><?php esc_html_e( 'Back', 'get-a-quote' ); ?></a>
 		</form>
 	</nav>
 	<div class="mwb_gaq__form">

@@ -87,7 +87,6 @@ function previewNewlement(attrs = []) {
 
 // Add new field to form.
 function appendNewlement(attrs = []) {
-
     var newElement = document.createElement(attrs.ftype.toUpperCase());
 
     jQuery.each(attrs, function(key, value) {
@@ -539,6 +538,7 @@ jQuery(document).ready(function($) {
         $(jQuery('#append-form').children()).each(function(index) {
 
             $($(this).children()).each(function(inde) {
+
                 if ($(this)[0].localName != 'svg') {
 
                     if (text = $(this).text() && $(this)[0].localName == 'label') {
@@ -564,7 +564,6 @@ jQuery(document).ready(function($) {
                             fdata = 'true';
 
                         }
-
                         var required = $(this)[0].required;
 
                         var iid = $(this)[0].id;
@@ -576,9 +575,17 @@ jQuery(document).ready(function($) {
                         var iclass = $(this)[0].className;
 
                         var pattern = $(this)[0].pattern;
+                        
+                        if ( required = '' ) {
 
-                        IDs.push({ iid, pattern, placeholder, ftype, itype, name, required, iclass });
+                            IDs.push({ iid, pattern, placeholder, ftype, itype, name, iclass });
+                        } else {
 
+                            IDs.push({ iid, pattern, placeholder, ftype, itype, name, required, iclass });
+                        
+                        }
+
+                    
                     }
 
                 }

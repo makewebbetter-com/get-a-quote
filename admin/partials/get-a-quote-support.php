@@ -28,7 +28,7 @@ $gaq_support_settings = apply_filters( 'gaq_support_tab_settings_array', array()
 						<h3><?php echo esc_html( $gaq_support_setting['title'] ); ?></h3>
 						<p><?php echo esc_html( $gaq_support_setting['description'] ); ?></p>
 					</div>
-					<div class="mdc-button mdc-button--raised mwb-cta-btn"><span class="mdc-button__ripple"></span>
+					<div class="mdc-button mwb-cta-btn"><span class="mdc-button__ripple"></span>
 						<a href="#" class="mwb-btn mwb-btn-primary"><?php echo esc_html( $gaq_support_setting['link-text'] ); ?></a>
 					</div>
 				</div>

@@ -172,10 +172,10 @@ class Get_A_Quote_Helper {
 					$name = trim( $name, ' ' );
 					$name = filter_var( $name, FILTER_SANITIZE_STRING );
 					if ( $name == '' ) {
-						$err[ $key ] = esc_html__( 'Name is empty', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Name field is empty.', 'get-a-quote' );
 						break;
 					} elseif ( is_numeric( $name ) ) {
-						$err[ $key ] = esc_html__( 'Name is to be character or alpha numeric', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Name is to be character or alpha numeric.', 'get-a-quote' );
 						break;
 					} else {
 						$filtered[ $key ] = $name;
@@ -188,7 +188,7 @@ class Get_A_Quote_Helper {
 				case 'Email':
 					$email = $data['Email'];
 					if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
-						$err[ $key ] = esc_html__( 'Invalid email format' );
+						$err[ $key ] = esc_html__( 'Invalid email format.' );
 						break;
 					} else {
 						$filtered[ $key ] = $email;
@@ -200,12 +200,12 @@ class Get_A_Quote_Helper {
 					$phone = trim( $phone, '-' );
 					$string = preg_replace( '/[^a-z]/i', '', $phone );
 					if ( ! empty( $string ) ) {
-						$err[ $key ] = esc_html__( 'Characters are not allowed in Phone field only Number', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Enter only number in Phone field.', 'get-a-quote' );
 						break;
 					}
 					$phone = filter_var( $phone, FILTER_SANITIZE_NUMBER_INT );
 					if ( ctype_alpha( $phone ) ) {
-						$err[ $key ] = esc_html__( 'Phone fields accepts only Number', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Enter only number in Phone field.', 'get-a-quote' );
 						break;
 					} else {
 						$filtered[ $key ] = $phone;
@@ -215,7 +215,7 @@ class Get_A_Quote_Helper {
 				case 'Cityname':
 					$city = $data['Cityname'];
 					if ( is_numeric( $city ) ) {
-						$err[ $key ] = esc_html__( 'Only characters are allowed in City.', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Only characters are allowed in City field.', 'get-a-quote' );
 						break;
 					} else {
 						$filtered[ $key ] = $city;
@@ -226,11 +226,12 @@ class Get_A_Quote_Helper {
 					$zcode = $data['Zipcode'];
 					$zcode = trim( $zcode, '-' );
 					$zcode = trim( $zcode, '.' );
+					$zcode = preg_replace( '/[^A-Za-z0-9\-]/', '', $zcode );
 					if ( ! preg_match( '#[0-9]{5}#', $zcode ) ) {
-						$err[ $key ] = esc_html__( 'Only numbers are allowed in Zipcode.', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Only numbers are allowed in Zipcode field.', 'get-a-quote' );
 						break;
 					} elseif ( strlen( $zcode ) > 7 || strlen( $zcode ) < 4 ) {
-						$err[ $key ] = esc_html__( 'Zipcode to be less than 7 and more then 4 digits.', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Zipcode length should be less than 7 and more then 4 digits.', 'get-a-quote' );
 						break;
 					} else {
 						$filtered[ $key ] = $zcode;

@@ -1,3 +1,17 @@
+<?php
+/**
+ * Provide a admin-facing view for the plugin
+ *
+ * This file is used to markup the admin-facing aspects of the plugin.
+ *
+ * @link       https://makewebbetter.com/
+ * @since      1.0.0
+ *
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/admin/partials
+ */
+
+?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="mwb_gaq__modal-wrapper">

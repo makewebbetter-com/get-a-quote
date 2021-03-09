@@ -17,10 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $gaq_mwb_gaq_obj;
 $gaq_genaral_settings = apply_filters( 'gaq_general_settings_array', array() );
 if ( isset( $_POST['mwb_gaq_setting_save'] ) ) {
-	if ( ! isset( $_POST['gaq_enable_quote_form'] ) ) {
-		$_POST['gaq_enable_quote_form'] = 'off';
+	$form_value = sanitize_text_field( wp_unslash( $_POST['gaq_enable_quote_form'] ) );
+	if ( ! isset( $form_value ) ) {
+		$form_value = 'off';
 	}
-	update_option( 'gaq_enable_quote_form_switch', $_POST['gaq_enable_quote_form'] );
+	update_option( 'gaq_enable_quote_form_switch', $form_value );
 }
 ?>
 <!--  template file for admin settings. -->

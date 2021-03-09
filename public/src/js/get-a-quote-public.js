@@ -3,93 +3,168 @@
  * should reside in this file.
  */
 jQuery(document).ready(function($) {
+	
 	$('.success-div').hide();
+	
 	$('.error-div').hide();
+	
 	/**
 	 * Constants Of all the list
 	 */
 	const wrapp = '<div id="form-group-{{fields-scope-here}}" class="form-group"></div>';
+	
 	var iterval=[];
+	
 	iterval = (php_vars.converted);
+	
 	if ( iterval != null && iterval != '' ) {
+	
 		$('.active-from').show();
+	
 		show_form_to_frontend( iterval );
+	
 	} else{ 
+	
 		$('.active-from').hide();
+		$('.error-div').show();
+		$('.error-div').html('Please make a form from admin section to get displayed here');
+	
 	}
+	
 	/**
 	 * Library Functions here.
 	 */
 	// Add new field to form.
 	function show_form_to_frontend(iternal) {
+	
 		for(var i = 0; i < iternal.length; i++) {
+	
 			attrs= iternal[i];
+	
 			if ( attrs.ltype == 'label' ) {
+	
 				var newElelabel = document.createElement(attrs.ltype.toUpperCase());
+	
 				$.each(attrs, function (key) {
+	
 					switch (key) {
+	
 						case 'lclass':
-							newElelabel.setAttribute("class", attrs.lclass);
-							newWrap = $(wrapp.replace("{{fields-scope-here}}", attrs.lclass));
-							break;
+	
+						newElelabel.setAttribute("class", attrs.lclass);
+	
+						newWrap = $(wrapp.replace("{{fields-scope-here}}", attrs.lclass));
+	
+						break;
+	
 						case 'ltext':
-							$(newElelabel).text(attrs.ltext);
+	
+						$(newElelabel).text(attrs.ltext);
+	
 						default:
-							break;
+	
+						break;
+	
 					}
+	
 				});
+	
 				var labelfield = $( newElelabel);
+	
 			}
+	
 			if ( attrs.ftype == 'input' || attrs.ftype == 'textarea' ||  attrs.ftype == 'select' ) {
+	
 				var newEleinput = document.createElement(attrs.ftype.toUpperCase());
+	
 				$.each(attrs, function (key, value) {
+	
 					switch (key) {
+	
 						case 'required':
-							if( value == 'true'){
-								newEleinput.setAttribute(key , 'required');
-								break;
-							} else{
-								break;
-							}
+	
+						if( value == 'true'){
+	
+							newEleinput.setAttribute(key , 'required');
+	
+							break;
+	
+						} else{
+	
+							break;
+	
+						}
+	
 						case 'name':
-							newEleinput.setAttribute('name', attrs.name);
-							break;
+	
+						newEleinput.setAttribute('name', attrs.name);
+	
+						break;
+	
 						case 'placeholder':
-							newEleinput.setAttribute(key , value);
-							break;
+	
+						newEleinput.setAttribute(key , value);
+	
+						break;
+	
 						case 'iid':
-							newEleinput.setAttribute('id', attrs.iid);
-							break;
+	
+						newEleinput.setAttribute('id', attrs.iid);
+	
+						break;
+	
 						case 'iclass':
-							newEleinput.setAttribute('class', attrs.iclass);
-							break;
+	
+						newEleinput.setAttribute('class', attrs.iclass);
+	
+						break;
+	
 						case 'pattern':
-							if( value != ''){
-								newEleinput.setAttribute(key , value);
-							} else{
-								break;
-							}
-						case 'itype' :
-							newEleinput.setAttribute('type' , value);
-						default:
+	
+						if( value != ''){
+	
+							newEleinput.setAttribute(key , value);
+	
+						} else{
+	
 							break;
+	
+						}
+	
+						case 'itype' :
+	
+						newEleinput.setAttribute('type' , value);
+	
+						default:
+	
+						break;
+	
 					}
+	
 				});
+	
 				var inputfield = $( newEleinput );
+	
 			}
+	
 			if ( labelfield != undefined && inputfield != undefined ) {
+	
 				$('.active-front-form').append( labelfield );
+	
 				$('.active-front-form').append( inputfield );
+	
 			}
+	
 			if( inputfield != undefined ){
+	
 				if( inputfield[0].localName == 'select' ){
-
+					
 					jQuery.ajax({
 
 						type: 'POST',
-			
+
 						url: gaq_public_param.ajaxurl,
-			
+
 						data: {
 			
 							message: 'get_country_list',
@@ -101,25 +176,38 @@ jQuery(document).ready(function($) {
 						},
 			
 						success: function(response) {
+
 							response = JSON.parse( response );
+
 							jQuery.each(response, function(key, value) {
+
 								jQuery("#fcountry").append('<option value=' + key + '>' + value + '</option>');
+
 							})
+
 						}
+
 					});
+
 				}
+
 			}
+
 		}
+
 	}
 
 	/**
 	 * if country fiels is displaying
 	*/
 	if( $('#fcountry').length > 0 ){
-		$('#fcountry').on('change', function(){
-			$('#fstate').hide();
-			var con = $('#fcountry').find(":selected").val();
 
+		$('#fcountry').on('change', function(){
+
+			$('#fstate').hide();
+
+			var con = $('#fcountry').find(":selected").val();
+			
 			if ( con != '' ){
 
 				jQuery.ajax({
@@ -164,31 +252,56 @@ jQuery(document).ready(function($) {
 	 * Form Submission
 	 */
 	$(document).on('submit', 'form#formdata', function(e){
+		
 		e.preventDefault();
+		
 		var form_data = new FormData(this);
+		
 		form_data.append( "action", "trigger_form_submission" );
+		
 		$.ajax({
+		
 			url         : gaq_public_param.ajaxurl,
+		
 			type        : "POST",
+		
 			data        : form_data,
+		
 			dataType    : 'json',
+		
 			contentType : false,
+		
 			processData : false,
+		
 			success : function( response ) {
+		
 				if( response == 'Success' || response == 'updated' ) {
+		
 					$('.error-div').hide();
+		
 					$('.success-div').show();
-					$('.success-div').html('<b><i class="fas fa-check"></i>Successfully Submitted!</b>');
+		
+					$('.success-div').html('<b>Successfully Submitted!</b>');
+		
 					$("html, body").animate({ scrollTop: 70 }, "slow");
+		
 				} else {
+		
 					$('.success-div').hide();
+		
 					$('.error-div').show();
+		
 					$("html, body").animate({ scrollTop: 100 }, "slow");
+		
 					$('.error-div').html('<b>*' + response + '</b>');
+		
 				}
+		
 			}
+		
 		});
 	});
+
 });
 
 (function( $ ) {
