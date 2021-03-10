@@ -135,7 +135,7 @@ class Get_a_quote {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-get-a-quote-admin.php';
 
 			// The class responsible for on-boarding steps for plugin.
-			if ( is_dir(  plugin_dir_path( dirname( __FILE__ ) ) . 'onboarding' ) && ! class_exists( 'Get_a_quote_Onboarding_Steps' ) ) {
+			if ( is_dir(  plugin_dir_path( dirname( __FILE__ ) ) . 'onboarding' ) && ! class_exists( 'Get_a_quote_6566^ing_Steps' ) ) {
 				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-onboarding-steps.php';
 			}
 
@@ -244,7 +244,8 @@ class Get_a_quote {
 		// Remove submenu form quotes post type.
 		$this->loader->add_action( 'admin_menu', $gaq_plugin_common, 'disable_new_posts' );
 
-		$mwb_gaq_enable_option = get_option( 'gaq_enable_quote_form_switch', 'on' );
+		$mwb_gaq_enable_option = get_option( 'gaq_enable_quote_form_switch' );
+		// echo '<pre>'; print_r( $mwb_gaq_enable_option ); echo '</pre>'; die();
 		if ( 'on' === $mwb_gaq_enable_option ) {
 			$this->loader->add_action( 'init', $gaq_plugin_common, 'register_post_type_quote' );
 			$mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options' );

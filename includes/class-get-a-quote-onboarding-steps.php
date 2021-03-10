@@ -174,7 +174,6 @@ class Get_a_quote_Onboarding_Steps {
 			wp_enqueue_style( 'mwb-gaq-meterial-css2', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-v5.0-web.min.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-lite', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-lite.min.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-icons-css', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/icon.css', array(), time(), 'all' );
-
 			wp_enqueue_style( 'mwb-gaq-onboarding-style', GET_A_QUOTE_DIR_URL . 'onboarding/css/get-a-quote-onboarding.css', array(), time(), 'all' );
 
 		}
@@ -200,13 +199,10 @@ class Get_a_quote_Onboarding_Steps {
 		if ( $this->mwb_gaq_valid_page_screen_check() || $is_valid ) {
 
 			wp_enqueue_script( 'mwb-gaq-onboarding-select2-js', GET_A_QUOTE_DIR_URL . 'package/lib/select-2/get-a-quote-select2.js', array( 'jquery' ), '1.0.0', false );
-
 			wp_enqueue_script( 'mwb-gaq-metarial-js', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.js', array(), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-js2', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-v5.0-web.min.js', array(), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-lite', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-lite.min.js', array(), time(), false );
-
 			wp_enqueue_script( 'mwb-gaq-onboarding-scripts', GET_A_QUOTE_DIR_URL . 'onboarding/js/get-a-quote-onboarding.js', array( 'jquery', 'mwb-gaq-onboarding-select2-js', 'mwb-gaq-metarial-js', 'mwb-gaq-metarial-js2', 'mwb-gaq-metarial-lite' ), time(), true );
-
 			$gaq_current_slug = ! empty( explode( '/', plugin_basename( __FILE__ ) ) ) ? explode( '/', plugin_basename( __FILE__ ) )[0] : '';
 			wp_localize_script(
 				'mwb-gaq-onboarding-scripts',
@@ -551,7 +547,9 @@ class Get_a_quote_Onboarding_Steps {
 	 * @since    1.0.0
 	 */
 	public function mwb_gaq_send_onboarding_data() {
+	
 		check_ajax_referer( 'mwb_gaq_onboarding_nonce', 'nonce' );
+		
 
 		$form_data = ! empty( $_POST['form_data'] ) ? json_decode( sanitize_text_field( wp_unslash( $_POST['form_data'] ) ) ) : '';
 
@@ -612,7 +610,7 @@ class Get_a_quote_Onboarding_Steps {
 			if ( ! empty( $formatted_data ) && is_array( $formatted_data ) ) {
 
 				unset( $formatted_data['mwb-gaq-show-counter'] );
-
+				
 				$this->mwb_gaq_handle_form_submission_for_hubspot( $formatted_data, $action_type );
 			}
 		} catch ( Exception $e ) {
@@ -699,6 +697,7 @@ class Get_a_quote_Onboarding_Steps {
 
 			$result = $response;
 		}
+		echo '<pre>'; print_r( $result ); echo '</pre>'; die();
 		return $result;
 	}
 

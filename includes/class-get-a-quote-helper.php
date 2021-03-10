@@ -160,10 +160,13 @@ class Get_A_Quote_Helper {
 	}
 
 	/**
-	 * Validation
+	 * ValiDation
+	 *
+	 * @param array $data data of the array.
+	 * @return array $filtered data.
 	 */
 	public static function valiDation( $data ) {
-		$err = array();
+		$err      = array();
 		$filtered = array();
 		foreach ( $data as $key => $value ) {
 			switch ( $key ) {
@@ -232,19 +235,13 @@ class Get_A_Quote_Helper {
 
 				case 'Zipcode':
 					$zcode = $data['Zipcode'];
-					$zcode = trim( $zcode, '-' );
-					$zcode = trim( $zcode, '.' );
-					$zcode = preg_replace( '/[^A-Za-z0-9\-]/', '', $zcode );
-					$zcode = preg_match( '#[0-9]{5}#', $zcode );
-					if( ! empty ( $zcode ) ) {
-						if ( strlen( $zcode ) > 7 || strlen( $zcode ) < 4 ) {
-							$err[ $key ] = esc_html__( 'Zipcode length should be less than 7 and more then 4 digits.', 'get-a-quote' );
-							break;
-						} else {
-							$filtered[ $key ] = $zcode;
-							break;
-						}
+					if ( ! preg_match( '/^[0-9]{0,6}$/', $zcode ) ) {
+
+						$err[ $key ] = esc_html__( 'Invalid Zipcode', 'get-a-quote' );
+						break;
 					}
+					$filtered[ $key ] = $zcode;
+					break;
 
 				case 'State':
 					$state = $data['State'];
@@ -376,15 +373,11 @@ class Get_A_Quote_Helper {
 		}
 	}
 
-	public function wc_help_tip( $tip, $allow_html = false ) {
-		if ( $allow_html ) {
-			$tip = wc_sanitize_tooltip( $tip );
-		} else {
-			$tip = esc_attr( $tip );
-		}
-		return sprintf( '<span class="woocommerce-help-tip" data-tip="%s"></span>', esc_html( $tip ) );
-	}
-
+	/**
+	 * Mwb_gaq_get_country_list
+	 *
+	 * @return array list.
+	 */
 	public static function mwb_gaq_get_country_list() {
 		$countries = array(
 			'' => 'Select Country',

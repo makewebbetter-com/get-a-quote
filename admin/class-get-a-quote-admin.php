@@ -158,7 +158,7 @@ class Get_A_Quote_Admin {
 			$gaq_menus = apply_filters( 'mwb_add_plugins_menus_array', array() );
 			if ( is_array( $gaq_menus ) && ! empty( $gaq_menus ) ) {
 				foreach ( $gaq_menus as $gaq_key => $gaq_value ) {
-					add_submenu_page( 'mwb-plugins', $gaq_value['name'], $gaq_value['name'], 'manage_options', $gaq_value['menu_link'], array( $gaq_value['instance'], $gaq_value['function']) );
+					add_submenu_page( 'mwb-plugins', $gaq_value['name'], $gaq_value['name'], 'manage_options', $gaq_value['menu_link'], array( $gaq_value['instance'], $gaq_value['function'] ) );
 				}
 			}
 		}
@@ -242,11 +242,9 @@ class Get_A_Quote_Admin {
 	 * @param array $gaq_settings_general Settings fields.
 	 */
 	public function gaq_admin_general_settings_page( $gaq_settings_general ) {
-		$val = get_option( 'gaq_enable_quote_form_switch', 'on' );
+		$val = get_option( 'gaq_enable_quote_form_switch' );
 		if ( '' !== $val ) {
 			( 'on' === $val ) ? $val = 'on' : $val = 'off';
-		} else {
-			$val = 'on';
 		}
 		$gaq_settings_general = array(
 			array(
@@ -278,8 +276,7 @@ class Get_A_Quote_Admin {
 	 * @param    Array $mwb_gaq_support Settings fields.
 	 * @return   Array  $mwb_gaq_support
 	 */
-	public function gaq_admin_support_settings_page( $mwb_gaq_support)
-	{
+	public function gaq_admin_support_settings_page( $mwb_gaq_support ) {
 		$mwb_gaq_support = array(
 			array(
 				'title'       => __( 'User Guide', 'get-a-quote' ),
@@ -304,38 +301,44 @@ class Get_A_Quote_Admin {
 	 * @since 1.0.0
 	 */
 	public function gaq_admin_save_tab_settings() {
+
 		global $gaq_mwb_gaq_obj;
-		if ( isset( $_POST['mwb_gaq_setting_save'] ) ) {
+		if ( isset( $_POST['general_nonce'] ) ) {
+			$general_form_nonce = sanitize_text_field( wp_unslash( $_POST['general_nonce'] ) );
+			if ( wp_verify_nonce( $general_form_nonce, 'general-form-nonce' ) ) {
+				if ( isset( $_POST['mwb_gaq_setting_save'] ) ) {
 
-			$mwb_gaq_gen_flag = false;
+					$mwb_gaq_gen_flag = false;
 
-			$gaq_genaral_settings = apply_filters( 'gaq_general_settings_array', array() );
+					$gaq_genaral_settings = apply_filters( 'gaq_general_settings_array', array() );
 
-			$gaq_button_index = array_search( 'submit', array_column( $gaq_genaral_settings, 'type' ), true );
-			if ( isset( $gaq_button_index ) && ( null === $gaq_button_index || '' === $gaq_button_index ) ) {
-				$gaq_button_index = array_search( 'button', array_column( $gaq_genaral_settings, 'type' ), true );
-			}
-			if ( isset( $gaq_button_index ) && '' !== $gaq_button_index ) {
-				unset( $gaq_genaral_settings[ $gaq_button_index ] );
-				if ( is_array( $gaq_genaral_settings ) && ! empty( $gaq_genaral_settings ) ) {
-					foreach ( $gaq_genaral_settings as $gaq_genaral_setting ) {
-						if ( isset( $gaq_genaral_setting['id'] ) && '' !== $gaq_genaral_setting['id'] ) {
-							if ( isset( $_POST[ $gaq_genaral_setting['id'] ] ) ) {
-								update_option( $gaq_genaral_setting['id'], $_POST[ $gaq_genaral_setting['id'] ] );
-							} else {
-								update_option( $gaq_genaral_setting['id'], '' );
+					$gaq_button_index = array_search( 'submit', array_column( $gaq_genaral_settings, 'type' ), true );
+					if ( isset( $gaq_button_index ) && ( null === $gaq_button_index || '' === $gaq_button_index ) ) {
+						$gaq_button_index = array_search( 'button', array_column( $gaq_genaral_settings, 'type' ), true );
+					}
+					if ( isset( $gaq_button_index ) && '' !== $gaq_button_index ) {
+						unset( $gaq_genaral_settings[ $gaq_button_index ] );
+						if ( is_array( $gaq_genaral_settings ) && ! empty( $gaq_genaral_settings ) ) {
+							foreach ( $gaq_genaral_settings as $gaq_genaral_setting ) {
+								if ( isset( $gaq_genaral_setting['id'] ) && '' !== $gaq_genaral_setting['id'] ) {
+									if ( isset( $_POST[ $gaq_genaral_setting['id'] ] ) ) {
+										update_option( $gaq_genaral_setting['id'], sanitize_text_field( wp_unslash( $_POST[ $gaq_genaral_setting['id'] ] ) ) );
+									} else {
+										update_option( $gaq_genaral_setting['id'], '' );
+									}
+								} else {
+									$mwb_gaq_gen_flag = true;
+								}
 							}
+						}
+						if ( $mwb_gaq_gen_flag ) {
+							$mwb_gaq_error_text = esc_html__( 'Id of some field is missing', 'get-a-quote' );
+							$gaq_mwb_gaq_obj->mwb_gaq_plug_admin_notice( $mwb_gaq_error_text, 'error' );
 						} else {
-							$mwb_gaq_gen_flag = true;
+							$mwb_gaq_error_text = esc_html__( 'Settings saved !', 'get-a-quote' );
+							$gaq_mwb_gaq_obj->mwb_gaq_plug_admin_notice( $mwb_gaq_error_text, 'success' );
 						}
 					}
-				}
-				if ( $mwb_gaq_gen_flag ) {
-					$mwb_gaq_error_text = esc_html__( 'Id of some field is missing', 'get-a-quote' );
-					$gaq_mwb_gaq_obj->mwb_gaq_plug_admin_notice( $mwb_gaq_error_text, 'error' );
-				} else {
-					$mwb_gaq_error_text = esc_html__( 'Settings saved !', 'get-a-quote' );
-					$gaq_mwb_gaq_obj->mwb_gaq_plug_admin_notice( $mwb_gaq_error_text, 'success' );
 				}
 			}
 		}

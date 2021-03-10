@@ -16,16 +16,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 global $gaq_mwb_gaq_obj;
 $gaq_genaral_settings = apply_filters( 'gaq_general_settings_array', array() );
-if ( isset( $_POST['mwb_gaq_setting_save'] ) ) {
-	$form_value = sanitize_text_field( wp_unslash( $_POST['gaq_enable_quote_form'] ) );
-	if ( ! isset( $form_value ) ) {
-		$form_value = 'off';
+if ( isset( $_POST['general_nonce'] ) ) {
+	$general_form_nonce = sanitize_text_field( wp_unslash( $_POST['general_nonce'] ) );
+
+	if ( wp_verify_nonce( $general_form_nonce, 'general-form-nonce' ) ) {
+		if ( isset( $_POST['mwb_gaq_setting_save'] ) ) {
+			if ( isset( $_POST['gaq_enable_quote_form'] ) ) {
+				$form_value = sanitize_text_field( wp_unslash( $_POST['gaq_enable_quote_form'] ) );
+			} else {
+					$form_value = 'off';
+			}
+			update_option( 'gaq_enable_quote_form_switch', $form_value );
+		}
 	}
-	update_option( 'gaq_enable_quote_form_switch', $form_value );
 }
 ?>
 <!--  template file for admin settings. -->
 <form action="" method="POST" class="mwb-gaq-gen-section-form">
+<input type="hidden" name="general_nonce" value="<?php echo wp_create_nonce( 'general-form-nonce' ); ?>"/>
 	<div class="gaq-secion-wrap">
 		<?php
 		$gaq_general_html = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_genaral_settings );
