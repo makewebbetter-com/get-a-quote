@@ -135,7 +135,7 @@ class Get_a_quote {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-get-a-quote-admin.php';
 
 			// The class responsible for on-boarding steps for plugin.
-			if ( is_dir(  plugin_dir_path( dirname( __FILE__ ) ) . 'onboarding' ) && ! class_exists( 'Get_a_quote_6566^ing_Steps' ) ) {
+			if ( is_dir( plugin_dir_path( dirname( __FILE__ ) ) . 'onboarding' ) && ! class_exists( 'Get_a_quote_6566^ing_Steps' ) ) {
 				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-onboarding-steps.php';
 			}
 
@@ -260,7 +260,7 @@ class Get_a_quote {
 				$this->loader->add_action( 'init', $gaq_plugin_common, 'register_default_taxonomy_quote_status' );
 			}
 		}
-		//Ajax actions for triggering the form data.
+		// Ajax actions for triggering the form data.
 		$this->loader->add_action( 'wp_ajax_trigger_edit_form_data', $gaq_plugin_common, 'trigger_edit_form_data' );
 		$this->loader->add_action( 'wp_ajax_nopriv_trigger_edit_form_data', $gaq_plugin_common, 'trigger_edit_form_data' );
 		$this->loader->add_action( 'wp_ajax_trigger_form_submission', $gaq_plugin_common, 'trigger_form_submission' );
@@ -555,8 +555,8 @@ class Get_a_quote {
 					case 'number':
 					case 'email':
 					case 'text':
-					?>
-					<div class="mwb-form-group mwb-gaq-<?php echo esc_attr($gaq_component['type']); ?>">
+						?>
+					<div class="mwb-form-group mwb-gaq-<?php echo esc_attr( $gaq_component['type'] ); ?>">
 						<div class="mwb-form-group__label">
 							<label for="<?php echo esc_attr( $gaq_component['id'] ); ?>" class="mwb-form-label"><?php echo esc_html( $gaq_component['title'] ); // WPCS: XSS ok. ?></label>
 						</div>
@@ -585,11 +585,11 @@ class Get_a_quote {
 							</div>
 						</div>
 					</div>
-					<?php
-					break;
+						<?php
+						break;
 
 					case 'password':
-					?>
+						?>
 					<div class="mwb-form-group">
 						<div class="mwb-form-group__label">
 							<label for="<?php echo esc_attr( $gaq_component['id'] ); ?>" class="mwb-form-label"><?php echo esc_html( $gaq_component['title'] ); // WPCS: XSS ok. ?></label>
@@ -762,7 +762,15 @@ class Get_a_quote {
 									<div class="mdc-switch__track"></div>
 									<div class="mdc-switch__thumb-underlay">
 										<div class="mdc-switch__thumb"></div>
-										<input name="<?php echo esc_html( $gaq_component['id'] ); ?>" type="checkbox" id="basic-switch" value="on" class="mdc-switch__native-control" role="switch" aria-checked="<?php if ( 'on' === $gaq_component['value'] ) echo 'true'; else echo 'false'; ?>"
+										<input name="<?php echo esc_html( $gaq_component['id'] ); ?>" type="checkbox" id="basic-switch" value="on" class="mdc-switch__native-control" role="switch" aria-checked="
+																<?php
+																if ( 'on' === $gaq_component['value'] ) {
+																	echo 'true';
+																} else {
+																	echo 'false';
+																}
+																?>
+										"
 										<?php checked( $gaq_component['value'], 'on' ); ?>
 										>
 									</div>
@@ -787,7 +795,7 @@ class Get_a_quote {
 						break;
 
 					case 'submit':
-					?>
+						?>
 					<tr valign="top">
 						<td scope="row">
 							<input type="submit" class="button button-primary mdc-button mdc-button--raised" 

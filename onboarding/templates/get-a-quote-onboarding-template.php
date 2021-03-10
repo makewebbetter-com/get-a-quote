@@ -27,7 +27,7 @@ $gaq_onboarding_form_fields = apply_filters( 'mwb_gaq_on_boarding_form_fields', 
 					<p class="mwb-gaq-on-boarding-desc"><?php esc_html_e( 'We love making new friends! Subscribe below and we promise to keep you up-to-date with our latest new plugins, updates, awesome deals and a few special offers.', 'get-a-quote' ); ?></p>
 
 					<form action="#" method="post" class="mwb-gaq-on-boarding-form">
-						<?php 
+						<?php
 						$gaq_onboarding_html = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_onboarding_form_fields );
 						echo esc_html( $gaq_onboarding_html );
 						?>

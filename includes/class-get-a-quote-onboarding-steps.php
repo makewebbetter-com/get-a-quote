@@ -547,9 +547,8 @@ class Get_a_quote_Onboarding_Steps {
 	 * @since    1.0.0
 	 */
 	public function mwb_gaq_send_onboarding_data() {
-	
+
 		check_ajax_referer( 'mwb_gaq_onboarding_nonce', 'nonce' );
-		
 
 		$form_data = ! empty( $_POST['form_data'] ) ? json_decode( sanitize_text_field( wp_unslash( $_POST['form_data'] ) ) ) : '';
 
@@ -610,7 +609,7 @@ class Get_a_quote_Onboarding_Steps {
 			if ( ! empty( $formatted_data ) && is_array( $formatted_data ) ) {
 
 				unset( $formatted_data['mwb-gaq-show-counter'] );
-				
+
 				$this->mwb_gaq_handle_form_submission_for_hubspot( $formatted_data, $action_type );
 			}
 		} catch ( Exception $e ) {
@@ -642,7 +641,7 @@ class Get_a_quote_Onboarding_Steps {
 				$submission,
 				array(
 					'name'  => 'currency',
-					'value' => 'USD', //get_woocommerce_currency(),
+					'value' => 'USD', // get_woocommerce_currency(),
 				)
 			);
 		}
@@ -697,7 +696,10 @@ class Get_a_quote_Onboarding_Steps {
 
 			$result = $response;
 		}
-		echo '<pre>'; print_r( $result ); echo '</pre>'; die();
+		echo '<pre>';
+		print_r( $result );
+		echo '</pre>';
+		die();
 		return $result;
 	}
 

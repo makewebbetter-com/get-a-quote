@@ -74,7 +74,9 @@ class Get_a_quote_Public {
 	public function gaq_public_enqueue_scripts() {
 
 		wp_register_script( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'public/src/js/get-a-quote-public.js', array( 'jquery' ), $this->version, false );
-		wp_localize_script( $this->plugin_name, 'gaq_public_param',
+		wp_localize_script(
+			$this->plugin_name,
+			'gaq_public_param',
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'country_ajax' ),

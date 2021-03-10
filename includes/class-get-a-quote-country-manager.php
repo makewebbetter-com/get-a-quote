@@ -4,9 +4,11 @@
  *
  * @package     mwb_gaq
  * @copyright   Copyright (c) 2014,  Emarket Design
- * @since 1.0.0 
+ * @since 1.0.0
  */
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Manage Country & State Functions calls.
@@ -401,7 +403,7 @@ class GAQCountryManager {
 	/**
 	 * Get States List
 	 *
-	 * @since 1.0.0  
+	 * @since 1.0.0
 	 * @return      array
 	 */
 	private function united_states_list() {
@@ -472,7 +474,7 @@ class GAQCountryManager {
 			'VI' => 'Virgin Islands',
 			'AA' => 'Armed Forces - Americas',
 			'AE' => 'Armed Forces - Europe, Canada, Middle East, Africa',
-			'AP' => 'Armed Forces - Pacific'
+			'AP' => 'Armed Forces - Pacific',
 		);
 
 		return apply_filters( 'mwb_gaq_us_states', $states );
@@ -481,7 +483,7 @@ class GAQCountryManager {
 	/**
 	 * Get Angola States.
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return      array    $states    A list of states.
 	 */
 	private function angola_provinces_list() {
@@ -504,7 +506,7 @@ class GAQCountryManager {
 			'MOX' => 'Moxico',
 			'NAM' => 'Namibe',
 			'UIG' => 'Uíge',
-			'ZAI' => 'Zaire'
+			'ZAI' => 'Zaire',
 		);
 
 		return apply_filters( 'mwb_gaq_angola_provinces', $provinces );
@@ -513,7 +515,7 @@ class GAQCountryManager {
 	/**
 	 * Get Provinces List
 	 *
-	 * @since 1.0.0  
+	 * @since 1.0.0
 	 * @return      array
 	 */
 	private function provinces_list() {
@@ -531,7 +533,7 @@ class GAQCountryManager {
 			'PE' => 'Prince Edward Island',
 			'QC' => 'Quebec',
 			'SK' => 'Saskatchewan',
-			'YT' => 'Yukon'
+			'YT' => 'Yukon',
 		);
 
 		return apply_filters( 'mwb_gaq_canada_provinces', $provinces );
@@ -540,7 +542,7 @@ class GAQCountryManager {
 	/**
 	 * Get Australian States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function australian_states_list() {
@@ -553,7 +555,7 @@ class GAQCountryManager {
 			'SA'  => 'South Australia',
 			'TAS' => 'Tasmania',
 			'VIC' => 'Victoria',
-			'WA'  => 'Western Australia'
+			'WA'  => 'Western Australia',
 		);
 
 		return apply_filters( 'mwb_gaq_australian_states', $states );
@@ -562,7 +564,7 @@ class GAQCountryManager {
 	/**
 	 * Get Bangladeshi States (districts)
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function bangladeshi_states_list() {
@@ -571,7 +573,7 @@ class GAQCountryManager {
 			'BAG' => 'Bagerhat',
 			'BAN' => 'Bandarban',
 			'BAR' => 'Barguna',
-			'BARI'=> 'Barisal',
+			'BARI' => 'Barisal',
 			'BHO' => 'Bhola',
 			'BOG' => 'Bogra',
 			'BRA' => 'Brahmanbaria',
@@ -585,7 +587,7 @@ class GAQCountryManager {
 			'FAR' => 'Faridpur',
 			'FEN' => 'Feni',
 			'GAI' => 'Gaibandha',
-			'GAZI'=> 'Gazipur',
+			'GAZI' => 'Gazipur',
 			'GOP' => 'Gopalganj',
 			'HAB' => 'Habiganj',
 			'JAM' => 'Jamalpur',
@@ -609,8 +611,8 @@ class GAQCountryManager {
 			'MYM' => 'Mymensingh',
 			'NAO' => 'Naogaon',
 			'NAR' => 'Narail',
-			'NARG'=> 'Narayanganj',
-			'NARD'=> 'Narsingdi',
+			'NARG' => 'Narayanganj',
+			'NARD' => 'Narsingdi',
 			'NAT' => 'Natore',
 			'NAW' => 'Nawabganj',
 			'NET' => 'Netrakona',
@@ -620,10 +622,10 @@ class GAQCountryManager {
 			'PAN' => 'Panchagarh',
 			'PAT' => 'Patuakhali',
 			'PIR' => 'Pirojpur',
-			'RAJB'=> 'Rajbari',
+			'RAJB' => 'Rajbari',
 			'RAJ' => 'Rajshahi',
 			'RAN' => 'Rangamati',
-			'RANP'=> 'Rangpur',
+			'RANP' => 'Rangpur',
 			'SAT' => 'Satkhira',
 			'SHA' => 'Shariatpur',
 			'SHE' => 'Sherpur',
@@ -631,7 +633,7 @@ class GAQCountryManager {
 			'SUN' => 'Sunamganj',
 			'SYL' => 'Sylhet',
 			'TAN' => 'Tangail',
-			'THA' => 'Thakurgaon'
+			'THA' => 'Thakurgaon',
 		);
 
 		return apply_filters( 'mwb_gaq_bangladeshi_states', $states );
@@ -640,7 +642,7 @@ class GAQCountryManager {
 	/**
 	 * Get Brazil States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function brazil_states_list() {
@@ -672,7 +674,7 @@ class GAQCountryManager {
 			'SC' => 'Santa Catarina',
 			'SP' => 'S&atilde;o Paulo',
 			'SE' => 'Sergipe',
-			'TO' => 'Tocantins'
+			'TO' => 'Tocantins',
 		);
 
 		return apply_filters( 'mwb_gaq_brazil_states', $states );
@@ -681,7 +683,7 @@ class GAQCountryManager {
 	/**
 	 * Get Bulgarian States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function bulgarian_states_list() {
@@ -714,7 +716,7 @@ class GAQCountryManager {
 			'BG-04' => 'Veliko Tarnovo',
 			'BG-05' => 'Vidin',
 			'BG-06' => 'Vratsa',
-			'BG-28' => 'Yambol'
+			'BG-28' => 'Yambol',
 		);
 
 		return apply_filters( 'mwb_gaq_bulgarian_states', $states );
@@ -723,7 +725,7 @@ class GAQCountryManager {
 	/**
 	 * Get Hong Kong States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function hong_kong_states_list() {
@@ -731,7 +733,7 @@ class GAQCountryManager {
 			''                => 'Select State',
 			'HONG KONG'       => 'Hong Kong Island',
 			'KOWLOON'         => 'Kowloon',
-			'NEW TERRITORIES' => 'New Territories'
+			'NEW TERRITORIES' => 'New Territories',
 		);
 
 		return apply_filters( 'mwb_gaq_hong_kong_states', $states );
@@ -740,7 +742,7 @@ class GAQCountryManager {
 	/**
 	 * Get Hungary States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function hungary_states_list() {
@@ -765,7 +767,7 @@ class GAQCountryManager {
 			'TO' => 'Tolna',
 			'VA' => 'Vas',
 			'VE' => 'Veszprém',
-			'ZA' => 'Zala'
+			'ZA' => 'Zala',
 		);
 
 		return apply_filters( 'mwb_gaq_hungary_states', $states );
@@ -774,7 +776,7 @@ class GAQCountryManager {
 	/**
 	 * Get Japanese States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function japanese_states_list() {
@@ -826,7 +828,7 @@ class GAQCountryManager {
 			'JP44' => 'Oita',
 			'JP45' => 'Miyazaki',
 			'JP46' => 'Kagoshima',
-			'JP47' => 'Okinawa'
+			'JP47' => 'Okinawa',
 		);
 
 		return apply_filters( 'mwb_gaq_japanese_states', $states );
@@ -835,7 +837,7 @@ class GAQCountryManager {
 	/**
 	 * Get Chinese States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function chinese_states_list() {
@@ -872,7 +874,7 @@ class GAQCountryManager {
 			'CN29' => 'Ningxia Hui / &#23425;&#22799;',
 			'CN30' => 'Macau / &#28595;&#38376;',
 			'CN31' => 'Tibet / &#35199;&#34255;',
-			'CN32' => 'Xinjiang / &#26032;&#30086;'
+			'CN32' => 'Xinjiang / &#26032;&#30086;',
 		);
 
 		return apply_filters( 'mwb_gaq_chinese_states', $states );
@@ -881,12 +883,12 @@ class GAQCountryManager {
 	/**
 	 * Get United Kingdom States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function united_kingdom_states_list() {
 		$states = array(
-			''	    	 => 'Select State',
+			''           => 'Select State',
 			'GB-ABE' => 'Aberdeen City',
 			'GB-ABD' => 'Aberdeenshire',
 			'GB-ANS' => 'Angus',
@@ -1112,7 +1114,7 @@ class GAQCountryManager {
 	/**
 	 * Get New Zealand States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function new_zealand_states_list() {
@@ -1133,7 +1135,7 @@ class GAQCountryManager {
 			'WA' => 'Waikato',
 			'WR' => 'Wairarapa',
 			'WE' => 'Wellington',
-			'WC' => 'West Coast'
+			'WC' => 'West Coast',
 		);
 
 		return apply_filters( 'mwb_gaq_new_zealand_states', $states );
@@ -1142,7 +1144,7 @@ class GAQCountryManager {
 	/**
 	 * Get Peruvian States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function peruvian_states_list() {
@@ -1173,7 +1175,7 @@ class GAQCountryManager {
 			'SAM' => 'San Mart&iacute;n',
 			'TAC' => 'Tacna',
 			'TUM' => 'Tumbes',
-			'UCA' => 'Ucayali'
+			'UCA' => 'Ucayali',
 		);
 
 		return apply_filters( 'mwb_gaq_peruvian_states', $states );
@@ -1182,7 +1184,7 @@ class GAQCountryManager {
 	/**
 	 * Get Indonesian States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function indonesian_states_list() {
@@ -1221,7 +1223,7 @@ class GAQCountryManager {
 			'MA' => 'Maluku',
 			'MU' => 'Maluku Utara',
 			'PA' => 'Papua',
-			'PB' => 'Papua Barat'
+			'PB' => 'Papua Barat',
 		);
 
 		return apply_filters( 'mwb_gaq_indonesia_states', $states );
@@ -1230,7 +1232,7 @@ class GAQCountryManager {
 	/**
 	 * Get Indian States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function indian_states_list() {
@@ -1271,7 +1273,7 @@ class GAQCountryManager {
 			'DD' => 'Daman and Diu',
 			'DL' => 'Delhi',
 			'LD' => 'Lakshadweep',
-			'PY' => 'Pondicherry (Puducherry)'
+			'PY' => 'Pondicherry (Puducherry)',
 		);
 
 		return apply_filters( 'mwb_gaq_indian_states', $states );
@@ -1280,7 +1282,7 @@ class GAQCountryManager {
 	/**
 	 * Get Iranian States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function iranian_states_list() {
@@ -1316,7 +1318,7 @@ class GAQCountryManager {
 			'MZN' => 'Mazandaran',
 			'MKZ' => 'Markazi',
 			'HRZ' => 'Hormozgan',
-			'SBN' => 'Sistan and Baluchestan'
+			'SBN' => 'Sistan and Baluchestan',
 		);
 
 		return apply_filters( 'mwb_gaq_iranian_states', $states );
@@ -1325,7 +1327,7 @@ class GAQCountryManager {
 	/**
 	 * Get Italian Provinces
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function italian_states_list() {
@@ -1440,7 +1442,7 @@ class GAQCountryManager {
 			'VR' => 'Verona',
 			'VV' => 'Vibo Valentia',
 			'VI' => 'Vicenza',
-			'VT' => 'Viterbo'
+			'VT' => 'Viterbo',
 		);
 
 		return apply_filters( 'mwb_gaq_italian_states', $states );
@@ -1449,7 +1451,7 @@ class GAQCountryManager {
 	/**
 	 * Get Malaysian States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function malaysian_states_list() {
@@ -1470,7 +1472,7 @@ class GAQCountryManager {
 			'TRG' => 'Terengganu',
 			'KUL' => 'W.P. Kuala Lumpur',
 			'LBN' => 'W.P. Labuan',
-			'PJY' => 'W.P. Putrajaya'
+			'PJY' => 'W.P. Putrajaya',
 		);
 
 		return apply_filters( 'mwb_gaq_malaysian_states', $states );
@@ -1479,7 +1481,7 @@ class GAQCountryManager {
 	/**
 	 * Get Mexican States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function mexican_states_list() {
@@ -1516,7 +1518,7 @@ class GAQCountryManager {
 			'TLA' => 'Tlaxcala',
 			'VER' => 'Veracruz',
 			'YUC' => 'Yucat&aacute;n',
-			'ZAC' => 'Zacatecas'
+			'ZAC' => 'Zacatecas',
 		);
 
 		return apply_filters( 'mwb_gaq_mexican_states', $states );
@@ -1605,7 +1607,7 @@ class GAQCountryManager {
 			'BAI' => 'Baitadi',
 			'DAD' => 'Dadeldhura',
 			'DAR' => 'Darchula',
-			'KAN' => 'Kanchanpur'
+			'KAN' => 'Kanchanpur',
 		);
 
 		return apply_filters( 'mwb_gaq_nepalese_states', $states );
@@ -1614,7 +1616,7 @@ class GAQCountryManager {
 	/**
 	 * Get South African States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function south_african_states_list() {
@@ -1628,7 +1630,7 @@ class GAQCountryManager {
 			'MP'  => 'Mpumalanga',
 			'NC'  => 'Northern Cape',
 			'NW'  => 'North West',
-			'WC'  => 'Western Cape'
+			'WC'  => 'Western Cape',
 		);
 
 		return apply_filters( 'mwb_gaq_south_african_states', $states );
@@ -1637,7 +1639,7 @@ class GAQCountryManager {
 	/**
 	 * Get Thailand States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function thailand_states_list() {
@@ -1719,7 +1721,7 @@ class GAQCountryManager {
 			'TH-61' => 'Uthai Thani (&#3629;&#3640;&#3607;&#3633;&#3618;&#3608;&#3634;&#3609;&#3637;)',
 			'TH-53' => 'Uttaradit (&#3629;&#3640;&#3605;&#3619;&#3604;&#3636;&#3605;&#3606;&#3660;)',
 			'TH-95' => 'Yala (&#3618;&#3632;&#3621;&#3634;)',
-			'TH-35' => 'Yasothon (&#3618;&#3650;&#3626;&#3608;&#3619;)'
+			'TH-35' => 'Yasothon (&#3618;&#3650;&#3626;&#3608;&#3619;)',
 		);
 
 		return apply_filters( 'mwb_gaq_thailand_states', $states );
@@ -1814,7 +1816,7 @@ class GAQCountryManager {
 			'TR78' => 'Karab&#252;k',
 			'TR79' => 'Kilis',
 			'TR80' => 'Osmaniye',
-			'TR81' => 'D&#252;zce'
+			'TR81' => 'D&#252;zce',
 		);
 
 		return apply_filters( 'mwb_gaq_turkey_states', $states );
@@ -1823,7 +1825,7 @@ class GAQCountryManager {
 	/**
 	 * Get Spain States
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return array $states A list of states
 	 */
 	private function spain_states_list() {
@@ -1880,12 +1882,12 @@ class GAQCountryManager {
 			'VA' => __( 'Valladolid', 'mwb_gaq-plugins' ),
 			'BI' => __( 'Bizkaia', 'mwb_gaq-plugins' ),
 			'ZA' => __( 'Zamora', 'mwb_gaq-plugins' ),
-			'Z'  => __( 'Zaragoza', 'mwb_gaq-plugins' )
+			'Z'  => __( 'Zaragoza', 'mwb_gaq-plugins' ),
 		);
 
 		return apply_filters( 'mwb_gaq_spain_states', $states );
 	}
 
 
-// End of class.
+	// End of class.
 }

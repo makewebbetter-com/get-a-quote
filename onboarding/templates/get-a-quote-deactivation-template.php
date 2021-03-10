@@ -32,7 +32,7 @@ $gaq_onboarding_form_deactivate = apply_filters( 'mwb_gaq_deactivation_form_fiel
 					<h3 class="mwb-gaq-on-boarding-heading mdc-dialog__title"></h3>
 					<p class="mwb-gaq-on-boarding-desc"><?php esc_html_e( 'May we have a little info about why you are deactivating?', 'get-a-quote' ); ?></p>
 					<form action="#" method="post" class="mwb-gaq-on-boarding-form">
-						<?php 
+						<?php
 						$gaq_onboarding_deactive_html = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_onboarding_form_deactivate );
 						echo esc_html( $gaq_onboarding_deactive_html );
 						?>
