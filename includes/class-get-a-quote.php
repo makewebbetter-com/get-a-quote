@@ -135,7 +135,7 @@ class Get_a_quote {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-get-a-quote-admin.php';
 
 			// The class responsible for on-boarding steps for plugin.
-			if ( is_dir(  plugin_dir_path( dirname( __FILE__ ) ) . '.onboarding' ) && ! class_exists( 'Get_a_quote_Onboarding_Steps' ) ) {
+			if ( is_dir(  plugin_dir_path( dirname( __FILE__ ) ) . 'onboarding' ) && ! class_exists( 'Get_a_quote_Onboarding_Steps' ) ) {
 				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-onboarding-steps.php';
 			}
 

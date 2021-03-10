@@ -1,0 +1,828 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Get-A-Quote 1.0.0\n"
+"POT-Creation-Date: 2021-03-09 16:44+0530\n"
+"PO-Revision-Date: 2021-03-09 16:44+0530\n"
+"Last-Translator: \n"
+"Language-Team: MakeWebBetter\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ../get-a-quote\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: esc_html_e;__;_e;esc_html__;esc_attr_e;esc_url_raw;"
+"esc_url;esc_attr;esc_html;esc_attr__\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-get-a-quote-admin.php:157
+msgid "MakeWebBetter"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:189
+msgid "Get-A-Quote"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:235
+msgid "Enable Quote Form"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:237
+msgid "Enable plugin to start the functionality."
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:248 admin/class-get-a-quote-admin.php:414
+#: admin/class-get-a-quote-admin.php:512
+msgid "Save Changes"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:267
+msgid "User Guide"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:268
+msgid "View the detailed guides and documentation to set up your plugin."
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:269
+msgid "VIEW"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:273
+msgid "Free Support"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:274
+msgid "Please submit a ticket , our team will respond within 24 hours."
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:275
+msgid "SUBMIT"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:316
+msgid "Id of some field is missing"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:319
+msgid "Settings saved !"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:334
+#: admin/partials/get-a-quote-form-fields-edit.php:32
+msgid "Form Fields"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:339
+msgid "Taxonomies"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:343
+msgid "Email Setting"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:369
+msgid "Activate Email"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:379
+msgid "Get reply on email"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:386
+msgid "Enter reply back email"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:389
+msgid "Email Subject"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:396
+msgid "Subject Here"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:399
+msgid "Email Message"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:408
+msgid "Message Here"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:444
+msgid "Enable Quote Status"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:452 admin/class-get-a-quote-admin.php:465
+#: includes/class-get-a-quote.php:476 includes/class-get-a-quote.php:479
+#: includes/class-get-a-quote.php:482
+msgid "Yes"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:453 admin/class-get-a-quote-admin.php:466
+#: includes/class-get-a-quote.php:476 includes/class-get-a-quote.php:479
+#: includes/class-get-a-quote.php:482
+msgid "No"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:457
+msgid "Enable Service Type"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:525
+msgid "Quote Details"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:549
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:56
+msgid "First Name"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:558
+msgid "Quote Service"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:561
+#: common/class-get-a-quote-common.php:150
+msgid "Quote Status"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:563
+#: admin/partials/get-a-quote-form-fields-edit.php:69
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:86
+#: includes/class-get-a-quote-onboarding-steps.php:360
+msgid "Email"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:564
+msgid "phone"
+msgstr ""
+
+#: admin/class-get-a-quote-admin.php:565
+msgid "Date"
+msgstr ""
+
+#: admin/partials/get-a-quote-admin-dashboard.php:32
+msgid "get-a-quote-support"
+msgstr ""
+
+#: admin/partials/get-a-quote-admin-dashboard.php:32
+#: admin/partials/get-a-quote-admin-dashboard.php:51
+msgid "&gaq_tab="
+msgstr ""
+
+#: admin/partials/get-a-quote-admin-dashboard.php:32
+msgid "Support"
+msgstr ""
+
+#: admin/partials/get-a-quote-email-setting.php:38
+#: admin/partials/get-a-quote-taxonomies.php:44
+msgid "Settings saved"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:32
+msgid "(current)"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:35
+#: admin/partials/get-a-quote-form-fields-preview.php:30
+msgid "Preview Form"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:41
+msgid "Publish"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:45
+msgid "Get A Quote"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:52
+msgid "Save Form"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:57
+#: admin/partials/get-a-quote-form-fields-edit.php:105
+msgid "Done"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:61
+msgid "First name"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:65
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:66
+msgid "City"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:73
+msgid "File"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:77
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:95
+msgid "Country"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:81
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:76
+msgid "Zipcode"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:85
+msgid "Budget"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:89
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:115
+msgid "Phone"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:93
+msgid "Additional"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:101
+msgid "Name"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-edit.php:103
+msgid "Placeholder-Name"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields-preview.php:36
+msgid "Back"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields.php:18
+msgid "Form Name"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields.php:19
+msgid "Shortcode"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields.php:20
+msgid "Operation"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields.php:23
+msgid "Contact Form"
+msgstr ""
+
+#: admin/partials/get-a-quote-form-fields.php:25
+msgid "Edit"
+msgstr ""
+
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:37
+msgid "Attributes"
+msgstr ""
+
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:45
+#: common/class-get-a-quote-common.php:112
+msgid "Service"
+msgstr ""
+
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:105
+msgid "State"
+msgstr ""
+
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:124
+msgid "Additional Details"
+msgstr ""
+
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:135
+msgid "Attached File"
+msgstr ""
+
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:149
+msgid "Open File"
+msgstr ""
+
+#: admin/partials/meta-box/get-a-quote-custom-meta-box.php:151
+msgid "No File Selected"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:67
+#: common/class-get-a-quote-common.php:78
+#: common/class-get-a-quote-common.php:86
+msgid "Quotes"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:68
+#: common/class-get-a-quote-common.php:87
+#: common/class-get-a-quote-common.php:138
+msgid "Quote"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:69
+msgid "Add New"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:70
+msgid "Add New Quote"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:71
+msgid "Edit Quote"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:72
+msgid "New Quote"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:73
+msgid "All Quotes"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:74
+msgid "View Quote"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:75
+msgid "Search Quotes"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:76
+msgid "No Quotes Found"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:77
+msgid "No Quotes Found In Trash"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:111
+#: common/class-get-a-quote-common.php:121
+msgid "Services"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:113
+msgid "Search Services"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:114
+msgid "All Services"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:115
+msgid "Parent Service"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:116
+msgid "Parent Service:"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:117
+msgid "Edit Service"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:118
+msgid "Update Service"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:119
+msgid "Add New Service"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:120
+msgid "New Service Name"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:137
+msgid "Quotation"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:151
+msgid "Status"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:152
+msgid "Search Status"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:153
+msgid "All Status"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:154
+msgid "Parent Status"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:155
+msgid "Parent Status:"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:156
+msgid "Edit Status"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:157
+msgid "Update Status"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:158
+msgid "Add New Status"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:159
+msgid "New Status Name"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:160
+msgid "Quote Statuses"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:176
+msgid "Pending"
+msgstr ""
+
+#: common/class-get-a-quote-common.php:177
+msgid "Pending For Review"
+msgstr ""
+
+#: get-a-quote.php:76 get-a-quote.php:82
+msgid "get-a-quote"
+msgstr ""
+
+#: get-a-quote.php:149
+msgid "Settings"
+msgstr ""
+
+#: includes/class-get-a-quote-activator.php:60
+msgid "Quote Form"
+msgstr ""
+
+#: includes/class-get-a-quote-activator.php:62
+msgid "[gaq_form_fields]"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1832
+msgid "A Coru&ntilde;a"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1833
+msgid "Araba"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1834
+msgid "Albacete"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1835
+msgid "Alicante"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1836
+msgid "Almer&iacute;a"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1837
+msgid "Asturias"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1838
+msgid "&Aacute;vila"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1839
+msgid "Badajoz"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1840
+msgid "Baleares"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1841
+msgid "Barcelona"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1842
+msgid "Burgos"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1843
+msgid "C&aacute;ceres"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1844
+msgid "C&aacute;diz"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1845
+msgid "Cantabria"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1846
+msgid "Castell&oacute;n"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1847
+msgid "Ceuta"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1848
+msgid "Ciudad Real"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1849
+msgid "C&oacute;rdoba"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1850
+msgid "Cuenca"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1851
+msgid "Girona"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1852
+msgid "Granada"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1853
+msgid "Guadalajara"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1854
+msgid "Gipuzkoa"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1855
+msgid "Huelva"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1856
+msgid "Huesca"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1857
+msgid "Ja&eacute;n"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1858
+msgid "La Rioja"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1859
+msgid "Las Palmas"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1860
+msgid "Le&oacute;n"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1861
+msgid "Lleida"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1862
+msgid "Lugo"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1863
+msgid "Madrid"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1864
+msgid "M&aacute;laga"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1865
+msgid "Melilla"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1866
+msgid "Murcia"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1867
+msgid "Navarra"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1868
+msgid "Ourense"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1869
+msgid "Palencia"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1870
+msgid "Pontevedra"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1871
+msgid "Salamanca"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1872
+msgid "Santa Cruz de Tenerife"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1873
+msgid "Segovia"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1874
+msgid "Sevilla"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1875
+msgid "Soria"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1876
+msgid "Tarragona"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1877
+msgid "Teruel"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1878
+msgid "Toledo"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1879
+msgid "Valencia"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1880
+msgid "Valladolid"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1881
+msgid "Bizkaia"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1882
+msgid "Zamora"
+msgstr ""
+
+#: includes/class-get-a-quote-country-manager.php:1883
+msgid "Zaragoza"
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:175
+msgid "Name field is empty."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:178
+msgid "Name is to be character or alpha numeric."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:191
+msgid "Invalid email format."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:203
+#: includes/class-get-a-quote-helper.php:208
+msgid "Enter only number in Phone field."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:218
+msgid "Only characters are allowed in City field."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:231
+msgid "Only numbers are allowed in Zipcode field."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:234
+msgid "Zipcode length should be less than 7 and more then 4 digits."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:244
+msgid "Only numbers are not allowed in State."
+msgstr ""
+
+#: includes/class-get-a-quote-helper.php:254
+msgid "Only numbers are not allowed in Country."
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:300
+msgid "What is your monthly revenue?"
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:319
+msgid "What industry defines your business?"
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:325
+msgid "Industry Type"
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:356
+msgid "What is the best email address to contact you?"
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:368
+msgid "What is your contact number?"
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:373
+msgid "Contact Number"
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:487
+msgid "Let us know why you are deactivating "
+msgstr ""
+
+#: includes/class-get-a-quote-onboarding-steps.php:491
+msgid "Reason"
+msgstr ""
+
+#: includes/class-get-a-quote.php:370
+msgid "General Setting"
+msgstr ""
+
+#: includes/class-get-a-quote.php:394
+#, php-format
+msgid ""
+"Unable to locate file at location \"%s\". Some features may not work "
+"properly in this plugin. Please contact us!"
+msgstr ""
+
+#: includes/class-get-a-quote.php:452
+msgid "N/A (phpversion function does not exist)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:461
+msgid "N/A (make sure exec function is enabled)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:464
+msgid "N/A (ABSPATH constant not defined)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:467
+msgid "N/A (php_uname function does not exist)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:470
+msgid "N/A (get_bloginfo function does not exist)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:473
+msgid "N/A (get_option function does not exist)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:485
+msgid "N/A (count_users function does not exist)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:488
+msgid "0"
+msgstr ""
+
+#: includes/class-get-a-quote.php:491 includes/class-get-a-quote.php:497
+#: includes/class-get-a-quote.php:500 includes/class-get-a-quote.php:528
+#: includes/class-get-a-quote.php:531
+msgid "N/A (ini_get function does not exist)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:494
+msgid "N/A"
+msgstr ""
+
+#: includes/class-get-a-quote.php:512
+msgid "N/A (gethostname function does not exist)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:515 includes/class-get-a-quote.php:524
+msgid "N/A (make sure exec is enabled)"
+msgstr ""
+
+#: includes/class-get-a-quote.php:534
+msgid "N/A (file_get_contents function does not exist)"
+msgstr ""
+
+#: onboarding/templates/get-a-quote-deactivation-template.php:33
+msgid "May we have a little info about why you are deactivating?"
+msgstr ""
+
+#: onboarding/templates/get-a-quote-deactivation-template.php:44
+msgid "Skip and Deactivate Now"
+msgstr ""
+
+#: onboarding/templates/get-a-quote-onboarding-template.php:26
+msgid "Welcome to MakeWebBetter"
+msgstr ""
+
+#: onboarding/templates/get-a-quote-onboarding-template.php:27
+msgid ""
+"We love making new friends! Subscribe below and we promise to keep you up-to-"
+"date with our latest new plugins, updates, awesome deals and a few special "
+"offers."
+msgstr ""
+
+#: onboarding/templates/get-a-quote-onboarding-template.php:39
+msgid "Skip For Now"
+msgstr ""
+
+#: public/partials/get-a-quote-public-display.php:44
+msgid "Type Of Service"
+msgstr ""

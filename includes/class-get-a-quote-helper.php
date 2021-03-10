@@ -187,6 +187,10 @@ class Get_A_Quote_Helper {
 					break;
 				case 'Email':
 					$email = $data['Email'];
+					if ( $email == '' ) {
+						$err[ $key ] = esc_html__( 'Email field is empty.', 'get-a-quote' );
+						break;
+					}
 					if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
 						$err[ $key ] = esc_html__( 'Invalid email format.' );
 						break;
@@ -196,6 +200,10 @@ class Get_A_Quote_Helper {
 					}
 				case 'Phone':
 					$phone = $data['Phone'];
+					if ( $phone == '' ) {
+						$err[ $key ] = esc_html__( 'Phone field is empty.', 'get-a-quote' );
+						break;
+					}
 					$phone = trim( $phone, ' ' );
 					$phone = trim( $phone, '-' );
 					$string = preg_replace( '/[^a-z]/i', '', $phone );
@@ -227,15 +235,15 @@ class Get_A_Quote_Helper {
 					$zcode = trim( $zcode, '-' );
 					$zcode = trim( $zcode, '.' );
 					$zcode = preg_replace( '/[^A-Za-z0-9\-]/', '', $zcode );
-					if ( ! preg_match( '#[0-9]{5}#', $zcode ) ) {
-						$err[ $key ] = esc_html__( 'Only numbers are allowed in Zipcode field.', 'get-a-quote' );
-						break;
-					} elseif ( strlen( $zcode ) > 7 || strlen( $zcode ) < 4 ) {
-						$err[ $key ] = esc_html__( 'Zipcode length should be less than 7 and more then 4 digits.', 'get-a-quote' );
-						break;
-					} else {
-						$filtered[ $key ] = $zcode;
-						break;
+					$zcode = preg_match( '#[0-9]{5}#', $zcode );
+					if( ! empty ( $zcode ) ) {
+						if ( strlen( $zcode ) > 7 || strlen( $zcode ) < 4 ) {
+							$err[ $key ] = esc_html__( 'Zipcode length should be less than 7 and more then 4 digits.', 'get-a-quote' );
+							break;
+						} else {
+							$filtered[ $key ] = $zcode;
+							break;
+						}
 					}
 
 				case 'State':

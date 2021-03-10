@@ -170,7 +170,6 @@ class Get_a_quote_Onboarding_Steps {
 		if ( $this->mwb_gaq_valid_page_screen_check() || $is_valid ) {
 			// comment the line of code Only when your plugin doesn't uses the Select2.
 			wp_enqueue_style( 'mwb-gaq-onboarding-select2-style', GET_A_QUOTE_DIR_URL . 'package/lib/select-2/get-a-quote-select2.css', array(), time(), 'all' );
-			
 			wp_enqueue_style( 'mwb-gaq-meterial-css', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-css2', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-v5.0-web.min.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-lite', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-lite.min.css', array(), time(), 'all' );
@@ -252,7 +251,6 @@ class Get_a_quote_Onboarding_Steps {
 	 * @since    1.0.0
 	 */
 	public function mwb_gaq_skip_onboarding_popup() {
-
 		$get_skipped_timstamp = update_option( 'mwb_gaq_onboarding_data_skipped', time() );
 		echo json_encode( 'true' );
 		wp_die();
@@ -352,11 +350,11 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-onboard-email',
+				'id' => 'onboard-email',
 				'title' => esc_html__( 'What is the best email address to contact you?', 'get-a-quote' ),
 				'type' => 'email',
 				'description' => '',
-				'name' => 'gaq-email',
+				'name' => 'email',
 				'placeholder' => esc_html__( 'Email', 'get-a-quote' ),
 				'value' => $current_user_email,
 				'required' => 'yes',
@@ -364,11 +362,11 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-onboard-number',
+				'id' => 'onboard-number',
 				'title' => esc_html__( 'What is your contact number?', 'get-a-quote' ),
 				'type' => 'text',
 				'description' => '',
-				'name' => 'gaq-phone',
+				'name' => 'phone',
 				'value' => '',
 				'placeholder' => esc_html__( 'Contact Number', 'get-a-quote' ),
 				'required' => 'yes',
@@ -376,11 +374,11 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-store-name',
+				'id' => 'store-name',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
-				'name' => 'gaq-company',
+				'name' => 'company',
 				'placeholder' => '',
 				'value' => self::$mwb_gaq_store_name,
 				'required' => '',
@@ -388,11 +386,11 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-store-url',
+				'id' => 'store-url',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
-				'name' => 'gaq-website',
+				'name' => 'website',
 				'placeholder' => '',
 				'value' => self::$mwb_gaq_store_url,
 				'required' => '',
@@ -400,24 +398,24 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-show-counter',
+				'id' => 'show-counter',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
 				'placeholder' => '',
-				'name' => 'mwb-gaq-show-counter',
+				'name' => 'show-counter',
 				'value' => get_option( 'mwb_gaq_onboarding_data_sent', 'not-sent' ),
 				'required' => '',
 				'class' => '',
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-plugin-name',
+				'id' => 'plugin-name',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
 				'placeholder' => '',
-				'name' => 'gaq_org_plugin_name',
+				'name' => 'org_plugin_name',
 				'value' => self::$mwb_gaq_plugin_name,
 				'required' => '',
 				'class' => '',
@@ -495,11 +493,11 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-admin-email',
+				'id' => 'admin-email',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
-				'name' => 'gaq_email',
+				'name' => 'email',
 				'placeholder' => '',
 				'value' => $current_user_email,
 				'required' => '',
@@ -507,23 +505,23 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-store-name',
+				'id' => 'store-name',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
 				'placeholder' => '',
-				'name' => 'gaq_company',
+				'name' => 'company',
 				'value' => self::$mwb_gaq_store_name,
 				'required' => '',
 				'class' => '',
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-store-url',
+				'id' => 'store-url',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
-				'name' => 'gaq_website',
+				'name' => 'website',
 				'placeholder' => '',
 				'value' => self::$mwb_gaq_store_url,
 				'required' => '',
@@ -531,12 +529,12 @@ class Get_a_quote_Onboarding_Steps {
 			),
 
 			rand() => array(
-				'id' => 'mwb-gaq-plugin-name',
+				'id' => 'plugin-name',
 				'title' => '',
 				'description' => '',
 				'type' => 'hidden',
 				'placeholder' => '',
-				'name' => 'gaq_org_plugin_name',
+				'name' => 'org_plugin_name',
 				'value' => '',
 				'required' => '',
 				'class' => '',
@@ -553,7 +551,6 @@ class Get_a_quote_Onboarding_Steps {
 	 * @since    1.0.0
 	 */
 	public function mwb_gaq_send_onboarding_data() {
-
 		check_ajax_referer( 'mwb_gaq_onboarding_nonce', 'nonce' );
 
 		$form_data = ! empty( $_POST['form_data'] ) ? json_decode( sanitize_text_field( wp_unslash( $_POST['form_data'] ) ) ) : '';
@@ -597,7 +594,6 @@ class Get_a_quote_Onboarding_Steps {
 		}
 
 		try {
-
 			$found = current(
 				array_filter(
 					$formatted_data,
@@ -626,7 +622,7 @@ class Get_a_quote_Onboarding_Steps {
 		}
 
 		if ( ! empty( $action_type ) && 'onboarding' == $action_type ) {
-			 $get_skipped_timstamp = update_option( 'mwb_gaq_onboarding_data_sent', 'sent' );
+			$get_skipped_timstamp = update_option( 'mwb_gaq_onboarding_data_sent', 'sent' );
 		}
 
 		echo json_encode( $formatted_data );
@@ -648,13 +644,12 @@ class Get_a_quote_Onboarding_Steps {
 				$submission,
 				array(
 					'name'  => 'currency',
-					'value' => get_woocommerce_currency(),
+					'value' => 'USD', //get_woocommerce_currency(),
 				)
 			);
 		}
 
 		$result = $this->mwb_gaq_hubwoo_submit_form( $submission, $action_type );
-
 		if ( true == $result['success'] ) {
 			return true;
 		} else {
@@ -688,8 +683,8 @@ class Get_a_quote_Onboarding_Steps {
 			array(
 				'fields' => $form_data,
 				'context'  => array(
-					'pageUri' => self::$store_url,
-					'pageName' => self::$store_name,
+					'pageUri' => self::$mwb_gaq_store_url,
+					'pageName' => self::$mwb_gaq_store_name,
 					'ipAddress' => $this->mwb_gaq_get_client_ip(),
 				),
 			)
@@ -704,7 +699,6 @@ class Get_a_quote_Onboarding_Steps {
 
 			$result = $response;
 		}
-
 		return $result;
 	}
 
@@ -750,7 +744,6 @@ class Get_a_quote_Onboarding_Steps {
 	private function mwb_gaq_hic_post( $endpoint, $post_params, $headers ) {
 
 		$url = $this->mwb_gaq_base_url . $endpoint;
-
 		$ch = @curl_init();
 		@curl_setopt( $ch, CURLOPT_POST, true );
 		@curl_setopt( $ch, CURLOPT_URL, $url );

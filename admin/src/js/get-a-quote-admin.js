@@ -750,8 +750,15 @@ jQuery(document).ready(function($) {
 
         for (i = 0; i < status.length; i++) {
 
-            $('.mwb_gaq_status_terms ').append("<td class='mwb_active_terms_status' id=" + status[i].term_id + ">" + status[i].name + "<i class='far fa-times-circle' style='font-size:20px'></i></td>");
+            if ( status[i].name == 'Pending') {
+           
+                $('.mwb_gaq_status_terms ').append("<td class='mwb_active_terms_status' id=" + status[i].term_id + ">" + status[i].name + "</td>");
 
+            } else {
+
+                $('.mwb_gaq_status_terms ').append("<td class='mwb_active_terms_status' id=" + status[i].term_id + ">" + status[i].name + "<i class='far fa-times-circle' style='font-size:20px'></i></td>");
+           
+            }
         }
 
     }
@@ -760,8 +767,15 @@ jQuery(document).ready(function($) {
 
         for (i = 0; i < service.length; i++) {
 
-            $('.service_terms ').append("<td class='mwb_active_terms_service' id=" + service[i].term_id + ">" + service[i].name + "<i class='far fa-times-circle' style='font-size:20px'></i></td>");
+            if ( service[i].name == 'Quotation' ) {
+                
+                $('.service_terms ').append("<td class='mwb_active_terms_service' id=" + service[i].term_id + ">" + service[i].name + "</td>");
+           
+            } else {
 
+                $('.service_terms ').append("<td class='mwb_active_terms_service' id=" + service[i].term_id + ">" + service[i].name + "<i class='far fa-times-circle' style='font-size:20px'></i></td>");
+           
+            }
         }
 
     }

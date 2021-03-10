@@ -20,8 +20,7 @@
  * @subpackage Get_a_quote/admin
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_Common
-{
+class Get_a_quote_Common {
 
 	/**
 	 * The ID of this plugin.
@@ -42,6 +41,14 @@ class Get_a_quote_Common
 	private $version;
 
 	/**
+	 * Base url of hubspot api for get-a-quote.
+	 *
+	 * @since 1.0.0
+	 * @var string base url of API.
+	 */
+	private $mwb_gaq_base_url = 'https://api.hsforms.com/';
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -60,8 +67,7 @@ class Get_a_quote_Common
 	 *
 	 * @return void
 	 */
-	public function register_post_type_quote()
-	{
+	public function register_post_type_quote() {
 
 		$labels = array(
 			'name'               => esc_html__( 'Quotes', 'get-a-quote' ),
@@ -82,10 +88,7 @@ class Get_a_quote_Common
 			'quotes',
 			array(
 				'supports'            => array( '' ),
-				'labels'              => array(
-					'name'          => esc_html__( 'Quotes', 'get-a-quote' ),
-					'singular_name' => esc_html__( 'Quote', 'get-a-quote' ),
-				),
+				'labels'              => $labels,
 				'public'              => true,
 				'show_ui'             => true,
 				'show_in_menu'        => true,
@@ -461,7 +464,7 @@ class Get_a_quote_Common
 	}
 
 	/**
-	 * Trigger_form_submission for form submission.
+	 * Disable_new_posts for form submission.
 	 *
 	 * @return void
 	 */
@@ -478,5 +481,6 @@ class Get_a_quote_Common
 		unset( $submenu['edit.php?post_type=quotes'][16] );
 
 	}
+
 
 }

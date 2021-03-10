@@ -192,6 +192,13 @@ class Get_A_Quote_Admin {
 			'instance'  => $this,
 			'function'  => 'gaq_options_menu_html',
 		);
+		$menus[] = array(
+			'name'      => __( 'Overview', 'get-a-quote' ),
+			'slug'      => 'get_a_quote_overview_menu',
+			'menu_link' => 'get_a_quote_overview_menu',
+			'instance'  => $this,
+			'function'  => 'get_a_quote_overview_callback',
+		);
 		return $menus;
 	}
 
@@ -208,6 +215,17 @@ class Get_A_Quote_Admin {
 	}
 
 	/**
+	 * Gaq_options_menu_html
+	 * Admin menu page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function get_a_quote_overview_callback() {
+		include_once GET_A_QUOTE_DIR_PATH . 'admin/partials/get-a-quote-admin-overview.php';
+	}
+
+	/**
+	 * Gaq_options_menu_html
 	 * Admin menu page.
 	 *
 	 * @since    1.0.0
