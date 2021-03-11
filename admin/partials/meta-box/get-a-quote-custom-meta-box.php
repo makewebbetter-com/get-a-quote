@@ -30,6 +30,7 @@ if ( ! empty( $countryarray ) ) {
 
 ?>
 <form action="<?php plugin_dir_url( __FILE__ ) . 'class-get-a-quote-admin.php'; ?>" method="POST" enctype="multipart/form-data">
+	<?php wp_nonce_field( 'mwb_gaq_meta_box_nonce', 'mwb_gaq_meta_form' ); ?>
 	<table class="table">
 		<tr>
 			<th style='font-size: 1.5em;color:#2196f3;

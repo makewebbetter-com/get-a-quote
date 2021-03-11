@@ -69,7 +69,7 @@ function get_a_quote_constants( $key, $value ) {
  */
 function activate_get_a_quote() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-get-a-quote-activator.php';
-	Get_a_quote_Activator::get_a_quote_activate();
+	Get_A_Quote_Activator::get_a_quote_activate();
 	$mwb_gaq_active_plugin = get_option( 'mwb_all_plugins_active', false );
 	if ( is_array( $mwb_gaq_active_plugin ) && ! empty( $mwb_gaq_active_plugin ) ) {
 		$mwb_gaq_active_plugin['get-a-quote'] = array(
@@ -92,7 +92,7 @@ function activate_get_a_quote() {
  */
 function deactivate_get_a_quote() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-get-a-quote-deactivator.php';
-	Get_a_quote_Deactivator::get_a_quote_deactivate();
+	Get_A_Quote_Deactivator::get_a_quote_deactivate();
 	$mwb_gaq_deactive_plugin = get_option( 'mwb_all_plugins_active', false );
 	if ( is_array( $mwb_gaq_deactive_plugin ) && ! empty( $mwb_gaq_deactive_plugin ) ) {
 		foreach ( $mwb_gaq_deactive_plugin as $mwb_gaq_deactive_key => $mwb_gaq_deactive ) {
@@ -126,7 +126,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-get-a-quote.php';
 function run_get_a_quote() {
 	define_get_a_quote_constants();
 
-	$gaq_plugin_standard = new Get_a_quote();
+	$gaq_plugin_standard = new Get_A_Quote();
 	$gaq_plugin_standard->gaq_run();
 	$GLOBALS['gaq_mwb_gaq_obj'] = $gaq_plugin_standard;
 

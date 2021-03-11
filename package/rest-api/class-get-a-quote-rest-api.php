@@ -25,7 +25,7 @@
  * @subpackage Get_a_quote/package/rest-api/version1
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_Rest_Api {
+class Get_A_Quote_Rest_Api {
 
 	/**
 	 * The unique identifier of this plugin.
@@ -66,7 +66,7 @@ class Get_a_quote_Rest_Api {
 	/**
 	 * Define endpoints for the plugin.
 	 *
-	 * Uses the Get_a_quote_Rest_Api class in order to create the endpoint
+	 * Uses the Get_A_Quote_Rest_Api class in order to create the endpoint
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -111,7 +111,7 @@ class Get_a_quote_Rest_Api {
 	public function mwb_gaq_default_callback( $request ) {
 
 		require_once GET_A_QUOTE_DIR_PATH . 'package/rest-api/version1/class-get-a-quote-api-process.php';
-		$mwb_gaq_api_obj = new Get_a_quote_Api_Process();
+		$mwb_gaq_api_obj = new Get_A_Quote_Api_Process();
 		$mwb_gaq_resultsdata = $mwb_gaq_api_obj->mwb_gaq_default_process( $request );
 		if ( is_array( $mwb_gaq_resultsdata ) && isset( $mwb_gaq_resultsdata['status'] ) && 200 == $mwb_gaq_resultsdata['status'] ) {
 			unset( $mwb_gaq_resultsdata['status'] );

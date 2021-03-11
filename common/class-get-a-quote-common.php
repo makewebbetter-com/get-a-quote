@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -20,7 +19,7 @@
  * @subpackage Get_a_quote/admin
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_Common {
+class Get_A_Quote_Common {
 
 	/**
 	 * The ID of this plugin.
@@ -59,7 +58,7 @@ class Get_a_quote_Common {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->gaq_helper  = Get_A_Quote_Helper::get_instance();
-		$this->gaq_country = GAQCountryManager::get_instance();
+		$this->gaq_country = GAQ_Country_Manager::get_instance();
 	}
 
 	/**
@@ -250,7 +249,7 @@ class Get_a_quote_Common {
 
 			if ( isset( $_POST['datalist'] ) ) {
 
-				$resultf = $_POST['datalist'];
+				$resultf = $data = map_deep( wp_unslash( $_POST['datalist'] ), 'sanitize_text_field' );
 
 				update_option( 'mwb_gaq_edit_form_data', $resultf );
 
@@ -262,9 +261,9 @@ class Get_a_quote_Common {
 
 			if ( isset( $_POST['savinglist'] ) ) {
 
-				$results = $_POST['savinglist'];
+				$data = map_deep( wp_unslash( $_POST['savinglist'] ), 'sanitize_text_field' );
 
-				update_option( 'mwb_gaq_save_form_data', $results );
+				update_option( 'mwb_gaq_save_form_data', $data );
 
 				$results = 'form saved';
 
@@ -274,7 +273,7 @@ class Get_a_quote_Common {
 
 			if ( isset( $_POST['term_name'] ) && isset( $_POST['taxonomy_name'] ) ) {
 
-				$resultt = wp_delete_term( $_POST['term_name'], $_POST['taxonomy_name'] );
+				$resultt = wp_delete_term( sanitize_text_field( wp_unslash($_POST['term_name'] ) ), sanitize_text_field( wp_unslash( $_POST['taxonomy_name'] ) ) );
 
 				echo wp_json_encode( $resultt );
 
@@ -293,22 +292,20 @@ class Get_a_quote_Common {
 	 */
 	public function trigger_form_submission() {
 
+		check_ajax_referer( 'form_data_nonce', 'nonce' );
+
 		if ( isset( $_POST['action'] ) ) {
 
 			$result = $_POST;
 
 			foreach ( $result as $key => $value ) {
-
-				if ( 'action' != $key ) {
-
+				if ( 'action' !== $key ) {
 					$data[ $key ] = $value;
-
 				}
 			}
-
 			$service              = $data['taxo_service'];
 
-			$data                 = $this->gaq_helper->valiDation( $data );
+			$data                 = $this->gaq_helper->vali_dation( $data );
 
 			$data['taxo_service'] = $service;
 

@@ -20,7 +20,7 @@
  * @subpackage Get_a_quote/includes
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_Loader {
+class Get_A_Quote_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

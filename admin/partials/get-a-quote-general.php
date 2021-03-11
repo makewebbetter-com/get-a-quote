@@ -33,7 +33,7 @@ if ( isset( $_POST['general_nonce'] ) ) {
 ?>
 <!--  template file for admin settings. -->
 <form action="" method="POST" class="mwb-gaq-gen-section-form">
-<input type="hidden" name="general_nonce" value="<?php echo wp_create_nonce( 'general-form-nonce' ); ?>"/>
+<input type="hidden" name="general_nonce" value="<?php echo esc_html( wp_create_nonce( 'general-form-nonce' ) ); ?>"/>
 	<div class="gaq-secion-wrap">
 		<?php
 		$gaq_general_html = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_genaral_settings );

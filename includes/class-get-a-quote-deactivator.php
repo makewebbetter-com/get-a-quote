@@ -19,7 +19,7 @@
  * @subpackage Get_a_quote/includes
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_Deactivator {
+class Get_A_Quote_Deactivator {
 
 	/**
 	 * Short Description. (use period)

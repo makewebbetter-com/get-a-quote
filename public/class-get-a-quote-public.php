@@ -14,13 +14,13 @@
  *
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
- * namespace get_a_quote_public.
+ * namespace Get_A_Quote_Public.
  *
  * @package    Get_a_quote
  * @subpackage Get_a_quote/public
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_Public {
+class Get_A_Quote_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -80,6 +80,7 @@ class Get_a_quote_Public {
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'country_ajax' ),
+				'form_nonce' => wp_create_nonce( 'form_data_nonce' ),
 			)
 		);
 		$form_value = empty( get_option( 'mwb_gaq_edit_form_data' ) ) ? '' : get_option( 'mwb_gaq_edit_form_data' );

@@ -26,7 +26,7 @@
  * @subpackage Get_a_quote/includes
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote {
+class Get_A_Quote {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -34,7 +34,7 @@ class Get_a_quote {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Get_a_quote_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Get_A_Quote_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -90,7 +90,7 @@ class Get_a_quote {
 		$this->get_a_quote_locale();
 
 		if ( is_admin() ) {
-			$this->Get_A_Quote_Admin_hooks();
+			$this->get_a_quote_admin_hooks();
 		} else {
 			$this->get_a_quote_public_hooks();
 		}
@@ -104,10 +104,10 @@ class Get_a_quote {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Get_a_quote_Loader. Orchestrates the hooks of the plugin.
-	 * - Get_a_quote_i18n. Defines internationalization functionality.
+	 * - Get_A_Quote_Loader. Orchestrates the hooks of the plugin.
+	 * - Get_A_Quote_I18n. Defines internationalization functionality.
 	 * - Get_A_Quote_Admin. Defines all hooks for the admin area.
-	 * - Get_a_quote_Public. Defines all hooks for the public side of the site.
+	 * - Get_A_Quote_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -139,8 +139,8 @@ class Get_a_quote {
 				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-onboarding-steps.php';
 			}
 
-			if ( class_exists( 'Get_a_quote_Onboarding_Steps' ) ) {
-				$gaq_onboard_steps = new Get_a_quote_Onboarding_Steps();
+			if ( class_exists( 'Get_A_Quote_Onboarding_Steps' ) ) {
+				$gaq_onboard_steps = new Get_A_Quote_Onboarding_Steps();
 			}
 		} else {
 
@@ -160,7 +160,7 @@ class Get_a_quote {
 		// This class is responsible for the country-data-managing.
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-country-manager.php';
 
-		$this->loader = new Get_a_quote_Loader();
+		$this->loader = new Get_A_Quote_Loader();
 
 		$this->gaq_helper = Get_A_Quote_Helper::get_instance();
 
@@ -169,7 +169,7 @@ class Get_a_quote {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Get_a_quote_I18n class in order to set the domain and to register the hook
+	 * Uses the Get_A_Quote_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -177,7 +177,7 @@ class Get_a_quote {
 	 */
 	private function get_a_quote_locale() {
 
-		$plugin_i18n = new Get_a_quote_I18n();
+		$plugin_i18n = new Get_A_Quote_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -190,7 +190,7 @@ class Get_a_quote {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function Get_A_Quote_Admin_hooks() {
+	private function get_a_quote_admin_hooks() {
 
 		$gaq_plugin_admin = new Get_A_Quote_Admin( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
 
@@ -239,13 +239,12 @@ class Get_a_quote {
 	 */
 	private function get_a_quote_common_hooks() {
 
-		$gaq_plugin_common     = new Get_a_quote_Common( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
+		$gaq_plugin_common = new Get_A_Quote_Common( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
 
 		// Remove submenu form quotes post type.
 		$this->loader->add_action( 'admin_menu', $gaq_plugin_common, 'disable_new_posts' );
 
 		$mwb_gaq_enable_option = get_option( 'gaq_enable_quote_form_switch' );
-		// echo '<pre>'; print_r( $mwb_gaq_enable_option ); echo '</pre>'; die();
 		if ( 'on' === $mwb_gaq_enable_option ) {
 			$this->loader->add_action( 'init', $gaq_plugin_common, 'register_post_type_quote' );
 			$mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options' );
@@ -280,7 +279,7 @@ class Get_a_quote {
 	 */
 	private function get_a_quote_public_hooks() {
 
-		$gaq_plugin_public = new Get_a_quote_Public( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
+		$gaq_plugin_public = new Get_A_Quote_Public( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $gaq_plugin_public, 'gaq_public_enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $gaq_plugin_public, 'gaq_public_enqueue_scripts' );
@@ -300,7 +299,7 @@ class Get_a_quote {
 	 */
 	private function get_a_quote_api_hooks() {
 
-		$gaq_plugin_api = new Get_a_quote_Rest_Api( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
+		$gaq_plugin_api = new Get_A_Quote_Rest_Api( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
 
 		$this->loader->add_action( 'rest_api_init', $gaq_plugin_api, 'mwb_gaq_add_endpoint' );
 
@@ -331,7 +330,7 @@ class Get_a_quote {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Get_a_quote_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Get_A_Quote_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function gaq_get_loader() {
 		return $this->loader;
@@ -809,7 +808,7 @@ class Get_a_quote {
 						break;
 
 					case 'html':
-						echo $gaq_component['value'];
+						echo $gaq_component['value']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						break;
 
 					default:

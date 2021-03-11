@@ -23,7 +23,7 @@
  * @subpackage Get_a_quote/includes
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_a_quote_I18n {
+class Get_A_Quote_I18n {
 
 
 	/**

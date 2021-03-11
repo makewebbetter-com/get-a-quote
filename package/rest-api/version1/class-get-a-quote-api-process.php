@@ -12,7 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-if ( ! class_exists( 'Get_a_quote_Api_Process' ) ) {
+if ( ! class_exists( 'Get_A_Quote_Api_Process' ) ) {
 
 	/**
 	 * The plugin API class.
@@ -24,7 +24,7 @@ if ( ! class_exists( 'Get_a_quote_Api_Process' ) ) {
 	 * @subpackage Hydroshop_Api_Management/includes
 	 * @author     MakeWebBetter <makewebbetter.com>
 	 */
-	class Get_a_quote_Api_Process {
+	class Get_A_Quote_Api_Process {
 
 		/**
 		 * Initialize the class and set its properties.

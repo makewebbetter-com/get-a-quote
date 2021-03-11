@@ -9,13 +9,18 @@
  * @subpackage Get_a_quote/admin
  */
 
+/**
+ * The Helper plugin class.
+ *
+ * This class is consist of all the globals functions.
+ */
 class Get_A_Quote_Helper {
 
 	/**
 	 * The single instance of the class.
 	 *
 	 * @since   1.0.0
-	 * @var GAQCountryManager   The single instance of the GAQCountryManager
+	 * @var GAQ_Country_Manager   The single instance of the GAQ_Country_Manager
 	 */
 	protected static $instance = null;
 
@@ -94,8 +99,8 @@ class Get_A_Quote_Helper {
 	/**
 	 * Create_attachment
 	 *
+	 * @param  string $p_id the ID of the post this attachment is for.
 	 * @param  string $file_add should be the path to a file in the upload directory.
-	 * @param  string $p_id he ID of the post this attachment is for.
 	 * @return void
 	 */
 	public function create_attachment( $p_id, $file_add ) {
@@ -165,7 +170,7 @@ class Get_A_Quote_Helper {
 	 * @param array $data data of the array.
 	 * @return array $filtered data.
 	 */
-	public static function valiDation( $data ) {
+	public static function vali_dation( $data ) {
 		$err      = array();
 		$filtered = array();
 		foreach ( $data as $key => $value ) {
@@ -174,7 +179,7 @@ class Get_A_Quote_Helper {
 					$name = $data['firstname'];
 					$name = trim( $name, ' ' );
 					$name = filter_var( $name, FILTER_SANITIZE_STRING );
-					if ( $name == '' ) {
+					if ( '' === $name ) {
 						$err[ $key ] = esc_html__( 'Name field is empty.', 'get-a-quote' );
 						break;
 					} elseif ( is_numeric( $name ) ) {
@@ -190,7 +195,7 @@ class Get_A_Quote_Helper {
 					break;
 				case 'Email':
 					$email = $data['Email'];
-					if ( $email == '' ) {
+					if ( '' === $email ) {
 						$err[ $key ] = esc_html__( 'Email field is empty.', 'get-a-quote' );
 						break;
 					}
@@ -203,7 +208,7 @@ class Get_A_Quote_Helper {
 					}
 				case 'Phone':
 					$phone = $data['Phone'];
-					if ( $phone == '' ) {
+					if ( '' === $phone ) {
 						$err[ $key ] = esc_html__( 'Phone field is empty.', 'get-a-quote' );
 						break;
 					}
@@ -304,13 +309,13 @@ class Get_A_Quote_Helper {
 	 * @param  string $taxoname provides the name of the taxonomy.
 	 * @since 1.0.0
 	 */
-	public function get_taxonomy( $taxoname ) {
-		if ( isset( $_POST['tax_input'] ) ) {
+	public function get_taxonomy( $taxoname, $tax_input ) {
+		if ( ! empty( $tax_input ) ) {
 			$term_id = '';
-			$tax = $_POST['tax_input'];
+			$tax     = $tax_input;
 			if ( isset( $tax[ $taxoname ] ) ) {
 				foreach ( $tax[ $taxoname ] as $key => $value ) {
-					if ( $value != 0 ) {
+					if ( 0 !== $value ) {
 						$term_id = $value;
 					}
 				}
@@ -345,7 +350,7 @@ class Get_A_Quote_Helper {
 
 		$send_to = $details['Email'];
 		$sent    = wp_mail( $send_to, $subject, wp_strip_all_tags( $message ), wp_strip_all_tags( $headers ) );
-		return ( $sent == 1 ) ? 'Mail Sent' : 'Mail not Send';
+		return ( 1 === $sent ) ? 'Mail Sent' : 'Mail not Send';
 	}
 
 	/**

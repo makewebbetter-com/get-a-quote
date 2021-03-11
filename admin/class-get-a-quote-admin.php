@@ -50,7 +50,7 @@ class Get_A_Quote_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->gaq_helper  = Get_A_Quote_Helper::get_instance();
-		$this->gaq_country = GAQCountryManager::get_instance();
+		$this->gaq_country = GAQ_Country_Manager::get_instance();
 	}
 
 	/**
@@ -582,7 +582,7 @@ class Get_A_Quote_Admin {
 			$columns['taxonomy-status'] = esc_html__( 'Quote Status', 'get-a-quote' );
 		}
 		$columns['post_type_email'] = esc_html__( 'Email', 'get-a-quote' );
-		$columns['post_type_phone'] = esc_html__( 'phone', 'get-a-quote' );
+		$columns['post_type_phone'] = esc_html__( 'Phone', 'get-a-quote' );
 		$columns['date']            = esc_html__( 'Date', 'get-a-quote' );
 		return $columns;
 	}
@@ -606,10 +606,9 @@ class Get_A_Quote_Admin {
 				echo esc_html( $email );
 				break;
 			case 'post_type_name':
-				$fname   = ! empty( $details['firstname'] ) ? $details['firstname'] : '';
-				$address = '<a href="' . admin_url( 'post.php?post=' . $post_id . '&amp;action=edit' ) . '"
-                ><strong>' . $fname . '</strong></a>';
-				echo $address;
+				$fname = ! empty( $details['firstname'] ) ? $details['firstname'] : '';
+				$add   = admin_url( 'post.php?post=' . $post_id . '&amp;action=edit' );
+				echo sprintf( '<a href="%s"><strong>%s</strong></a>', esc_html( $add ), esc_html( $fname ) );
 				break;
 			case 'post_type_phone':
 				$phone = ! empty( $details['Phone'] ) ? $details['Phone'] : '';
@@ -619,7 +618,11 @@ class Get_A_Quote_Admin {
 	}
 
 	/**
+	 * Fill_cols.
 	 * Unset columns of the actions shown in the edit row.
+	 *
+	 * @param array  $actions array of the list.
+	 * @param object $post of the post.
 	 */
 	public function fill_cols( $actions, $post ) {
 		if ( 'quotes' === $post->post_type ) {
@@ -635,28 +638,51 @@ class Get_A_Quote_Admin {
 	 * @since    1.0.0
 	 */
 	public function update_quote_callback() {
-		// echo '<pre>'; print_r( $_POST ); echo '</pre>'; die();
+
+		// Return if doing autosave.
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		// Return if doing ajax :: Quick edits.
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return;
+		}
+
+		// Return on post trash, quick-edit, new post.
+		if ( empty( $_POST['action'] ) || 'editpost' !== $_POST['action'] ) {
+			return;
+		}
+
+		// Nonce verification.
+		check_admin_referer( 'mwb_gaq_meta_box_nonce', 'mwb_gaq_meta_form' );
+
 		// quotes post is updated here.
 		$details = $this->gaq_helper->detailed_post_array( get_the_ID() );
 		if ( isset( $_POST['firstname'] ) ) {
-			$post_update_meta                 = array();
-			$post_id                          = get_the_ID();
-			$post_update_meta['taxo_service'] = $this->gaq_helper->get_taxonomy( 'service' );
-			$post_update_meta['status_taxo']  = $this->gaq_helper->get_taxonomy( 'status' );
-			$post_update_meta['firstname']     = ! empty( $_POST['firstname'] ) ? sanitize_text_field( wp_unslash( $_POST['firstname'] ) ) : '';
-			$post_update_meta['Cityname']     = ! empty( $_POST['Cityname'] ) ? sanitize_text_field( wp_unslash( $_POST['Cityname'] ) ) : '';
-			$post_update_meta['Zipcode']      = ! empty( $_POST['Zipcode'] ) ? sanitize_text_field( wp_unslash( $_POST['Zipcode'] ) ) : '';
-			$post_update_meta['State']        = ! empty( $_POST['State'] ) ? sanitize_text_field( wp_unslash( $_POST['State'] ) ) : '';
-			$post_update_meta['Country']      = ! empty( $_POST['Country'] ) ? sanitize_text_field( wp_unslash( $_POST['Country'] ) ) : '';
-			$post_update_meta['Email']        = ! empty( $_POST['Email'] ) ? sanitize_text_field( wp_unslash( $_POST['Email'] ) ) : '';
-			$post_update_meta['Phone']        = ! empty( $_POST['Phone'] ) ? sanitize_text_field( wp_unslash( $_POST['Phone'] ) ) : '';
-			$post_update_meta['Budget']       = ! empty( $_POST['Budget'] ) ? sanitize_text_field( wp_unslash( $_POST['Budget'] ) ) : '';
-			$post_update_meta['Additional']   = ! empty( $_POST['Additional'] ) ? sanitize_text_field( wp_unslash( $_POST['Additional'] ) ) : '';
-			$post_update_meta['filename']     = ! empty( $details['filename'] ) ? sanitize_text_field( wp_unslash( $details['filename'] ) ) : '';
+			$post_update_meta = array();
+			$post_id          = get_the_ID();
+			if ( isset( $_POST['tax_input'] ) ) {
+				$post_update_meta['taxo_service'] = $this->gaq_helper->get_taxonomy( 'service', map_deep( wp_unslash( $_POST['tax_input'] ), 'sanitize_text_field' ) );
+				$post_update_meta['status_taxo']  = $this->gaq_helper->get_taxonomy( 'status', map_deep( wp_unslash( $_POST['tax_input'] ), 'sanitize_text_field' ) );
+			}
+			$post_update_meta['firstname']  = ! empty( $_POST['firstname'] ) ? sanitize_text_field( wp_unslash( $_POST['firstname'] ) ) : '';
+			$post_update_meta['Cityname']   = ! empty( $_POST['Cityname'] ) ? sanitize_text_field( wp_unslash( $_POST['Cityname'] ) ) : '';
+			$post_update_meta['Zipcode']    = ! empty( $_POST['Zipcode'] ) ? sanitize_text_field( wp_unslash( $_POST['Zipcode'] ) ) : '';
+			$post_update_meta['State']      = ! empty( $_POST['State'] ) ? sanitize_text_field( wp_unslash( $_POST['State'] ) ) : '';
+			$post_update_meta['Country']    = ! empty( $_POST['Country'] ) ? sanitize_text_field( wp_unslash( $_POST['Country'] ) ) : '';
+			$post_update_meta['Email']      = ! empty( $_POST['Email'] ) ? sanitize_text_field( wp_unslash( $_POST['Email'] ) ) : '';
+			$post_update_meta['Phone']      = ! empty( $_POST['Phone'] ) ? sanitize_text_field( wp_unslash( $_POST['Phone'] ) ) : '';
+			$post_update_meta['Budget']     = ! empty( $_POST['Budget'] ) ? sanitize_text_field( wp_unslash( $_POST['Budget'] ) ) : '';
+			$post_update_meta['Additional'] = ! empty( $_POST['Additional'] ) ? sanitize_text_field( wp_unslash( $_POST['Additional'] ) ) : '';
+			$post_update_meta['filename']   = ! empty( $details['filename'] ) ? sanitize_text_field( wp_unslash( $details['filename'] ) ) : '';
 			$post_update_meta['status']     = ! empty( $details['status'] ) ? sanitize_text_field( wp_unslash( $details['status'] ) ) : '';
-			$post_update_meta['filelink']     = ! empty( $details['filelink'] ) ? sanitize_text_field( wp_unslash( $details['filelink'] ) ) : '';
+			$post_update_meta['filelink']   = ! empty( $details['filelink'] ) ? sanitize_text_field( wp_unslash( $details['filelink'] ) ) : '';
+
 			if ( ! empty( $post_update_meta ) ) {
+
 				update_post_meta( $post_id, 'quotes_meta', $post_update_meta );
+
 			}
 		}
 	}

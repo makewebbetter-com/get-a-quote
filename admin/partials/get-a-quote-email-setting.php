@@ -45,7 +45,7 @@ $mwb_gaq_activate_email = get_option( 'mwb_gaq_email_fields_data' );
 ?>
 
 <form class="mwb_email_setting_form" action="" method="POST">
-	<input type="hidden" name="email_form_nonce" value="<?php echo wp_create_nonce( 'email-form-nonce' ); ?>"/>
+	<input type="hidden" name="email_form_nonce" value="<?php echo esc_html( wp_create_nonce( 'email-form-nonce' ) ); ?>"/>
 	<div class="wp-tooltip-label">
 		<div class="mwb_gaq_email_sett_table">
 			<table class="form-table mwb_gaq_email_setting">

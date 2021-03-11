@@ -35,7 +35,7 @@ $taxonomies                                = get_terms(
 ?>
 
 <form action="" class="active-from" id='formdata' method="POST" enctype="multipart/form-data">
-	<input type="hidden" name="form_nonce" value="<?php echo wp_create_nonce( 'frontend-form-nonce' ); ?>"/>
+	<input type="hidden" name="form_nonce" value="<?php echo esc_html( wp_create_nonce( 'frontend-form-nonce' ) ); ?>"/>
 	<?php
 	if ( ! empty( $taxonomies ) ) {
 		$taxonomies = json_decode( json_encode( $taxonomies ), true );
@@ -46,7 +46,7 @@ $taxonomies                                = get_terms(
 				<?php
 				foreach ( $taxonomies as $values => $key ) {
 					?>
-					<option class='dropdown-item' value="<?php echo $key['slug']; ?>" <?php selected( $key['slug'] ); ?>> <?php esc_html_e( $key['name'], 'get-a-quote' ); ?></option>
+					<option class='dropdown-item' value="<?php echo esc_html( $key['slug'] ); ?>" <?php selected( $key['slug'] ); ?>> <?php echo esc_html( $key['name'] ); ?></option>
 					<?php
 				}
 				?>

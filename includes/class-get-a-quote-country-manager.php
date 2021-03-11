@@ -6,6 +6,7 @@
  * @copyright   Copyright (c) 2014,  Emarket Design
  * @since 1.0.0
  */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -18,23 +19,23 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @subpackage Get_A_Quote/includes
  * @author     MakeWebBetter <plugins@makewebbetter.com>
  */
-class GAQCountryManager {
+class GAQ_Country_Manager {
 	/**
 	 * The single instance of the class.
 	 *
 	 * @since   1.0.0
-	 * @var GAQCountryManager   The single instance of the GAQCountryManager
+	 * @var GAQ_Country_Manager   The single instance of the GAQ_Country_Manager
 	 */
 	protected static $instance = null;
 
 	/**
-	 * Main GAQCountryManager Instance.
+	 * Main GAQ_Country_Manager Instance.
 	 *
-	 * Ensures only one instance of GAQCountryManager is loaded or can be loaded.
+	 * Ensures only one instance of GAQ_Country_Manager is loaded or can be loaded.
 	 *
 	 * @since 1.0.0
 	 * @static
-	 * @return GAQCountryManager - Main instance.
+	 * @return GAQ_Country_Manager - Main instance.
 	 */
 	public static function get_instance() {
 
@@ -46,9 +47,9 @@ class GAQCountryManager {
 	}
 
 	/**
-	 * Get States.
+	 * Country_states.
 	 *
-	 * @param string $country.
+	 * @param string $country is the selected country.
 	 * @return array A list of states for the selected country.
 	 */
 	public function country_states( $country = 'US' ) {
@@ -137,14 +138,13 @@ class GAQCountryManager {
 	}
 
 	/**
-	 * Get States.
+	 * Get_country_list.
 	 *
-	 * @param string $country.
 	 * @return array A list of states for the selected country.
 	 */
 	public function get_country_list() {
 		return array(
-			'' => 'Select Country',
+			''   => 'Select Country',
 			'US' => 'United States',
 			'CA' => 'Canada',
 			'GB' => 'United Kingdom',
@@ -496,13 +496,13 @@ class GAQCountryManager {
 			'CNN' => 'Cunene',
 			'HUA' => 'Huambo',
 			'HUI' => 'Huíla',
-			'CCU' => 'Kuando Kubango', // Cuando Cubango
-			'CNO' => 'Kwanza-Norte', // Cuanza Norte
-			'CUS' => 'Kwanza-Sul', // Cuanza Sul
+			'CCU' => 'Kuando Kubango',
+			'CNO' => 'Kwanza-Norte',
+			'CUS' => 'Kwanza-Sul',
 			'LUA' => 'Luanda',
-			'LNO' => 'Lunda-Norte', // Lunda Norte
-			'LSU' => 'Lunda-Sul', // Lunda Sul
-			'MAL' => 'Malanje', // Malanje
+			'LNO' => 'Lunda-Norte',
+			'LSU' => 'Lunda-Sul',
+			'MAL' => 'Malanje',
 			'MOX' => 'Moxico',
 			'NAM' => 'Namibe',
 			'UIG' => 'Uíge',
