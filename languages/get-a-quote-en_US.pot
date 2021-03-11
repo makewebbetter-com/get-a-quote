@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Get-A-Quote 1.0.0\n"
-"POT-Creation-Date: 2021-03-11 19:36+0530\n"
-"PO-Revision-Date: 2021-03-11 19:36+0530\n"
+"POT-Creation-Date: 2021-03-11 20:31+0530\n"
+"PO-Revision-Date: 2021-03-11 20:31+0530\n"
 "Last-Translator: \n"
 "Language-Team: MakeWebBetter\n"
 "Language: en_US\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: ../get-a-quote\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: esc_html_e;__;_e;esc_html__;esc_attr_e;esc_url_raw;"
@@ -116,14 +116,14 @@ msgid "Enable Quote Status"
 msgstr ""
 
 #: admin/class-get-a-quote-admin.php:492 admin/class-get-a-quote-admin.php:505
-#: includes/class-get-a-quote.php:480 includes/class-get-a-quote.php:483
-#: includes/class-get-a-quote.php:486
+#: includes/class-get-a-quote.php:461 includes/class-get-a-quote.php:464
+#: includes/class-get-a-quote.php:467
 msgid "Yes"
 msgstr ""
 
 #: admin/class-get-a-quote-admin.php:493 admin/class-get-a-quote-admin.php:506
-#: includes/class-get-a-quote.php:480 includes/class-get-a-quote.php:483
-#: includes/class-get-a-quote.php:486
+#: includes/class-get-a-quote.php:461 includes/class-get-a-quote.php:464
+#: includes/class-get-a-quote.php:467
 msgid "No"
 msgstr ""
 
@@ -861,7 +861,7 @@ msgid "Name field is empty."
 msgstr ""
 
 #: includes/class-get-a-quote-helper.php:186
-msgid "Name is to be character or alpha numeric."
+msgid "Name is to be character or alphanumeric."
 msgstr ""
 
 #: includes/class-get-a-quote-helper.php:199
@@ -877,6 +877,9 @@ msgid "Phone field is empty."
 msgstr ""
 
 #: includes/class-get-a-quote-helper.php:219
+msgid "Enter numbers only in Phone field."
+msgstr ""
+
 #: includes/class-get-a-quote-helper.php:224
 msgid "Enter only number in Phone field."
 msgstr ""
@@ -897,68 +900,68 @@ msgstr ""
 msgid "Only numbers are not allowed in Country."
 msgstr ""
 
-#: includes/class-get-a-quote.php:374
+#: includes/class-get-a-quote.php:355
 msgid "General Setting"
 msgstr ""
 
-#: includes/class-get-a-quote.php:398
+#: includes/class-get-a-quote.php:379
 #, php-format
 msgid ""
 "Unable to locate file at location \"%s\". Some features may not work "
 "properly in this plugin. Please contact us!"
 msgstr ""
 
-#: includes/class-get-a-quote.php:456
+#: includes/class-get-a-quote.php:437
 msgid "N/A (phpversion function does not exist)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:465
+#: includes/class-get-a-quote.php:446
 msgid "N/A (make sure exec function is enabled)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:468
+#: includes/class-get-a-quote.php:449
 msgid "N/A (ABSPATH constant not defined)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:471
+#: includes/class-get-a-quote.php:452
 msgid "N/A (php_uname function does not exist)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:474
+#: includes/class-get-a-quote.php:455
 msgid "N/A (get_bloginfo function does not exist)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:477
+#: includes/class-get-a-quote.php:458
 msgid "N/A (get_option function does not exist)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:489
+#: includes/class-get-a-quote.php:470
 msgid "N/A (count_users function does not exist)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:492
+#: includes/class-get-a-quote.php:473
 msgid "0"
 msgstr ""
 
-#: includes/class-get-a-quote.php:495 includes/class-get-a-quote.php:501
-#: includes/class-get-a-quote.php:504 includes/class-get-a-quote.php:532
-#: includes/class-get-a-quote.php:535
+#: includes/class-get-a-quote.php:476 includes/class-get-a-quote.php:482
+#: includes/class-get-a-quote.php:485 includes/class-get-a-quote.php:513
+#: includes/class-get-a-quote.php:516
 msgid "N/A (ini_get function does not exist)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:498
+#: includes/class-get-a-quote.php:479
 msgid "N/A"
 msgstr ""
 
-#: includes/class-get-a-quote.php:516
+#: includes/class-get-a-quote.php:497
 msgid "N/A (gethostname function does not exist)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:519 includes/class-get-a-quote.php:528
+#: includes/class-get-a-quote.php:500 includes/class-get-a-quote.php:509
 msgid "N/A (make sure exec is enabled)"
 msgstr ""
 
-#: includes/class-get-a-quote.php:538
+#: includes/class-get-a-quote.php:519
 msgid "N/A (file_get_contents function does not exist)"
 msgstr ""
 
