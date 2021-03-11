@@ -65,7 +65,7 @@ class Get_A_Quote_Admin {
 		if ( isset( $screen->id ) && 'edit-quotes' === $screen->id ) {
 			wp_enqueue_style( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'admin/src/scss/get-a-quote-admin-section.css', array(), $this->version, 'all' );
 		}
-		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' === $screen->id ) {
+		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' === $screen->id || 'makewebbetter_page_get_a_quote_overview_menu' === $screen->id ) {
 			wp_enqueue_style( 'bootstrap-css', GET_A_QUOTE_DIR_URL . 'admin/src/scss/bootstrap.min.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'mwb-gaq-select2-css', GET_A_QUOTE_DIR_URL . 'package/lib/select-2/get-a-quote-select2.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-css', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.css', array(), time(), 'all' );
@@ -85,7 +85,7 @@ class Get_A_Quote_Admin {
 	 */
 	public function gaq_admin_enqueue_scripts( $hook ) {
 		$screen = get_current_screen();
-		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' === $screen->id ) {
+		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' === $screen->id || 'makewebbetter_page_get_a_quote_overview_menu' === $screen->id ) {
 			wp_enqueue_script( 'mwb-gaq-select2', GET_A_QUOTE_DIR_URL . 'package/lib/select-2/get-a-quote-select2.js', array( 'jquery' ), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-js', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.js', array(), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-js2', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-v5.0-web.min.js', array(), time(), false );
@@ -154,7 +154,7 @@ class Get_A_Quote_Admin {
 	public function gaq_options_page() {
 		global $submenu;
 		if ( empty( $GLOBALS['admin_page_hooks']['mwb-plugins'] ) ) {
-			add_menu_page( __( 'MakeWebBetter', 'get-a-quote' ), __( 'MakeWebBetter', 'get-a-quote' ), 'manage_options', 'mwb-plugins', array( $this, 'mwb_plugins_listing_page' ), GET_A_QUOTE_DIR_URL . 'admin/src/images/mwb-logo.png', 15 );
+			add_menu_page( 'MakeWebBetter', 'MakeWebBetter', 'manage_options', 'mwb-plugins', array( $this, 'mwb_plugins_listing_page' ), GET_A_QUOTE_DIR_URL . 'admin/src/images/mwb-logo.png', 15 );
 			$gaq_menus = apply_filters( 'mwb_add_plugins_menus_array', array() );
 			if ( is_array( $gaq_menus ) && ! empty( $gaq_menus ) ) {
 				foreach ( $gaq_menus as $gaq_key => $gaq_value ) {
@@ -446,6 +446,25 @@ class Get_A_Quote_Admin {
 	 * @since    1.0.0
 	 * @param array $gaq_settings_template Settings fields.
 	 */
+	public function gaq_admin_taxonomies_button( $gaq_settings_template ) {
+		$gaq_settings_template = array(
+			array(
+				'type'        => 'button',
+				'id'          => 'mwb_gaq_taxonomies_common_settings_save',
+				'name'        => 'mwb_gaq_taxonomies_common_settings_save',
+				'button_text' => __( 'Save Changes', 'get-a-quote' ),
+				'class'       => 'gaq-button-class button-primary save-button taxonomy-save',
+			),
+		);
+		return $gaq_settings_template;
+	}
+
+	/**
+	 * Get-a-quote admin menu page.
+	 *
+	 * @since    1.0.0
+	 * @param array $gaq_settings_template Settings fields.
+	 */
 	public function gaq_admin_taxonomies_settings_page( $gaq_settings_template ) {
 		$values = get_option( 'mwb_gaq_taxonomies_options' );
 		if ( isset( $values ) ) {
@@ -486,52 +505,6 @@ class Get_A_Quote_Admin {
 					'Yes' => __( 'Yes', 'get-a-quote' ),
 					'No'  => __( 'No', 'get-a-quote' ),
 				),
-			),
-			array(
-				'type'  => 'html',
-				'value' => "<table class='form-table mwb_gaq_taxonomy_setting'>
-				<tbody>
-				<tr class='mwb_gaq_status_terms terms'>
-				<th class='status_terms_header sub-heading'>Status</th>
-				<th class='status_terms_btn btn'><a href='#' id='add_status_terms'>Add Status Terms</a></th>
-				<th class='status_terms_sub-heading header'>Active Terms</th>
-				<div class='center hideform' id='mwb_status_add_div'>
-					<i style='float: right;' class='fa fa-times close' aria-hidden='true'></i>
-					<form action='' method='POST'>
-						<?php esc_html_e( 'Term Name', 'get-a-quote' ); ?>
-						<br>
-						<br>
-						<input type='text' name='new_status'>
-						<br><br>
-						<input type='submit' name='mwb_gaq_add_status' value='Add Status Term'>
-					</form>
-				</div>
-				</tr>",
-			),
-			array(
-				'type'  => 'html',
-				'value' => "<tr class='service_terms terms'>
-				<th class='service_terms_header sub-heading'>Service</th>
-				<th class='service_terms_btn btn'><a href='#' id='add_service_terms'>Add Service Terms</a></th>
-				<th class='service_terms_sub-heading header'>Active Terms</th>
-				<div class='center hideform' id='mwb_service_add_div'>
-					<i style='float: right;' class='fa fa-times close' aria-hidden='true'></i>
-					<form action='' method='POST'>
-						<?php esc_html_e( 'Term Name', 'get-a-quote' ); ?>
-						<br>
-						<br>
-						<input type='text' name='new_service'>
-						<br><br>
-						<input type='submit' name='mwb_gaq_add_service' value='Add Service Term'>
-					</form>
-				</div></tr></tbody></table>",
-			),
-			array(
-				'type'        => 'button',
-				'id'          => 'mwb_gaq_taxonomies_common_settings_save',
-				'name'        => 'mwb_gaq_taxonomies_common_settings_save',
-				'button_text' => __( 'Save Changes', 'get-a-quote' ),
-				'class'       => 'gaq-button-class button-primary save-button taxonomy-save',
 			),
 		);
 		return $gaq_settings_template;
@@ -685,6 +658,39 @@ class Get_A_Quote_Admin {
 
 			}
 		}
+	}
+
+	/**
+	 * Get all valid screens to add scripts and templates.
+	 *
+	 * @param array $valid_screens validated screen.
+	 * @since    1.0.0
+	 */
+	public function add_mwb_frontend_screens( $valid_screens = array() ) {
+
+		if ( is_array( $valid_screens ) ) {
+
+			// Push your screen here.
+			array_push( $valid_screens, 'makewebbetter_page_get_a_quote_menu' );
+		}
+		return $valid_screens;
+	}
+
+	/**
+	 * Get all valid slugs to add deactivate popup.
+	 *
+	 * @param array $valid_screens validated screen.
+	 * @since    1.0.0
+	 */
+	public function add_mwb_deactivation_screens( $valid_screens = array() ) {
+
+		if ( is_array( $valid_screens ) ) {
+
+			// Push your screen here.
+			array_push( $valid_screens, 'get-a-quote' );
+		}
+
+		return $valid_screens;
 	}
 
 }

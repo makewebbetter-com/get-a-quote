@@ -183,7 +183,7 @@ class Get_A_Quote_Helper {
 						$err[ $key ] = esc_html__( 'Name field is empty.', 'get-a-quote' );
 						break;
 					} elseif ( is_numeric( $name ) ) {
-						$err[ $key ] = esc_html__( 'Name is to be character or alpha numeric.', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Name is to be character or alphanumeric.', 'get-a-quote' );
 						break;
 					} else {
 						$filtered[ $key ] = $name;
@@ -216,7 +216,7 @@ class Get_A_Quote_Helper {
 					$phone = trim( $phone, '-' );
 					$string = preg_replace( '/[^a-z]/i', '', $phone );
 					if ( ! empty( $string ) ) {
-						$err[ $key ] = esc_html__( 'Enter only number in Phone field.', 'get-a-quote' );
+						$err[ $key ] = esc_html__( 'Enter numbers only in Phone field.', 'get-a-quote' );
 						break;
 					}
 					$phone = filter_var( $phone, FILTER_SANITIZE_NUMBER_INT );
@@ -306,7 +306,8 @@ class Get_A_Quote_Helper {
 	/**
 	 * Get_taxonomy it gets the value of the taxo term.
 	 *
-	 * @param  string $taxoname provides the name of the taxonomy.
+	 * @param string $taxoname provides the name of the taxonomy.
+	 * @param  array  $tax_input tax array for the  taxonomy.
 	 * @since 1.0.0
 	 */
 	public function get_taxonomy( $taxoname, $tax_input ) {

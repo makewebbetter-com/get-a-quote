@@ -243,8 +243,6 @@ jQuery(document).ready(function($) {
 
         result = jQuery(result).remove();
 
-        // alert( result );
-
     });
 
     //Edit icon operation will open the side div and display the edit fields
@@ -872,6 +870,10 @@ function removeTaxo(term_id, taxoname) {
     });
 
 }
+jQuery(document).on('click', '.gaq-overview__help-icon', function() {
+    jQuery('.gaq-overview__help').toggleClass('gaq-help__out');
+
+});
 
 (function($) {
     'use strict';

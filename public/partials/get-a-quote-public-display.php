@@ -14,8 +14,7 @@
 ?>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <p class="notice notice-success is-dismissible success-div"></p>
-<p class="error-div">
-</p>
+<p class="error-div"></p>
 <?php
 if ( isset( $_POST['form_nonce'] ) ) {
 	$form_nonce = sanitize_text_field( wp_unslash( $_POST['form_nonce'] ) );

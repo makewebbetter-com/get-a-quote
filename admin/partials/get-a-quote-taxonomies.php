@@ -52,13 +52,52 @@ $mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', array() )
 
 <form action="" method="POST">
 	<div class="gaq-section-wrap">
-	<?php
-	wp_nonce_field( 'gaq_admin_taxo', 'gaq_admin_taxo_nonce' );
-	global $gaq_mwb_gaq_obj;
-	$gaq_template_settings = apply_filters( 'gaq_taxonomies_settings_array', array() );
-	$gaq_template_html     = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_template_settings );
-	echo esc_html( $gaq_template_html );
-	?>
+		<?php
+		wp_nonce_field( 'gaq_admin_taxo', 'gaq_admin_taxo_nonce' );
+		global $gaq_mwb_gaq_obj;
+		$gaq_template_settings = apply_filters( 'gaq_taxonomies_settings_array', array() );
+		$gaq_template_html     = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_template_settings );
+		?>
+		<table class='form-table mwb_gaq_taxonomy_setting'>
+			<tbody>
+				<tr class='mwb_gaq_status_terms terms'>
+					<th class='status_terms_header sub-heading'><?php esc_html_e( 'Status', 'get-a-quote' ); ?></th>
+					<th class='status_terms_btn btn'><a href='#' id='add_status_terms'><?php esc_html_e( 'Add Status Terms', 'get-a-quote' ); ?></a></th>
+					<th class='status_terms_sub-heading header'><?php esc_html_e( 'Active Terms', 'get-a-quote' ); ?></th>
+					<div class='center hideform' id='mwb_status_add_div'>
+						<i style='float: right;' class='fa fa-times close' aria-hidden='true'></i>
+						<form action='' method='POST'>
+							<?php esc_html_e( 'Term Name', 'get-a-quote' ); ?>
+							<br>
+							<br>
+							<input type='text' name='new_status'>
+							<br><br>
+							<input type='submit' name='mwb_gaq_add_status' value='Add Status Term'>
+						</form>
+					</div>
+				</tr>
+				<tr class='service_terms terms'>
+					<th class='service_terms_header sub-heading'><?php esc_html_e( 'Service', 'get-a-quote' ); ?></th>
+					<th class='service_terms_btn btn'><a href='#' id='add_service_terms'><?php esc_html_e( 'Add Service Terms', 'get-a-quote' ); ?></a></th>
+					<th class='service_terms_sub-heading header'><?php esc_html_e( 'Active Terms', 'get-a-quote' ); ?></th>
+					<div class='center hideform' id='mwb_service_add_div'>
+						<i style='float: right;' class='fa fa-times close' aria-hidden='true'></i>
+						<form action='' method='POST'>
+							<?php esc_html_e( 'Term Name', 'get-a-quote' ); ?>
+							<br>
+							<br>
+							<input type='text' name='new_service'>
+							<br><br>
+							<input type='submit' name='mwb_gaq_add_service' value='Add Service Term'>
+						</form>
+					</div>
+				</tr>
+			</tbody>
+		</table>
+		<?php
+		$gaq_template_settings = apply_filters( 'gaq_taxonomies_button_array', array() );
+		$gaq_template_html     = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_template_settings );
+		?>
 	</div>
 </form>
 <?php

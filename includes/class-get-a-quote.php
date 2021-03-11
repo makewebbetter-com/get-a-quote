@@ -133,23 +133,19 @@ class Get_A_Quote {
 
 			// The class responsible for defining all actions that occur in the admin area.
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-get-a-quote-admin.php';
+			/**
+			 * The class responsible for defining all actions that occur in the onboarding the site data
+			 * in the admin side of the site.
+			 */
+			! class_exists( 'Makewebbetter_Onboarding_Helper' ) && require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-makewebbetter-onboarding-helper.php';
+			$this->onboard = new Makewebbetter_Onboarding_Helper();
 
-			// The class responsible for on-boarding steps for plugin.
-			if ( is_dir( plugin_dir_path( dirname( __FILE__ ) ) . 'onboarding' ) && ! class_exists( 'Get_a_quote_6566^ing_Steps' ) ) {
-				require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-onboarding-steps.php';
-			}
-
-			if ( class_exists( 'Get_A_Quote_Onboarding_Steps' ) ) {
-				$gaq_onboard_steps = new Get_A_Quote_Onboarding_Steps();
-			}
 		} else {
 
 			// The class responsible for defining all actions that occur in the public-facing side of the site.
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-get-a-quote-public.php';
 
 		}
-
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'package/rest-api/class-get-a-quote-rest-api.php';
 
 		// The class is responsible for the common hooks used between admin and public area.
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'common/class-get-a-quote-common.php';
@@ -158,7 +154,7 @@ class Get_A_Quote {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-helper.php';
 
 		// This class is responsible for the country-data-managing.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-get-a-quote-country-manager.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-gaq-country-manager.php';
 
 		$this->loader = new Get_A_Quote_Loader();
 
@@ -215,6 +211,7 @@ class Get_A_Quote {
 		// to register submenu for faq.
 		$this->loader->add_filter( 'mwb_gaq_plugin_standard_admin_settings_tabs', $gaq_plugin_admin, 'gaq_adding_tabs', 10 );
 		$this->loader->add_filter( 'gaq_taxonomies_settings_array', $gaq_plugin_admin, 'gaq_admin_taxonomies_settings_page', 10 );
+		$this->loader->add_filter( 'gaq_taxonomies_button_array', $gaq_plugin_admin, 'gaq_admin_taxonomies_button', 10 );
 		$this->loader->add_filter( 'gaq_email_settings_array', $gaq_plugin_admin, 'gaq_admin_email_settings_page', 10 );
 
 		// Add custom columns to show submission details and editing post row action.
@@ -227,6 +224,11 @@ class Get_A_Quote {
 
 		// Add/Update submission at admin panel.
 		$this->loader->add_action( 'save_post', $gaq_plugin_admin, 'update_quote_callback' );
+
+		// onboarding hook.
+		$this->loader->add_filter( 'mwb_helper_valid_frontend_screens', $gaq_plugin_admin, 'add_mwb_frontend_screens' );
+
+		$this->loader->add_filter( 'mwb_deactivation_supported_slug', $gaq_plugin_admin, 'add_mwb_deactivation_screens' );
 
 	}
 
@@ -805,10 +807,6 @@ class Get_A_Quote {
 						</td>
 					</tr>
 						<?php
-						break;
-
-					case 'html':
-						echo $gaq_component['value']; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						break;
 
 					default:

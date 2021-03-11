@@ -249,7 +249,7 @@ class Get_A_Quote_Common {
 
 			if ( isset( $_POST['datalist'] ) ) {
 
-				$resultf = $data = map_deep( wp_unslash( $_POST['datalist'] ), 'sanitize_text_field' );
+				$resultf = map_deep( wp_unslash( $_POST['datalist'] ), 'sanitize_text_field' );
 
 				update_option( 'mwb_gaq_edit_form_data', $resultf );
 
@@ -273,7 +273,7 @@ class Get_A_Quote_Common {
 
 			if ( isset( $_POST['term_name'] ) && isset( $_POST['taxonomy_name'] ) ) {
 
-				$resultt = wp_delete_term( sanitize_text_field( wp_unslash($_POST['term_name'] ) ), sanitize_text_field( wp_unslash( $_POST['taxonomy_name'] ) ) );
+				$resultt = wp_delete_term( sanitize_text_field( wp_unslash( $_POST['term_name'] ) ), sanitize_text_field( wp_unslash( $_POST['taxonomy_name'] ) ) );
 
 				echo wp_json_encode( $resultt );
 
@@ -404,8 +404,6 @@ class Get_A_Quote_Common {
 					} else {
 
 						$response = 'Failed';
-
-						print_r( $err );
 
 					}
 				} else {
