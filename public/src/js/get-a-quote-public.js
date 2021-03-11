@@ -256,7 +256,6 @@ jQuery(document).ready(function($) {
 		e.preventDefault();
 		
 		var form_data = new FormData(this);
-		// var form_data = JSON.stringify( jQuery( 'form#formdata' ).serializeArray() ); 
 		
 		form_data.append( "action", "trigger_form_submission" );
 		form_data.append( "nonce", gaq_public_param.form_nonce );
