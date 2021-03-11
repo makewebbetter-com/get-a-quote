@@ -95,7 +95,6 @@ class Get_A_Quote {
 			$this->get_a_quote_public_hooks();
 		}
 		$this->get_a_quote_common_hooks();
-		$this->get_a_quote_api_hooks();
 
 	}
 
@@ -288,22 +287,6 @@ class Get_A_Quote {
 
 		/**MY CUSTOM WORK */
 		$this->loader->add_action( 'init', $gaq_plugin_public, 'register_shortcodes' );
-
-	}
-
-
-	/**
-	 * Register all of the hooks related to the api functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function get_a_quote_api_hooks() {
-
-		$gaq_plugin_api = new Get_A_Quote_Rest_Api( $this->gaq_get_plugin_name(), $this->gaq_get_version() );
-
-		$this->loader->add_action( 'rest_api_init', $gaq_plugin_api, 'mwb_gaq_add_endpoint' );
 
 	}
 
