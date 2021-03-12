@@ -3,7 +3,7 @@ Contributors: MakeWebBetter
 Donate link: https://makewebbetter.com/
 Tags: email quote,request quote , quotation ,quote plugin,wordpress quotes  
 Requires at least: 4.0
-Tested up to: 5.6.0
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: 1.0.0
 License: GPLv2 or later

@@ -12,8 +12,8 @@
  * @package           Get_a_quote
  *
  * @wordpress-plugin
- * Plugin Name:       Get-A-Quote
- * Plugin URI:        https://makewebbetter.com/product/get-a-quote/
+ * Plugin Name:       Get A Quote
+ * Plugin URI:        https://wordpress.org/plugins/get-a-quote/
  * Description:       Provides a quote option to request the type of services provided by their store, through the procedure of the form submission.
  * Version:           1.0.0
  * Author:            MakeWebBetter
@@ -22,7 +22,7 @@
  * Domain Path:       /languages
  *
  * Requires at least: 4.0
- * Tested up to:      5.6.0
+ * Tested up to:      5.7
  *
  * License:           GNU General Public License v3.0
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.html

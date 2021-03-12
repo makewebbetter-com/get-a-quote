@@ -711,8 +711,10 @@ td {
 
 .gaq-overview__keywords-image img {
     object-fit: cover;
-    width: 100%;
+    width: auto;
+    max-width: 80px;
 }
+
 
 .gaq-overview__features {
     list-style: none;
@@ -760,6 +762,7 @@ td {
     color: #ffffff;
     flex-grow: 1;
     padding: 30px;
+    border: 1px solid #dddddd;
 }
 
 .gaq-support__connect a {
@@ -784,8 +787,8 @@ td {
 
 .gaq-overview__help {
     background-color: #ffffff;
-    border-radius: 0px 0px 0px 5px;
-    box-shadow: 0px 1px 5px #6f6f6f;
+    border-radius: 0 0 0 5px;
+    box-shadow: 0 4px 10px #efefef;
     max-width: 200px;
     padding: 15px 10px;
     position: fixed;
@@ -799,7 +802,7 @@ td {
     cursor: pointer;
     font-size: 32px;
     font-weight: 800;
-    left: -40px;
+    left: -36px;
     position: absolute;
     top: 41px;
     background: #2196f3;
@@ -812,9 +815,10 @@ td {
 
 .gaq-overview__help h4 {
     margin: 2px 0px 10px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     text-align: center;
+    line-height: 1.5;
 }
 
 .gaq-overview__help-icon:hover {
@@ -857,7 +861,9 @@ td {
     display: flex;
     flex-wrap: wrap;
 }
-
+.gaq-support__icons {
+    margin-top: 25px;
+}
 .gaq-support__list-item {
     margin-right: 15px;
 }

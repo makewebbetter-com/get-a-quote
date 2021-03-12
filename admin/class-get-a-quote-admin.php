@@ -186,7 +186,7 @@ class Get_A_Quote_Admin {
 	 */
 	public function gaq_admin_submenu_page( $menus = array() ) {
 		$menus[] = array(
-			'name'      => __( 'Get-A-Quote', 'get-a-quote' ),
+			'name'      => __( 'Get A Quote', 'get-a-quote' ),
 			'slug'      => 'get_a_quote_menu',
 			'menu_link' => 'get_a_quote_menu',
 			'instance'  => $this,

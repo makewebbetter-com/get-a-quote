@@ -125,8 +125,8 @@
 				<p class="gaq-support__description"><?php echo esc_html_e( 'Receive dedicated ', 'get-a-quote' ); ?><b><?php echo esc_html_e( '24x7 ', 'get-a-quote' ); ?></b>
 															   <?php
 																echo esc_html_e(
-																	'Phone, Email & Skype support. Our Support is ready to assist you regarding any query, issue, or feature request and if that doesn`t help our Technical team will connect with you personally and have your query
-					resolved.',
+																	"Phone, Email & Skype support. Our Support is ready to assist you regarding any query, issue, or feature request and if that doesn't help our Technical team will connect with you personally and have your query
+					resolved.",
 																	'get-a-quote'
 																);
 																?>
@@ -134,7 +134,7 @@
 			</div>
 			<div class="gaq-support__icons">
 				<ul class="gaq-support__list">
-					<li class="gaq-support__list-item"><a href="tel:+91 8765287591"><img src="<?php echo ( sprintf( '%sadmin/src/images/phone-call.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"></a></li>
+					<li class="gaq-support__list-item"><a href="tel:+1(888)575-2397"><img src="<?php echo ( sprintf( '%sadmin/src/images/phone-call.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"></a></li>
 					<li class="gaq-support__list-item"><a href="mailto:ticket@makewebbetter.com"><img src="<?php echo ( sprintf( '%sadmin/src/images/mail.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"></a></li>
 					<li class="gaq-support__list-item"><a href="https://join.skype.com/invite/IKVeNkLHebpC"><img src="<?php echo ( sprintf( '%sadmin/src/images/skype_logo.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"></a></li>
 				</ul>
