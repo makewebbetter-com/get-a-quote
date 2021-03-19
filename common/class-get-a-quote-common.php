@@ -296,7 +296,7 @@ class Get_A_Quote_Common {
 
 		if ( isset( $_POST['action'] ) ) {
 
-			$result = $_POST;
+			$result = map_deep( wp_unslash( $_POST ), 'sanitize_text_field' );
 
 			foreach ( $result as $key => $value ) {
 				if ( 'action' !== $key ) {
@@ -363,7 +363,9 @@ class Get_A_Quote_Common {
 						}
 					}
 
-					$loc     = site_url() . '/wp-content/uploads/quote-submission';
+					$data_dir = wp_upload_dir();
+
+					$loc     = $data_dir['baseurl'] . '/quote-submission';
 
 					$log_dir = WP_CONTENT_DIR . '/uploads/quote-submission';
 

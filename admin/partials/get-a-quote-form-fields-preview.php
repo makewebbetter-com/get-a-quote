@@ -15,7 +15,7 @@
 <div class="mwb_gaq__modal-wrapper">
 	<div class="mwb_gaq__header">
 		<div class="mwb_gaq__logo">
-			<img src="https://mwblive-0obrejwqde.netdna-ssl.com/wp-content/uploads/2018/12/mwb-logo.png" alt="mwb-logo">
+			<img src="<?php echo esc_html( GET_A_QUOTE_DIR_URL . 'admin/src/images/mwb-logo1.png' ); ?>" alt="mwb-logo">
 		</div>
 		<a href='admin.php?page=get_a_quote_menu&gaq_tab=get-a-quote-form-fields' class="mwb_gaq__cross"><i class="fa fa-times fa-3x " id='addclass'></i></a>
 	</div>
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<form class="form-inline">
-			<a href="?page=get_a_quote_menu&gaq_tab=get-a-quote-form-fields-edit" class="btn btn-info" id="mwb_gaq__publishbutton"><?php esc_html_e( 'Back', 'get-a-quote' ); ?></a>
+			<a href="?page=get_a_quote_menu&gaq_tab=get-a-quote-form-fields-edit" class="mwb-btn btn-info-mwb" id="mwb_gaq__publishbutton"><?php esc_html_e( 'Back', 'get-a-quote' ); ?></a>
 		</form>
 	</nav>
 	<div class="mwb_gaq__form">

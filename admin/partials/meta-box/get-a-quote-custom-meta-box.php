@@ -14,7 +14,7 @@ $details      = $this->gaq_helper->detailed_post_array( get_the_ID() );
 $countryarray = $this->gaq_helper->mwb_gaq_get_country_list();
 if ( ! empty( $countryarray ) ) {
 	foreach ( $countryarray as $key => $value ) {
-		if ( ! empty( $details['Country'] ) ) {
+		if ( isset( $details['Country'] ) && ! empty( $details['Country'] ) ) {
 			if ( $details['Country'] === $key ) {
 				$state = $this->gaq_country->country_states( $key );
 				foreach ( $state as $skey => $svalue ) {
@@ -31,7 +31,7 @@ if ( ! empty( $countryarray ) ) {
 ?>
 <form action="<?php plugin_dir_url( __FILE__ ) . 'class-get-a-quote-admin.php'; ?>" method="POST" enctype="multipart/form-data">
 	<?php wp_nonce_field( 'mwb_gaq_meta_box_nonce', 'mwb_gaq_meta_form' ); ?>
-	<table class="table">
+	<table class="mwb-table">
 		<tr>
 			<th style='font-size: 1.5em;color:#2196f3;
 			;padding: 20px 8px;font-weight:600'>

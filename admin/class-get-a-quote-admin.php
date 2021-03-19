@@ -66,7 +66,6 @@ class Get_A_Quote_Admin {
 			wp_enqueue_style( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'admin/src/scss/get-a-quote-admin-section.css', array(), $this->version, 'all' );
 		}
 		if ( isset( $screen->id ) && 'makewebbetter_page_get_a_quote_menu' === $screen->id || 'quotes' === $screen->id || 'makewebbetter_page_get_a_quote_overview_menu' === $screen->id ) {
-			wp_enqueue_style( 'bootstrap-css', GET_A_QUOTE_DIR_URL . 'admin/src/scss/bootstrap.min.css', array(), $this->version, 'all' );
 			wp_enqueue_style( 'mwb-gaq-select2-css', GET_A_QUOTE_DIR_URL . 'package/lib/select-2/get-a-quote-select2.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-css', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.css', array(), time(), 'all' );
 			wp_enqueue_style( 'mwb-gaq-meterial-css2', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-v5.0-web.min.css', array(), time(), 'all' );
@@ -90,10 +89,8 @@ class Get_A_Quote_Admin {
 			wp_enqueue_script( 'mwb-gaq-metarial-js', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-web.min.js', array(), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-js2', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-components-v5.0-web.min.js', array(), time(), false );
 			wp_enqueue_script( 'mwb-gaq-metarial-lite', GET_A_QUOTE_DIR_URL . 'package/lib/material-design/material-lite.min.js', array(), time(), false );
-			wp_enqueue_script( 'sweetalert', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js', array( 'jquery' ), $this->version, false );
-			wp_enqueue_script( 'bootsrap-js', GET_A_QUOTE_DIR_URL . 'admin/src/js/bootstrap.min.js.map', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'sweetalert', GET_A_QUOTE_DIR_URL . 'admin/src/js/sweet-alert.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( 'all-js', GET_A_QUOTE_DIR_URL . 'admin/src/js/all.js', array( 'jquery' ), $this->version, false );
-			wp_enqueue_script( 'bootsrap-map', GET_A_QUOTE_DIR_URL . 'admin/src/js/bootstrap.min.js', array( 'jquery' ), $this->version, false );
 			wp_register_script( $this->plugin_name . 'admin-js', GET_A_QUOTE_DIR_URL . 'admin/src/js/get-a-quote-admin.js', array( 'jquery', 'mwb-gaq-select2', 'mwb-gaq-metarial-js', 'mwb-gaq-metarial-js2', 'mwb-gaq-metarial-lite' ), $this->version, false );
 
 			wp_localize_script(

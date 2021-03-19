@@ -65,7 +65,7 @@
 					</div>
 					<div class="gaq-overview__keywords-text">
 						<h3 class="gaq-overview__keywords-heading"><?php echo esc_html_e( 'Service and quote status taxonomies', 'get-a-quote' ); ?></h3>
-						<p class="gaq-overview__keywords-description"><?php echo esc_html_e( 'The plugin provides you two different types of taxonomies. <b>1) Quote Service Taxonomy</b>, <b>2) Quote Status Taxonomy</b>. Merchants can enable/disable these taxonomies as per their requirements.', 'get-a-quote' ); ?></p>
+						<p class="gaq-overview__keywords-description"><?php echo esc_html_e( 'The plugin provides you two different types of taxonomies (Quote Service Taxonomy & Quote Status Taxonomy). Merchants can enable/disable these taxonomies as per their requirements.', 'get-a-quote' ); ?></p>
 					</div>
 				</div>
 			</div>

@@ -40,8 +40,8 @@ $taxonomies                                = get_terms(
 		$taxonomies = json_decode( json_encode( $taxonomies ), true );
 		if ( ! isset( $taxonomies['errors'] ) ) {
 			?>
-			<label class="form-labels"><?php esc_html_e( 'Type Of Service', 'get-a-quote' ); ?></label><br />
-			<select class="mwb_gaq_taxonomy_display form-select form-control" name="taxo_service">
+			<label class="form-labels"><?php esc_html_e( 'Type Of Service', 'get-a-quote' ); ?></label>
+			<select class="mwb_gaq_taxonomy_display form-select mwb-form-control" name="taxo_service">
 				<?php
 				foreach ( $taxonomies as $values => $key ) {
 					?>
@@ -56,5 +56,5 @@ $taxonomies                                = get_terms(
 	?>
 	<div class="active-front-form mwb_gaq__form--group">
 	</div>
-	<button type="submit" class="btn btn-dark" name="qsubmit" id="form_submit">Submit</button>
+	<button type="submit" class="mwb-btn btn-info-mwb" name="qsubmit" id="form_submit">Submit</button>
 </form>

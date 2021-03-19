@@ -61,8 +61,9 @@ $gaq_default_tabs = $gaq_mwb_gaq_obj->mwb_gaq_plug_default_tabs();
 		<div>
 			<?php
 			do_action( 'mwb_gaq_before_general_settings_form' );
-			// if submenu is directly clicked on woocommerce.
+
 			if ( empty( $gaq_active_tab ) ) {
+
 				$gaq_active_tab = 'mwb_gaq_plug_general';
 			}
 			// look for the path based on the tab id in the admin templates.

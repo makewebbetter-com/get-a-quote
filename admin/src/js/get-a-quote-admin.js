@@ -451,7 +451,7 @@ jQuery(document).ready(function($) {
 
             var divinput = $(this)[0].children[3];
 
-            var cls = 'form-control';
+            var cls = 'mwb-form-control';
 
             var ftype = $(divinput)[0].localName
 
@@ -667,7 +667,7 @@ jQuery(document).ready(function($) {
 
             }
 
-            jQuery(".mwb_display_form ").append('<a href="#" class="btn btn-info">Submit</a>');
+            jQuery(".mwb_display_form ").append('<a href="#" class="mwb-btn btn-info-mwb">Submit</a>');
 
         }
 
@@ -836,6 +836,10 @@ jQuery(document).ready(function($) {
         }
     
     });
+    $('.navbar-toggler-mwb').click(function(){
+        $(".navbar-collapse-mwb").toggleClass('show');
+        $('.navbar-expand-sm-mwb').slideDown();
+    });
 
 });
 
@@ -870,6 +874,7 @@ function removeTaxo(term_id, taxoname) {
     });
 
 }
+
 jQuery(document).on('click', '.gaq-overview__help-icon', function() {
     jQuery('.gaq-overview__help').toggleClass('gaq-help__out');
 
