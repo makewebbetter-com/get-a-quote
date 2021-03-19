@@ -1,0 +1,59 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+ .mwb-form-control {
+    margin-bottom: 20px;
+    margin-top: 5px;
+    width: 80%;
+}
+.active-from{
+    width: 45%;
+}
+.form-labels {
+    display: block;
+}
+.mwb-form-control{
+    font-size: 1rem;
+    padding: 10px 8px!important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-clip: padding-box;
+    background-color: #fff;
+    border-radius: .25rem;
+    border: 1px solid #ced4da;
+    color: #212529;
+    display: block;
+    font-weight: 400;
+    line-height: 1.5;
+    width: 100%;
+    margin-bottom:15px!important;
+}
+.mwb-btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-info-mwb {
+    color: #fff;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+    font-weight: 600;
+    padding: 8px 16px;
+}

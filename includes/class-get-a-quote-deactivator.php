@@ -1,13 +1,12 @@
 <?php
-
 /**
  * Fired during plugin deactivation
  *
- * @link       https://makewebbetter.com
+ * @link       https://makewebbetter.com/
  * @since      1.0.0
  *
- * @package    Get_A_Quote
- * @subpackage Get_A_Quote/includes
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/includes
  */
 
 /**
@@ -16,9 +15,9 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Get_A_Quote
- * @subpackage Get_A_Quote/includes
- * @author     Make Web Better <plugins@makewebbetter.com>
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/includes
+ * @author     makewebbetter <webmaster@makewebbetter.com>
  */
 class Get_A_Quote_Deactivator {
 
@@ -29,8 +28,8 @@ class Get_A_Quote_Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function deactivate() {
-
+	public static function get_a_quote_deactivate() {
+		$page_id = get_option( 'quote_page_id' );
+		wp_delete_post( $page_id );
 	}
-
 }

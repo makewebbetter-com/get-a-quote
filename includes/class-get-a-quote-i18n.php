@@ -1,16 +1,15 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://makewebbetter.com
+ * @link       https://makewebbetter.com/
  * @since      1.0.0
  *
- * @package    Get_A_Quote
- * @subpackage Get_A_Quote/includes
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/includes
  */
 
 /**
@@ -20,11 +19,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Get_A_Quote
- * @subpackage Get_A_Quote/includes
- * @author     Make Web Better <plugins@makewebbetter.com>
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/includes
+ * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_A_Quote_i18n {
+class Get_A_Quote_I18n {
 
 
 	/**

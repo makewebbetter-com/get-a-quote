@@ -1,13 +1,12 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://makewebbetter.com
+ * @link       https://makewebbetter.com/
  * @since      1.0.0
  *
- * @package    Get_A_Quote
- * @subpackage Get_A_Quote/public
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/public
  */
 
 /**
@@ -15,10 +14,11 @@
  *
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
+ * namespace Get_A_Quote_Public.
  *
- * @package    Get_A_Quote
- * @subpackage Get_A_Quote/public
- * @author     Make Web Better <plugins@makewebbetter.com>
+ * @package    Get_a_quote
+ * @subpackage Get_a_quote/public
+ * @author     makewebbetter <webmaster@makewebbetter.com>
  */
 class Get_A_Quote_Public {
 
@@ -44,8 +44,8 @@ class Get_A_Quote_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of the plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -59,21 +59,10 @@ class Get_A_Quote_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function gaq_public_enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Get_A_Quote_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Get_A_Quote_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/get-a-quote-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'public/src/scss/get-a-quote-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'bootstrap-css', GET_A_QUOTE_DIR_URL . 'public/src/scss/bootstrap.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -82,22 +71,51 @@ class Get_A_Quote_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function gaq_public_enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Get_A_Quote_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Get_A_Quote_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/get-a-quote-public.js', array( 'jquery' ), $this->version, false );
-
+		wp_register_script( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'public/src/js/get-a-quote-public.js', array( 'jquery' ), $this->version, false );
+		wp_localize_script(
+			$this->plugin_name,
+			'gaq_public_param',
+			array(
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'country_ajax' ),
+				'form_nonce' => wp_create_nonce( 'form_data_nonce' ),
+			)
+		);
+		$form_value = empty( get_option( 'mwb_gaq_edit_form_data' ) ) ? '' : get_option( 'mwb_gaq_edit_form_data' );
+		wp_localize_script(
+			$this->plugin_name,
+			'php_vars',
+			array(
+				'converted' => $form_value,
+			)
+		);
+		wp_enqueue_script( $this->plugin_name );
 	}
 
+	/**
+	 * Register the required shortcodes.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_shortcodes() {
+		add_shortcode( 'gaq_form_fields', array( $this, 'quote_form_fields' ) );
+	}
+
+	/**
+	 * Render the enabled fields.
+	 *
+	 * @since    1.0.0
+	 */
+	public function quote_form_fields() {
+		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form_switch', 'on' );
+		$data                 = get_option( 'mwb_gaq_edit_form_data' );
+		if ( 'on' === $is_gaq_enable_plugin && '' !== $data ) {
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/get-a-quote-public-display.php';
+		} else {
+			return '';
+		}
+	}
+	// End class file.
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
@@ -8,34 +7,61 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://makewebbetter.com
+ * @link              https://makewebbetter.com/
  * @since             1.0.0
- * @package           Get_A_Quote
+ * @package           Get_a_quote
  *
  * @wordpress-plugin
- * Plugin Name:       Get a Quote
+ * Plugin Name:       Get A Quote
  * Plugin URI:        https://wordpress.org/plugins/get-a-quote/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Provides a quote option to request the type of services provided by their store, through the procedure of the form submission.
  * Version:           1.0.0
- * Author:            Make Web Better
- * Author URI:        https://makewebbetter.com
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Author:            MakeWebBetter
+ * Author URI:        https://makewebbetter.com/
  * Text Domain:       get-a-quote
  * Domain Path:       /languages
+ *
+ * Requires at least: 4.0
+ * Tested up to:      5.7
+ *
+ * License:           GNU General Public License v3.0
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
 /**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Define plugin constants.
+ *
+ * @since             1.0.0
  */
-define( 'GET_A_QUOTE_VERSION', '1.0.0' );
+function define_get_a_quote_constants() {
+
+	get_a_quote_constants( 'GET_A_QUOTE_VERSION', '1.0.0' );
+	get_a_quote_constants( 'GET_A_QUOTE_DIR_PATH', plugin_dir_path( __FILE__ ) );
+	get_a_quote_constants( 'GET_A_QUOTE_DIR_URL', plugin_dir_url( __FILE__ ) );
+	get_a_quote_constants( 'GET_A_QUOTE_SERVER_URL', 'https://makewebbetter.com' );
+	get_a_quote_constants( 'GET_A_QUOTE_ITEM_REFERENCE', 'get-a-quote' );
+}
+
+
+/**
+ * Callable function for defining plugin constants.
+ *
+ * @param   String $key    Key for contant.
+ * @param   String $value   value for contant.
+ * @since             1.0.0
+ */
+function get_a_quote_constants( $key, $value ) {
+
+	if ( ! defined( $key ) ) {
+
+		define( $key, $value );
+	}
+}
 
 /**
  * The code that runs during plugin activation.
@@ -43,7 +69,21 @@ define( 'GET_A_QUOTE_VERSION', '1.0.0' );
  */
 function activate_get_a_quote() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-get-a-quote-activator.php';
-	Get_A_Quote_Activator::activate();
+	Get_A_Quote_Activator::get_a_quote_activate();
+	$mwb_gaq_active_plugin = get_option( 'mwb_all_plugins_active', false );
+	if ( is_array( $mwb_gaq_active_plugin ) && ! empty( $mwb_gaq_active_plugin ) ) {
+		$mwb_gaq_active_plugin['get-a-quote'] = array(
+			'plugin_name' => __( 'get-a-quote', 'get-a-quote' ),
+			'active' => '1',
+		);
+	} else {
+		$mwb_gaq_active_plugin = array();
+		$mwb_gaq_active_plugin['get-a-quote'] = array(
+			'plugin_name' => __( 'get-a-quote', 'get-a-quote' ),
+			'active' => '1',
+		);
+	}
+	update_option( 'mwb_all_plugins_active', $mwb_gaq_active_plugin );
 }
 
 /**
@@ -52,7 +92,16 @@ function activate_get_a_quote() {
  */
 function deactivate_get_a_quote() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-get-a-quote-deactivator.php';
-	Get_A_Quote_Deactivator::deactivate();
+	Get_A_Quote_Deactivator::get_a_quote_deactivate();
+	$mwb_gaq_deactive_plugin = get_option( 'mwb_all_plugins_active', false );
+	if ( is_array( $mwb_gaq_deactive_plugin ) && ! empty( $mwb_gaq_deactive_plugin ) ) {
+		foreach ( $mwb_gaq_deactive_plugin as $mwb_gaq_deactive_key => $mwb_gaq_deactive ) {
+			if ( 'get-a-quote' === $mwb_gaq_deactive_key ) {
+				$mwb_gaq_deactive_plugin[ $mwb_gaq_deactive_key ]['active'] = '0';
+			}
+		}
+	}
+	update_option( 'mwb_all_plugins_active', $mwb_gaq_deactive_plugin );
 }
 
 register_activation_hook( __FILE__, 'activate_get_a_quote' );
@@ -64,6 +113,7 @@ register_deactivation_hook( __FILE__, 'deactivate_get_a_quote' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-get-a-quote.php';
 
+
 /**
  * Begins execution of the plugin.
  *
@@ -74,9 +124,29 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-get-a-quote.php';
  * @since    1.0.0
  */
 function run_get_a_quote() {
+	define_get_a_quote_constants();
 
-	$plugin = new Get_A_Quote();
-	$plugin->run();
+	$gaq_plugin_standard = new Get_A_Quote();
+	$gaq_plugin_standard->gaq_run();
+	$GLOBALS['gaq_mwb_gaq_obj'] = $gaq_plugin_standard;
 
 }
 run_get_a_quote();
+
+
+// Add settings link on plugin page.
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'get_a_quote_settings_link' );
+
+/**
+ * Settings link.
+ *
+ * @since    1.0.0
+ * @param   Array $links    Settings link array.
+ */
+function get_a_quote_settings_link( $links ) {
+
+	$my_link = array(
+		'<a href="' . admin_url( 'admin.php?page=get_a_quote_menu' ) . '">' . __( 'Settings', 'get-a-quote' ) . '</a>',
+	);
+	return array_merge( $my_link, $links );
+}
