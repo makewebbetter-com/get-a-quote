@@ -47,7 +47,22 @@ function define_get_a_quote_constants() {
 	get_a_quote_constants( 'GET_A_QUOTE_ITEM_REFERENCE', 'get-a-quote' );
 }
 
-
+/**
+ * Adding custom setting links at the plugin activation list.
+ *
+ * @param array  $links_array array containing the links to plugin.
+ * @param string $plugin_file_name plugin file name.
+ * @return array
+ */
+function get_a_quote_custom_settings_at_plugin_tab( $links_array, $plugin_file_name ) {
+	if ( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
+		$links_array[] = '<a href="https://demo.makewebbetter.com/get-a-quote/quote-form/" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Demo.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Demo</a>';
+		$links_array[] = '<a href="https://docs.makewebbetter.com/get-a-quote-for-wordpress/" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Documentation.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Documentation</a>';
+		$links_array[] = '<a href="https://makewebbetter.com/submit-query/" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Support.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Support</a>';
+	}
+	return $links_array;
+}
+add_filter( 'plugin_row_meta', 'get_a_quote_custom_settings_at_plugin_tab', 10, 2 );
 /**
  * Callable function for defining plugin constants.
  *
@@ -129,6 +144,7 @@ function run_get_a_quote() {
 	$gaq_plugin_standard = new Get_A_Quote();
 	$gaq_plugin_standard->gaq_run();
 	$GLOBALS['gaq_mwb_gaq_obj'] = $gaq_plugin_standard;
+	$GLOBALS['error_notice'] = true;
 
 }
 run_get_a_quote();

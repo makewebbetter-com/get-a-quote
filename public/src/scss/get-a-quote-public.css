@@ -2,6 +2,7 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
  .mwb-form-control {
     margin-bottom: 20px;
     margin-top: 5px;
@@ -56,4 +57,12 @@
     border-color: #0dcaf0;
     font-weight: 600;
     padding: 8px 16px;
+}
+
+.mwb_gaq__form--group label {
+    margin: 10px 0;
+}
+.active-front-form.mwb_gaq__form--group + .small label {
+    margin: 10px 0;
+    display: inline-block;
 }

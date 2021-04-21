@@ -74,6 +74,8 @@ class Get_A_Quote_Admin {
 			wp_enqueue_style( $this->plugin_name . '-admin-global', GET_A_QUOTE_DIR_URL . 'admin/src/scss/get-a-quote-admin-global.css', array( 'mwb-gaq-meterial-icons-css' ), time(), 'all' );
 			wp_enqueue_style( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'admin/src/scss/get-a-quote-admin.css', array(), $this->version, 'all' );
 		}
+		wp_enqueue_style( $this->plugin_name . 'custom', GET_A_QUOTE_DIR_URL . 'admin/src/scss/get-a-quote-admin-custom.css', array(), $this->version, 'all' );
+
 	}
 
 	/**
@@ -114,12 +116,15 @@ class Get_A_Quote_Admin {
 					'hide_empty' => false,
 				)
 			);
+			$form_value = empty( get_option( 'mwb_gaq_save_form_data' ) ) ? '' : get_option( 'mwb_gaq_save_form_data' );
 			wp_localize_script(
 				$this->plugin_name . 'admin-js',
 				'taxonomy_values',
 				array(
-					'service' => $terms_service,
-					'status'  => $terms_status,
+					'service'   => $terms_service,
+					'status'    => $terms_status,
+					'converted' => $form_value,
+					'redirect'  => get_option( 'select_for_redirection' ),
 				)
 			);
 			wp_localize_script(
@@ -130,15 +135,6 @@ class Get_A_Quote_Admin {
 					'nonce'    => wp_create_nonce( 'mwb_gaq_edit_form_nonce' ),
 				)
 			);
-			$form_value = empty( get_option( 'mwb_gaq_save_form_data' ) ) ? '' : get_option( 'mwb_gaq_save_form_data' );
-			wp_localize_script(
-				$this->plugin_name . 'admin-js',
-				'form_variables',
-				array(
-					'converted' => $form_value,
-				)
-			);
-
 			wp_enqueue_script( $this->plugin_name . 'admin-js' );
 		}
 	}
@@ -151,7 +147,7 @@ class Get_A_Quote_Admin {
 	public function gaq_options_page() {
 		global $submenu;
 		if ( empty( $GLOBALS['admin_page_hooks']['mwb-plugins'] ) ) {
-			add_menu_page( 'MakeWebBetter', 'MakeWebBetter', 'manage_options', 'mwb-plugins', array( $this, 'mwb_plugins_listing_page' ), GET_A_QUOTE_DIR_URL . 'admin/src/images/mwb-logo.png', 15 );
+			add_menu_page( 'MakeWebBetter', 'MakeWebBetter', 'manage_options', 'mwb-plugins', array( $this, 'mwb_plugins_listing_page' ), GET_A_QUOTE_DIR_URL . 'admin/src/images/MWB_White-01-01-01.svg', 15 );
 			$gaq_menus = apply_filters( 'mwb_add_plugins_menus_array', array() );
 			if ( is_array( $gaq_menus ) && ! empty( $gaq_menus ) ) {
 				foreach ( $gaq_menus as $gaq_key => $gaq_value ) {
@@ -189,13 +185,6 @@ class Get_A_Quote_Admin {
 			'instance'  => $this,
 			'function'  => 'gaq_options_menu_html',
 		);
-		$menus[] = array(
-			'name'      => __( 'Overview', 'get-a-quote' ),
-			'slug'      => 'get_a_quote_overview_menu',
-			'menu_link' => 'get_a_quote_overview_menu',
-			'instance'  => $this,
-			'function'  => 'get_a_quote_overview_callback',
-		);
 		return $menus;
 	}
 
@@ -217,20 +206,9 @@ class Get_A_Quote_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function get_a_quote_overview_callback() {
-		include_once GET_A_QUOTE_DIR_PATH . 'admin/partials/get-a-quote-admin-overview.php';
-	}
-
-	/**
-	 * Gaq_options_menu_html
-	 * Admin menu page.
-	 *
-	 * @since    1.0.0
-	 */
 	public function gaq_options_menu_html() {
 		include_once GET_A_QUOTE_DIR_PATH . 'admin/partials/get-a-quote-admin-dashboard.php';
 	}
-
 
 	/**
 	 * Admin menu page.
@@ -239,57 +217,56 @@ class Get_A_Quote_Admin {
 	 * @param array $gaq_settings_general Settings fields.
 	 */
 	public function gaq_admin_general_settings_page( $gaq_settings_general ) {
-		$val = get_option( 'gaq_enable_quote_form_switch' );
-		if ( '' !== $val ) {
-			( 'on' === $val ) ? $val = 'on' : $val = 'off';
+		$val = get_pages();
+		$pages = array();
+		foreach ( $val as $page ) {
+			$pages[ $page->post_name ] = $page->post_name;
 		}
 		$gaq_settings_general = array(
 			array(
 				'title'       => __( 'Enable Quote Form', 'get-a-quote' ),
 				'type'        => 'radio-switch',
 				'description' => __( 'Enable plugin to start the functionality.', 'get-a-quote' ),
-				'for'         => 'gaq_enable_quote_form',
 				'id'          => 'gaq_enable_quote_form',
-				'name'        => 'gaq_enable_quote_form',
-				'value'       => $val,
+				'value'       => get_option( 'gaq_enable_quote_form' ),
 				'class'       => 'gaq-radio-switch-class',
+				'options' => array(
+					'yes' => __( 'YES', 'get-a-quote' ),
+					'no' => __( 'NO', 'get-a-quote' ),
+				),
+			),
+			array(
+				'title'       => __( 'Enable Redirection after Submission', 'get-a-quote' ),
+				'type'        => 'select',
+				'id'          => 'select_for_redirection',
+				'value'       => get_option( 'select_for_redirection' ),
+				'description' => 'Redirect to page after successful submission',
+				'name'        => 'select_for_redirection',
+				'class'       => 'gaq-select-class mwb_gaq_select',
+				'options'     => array(
+					'Yes' => __( 'Yes', 'get-a-quote' ),
+					'No'  => __( 'No', 'get-a-quote' ),
+				),
+			),
+			array(
+				'title'       => __( 'Redirection page', 'get-a-quote' ),
+				'type'        => 'select',
+				'wrap-class'     => 'redirection',
+				'id'          => 'select_page_for_redirection',
+				'value'       => get_option( 'select_page_for_redirection' ),
+				'description' => 'Redirection Page',
+				'name'        => 'select_page_for_redirection',
+				'class'       => 'gaq-select-class mwb_gaq_select',
+				'options'     => $pages,
 			),
 			array(
 				'type'        => 'button',
 				'id'          => 'mwb_gaq_setting_save',
-				'name'        => 'mwb_gaq_setting_save',
 				'button_text' => __( 'Save Changes', 'get-a-quote' ),
 				'class'       => 'gaq-button-class',
 			),
 		);
 		return $gaq_settings_general;
-	}
-
-
-	/**
-	 * Support page tabs.
-	 *
-	 * @since    1.0.0
-	 * @param    Array $mwb_gaq_support Settings fields.
-	 * @return   Array  $mwb_gaq_support
-	 */
-	public function gaq_admin_support_settings_page( $mwb_gaq_support ) {
-		$mwb_gaq_support = array(
-			array(
-				'title'       => __( 'User Guide', 'get-a-quote' ),
-				'description' => __( 'View the detailed guides and documentation to set up your plugin.', 'get-a-quote' ),
-				'link-text'   => __( 'VIEW', 'get-a-quote' ),
-				'link'        => '',
-			),
-			array(
-				'title'       => __( 'Free Support', 'get-a-quote' ),
-				'description' => __( 'Please submit a ticket , our team will respond within 24 hours.', 'get-a-quote' ),
-				'link-text'   => __( 'SUBMIT', 'get-a-quote' ),
-				'link'        => '',
-			),
-		);
-
-		return apply_filters( 'mwb_gaq_add_support_content', $mwb_gaq_support );
 	}
 
 	/**
@@ -299,19 +276,16 @@ class Get_A_Quote_Admin {
 	 */
 	public function gaq_admin_save_tab_settings() {
 
-		global $gaq_mwb_gaq_obj;
+		global $gaq_mwb_gaq_obj, $error_notice;
 		if ( isset( $_POST['general_nonce'] ) ) {
 			$general_form_nonce = sanitize_text_field( wp_unslash( $_POST['general_nonce'] ) );
 			if ( wp_verify_nonce( $general_form_nonce, 'general-form-nonce' ) ) {
 				if ( isset( $_POST['mwb_gaq_setting_save'] ) ) {
-
 					$mwb_gaq_gen_flag = false;
-
 					$gaq_genaral_settings = apply_filters( 'gaq_general_settings_array', array() );
-
-					$gaq_button_index = array_search( 'submit', array_column( $gaq_genaral_settings, 'type' ), true );
-					if ( isset( $gaq_button_index ) && ( null === $gaq_button_index || '' === $gaq_button_index ) ) {
-						$gaq_button_index = array_search( 'button', array_column( $gaq_genaral_settings, 'type' ), true );
+					$gaq_button_index = array_search( 'submit', array_column( $gaq_genaral_settings, 'type' ) );
+					if ( isset( $gaq_button_index ) && ( null == $gaq_button_index || '' == $gaq_button_index ) ) {
+						$gaq_button_index = array_search( 'button', array_column( $gaq_genaral_settings, 'type' ) );
 					}
 					if ( isset( $gaq_button_index ) && '' !== $gaq_button_index ) {
 						unset( $gaq_genaral_settings[ $gaq_button_index ] );
@@ -330,16 +304,15 @@ class Get_A_Quote_Admin {
 						}
 						if ( $mwb_gaq_gen_flag ) {
 							$mwb_gaq_error_text = esc_html__( 'Id of some field is missing', 'get-a-quote' );
-							$gaq_mwb_gaq_obj->mwb_gaq_plug_admin_notice( $mwb_gaq_error_text, 'error' );
 						} else {
-							$mwb_gaq_error_text = esc_html__( 'Settings saved !', 'get-a-quote' );
-							$gaq_mwb_gaq_obj->mwb_gaq_plug_admin_notice( $mwb_gaq_error_text, 'success' );
+							$error_notice = false;
 						}
 					}
 				}
 			}
 		}
 	}
+
 	/**
 	 * Gaq_adding_tabs
 	 *
@@ -349,7 +322,7 @@ class Get_A_Quote_Admin {
 	public function gaq_adding_tabs( $tabs = array() ) {
 		$tabs['get-a-quote-form-fields']   =
 			array(
-				'title' => esc_html__( 'Form Fields', 'get-a-quote' ),
+				'title' => esc_html__( 'Form Settings', 'get-a-quote' ),
 				'name'  => 'get-a-quote-form-fields',
 			);
 		$tabs['get-a-quote-taxonomies']    =
@@ -360,6 +333,10 @@ class Get_A_Quote_Admin {
 		$tabs['get-a-quote-email-setting'] = array(
 			'title' => esc_html__( 'Email Setting', 'get-a-quote' ),
 			'name'  => 'get-a-quote-email-setting',
+		);
+		$tabs['get-a-quote-admin-overview'] = array(
+			'title' => esc_html__( 'Overview', 'get-a-quote' ),
+			'name'  => 'get-a-quote-admin-overview',
 		);
 
 		return $tabs;
@@ -480,6 +457,7 @@ class Get_A_Quote_Admin {
 			array(
 				'title'       => __( 'Enable Quote Status', 'get-a-quote' ),
 				'type'        => 'select',
+				'wrap-class'  => 'mwb_quote_status_gaq',
 				'id'          => 'select_for_status',
 				'value'       => $valsat,
 				'description' => '',
@@ -493,6 +471,7 @@ class Get_A_Quote_Admin {
 			array(
 				'title'       => __( 'Enable Service Type', 'get-a-quote' ),
 				'type'        => 'select',
+				'wrap-class'  => 'mwb_quote_service_gaq',
 				'id'          => 'select_for_services',
 				'value'       => $valser,
 				'description' => '',

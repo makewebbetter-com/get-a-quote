@@ -9,6 +9,8 @@
  * @subpackage Get_a_quote/public
  */
 
+session_start();
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -74,6 +76,7 @@ class Get_A_Quote_Public {
 	public function gaq_public_enqueue_scripts() {
 
 		wp_register_script( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'public/src/js/get-a-quote-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'captcha', 'https://www.google.com/recaptcha/api.js', array(), time(), false );
 		wp_localize_script(
 			$this->plugin_name,
 			'gaq_public_param',
@@ -89,6 +92,8 @@ class Get_A_Quote_Public {
 			'php_vars',
 			array(
 				'converted' => $form_value,
+				'redirect'  => get_option( 'select_for_redirection' ),
+				'red_page'  => get_option( 'select_page_for_redirection' ),
 			)
 		);
 		wp_enqueue_script( $this->plugin_name );
@@ -109,7 +114,7 @@ class Get_A_Quote_Public {
 	 * @since    1.0.0
 	 */
 	public function quote_form_fields() {
-		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form_switch', 'on' );
+		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form', 'on' );
 		$data                 = get_option( 'mwb_gaq_edit_form_data' );
 		if ( 'on' === $is_gaq_enable_plugin && '' !== $data ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/get-a-quote-public-display.php';

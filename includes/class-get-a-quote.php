@@ -200,7 +200,6 @@ class Get_A_Quote {
 		$this->loader->add_filter( 'mwb_add_plugins_menus_array', $gaq_plugin_admin, 'gaq_admin_submenu_page', 15 );
 		$this->loader->add_filter( 'gaq_template_settings_array', $gaq_plugin_admin, 'gaq_admin_template_settings_page', 10 );
 		$this->loader->add_filter( 'gaq_general_settings_array', $gaq_plugin_admin, 'gaq_admin_general_settings_page', 10 );
-		$this->loader->add_filter( 'gaq_support_tab_settings_array', $gaq_plugin_admin, 'gaq_admin_support_settings_page', 10 );
 
 		// Saving tab settings.
 		$this->loader->add_action( 'admin_init', $gaq_plugin_admin, 'gaq_admin_save_tab_settings' );
@@ -245,7 +244,7 @@ class Get_A_Quote {
 		// Remove submenu form quotes post type.
 		$this->loader->add_action( 'admin_menu', $gaq_plugin_common, 'disable_new_posts' );
 
-		$mwb_gaq_enable_option = get_option( 'gaq_enable_quote_form_switch' );
+		$mwb_gaq_enable_option = get_option( 'gaq_enable_quote_form' );
 		if ( 'on' === $mwb_gaq_enable_option ) {
 			$this->loader->add_action( 'init', $gaq_plugin_common, 'register_post_type_quote' );
 			$mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options' );
@@ -631,8 +630,8 @@ class Get_A_Quote {
 					case 'select':
 					case 'multiselect':
 						?>
-					<div class="mwb-form-group">
-						<div class="mwb-form-group__label">
+					<div class="mwb-form-group <?php echo esc_attr( $gaq_component['wrap-class'] ); ?> ">
+						<div class="mwb-form-group__label ">
 							<label class="mwb-form-label" for="<?php echo esc_attr( $gaq_component['id'] ); ?>"><?php echo esc_html( $gaq_component['title'] ); ?></label>
 						</div>
 						<div class="mwb-form-group__control">

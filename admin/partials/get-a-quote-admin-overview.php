@@ -30,13 +30,18 @@
 			?>
 			</p>
 			<h3><?php echo esc_html_e( 'With our Get A Quote for WordPress plugin you can:', 'get-a-quote' ); ?></h3>
-			<ul class="gaq-overview__features">
-				<li><?php echo esc_html_e( 'Add a quote form on your website', 'get-a-quote' ); ?></li>
-				<li><?php echo esc_html_e( 'Notify customers for their quote submission through emails', 'get-a-quote' ); ?></li>
-				<li><?php echo esc_html_e( 'Enable/Disable your quotation form fields', 'get-a-quote' ); ?></li>
-				<li><?php echo esc_html_e( 'Enable/Disable service and quote status taxonomy', 'get-a-quote' ); ?></li>
-				<li><?php echo esc_html_e( 'Add different statuses for your quotation', 'get-a-quote' ); ?></li>
-			</ul>
+			<div class="gaq-overview__features-wrapper">
+				<ul class="gaq-overview__features">
+					<li><?php echo esc_html_e( 'Add a quote form on your website', 'get-a-quote' ); ?></li>
+					<li><?php echo esc_html_e( 'Notify customers for their quote submission through emails', 'get-a-quote' ); ?></li>
+					<li><?php echo esc_html_e( 'Enable/Disable your quotation form fields', 'get-a-quote' ); ?></li>
+					<li><?php echo esc_html_e( 'Enable/Disable service and quote status taxonomy', 'get-a-quote' ); ?></li>
+					<li><?php echo esc_html_e( 'Add different statuses for your quotation', 'get-a-quote' ); ?></li>
+				</ul>
+				<div class="gaq-overview__video--url">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/F9QjJV16-ok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+			</div>
 		</div>
 		<div class="gaq-overview__keywords">
 			<div class="gaq-overview__keywords-item">
@@ -119,31 +124,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="gaq-overview__support">
-			<div class="gaq-support__content">
-				<h2 class="gaq-support__heading"><?php echo esc_html_e( 'Exclusive Support', 'get-a-quote' ); ?></h2>
-				<p class="gaq-support__description"><?php echo esc_html_e( 'Receive dedicated ', 'get-a-quote' ); ?><b><?php echo esc_html_e( '24x7 ', 'get-a-quote' ); ?></b>
-															   <?php
-																echo esc_html_e(
-																	"Phone, Email & Skype support. Our Support is ready to assist you regarding any query, issue, or feature request and if that doesn't help our Technical team will connect with you personally and have your query
-					resolved.",
-																	'get-a-quote'
-																);
-																?>
-				</p>
-			</div>
-			<div class="gaq-support__icons">
-				<ul class="gaq-support__list">
-					<li class="gaq-support__list-item"><a href="tel:+1(888)575-2397"><img src="<?php echo ( sprintf( '%sadmin/src/images/phone-call.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"></a></li>
-					<li class="gaq-support__list-item"><a href="mailto:ticket@makewebbetter.com"><img src="<?php echo ( sprintf( '%sadmin/src/images/mail.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"></a></li>
-					<li class="gaq-support__list-item"><a href="https://join.skype.com/invite/IKVeNkLHebpC"><img src="<?php echo ( sprintf( '%sadmin/src/images/skype_logo.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"></a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="gaq-overview__help">
-			<div class="gaq-overview__help-icon"><span></span></div>
-			<h4><?php echo esc_html_e( 'Connect with us in one click', 'get-a-quote' ); ?></h4>
-			<a href="https://join.skype.com/invite/IKVeNkLHebpC"> <img src="<?php echo ( sprintf( '%sadmin/src/images/skype_logo.png', esc_html( GET_A_QUOTE_DIR_URL ) ) ); ?>" alt="Icon"><span><?php echo esc_html_e( 'Connect', 'get-a-quote' ); ?></span></a>
-		</div>
+	
 	</div>
 </div>

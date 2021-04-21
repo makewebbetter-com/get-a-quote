@@ -25,11 +25,11 @@ $form_fields = apply_filters( 'mwb_deactivation_form_fields', array() );
 		<div class="mwb-on-boarding-wrapper">
 			<div class="mwb-on-boarding-close-btn">
 				<a href="#">
-					<span class="close-form"><?php esc_html_e( 'x', 'membership-for-woocommerce' ); ?></span>
+					<span class="close-form"><?php esc_html_e( 'x', 'get-a-quote' ); ?></span>
 				</a>
 			</div>
 			<h3 class="mwb-on-boarding-heading"></h3>
-			<p class="mwb-on-boarding-desc"><?php esc_html_e( 'May we have a little info about why you are deactivating?', 'text-domain' ); ?></p>
+			<p class="mwb-on-boarding-desc"><?php esc_html_e( 'May we have a little info about why you are deactivating?', 'get-a-quote' ); ?></p>
 			<form action="#" method="post" class="mwb-on-boarding-form">
 				<?php foreach ( $form_fields as $key => $field_attr ) : ?>
 					<?php $this->render_field_html( $field_attr, 'deactivating' ); ?>
@@ -39,7 +39,7 @@ $form_fields = apply_filters( 'mwb_deactivation_form_fields', array() );
 					<input type="submit" class="mwb-on-boarding-submit mwb-on-boarding-verify " value="Send Us">
 				</div>
 				<div class="mwb-on-boarding-form-no_thanks">
-					<a href="#" class="mwb-deactivation-no_thanks"><?php esc_html_e( 'Skip and Deactivate Now', 'makewebbetter-onboarding' ); ?></a>
+					<a href="#" class="mwb-deactivation-no_thanks"><?php esc_html_e( 'Skip and Deactivate Now', 'get-a-quote' ); ?></a>
 				</div>
 				</div>
 			</form>

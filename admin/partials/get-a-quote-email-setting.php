@@ -34,8 +34,8 @@ if ( isset( $_POST['email_form_nonce'] ) ) {
 		update_option( 'mwb_gaq_email_fields_data', $mwb_gaq_email_fields_settings );
 
 		?>
-		<div class="notice notice-success is-dismissible">
-			<p><strong><?php esc_html_e( 'Settings saved', 'GAQ_TEXT_DOMAIN' ); ?></strong></p>
+		<div class="notice notice-success is-dismissible mwb-gaq__alert-notice">
+			<p><?php esc_html_e( 'Settings saved', 'GAQ_TEXT_DOMAIN' ); ?></p>
 		</div>
 		<?php
 	}
