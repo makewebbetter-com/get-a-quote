@@ -286,7 +286,6 @@ class Get_A_Quote {
 
 		/**MY CUSTOM WORK */
 		$this->loader->add_action( 'init', $gaq_plugin_public, 'register_shortcodes' );
-
 	}
 
 
@@ -630,7 +629,7 @@ class Get_A_Quote {
 					case 'select':
 					case 'multiselect':
 						?>
-					<div class="mwb-form-group <?php echo esc_attr( $gaq_component['wrap-class'] ); ?> ">
+					<div class="mwb-form-group <?php echo ( isset( $gaq_component['wrap-class'] ) ? esc_attr( $gaq_component['wrap-class'] ) : '' ); ?> ">
 						<div class="mwb-form-group__label ">
 							<label class="mwb-form-label" for="<?php echo esc_attr( $gaq_component['id'] ); ?>"><?php echo esc_html( $gaq_component['title'] ); ?></label>
 						</div>

@@ -64,7 +64,6 @@ class Get_A_Quote_Public {
 	public function gaq_public_enqueue_styles() {
 
 		wp_enqueue_style( $this->plugin_name, GET_A_QUOTE_DIR_URL . 'public/src/scss/get-a-quote-public.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'bootstrap-css', GET_A_QUOTE_DIR_URL . 'public/src/scss/bootstrap.min.css', array(), $this->version, 'all' );
 
 	}
 
@@ -114,7 +113,7 @@ class Get_A_Quote_Public {
 	 * @since    1.0.0
 	 */
 	public function quote_form_fields() {
-		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form', 'on' );
+		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form',);
 		$data                 = get_option( 'mwb_gaq_edit_form_data' );
 		if ( 'on' === $is_gaq_enable_plugin && '' !== $data ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/get-a-quote-public-display.php';

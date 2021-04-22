@@ -237,15 +237,13 @@ jQuery(document).ready(function($) {
             setTimeout(function() {
               window.location.pathname = "/" + red_page + "/";
             }, 2000);
+          } else {
+            setTimeout(function() {
+              window.location.pathname = "/quote-form/";
+            }, 4000);
           }
-        } else if (response == "captcha") {
-          $(".success-div").hide();
-
-          $(".error-div").show();
-
-          $("html, body").animate({ scrollTop: 100 }, "slow");
-
-          $(".error-div").html("<b>* Captcha Not Verified </b>");
+        } else if (response == "Deactivated") {
+          window.location["reload"]();
         } else {
           $(".success-div").hide();
 
@@ -259,7 +257,6 @@ jQuery(document).ready(function($) {
     });
   });
 });
-
 (function($) {
   "use strict";
 
