@@ -84,7 +84,7 @@
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-dollar-sign"></span></div>
 				<?php esc_html_e( 'Budget', 'get-a-quote' ); ?>			
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-type="tel" data-required="required" data-lname="phonelabel" data-name="Phone" data-placeholder="86 800-555-1234" data-pattern="[0-9]{2} [0-9]{3}-[0-9]{4}-[0-9]{3}" data-id="phone" data-class="mwb-form-control" data-scope="sphone" data-label="Phone Number">
+			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-type="tel" data-required="required" data-lname="phonelabel" data-name="Phone" data-placeholder="86 8005551234" data-pattern="[0-9]{2} [0-9]{10}" data-id="phone" data-class="mwb-form-control" data-scope="sphone" data-label="Phone Number">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-mobile-alt"></span></div>
 				<?php esc_html_e( 'Phone', 'get-a-quote' ); ?>			
 			</div>

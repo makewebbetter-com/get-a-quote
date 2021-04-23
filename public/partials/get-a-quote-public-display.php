@@ -59,12 +59,12 @@ $taxonomies                                = get_terms(
 	<div class="active-front-form mwb_gaq__form--group">
 	</div>
 	<div class="form-group small clearfix">
-		<label class="checkbox-inline"><?php esc_html_e('Verification Code', 'get-a-quote'); ?></label>
+		<label class="checkbox-inline form-labels"><?php esc_html_e('Verification Code', 'get-a-quote'); ?></label><br>
 		<img src="<?php echo GET_A_QUOTE_DIR_URL . 'public/partials/image.php'; ?>" >
 	</div>
 	<br>
 	<div class="form-group">
-		<input type="text" name="vercode" class="form-control" placeholder="Verfication Code" required="required">
+		<input type="text" name="vercode" class="mwb-form-control" placeholder="Verfication Code" required="required">
 	</div>
 	</div>
 	<button type="submit" class="mwb-btn btn-info-mwb" name="qsubmit" id="form_submit"><?php esc_html_e('Submit', 'get-a-quote'); ?></button>

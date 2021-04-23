@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
       clearTimeout(show_img);
       $("#primary").css("display", "block");
       $(".mwb-gaq-dialog-wrapper").css("display", "none");
-    }, 300);
+    }, 3000);
   });
 
   $(".success-div").hide();
@@ -195,7 +195,7 @@ jQuery(document).ready(function($) {
           success: function(response) {
             if (response != "false") {
               $(
-                '<select id="fstate" class="form-select form-control" name="State">'
+                '<select id="fstate" class="form-select mwb-form-control" name="State">'
               ).insertAfter("#fcountry");
 
               response = JSON.parse(response);
@@ -251,10 +251,6 @@ jQuery(document).ready(function($) {
             setTimeout(function() {
               window.location.pathname = "/" + red_page + "/";
             }, 2000);
-          } else {
-            setTimeout(function() {
-              window.location.pathname = "/quote-form/";
-            }, 4000);
           }
         } else if (response == "Deactivated") {
           window.location["reload"]();
