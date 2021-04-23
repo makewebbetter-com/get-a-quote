@@ -10,6 +10,7 @@
  * @package    Get_a_quote
  * @subpackage Get_a_quote/public/partials
  */
+
 ?>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class="gaq-success-notice">

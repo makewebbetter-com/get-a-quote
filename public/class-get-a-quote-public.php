@@ -113,7 +113,7 @@ class Get_A_Quote_Public {
 	 * @since    1.0.0
 	 */
 	public function quote_form_fields() {
-		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form',);
+		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form');
 		$data                 = get_option( 'mwb_gaq_edit_form_data' );
 		if ( 'on' === $is_gaq_enable_plugin && '' !== $data ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/get-a-quote-public-display.php';
@@ -121,5 +121,30 @@ class Get_A_Quote_Public {
 			return '';
 		}
 	}
+
+	/**
+	 * Custom_loader_function
+	 * public function for the filter to be created.
+	 */
+	public function custom_loader_function() {
+		$value = get_option( 'gaq_enable_quote_form' );
+		if ( 'on' === $value ) {
+			add_action( 'wp_footer', array( $this, 'render_gaq_html' ) );
+		}
+	}
+
+	/**
+	 * Render_gaq_html
+	 * public function for the filter to be created.
+	 */
+	public function render_gaq_html() {
+		wc_get_template(
+			'partials/get-a-quote-loader.php',
+			array(),
+			'',
+			plugin_dir_path( __FILE__ )
+		);
+	}
+
 	// End class file.
 }

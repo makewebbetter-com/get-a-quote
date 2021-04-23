@@ -286,6 +286,8 @@ class Get_A_Quote {
 
 		/**MY CUSTOM WORK */
 		$this->loader->add_action( 'init', $gaq_plugin_public, 'register_shortcodes' );
+		$this->loader->add_action( 'init', $gaq_plugin_public, 'custom_loader_function' );
+
 	}
 
 
@@ -541,7 +543,7 @@ class Get_A_Quote {
 					<div class="mwb-form-group mwb-gaq-<?php echo esc_attr( $gaq_component['type'] ); ?>">
 						<div class="mwb-form-group__label">
 							<label for="<?php echo esc_attr( $gaq_component['id'] ); ?>" class="mwb-form-label"><?php echo esc_html( $gaq_component['title'] ); // WPCS: XSS ok. ?></label>
-						</div>
+							<a aria-hidden="true" class="mdc-text-field-helper-text--persistent mwb-helper-text" title="<?php echo esc_attr( $gaq_component['description'] ); ?>"><i class="fa fa-question-circle" ></i></a></div>
 						<div class="mwb-form-group__control">
 							<label class="mdc-text-field mdc-text-field--outlined">
 								<span class="mdc-notched-outline">
@@ -562,9 +564,6 @@ class Get_A_Quote {
 								placeholder="<?php echo esc_attr( $gaq_component['placeholder'] ); ?>"
 								>
 							</label>
-							<div class="mdc-text-field-helper-line">
-								<div class="mdc-text-field-helper-text--persistent mwb-helper-text" id="" aria-hidden="true"><?php echo esc_attr( $gaq_component['description'] ); ?></div>
-							</div>
 						</div>
 					</div>
 						<?php
@@ -575,6 +574,7 @@ class Get_A_Quote {
 					<div class="mwb-form-group">
 						<div class="mwb-form-group__label">
 							<label for="<?php echo esc_attr( $gaq_component['id'] ); ?>" class="mwb-form-label"><?php echo esc_html( $gaq_component['title'] ); // WPCS: XSS ok. ?></label>
+							<a aria-hidden="true" class="mdc-text-field-helper-text--persistent mwb-helper-text" title="<?php echo esc_attr( $gaq_component['description'] ); ?>"><i class="fa fa-question-circle" ></i></a></div>
 						</div>
 						<div class="mwb-form-group__control">
 							<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
@@ -594,9 +594,6 @@ class Get_A_Quote {
 								>
 								<i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing mwb-password-hidden" tabindex="0" role="button">visibility</i>
 							</label>
-							<div class="mdc-text-field-helper-line">
-								<div class="mdc-text-field-helper-text--persistent mwb-helper-text" id="" aria-hidden="true"><?php echo esc_attr( $gaq_component['description'] ); ?></div>
-							</div>
 						</div>
 					</div>
 						<?php
@@ -607,7 +604,7 @@ class Get_A_Quote {
 					<div class="mwb-form-group">
 						<div class="mwb-form-group__label">
 							<label class="mwb-form-label" for="<?php echo esc_attr( $gaq_component['id'] ); ?>"><?php echo esc_attr( $gaq_component['title'] ); ?></label>
-						</div>
+							<a aria-hidden="true" class="mdc-text-field-helper-text--persistent mwb-helper-text" title="<?php echo esc_attr( $gaq_component['description'] ); ?>"><i class="fa fa-question-circle" ></i></a></div>
 						<div class="mwb-form-group__control">
 							<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea"  	for="text-field-hero-input">
 								<span class="mdc-notched-outline">
@@ -632,6 +629,7 @@ class Get_A_Quote {
 					<div class="mwb-form-group <?php echo ( isset( $gaq_component['wrap-class'] ) ? esc_attr( $gaq_component['wrap-class'] ) : '' ); ?> ">
 						<div class="mwb-form-group__label ">
 							<label class="mwb-form-label" for="<?php echo esc_attr( $gaq_component['id'] ); ?>"><?php echo esc_html( $gaq_component['title'] ); ?></label>
+							<a aria-hidden="true" class="mdc-text-field-helper-text--persistent mwb-helper-text" title="<?php echo esc_attr( $gaq_component['description'] ); ?>"><i class="fa fa-question-circle" ></i></a>
 						</div>
 						<div class="mwb-form-group__control">
 							<div class="mwb-form-select">
@@ -654,7 +652,6 @@ class Get_A_Quote {
 									}
 									?>
 								</select>
-								<label class="mdl-textfield__label" for="octane"><?php echo esc_html( $gaq_component['description'] ); ?></label>
 							</div>
 						</div>
 					</div>
@@ -666,6 +663,7 @@ class Get_A_Quote {
 					<div class="mwb-form-group">
 						<div class="mwb-form-group__label">
 							<label for="<?php echo esc_attr( $gaq_component['id'] ); ?>" class="mwb-form-label"><?php echo esc_html( $gaq_component['title'] ); ?></label>
+							<a aria-hidden="true" class="mdc-text-field-helper-text--persistent mwb-helper-text" title="<?php echo esc_attr( $gaq_component['description'] ); ?>"><i class="fa fa-question-circle" ></i></a>
 						</div>
 						<div class="mwb-form-group__control mwb-pl-4">
 							<div class="mdc-form-field">
@@ -689,7 +687,6 @@ class Get_A_Quote {
 									</div>
 									<div class="mdc-checkbox__ripple"></div>
 								</div>
-								<label for="checkbox-1"><?php echo esc_html( $gaq_component['description'] ); ?></label>
 							</div>
 						</div>
 					</div>
@@ -736,7 +733,8 @@ class Get_A_Quote {
 						?>
 					<div class="mwb-form-group">
 						<div class="mwb-form-group__label">
-							<label for="" class="mwb-form-label"><?php echo esc_html( $gaq_component['title'] ); ?></label>
+							<label for="" class="mwb-form-label"><?php echo esc_html( $gaq_component['title'] ); ?>  </label>
+							<a aria-hidden="true" class="mdc-text-field-helper-text--persistent mwb-helper-text" title="<?php echo esc_attr( $gaq_component['description'] ); ?>"><i class="fa fa-question-circle" ></i></a>
 						</div>
 						<div class="mwb-form-group__control">
 							<div>

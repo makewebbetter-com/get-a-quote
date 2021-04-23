@@ -3,6 +3,19 @@
  * should reside in this file.
  */
 jQuery(document).ready(function($) {
+  // JS for preloader
+  $("#form_submit").on("click", function() {
+    var show_img = setTimeout(function pre() {
+      $("#primary").css("display", "none");
+      $(".mwb-gaq-dialog-wrapper").css("display", "block");
+    }, 300);
+    setTimeout(function preloaded() {
+      clearTimeout(show_img);
+      $("#primary").css("display", "block");
+      $(".mwb-gaq-dialog-wrapper").css("display", "none");
+    }, 300);
+  });
+
   $(".success-div").hide();
 
   $(".error-div").hide();
@@ -208,7 +221,7 @@ jQuery(document).ready(function($) {
     var form_data = new FormData(this);
     form_data.append("action", "trigger_form_submission");
     form_data.append("nonce", gaq_public_param.form_nonce);
-
+    jQuery(".mwb-gaq-dialog-wrapper").show();
     $.ajax({
       url: gaq_public_param.ajaxurl,
 
@@ -223,6 +236,7 @@ jQuery(document).ready(function($) {
       processData: false,
 
       success: function(response) {
+        jQuery(".mwb-gaq-dialog-wrapper").hide();
         if (response == "Success" || response == "updated") {
           $(".error-div").hide();
 

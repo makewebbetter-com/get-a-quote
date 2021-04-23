@@ -240,7 +240,7 @@ class Get_A_Quote_Admin {
 				'type'        => 'select',
 				'id'          => 'select_for_redirection',
 				'value'       => get_option( 'select_for_redirection' ),
-				'description' => 'Redirect to page after successful submission',
+				'description' => __( 'Redirect to page after successful submission', 'get-a-quote' ),
 				'name'        => 'select_for_redirection',
 				'class'       => 'gaq-select-class mwb_gaq_select',
 				'options'     => array(
@@ -366,7 +366,7 @@ class Get_A_Quote_Admin {
 				'id'          => 'mwb_gaq_enable_email_setting',
 				'name'        => 'mwb_gaq_enable_email_setting',
 				'value'       => 'on',
-				'description' => '',
+				'description' => 'Activate this to send the mail on every successful submission of Quote.',
 				'checked'     => $val,
 				'class'       => 'gaq-checkbox-class mwb_gaq_enable_form_input',
 			),
@@ -377,7 +377,7 @@ class Get_A_Quote_Admin {
 				'id'          => 'sender_email',
 				'value'       => $values['sender_email'],
 				'class'       => 'gaq-text-class',
-				'description' => '',
+				'description' => 'Mention the Email-ID here on which you want to answer query.',
 				'placeholder' => __( 'Enter reply back email', 'get-a-quote' ),
 			),
 			array(
@@ -387,7 +387,7 @@ class Get_A_Quote_Admin {
 				'name'        => 'email_subject',
 				'value'       => $values['email_subject'],
 				'class'       => 'gaq-text-class',
-				'description' => '',
+				'description' => 'Mention the subject you want to make in the mail on successful submission',
 				'placeholder' => __( 'Subject Here', 'get-a-quote' ),
 			),
 			array(
@@ -399,7 +399,7 @@ class Get_A_Quote_Admin {
 				'class'       => 'gaq-textarea-class',
 				'rows'        => '5',
 				'cols'        => '10',
-				'description' => '',
+				'description' => 'Mention the message you to send on the successful submission',
 				'placeholder' => __( 'Message Here', 'get-a-quote' ),
 			),
 			array(
@@ -407,7 +407,7 @@ class Get_A_Quote_Admin {
 				'id'          => 'mwb_gaq_email_fields_settings_save',
 				'name'        => 'mwb_gaq_email_fields_settings_save',
 				'button_text' => __( 'Save Changes', 'get-a-quote' ),
-				'description' => '',
+				'description' => 'Activate this to send the mail on every successful submission of Quote.',
 				'class'       => 'gaq-button-class button-primary save-button',
 			),
 		);
@@ -460,7 +460,7 @@ class Get_A_Quote_Admin {
 				'wrap-class'  => 'mwb_quote_status_gaq',
 				'id'          => 'select_for_status',
 				'value'       => $valsat,
-				'description' => '',
+				'description' => 'Enables the status of the quote submitted by the user.',
 				'name'        => 'select_for_status',
 				'class'       => 'gaq-select-class mwb_gaq_select',
 				'options'     => array(
@@ -474,7 +474,7 @@ class Get_A_Quote_Admin {
 				'wrap-class'  => 'mwb_quote_service_gaq',
 				'id'          => 'select_for_services',
 				'value'       => $valser,
-				'description' => '',
+				'description' => 'Enables the service to the customer to query for.',
 				'name'        => 'select_for_services',
 				'class'       => 'gaq-select-class mwb_gaq_select',
 				'options'     => array(
