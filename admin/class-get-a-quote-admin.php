@@ -240,7 +240,7 @@ class Get_A_Quote_Admin {
 				'type'        => 'select',
 				'id'          => 'select_for_redirection',
 				'value'       => get_option( 'select_for_redirection' ),
-				'description' => __( 'Redirect to page after successful submission', 'get-a-quote' ),
+				'description' => 'Redirect to page after successful submission',
 				'name'        => 'select_for_redirection',
 				'class'       => 'gaq-select-class mwb_gaq_select',
 				'options'     => array(
@@ -254,7 +254,7 @@ class Get_A_Quote_Admin {
 				'wrap-class'     => 'redirection',
 				'id'          => 'select_page_for_redirection',
 				'value'       => get_option( 'select_page_for_redirection' ),
-				'description' => 'Redirection Page',
+				'description' => 'Select the page you want user to get redirected',
 				'name'        => 'select_page_for_redirection',
 				'class'       => 'gaq-select-class mwb_gaq_select',
 				'options'     => $pages,
