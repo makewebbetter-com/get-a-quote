@@ -15,7 +15,7 @@
  * Plugin Name:       Get A Quote
  * Plugin URI:        https://wordpress.org/plugins/get-a-quote/
  * Description:       Provides a quote option to request the type of services provided by their store, through the procedure of the form submission.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            MakeWebBetter
  * Author URI:        https://makewebbetter.com/
  * Text Domain:       get-a-quote

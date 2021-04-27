@@ -113,7 +113,7 @@ class Get_A_Quote_Public {
 	 * @since    1.0.0
 	 */
 	public function quote_form_fields() {
-		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form');
+		$is_gaq_enable_plugin = get_option( 'gaq_enable_quote_form' );
 		$data                 = get_option( 'mwb_gaq_edit_form_data' );
 		if ( 'on' === $is_gaq_enable_plugin && '' !== $data ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/get-a-quote-public-display.php';

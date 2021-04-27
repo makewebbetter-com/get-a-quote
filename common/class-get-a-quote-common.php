@@ -19,8 +19,8 @@
  * @subpackage Get_a_quote/admin
  * @author     makewebbetter <webmaster@makewebbetter.com>
  */
-class Get_A_Quote_Common
-{
+class Get_A_Quote_Common {
+
 
 	/**
 	 * The ID of this plugin.
@@ -55,9 +55,8 @@ class Get_A_Quote_Common
 	 * @param string $plugin_name The name of this plugin.
 	 * @param string $version     The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version )
-	{
-		$this->plugin_name = $plugin_name;
+	public function __construct( $plugin_name, $version ) {
+		 $this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->gaq_helper  = Get_A_Quote_Helper::get_instance();
 		$this->gaq_country = GAQ_Country_Manager::get_instance();
@@ -68,42 +67,40 @@ class Get_A_Quote_Common
 	 *
 	 * @return void
 	 */
-	public function register_post_type_quote()
-	{
-
+	public function register_post_type_quote() {
 		$labels = array(
-		'name'               => esc_html__('Quotes', 'get-a-quote'),
-		'singular_name'      => esc_html__('Quote', 'get-a-quote'),
-		'add_new'            => esc_html__('Add New', 'get-a-quote'),
-		'add_new_item'       => esc_html__('Add New Quote', 'get-a-quote'),
-		'edit_item'          => esc_html__('Edit Quote', 'get-a-quote'),
-		'new_item'           => esc_html__('New Quote', 'get-a-quote'),
-		'all_items'          => esc_html__('All Quotes', 'get-a-quote'),
-		'view_item'          => esc_html__('View Quote', 'get-a-quote'),
-		'search_items'       => esc_html__('Search Quotes', 'get-a-quote'),
-		'not_found'          => esc_html__('No Quotes Found', 'get-a-quote'),
-		'not_found_in_trash' => esc_html__('No Quotes Found In Trash', 'get-a-quote'),
-		'menu_name'          => esc_html__('Quotes', 'get-a-quote'),
+			'name'               => esc_html__( 'Quotes', 'get-a-quote' ),
+			'singular_name'      => esc_html__( 'Quote', 'get-a-quote' ),
+			'add_new'            => esc_html__( 'Add New', 'get-a-quote' ),
+			'add_new_item'       => esc_html__( 'Add New Quote', 'get-a-quote' ),
+			'edit_item'          => esc_html__( 'Edit Quote', 'get-a-quote' ),
+			'new_item'           => esc_html__( 'New Quote', 'get-a-quote' ),
+			'all_items'          => esc_html__( 'All Quotes', 'get-a-quote' ),
+			'view_item'          => esc_html__( 'View Quote', 'get-a-quote' ),
+			'search_items'       => esc_html__( 'Search Quotes', 'get-a-quote' ),
+			'not_found'          => esc_html__( 'No Quotes Found', 'get-a-quote' ),
+			'not_found_in_trash' => esc_html__( 'No Quotes Found In Trash', 'get-a-quote' ),
+			'menu_name'          => esc_html__( 'Quotes', 'get-a-quote' ),
 		);
 
 		register_post_type(
 			'quotes',
 			array(
-			'supports'            => array( '' ),
-			'labels'              => $labels,
-			'public'              => true,
-			'show_ui'             => true,
-			'show_in_menu'        => true,
-			'show_in_nav_menus'   => true,
-			'show_in_admin_bar'   => true,
-			'menu_position'       => 10,
-			'menu_icon'           => 'dashicons-twitch',
-			'can_export'          => true,
-			'has_archive'         => false,
-			'exclude_from_search' => false,
-			'publicly_queryable'  => true,
-			'rewrite'             => array( 'slug' => 'quotes-submission' ), // my custom slug.
-			'capability_type'     => 'post',
+				'supports'            => array( '' ),
+				'labels'              => $labels,
+				'public'              => true,
+				'show_ui'             => true,
+				'show_in_menu'        => true,
+				'show_in_nav_menus'   => true,
+				'show_in_admin_bar'   => true,
+				'menu_position'       => 10,
+				'menu_icon'           => 'dashicons-twitch',
+				'can_export'          => true,
+				'has_archive'         => false,
+				'exclude_from_search' => false,
+				'publicly_queryable'  => true,
+				'rewrite'             => array( 'slug' => 'quotes-submission' ), // my custom slug.
+				'capability_type'     => 'post',
 			)
 		);
 	}
@@ -111,99 +108,94 @@ class Get_A_Quote_Common
 	/**
 	 * Gaq_register_taxonomy_service
 	 */
-	public function register_default_taxonomy()
-	{
+	public function register_default_taxonomy() {
 		$labels = array(
-		'name'              => esc_html__('Services', 'GAQ_TEXT_DOMAIN'),
-		'singular_name'     => esc_html__('Service', 'GAQ_TEXT_DOMAIN'),
-		'search_items'      => esc_html__('Search Services', 'GAQ_TEXT_DOMAIN'),
-		'all_items'         => esc_html__('All Services', 'GAQ_TEXT_DOMAIN'),
-		'parent_item'       => esc_html__('Parent Service', 'GAQ_TEXT_DOMAIN'),
-		'parent_item_colon' => esc_html__('Parent Service:', 'GAQ_TEXT_DOMAIN'),
-		'edit_item'         => esc_html__('Edit Service', 'GAQ_TEXT_DOMAIN'),
-		'update_item'       => esc_html__('Update Service', 'GAQ_TEXT_DOMAIN'),
-		'add_new_item'      => esc_html__('Add New Service', 'GAQ_TEXT_DOMAIN'),
-		'new_item_name'     => esc_html__('New Service Name', 'GAQ_TEXT_DOMAIN'),
-		'menu_name'         => esc_html__('Services', 'GAQ_TEXT_DOMAIN'),
+			'name'              => esc_html__( 'Services', 'GAQ_TEXT_DOMAIN' ),
+			'singular_name'     => esc_html__( 'Service', 'GAQ_TEXT_DOMAIN' ),
+			'search_items'      => esc_html__( 'Search Services', 'GAQ_TEXT_DOMAIN' ),
+			'all_items'         => esc_html__( 'All Services', 'GAQ_TEXT_DOMAIN' ),
+			'parent_item'       => esc_html__( 'Parent Service', 'GAQ_TEXT_DOMAIN' ),
+			'parent_item_colon' => esc_html__( 'Parent Service:', 'GAQ_TEXT_DOMAIN' ),
+			'edit_item'         => esc_html__( 'Edit Service', 'GAQ_TEXT_DOMAIN' ),
+			'update_item'       => esc_html__( 'Update Service', 'GAQ_TEXT_DOMAIN' ),
+			'add_new_item'      => esc_html__( 'Add New Service', 'GAQ_TEXT_DOMAIN' ),
+			'new_item_name'     => esc_html__( 'New Service Name', 'GAQ_TEXT_DOMAIN' ),
+			'menu_name'         => esc_html__( 'Services', 'GAQ_TEXT_DOMAIN' ),
 		);
 
 		$args = array(
-		'hierarchical'      => true,
-		'labels'            => $labels,
-		'show_ui'           => true,
-		'show_admin_column' => false,
-		'show_tagcloud'     => true,
-		'query_var'         => true,
-		'rewrite'           => array( 'slug' => 'service' ),
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => false,
+			'show_tagcloud'     => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'service' ),
 		);
 
-		register_taxonomy('service', 'quotes', $args);
+		register_taxonomy( 'service', 'quotes', $args );
 		$register = array(
-		array(
-		'label'       => esc_html__('Quotation', 'get-a-quote'),
-		'description' => esc_html__('Quote', 'get-a-quote'),
-		),
+			array(
+				'label'       => esc_html__( 'Quotation', 'get-a-quote' ),
+				'description' => esc_html__( 'Quote', 'get-a-quote' ),
+			),
 		);
-		$this->gaq_helper->insert_default_quote_taxonomies($register, 'service');
+		$this->gaq_helper->insert_default_quote_taxonomies( $register, 'service' );
 	}
 
 	/**
 	 * Register Quote status.
 	 */
-	public function register_default_taxonomy_quote_status()
-	{
-
+	public function register_default_taxonomy_quote_status() {
 		$labels = array(
-		'name'              => esc_html__('Quote Status', 'get-a-quote'),
-		'singular_name'     => esc_html__('Status', 'get-a-quote'),
-		'search_items'      => esc_html__('Search Status', 'get-a-quote'),
-		'all_items'         => esc_html__('All Status', 'get-a-quote'),
-		'parent_item'       => esc_html__('Parent Status', 'get-a-quote'),
-		'parent_item_colon' => esc_html__('Parent Status:', 'get-a-quote'),
-		'edit_item'         => esc_html('Edit Status'),
-		'update_item'       => esc_html__('Update Status', 'get-a-quote'),
-		'add_new_item'      => esc_html__('Add New Status', 'get-a-quote'),
-		'new_item_name'     => esc_html__('New Status Name', 'get-a-quote'),
-		'menu_name'         => esc_html__('Quote Statuses', 'get-a-quote'),
+			'name'              => esc_html__( 'Quote Status', 'get-a-quote' ),
+			'singular_name'     => esc_html__( 'Status', 'get-a-quote' ),
+			'search_items'      => esc_html__( 'Search Status', 'get-a-quote' ),
+			'all_items'         => esc_html__( 'All Status', 'get-a-quote' ),
+			'parent_item'       => esc_html__( 'Parent Status', 'get-a-quote' ),
+			'parent_item_colon' => esc_html__( 'Parent Status:', 'get-a-quote' ),
+			'edit_item'         => esc_html( 'Edit Status' ),
+			'update_item'       => esc_html__( 'Update Status', 'get-a-quote' ),
+			'add_new_item'      => esc_html__( 'Add New Status', 'get-a-quote' ),
+			'new_item_name'     => esc_html__( 'New Status Name', 'get-a-quote' ),
+			'menu_name'         => esc_html__( 'Quote Statuses', 'get-a-quote' ),
 		);
 		$args   =
 		array(
-		'hierarchical' => true,
-		'labels'       => $labels,
-		'show_ui'      => true,
-		'query_var'    => true,
-		'show_in_rest' => true,
-		'rewrite'      => array( 'slug' => 'status' ),
+			'hierarchical' => true,
+			'labels'       => $labels,
+			'show_ui'      => true,
+			'query_var'    => true,
+			'show_in_rest' => true,
+			'rewrite'      => array( 'slug' => 'status' ),
 		);
 
-		register_taxonomy('status', 'quotes', $args);
+		register_taxonomy( 'status', 'quotes', $args );
 
 		$register = array(
-		array(
-		'label'       => esc_html__('Pending', 'get-a-quote'),
-		'description' => esc_html__('Pending For Review', 'get-a-quote'),
-		),
+			array(
+				'label'       => esc_html__( 'Pending', 'get-a-quote' ),
+				'description' => esc_html__( 'Pending For Review', 'get-a-quote' ),
+			),
 		);
-		$this->gaq_helper->insert_default_quote_taxonomies($register, 'status');
+		$this->gaq_helper->insert_default_quote_taxonomies( $register, 'status' );
 	}
 
 	/**
 	 * Trigger_edit_form_data
 	 * It is for  the edit form setting.
 	 */
-	public function trigger_country_list()
-	{
-
+	public function trigger_country_list() {
 		// Nonce verification.
-		check_ajax_referer('mwb_gaq_edit_form_nonce', '_ajax_nonce');
+		check_ajax_referer( 'mwb_gaq_edit_form_nonce', '_ajax_nonce' );
 
-		if (isset($_POST['action']) ) {
+		if ( isset( $_POST['action'] ) ) {
 
-			if (isset($_POST['message']) ) {
+			if ( isset( $_POST['message'] ) ) {
 
 				$list = $this->gaq_helper->mwb_gaq_get_country_list();
 
-				echo wp_json_encode($list);
+				echo wp_json_encode( $list );
 
 				wp_die();
 			}
@@ -214,29 +206,27 @@ class Get_A_Quote_Common
 	 * Trigger_edit_form_data
 	 * It is for  the edit form setting.
 	 */
-	public function trigger_country_list_public()
-	{
-
+	public function trigger_country_list_public() {
 		// Nonce verification.
-		check_ajax_referer('country_ajax', '_ajax_nonce');
+		check_ajax_referer( 'country_ajax', '_ajax_nonce' );
 
-		if (isset($_POST['action']) ) {
+		if ( isset( $_POST['action'] ) ) {
 
-			if (isset($_POST['message']) && 'get_country_list' === $_POST['message'] ) {
+			if ( isset( $_POST['message'] ) && 'get_country_list' === $_POST['message'] ) {
 
 				$list = $this->gaq_helper->mwb_gaq_get_country_list();
 
-				echo wp_json_encode($list);
+				echo wp_json_encode( $list );
 
 				wp_die();
 			}
 
-			if (isset($_POST['message']) && isset($_POST['country']) ) {
+			if ( isset( $_POST['message'] ) && isset( $_POST['country'] ) ) {
 
-				$country = sanitize_text_field(wp_unslash($_POST['country']));
-				$list    = $this->gaq_country->country_states($country);
+				$country = sanitize_text_field( wp_unslash( $_POST['country'] ) );
+				$list    = $this->gaq_country->country_states( $country );
 
-				echo wp_json_encode($list);
+				echo wp_json_encode( $list );
 
 				wp_die();
 			}
@@ -247,43 +237,41 @@ class Get_A_Quote_Common
 	 * Trigger_edit_form_data
 	 * It is for  the edit form setting.
 	 */
-	public function trigger_edit_form_data()
-	{
-
+	public function trigger_edit_form_data() {
 		// Nonce verification.
-		check_ajax_referer('mwb_gaq_edit_form_nonce', '_ajax_nonce');
+		check_ajax_referer( 'mwb_gaq_edit_form_nonce', '_ajax_nonce' );
 
-		if (isset($_POST['action']) ) {
+		if ( isset( $_POST['action'] ) ) {
 
-			if (isset($_POST['datalist']) ) {
+			if ( isset( $_POST['datalist'] ) ) {
 
-				$resultf = map_deep(wp_unslash($_POST['datalist']), 'sanitize_text_field');
+				$resultf = map_deep( wp_unslash( $_POST['datalist'] ), 'sanitize_text_field' );
 
-				update_option('mwb_gaq_edit_form_data', $resultf);
+				update_option( 'mwb_gaq_edit_form_data', $resultf );
 
 				$resultf = 'success';
 
-				echo wp_json_encode($resultf);
+				echo wp_json_encode( $resultf );
 
 			}
 
-			if (isset($_POST['savinglist']) ) {
+			if ( isset( $_POST['savinglist'] ) ) {
 
-				$data = map_deep(wp_unslash($_POST['savinglist']), 'sanitize_text_field');
+				$data = map_deep( wp_unslash( $_POST['savinglist'] ), 'sanitize_text_field' );
 
-				update_option('mwb_gaq_save_form_data', $data);
+				update_option( 'mwb_gaq_save_form_data', $data );
 
 				$results = 'form saved';
 
-				echo wp_json_encode($results);
+				echo wp_json_encode( $results );
 
 			}
 
-			if (isset($_POST['term_name']) && isset($_POST['taxonomy_name']) ) {
+			if ( isset( $_POST['term_name'] ) && isset( $_POST['taxonomy_name'] ) ) {
 
-				$resultt = wp_delete_term(sanitize_text_field(wp_unslash($_POST['term_name'])), sanitize_text_field(wp_unslash($_POST['taxonomy_name'])));
+				$resultt = wp_delete_term( sanitize_text_field( wp_unslash( $_POST['term_name'] ) ), sanitize_text_field( wp_unslash( $_POST['taxonomy_name'] ) ) );
 
-				echo wp_json_encode($resultt);
+				echo wp_json_encode( $resultt );
 
 			}
 
@@ -298,9 +286,8 @@ class Get_A_Quote_Common
 	 *
 	 * @return void
 	 */
-	public function trigger_form_submission()
-	{
-		session_start();
+	public function trigger_form_submission() {
+		 session_start();
 		if ( 'on' === get_option( 'gaq_enable_quote_form' ) ) {
 
 			check_ajax_referer( 'form_data_nonce', 'nonce' );
@@ -481,18 +468,16 @@ class Get_A_Quote_Common
 	 *
 	 * @return void
 	 */
-	public function disable_new_posts()
-	{
-
+	public function disable_new_posts() {
 		// Hide sidebar link.
 
 		global $submenu;
 
-		unset($submenu['edit.php?post_type=quotes'][10]);
+		unset( $submenu['edit.php?post_type=quotes'][10] );
 
-		unset($submenu['edit.php?post_type=quotes'][15]);
+		unset( $submenu['edit.php?post_type=quotes'][15] );
 
-		unset($submenu['edit.php?post_type=quotes'][16]);
+		unset( $submenu['edit.php?post_type=quotes'][16] );
 
 	}
 

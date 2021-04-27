@@ -177,7 +177,6 @@ function appendNewlement(attrs = []) {
 }
 
 jQuery(document).ready(function($) {
-
   /**
    * Add Class to body when builder is initiated.
    */
@@ -703,7 +702,7 @@ jQuery(document).ready(function($) {
       removeTaxo(id, "service");
     }
   });
-  $(".navbar-toggler-mwb").click(function() {
+  $(".navbar-toggler-mwb").onclick(function() {
     $(".navbar-collapse-mwb").toggleClass("show");
     $(".navbar-expand-sm-mwb").slideDown();
   });
@@ -802,7 +801,7 @@ jQuery(document).on("click", ".gaq-overview__help-icon", function() {
       }
     );
 
-    $(".mwb-password-hidden").click(function() {
+    $(".mwb-password-hidden").onclick(function() {
       if ($(".mwb-form__password").attr("type") == "text") {
         $(".mwb-form__password").attr("type", "password");
       } else {
@@ -821,12 +820,12 @@ jQuery(document).on("click", ".gaq-overview__help-icon", function() {
   });
 })(jQuery);
 
-jQuery(document).ready(function(){
-  if(('.mwb-gaq__alert-notice')||('.mwb-errorr-8')) {
-   setTimeout( function() {
-    jQuery('.mwb-gaq__alert-notice').hide();
-  
-    jQuery('.mwb-errorr-8').hide();
-  }, 1000);
-}
-})
+jQuery(document).ready(function() {
+  if (".mwb-gaq__alert-notice" || ".mwb-errorr-8") {
+    setTimeout(function() {
+      jQuery(".mwb-gaq__alert-notice").hide();
+
+      jQuery(".mwb-errorr-8").hide();
+    }, 1000);
+  }
+});

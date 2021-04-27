@@ -235,6 +235,7 @@ class Get_A_Quote_Admin {
 					'no' => __( 'NO', 'get-a-quote' ),
 				),
 			),
+			// Feature Update in the version v1.0.1 Redirection After Submission.
 			array(
 				'title'       => __( 'Enable Redirection after Submission', 'get-a-quote' ),
 				'type'        => 'select',
@@ -248,6 +249,7 @@ class Get_A_Quote_Admin {
 					'No'  => __( 'No', 'get-a-quote' ),
 				),
 			),
+			// Feature Update in the version v1.0.1 Redirection After Submission.
 			array(
 				'title'       => __( 'Redirection page', 'get-a-quote' ),
 				'type'        => 'select',
