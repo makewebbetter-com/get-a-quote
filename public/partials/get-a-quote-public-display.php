@@ -25,8 +25,7 @@ if ( isset( $_POST['form_nonce'] ) ) {
 		$mwb_gaq_form_data['taxonomy_for_status']  = 'Pending';
 	}
 }
-
-$taxonomies                                = get_terms(
+$taxonomies = get_terms(
 	array(
 		'taxonomy'   => 'service',
 		'hide_empty' => false,
@@ -63,7 +62,7 @@ $taxonomies                                = get_terms(
 
 	<div class="form-group small clearfix">
 		<label class="checkbox-inline form-labels"><?php esc_html_e( 'Verification Code', 'get-a-quote' ); ?></label><br>
-		<img src="<?php echo GET_A_QUOTE_DIR_URL . 'public/partials/image.php'; ?>" >
+		<img src="<?php echo esc_url( GET_A_QUOTE_DIR_URL . 'public/partials/image.php' ); ?>" >
 	</div>
 	<br>
 	<div class="form-group">
