@@ -702,7 +702,7 @@ jQuery(document).ready(function($) {
       removeTaxo(id, "service");
     }
   });
-  $(".navbar-toggler-mwb").onclick(function() {
+  $(".navbar-toggler-mwb").on("click", function() {
     $(".navbar-collapse-mwb").toggleClass("show");
     $(".navbar-expand-sm-mwb").slideDown();
   });
@@ -801,7 +801,7 @@ jQuery(document).on("click", ".gaq-overview__help-icon", function() {
       }
     );
 
-    $(".mwb-password-hidden").onclick(function() {
+    $(".mwb-password-hidden").on("click", function() {
       if ($(".mwb-form__password").attr("type") == "text") {
         $(".mwb-form__password").attr("type", "password");
       } else {
