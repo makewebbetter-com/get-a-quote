@@ -27,8 +27,8 @@ if ( 'get-a-quote-form-fields-edit' === $gaq_active_tab || 'get-a-quote-form-fie
 <header>
 	<div class="mwb-header-container mwb-bg-white mwb-r-8">
 		<h1 class="mwb-header-title"><?php echo esc_attr( strtoupper( str_replace( '-', ' ', $gaq_mwb_gaq_obj->gaq_get_plugin_name() ) ) ); ?></h1>
-		<a href="<?php echo esc_url( 'https://docs.makewebbetter.com/get-a-quote-for-wordpress/' ); ?>" class="mwb-link"><?php esc_html_e( 'Documentation', 'mwb-product-filter-for-woocommerce' ); ?></a>|
-		<a href="<?php echo esc_url( 'https://makewebbetter.com/contact-us/"' ); ?>" class="mwb-link"><?php esc_html_e( 'Support', 'get-a-quote' ); ?></a>
+		<a href="<?php echo esc_url( 'https://docs.makewebbetter.com/get-a-quote-for-wordpress/?utm_source=MWB-getquote-backend&utm_medium=MWB-backend&utm_campaign=MWB-getquote-backend' ); ?>" class="mwb-link"><?php esc_html_e( 'Documentation', 'mwb-product-filter-for-woocommerce' ); ?></a>|
+		<a href="<?php echo esc_url( 'https://makewebbetter.com/contact-us/?utm_source=MWB-getquote-backend&utm_medium=MWB-backend&utm_campaign=MWB-getquote-backend"' ); ?>" class="mwb-link"><?php esc_html_e( 'Support', 'get-a-quote' ); ?></a>
 	</div>
 </header>
 <?php

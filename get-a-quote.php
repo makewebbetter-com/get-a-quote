@@ -17,7 +17,7 @@
  * Description:       Provides a quote option to request the type of services provided by their store, through the procedure of the form submission.
  * Version:           1.0.1
  * Author:            MakeWebBetter
- * Author URI:        https://makewebbetter.com/
+ * Author URI:        https://makewebbetter.com/?utm_source=MWB-getquote-backend&utm_medium=MWB-backend&utm_campaign=MWB-getquote-backend
  * Text Domain:       get-a-quote
  * Domain Path:       /languages
  *
@@ -56,9 +56,9 @@ function define_get_a_quote_constants() {
  */
 function get_a_quote_custom_settings_at_plugin_tab( $links_array, $plugin_file_name ) {
 	if ( strpos( $plugin_file_name, basename( __FILE__ ) ) ) {
-		$links_array[] = '<a href="https://demo.makewebbetter.com/get-a-quote/quote-form/" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Demo.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Demo</a>';
-		$links_array[] = '<a href="https://docs.makewebbetter.com/get-a-quote-for-wordpress/" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Documentation.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Documentation</a>';
-		$links_array[] = '<a href="https://makewebbetter.com/submit-query/" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Support.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Support</a>';
+		$links_array[] = '<a href="https://demo.makewebbetter.com/get-a-quote/quote-form/?utm_source=MWB-getquote-backend&utm_medium=MWB-backend&utm_campaign=MWB-getquote-backend" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Demo.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Demo</a>';
+		$links_array[] = '<a href="https://docs.makewebbetter.com/get-a-quote-for-wordpress/?utm_source=MWB-getquote-backend&utm_medium=MWB-backend&utm_campaign=MWB-getquote-backend" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Documentation.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Documentation</a>';
+		$links_array[] = '<a href="https://makewebbetter.com/contact-us/?utm_source=MWB-getquote-backend&utm_medium=MWB-backend&utm_campaign=MWB-getquote-backend" target="_blank"><img src="' . GET_A_QUOTE_DIR_URL . 'admin/src/images/Support.svg" class="mwb_gaq_plugin_extra_custom_tab"></i>Support</a>';
 	}
 	return $links_array;
 }
