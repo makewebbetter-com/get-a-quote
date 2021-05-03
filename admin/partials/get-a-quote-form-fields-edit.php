@@ -76,7 +76,7 @@
 				<div class="mwb_gaq_commonFields_icon" ><span class="far fa-flag"></span></div>
 				<?php esc_html_e( 'Country', 'get-a-quote' ); ?>			
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_zipcode" data-pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$" data-placeholder="Zipcode here" data-ftype="input" data-type="text" data-lname="zipcodelabel" data-name="Zipcode" data-id="zipcodes" data-class="mwb-form-control" data-scope="szipcode" data-label="Zipcode">
+			<div class="mwb_gaq_commonFields_group mwb_form_zipcode" data-pattern="[0-9]{6}" data-placeholder="123456" data-ftype="input" data-type="text" data-lname="zipcodelabel" data-name="Zipcode" data-id="zipcodes" data-class="mwb-form-control" data-scope="szipcode" data-label="Zipcode">
 				<div class="mwb_gaq_commonFields_icon" ><span class="far fa-address-card"></span></div>
 				<?php esc_html_e( 'Zipcode', 'get-a-quote' ); ?>			
 			</div>
@@ -84,7 +84,7 @@
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-dollar-sign"></span></div>
 				<?php esc_html_e( 'Budget', 'get-a-quote' ); ?>			
 			</div>
-			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-type="tel" data-required="required" data-lname="phonelabel" data-name="Phone" data-placeholder="+86 800 555 1234" data-pattern="^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" data-id="phone" data-class="mwb-form-control" data-scope="sphone" data-label="Phone Number">
+			<div class="mwb_gaq_commonFields_group mwb_form_phone" data-ftype="input" data-type="tel" data-required="required" data-lname="phonelabel" data-name="Phone" data-placeholder="86 8005551234" data-pattern="[0-9]{2} [0-9]{10}" data-id="phone" data-class="mwb-form-control" data-scope="sphone" data-label="Phone Number">
 				<div class="mwb_gaq_commonFields_icon" ><span class="fas fa-mobile-alt"></span></div>
 				<?php esc_html_e( 'Phone', 'get-a-quote' ); ?>			
 			</div>

@@ -890,12 +890,12 @@ class Makewebbetter_Onboarding_Helper {
 		if ( is_wp_error( $response ) ) {
 
 			$status_code = 500;
-			$response    = esc_html__( 'Unexpected Error Occured', 'membership-for-woocommerce' );
+			$response    = esc_html__( 'Unexpected Error Occured', 'get-a-quote' );
 			$errors      = $response;
 
 		} else {
 
-			$response    = json_decode( wp_remote_retrieve_body( $response ) );
+			$response    = wp_remote_retrieve_body( $response );
 			$status_code = wp_remote_retrieve_response_code( $response );
 			$errors      = $response;
 		}

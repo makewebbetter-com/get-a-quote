@@ -31,8 +31,8 @@ $form_fields = apply_filters( 'mwb_on_boarding_form_fields', array() );
 					<span class="close-form">x</span>
 				</a>
 			</div>
-			<h3 class="mwb-on-boarding-heading"><?php esc_html_e( 'Welcome to MakeWebBetter', 'membership-for-woocommerce' ); ?></h3>
-			<p class="mwb-on-boarding-desc"><?php esc_html_e( 'We love making new friends! Subscribe below and we promise to keep you up-to-date with our latest new plugins, updates, awesome deals and a few special offers.', 'membership-for-woocommerce' ); ?></p>
+			<h3 class="mwb-on-boarding-heading"><?php esc_html_e( 'Welcome to MakeWebBetter', 'get-a-quote' ); ?></h3>
+			<p class="mwb-on-boarding-desc"><?php esc_html_e( 'We love making new friends! Subscribe below and we promise to keep you up-to-date with our latest new plugins, updates, awesome deals and a few special offers.', 'get-a-quote' ); ?></p>
 			<form action="#" method="post" class="mwb-on-boarding-form">
 				<?php foreach ( $form_fields as $key => $field_attr ) : ?>
 					<?php $this->render_field_html( $field_attr ); ?>
@@ -42,7 +42,7 @@ $form_fields = apply_filters( 'mwb_on_boarding_form_fields', array() );
 					<input type="submit" class="mwb-on-boarding-submit mwb-on-boarding-verify " value="Send Us">
 				</div>
 				<div class="mwb-on-boarding-form-no_thanks">
-					<a href="#" class="mwb-on-boarding-no_thanks"><?php esc_html_e( 'Skip For Now', 'makewebbetter-onboarding' ); ?></a>
+					<a href="#" class="mwb-on-boarding-no_thanks"><?php esc_html_e( 'Skip For Now', 'get-a-quote' ); ?></a>
 				</div>
 				</div>
 			</form>

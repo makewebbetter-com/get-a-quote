@@ -1,0 +1,38 @@
+.mwb_gaq_plugin_extra_custom_tab {
+    vertical-align: middle;
+    display: inline-block;
+    width: 15px;
+    max-width: 100%;
+    margin: 0 5px;
+}
+.gaq-overview__features-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.gaq-overview__features {
+    flex: 0 0 calc(50% - 30px);
+    max-width: calc(50% - 30px);
+    margin-right: 30px;
+}
+.gaq-overview__video--url {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.gaq-overview__video--url iframe {
+    width: 100%;
+}
+@media only screen and (max-width: 992px)
+{
+.gaq-overview__features {
+    max-width: 100%;
+    flex: 0 0 100%;
+    margin-right: 0;
+    margin-bottom: 30px;
+}
+
+.gaq-overview__video--url {
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+}

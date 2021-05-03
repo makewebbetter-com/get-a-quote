@@ -40,8 +40,8 @@ if ( isset( $_POST['mwb_gaq_taxonomies_common_settings_save'] ) ) {
 
 	update_option( 'mwb_gaq_taxonomies_options', $mwb_gaq_taxonomies_setting ); ?>
 
-	<div class="notice notice-success is-dismissible">
-		<p><strong><?php esc_html_e( 'Settings saved', 'get-a-quote' ); ?></strong></p>
+	<div class="notice notice-success is-dismissible mwb-gaq__alert-notice">
+		<p><?php esc_html_e( 'Settings saved', 'get-a-quote' ); ?></p>
 	</div>
 
 	<?php
@@ -52,12 +52,14 @@ $mwb_gaq_taxonomies_option = get_option( 'mwb_gaq_taxonomies_options', array() )
 
 <form action="" method="POST">
 	<div class="gaq-section-wrap">
+		<div class="gaq_status_service_wrap">
 		<?php
 		wp_nonce_field( 'gaq_admin_taxo', 'gaq_admin_taxo_nonce' );
 		global $gaq_mwb_gaq_obj;
 		$gaq_template_settings = apply_filters( 'gaq_taxonomies_settings_array', array() );
 		$gaq_template_html     = $gaq_mwb_gaq_obj->mwb_gaq_plug_generate_html( $gaq_template_settings );
 		?>
+		</div>
 		<table class='form-table mwb_gaq_taxonomy_setting'>
 			<tbody>
 				<tr class='mwb_gaq_status_terms terms'>

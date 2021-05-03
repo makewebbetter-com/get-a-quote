@@ -19,6 +19,9 @@ Get A Quote for WordPress plugin adds a quotation form on your WordPress website
 
 As soon as the user fills out and submit the form, he/she receives an email regarding the successful submission of the form. Merchants can then send the quotation(manually) to the customer through the channel they like. And they can change the quotation’s status accordingly. Admin can also add multiple statuses and services using this plugin.
 
+
+[youtube https://www.youtube.com/watch?v=F9QjJV16-ok&w=560&h=315&rel=0]
+
 **With our Get A Quote for WordPress plugin you can:**
 
 * Add a quote form on your website
@@ -98,9 +101,9 @@ Please visit the MakeWebBetter [**knowledge base**](https://support.makewebbette
 
 == Changelog ==
 
-= 1.0.0 - Released on 17 march 2021 =
+= 1.0.0 - Released on 18 march 2021 =
 * First version
 
 == Upgrade Notice ==
-= 1.0.0 - RELEASED ON 17 MARCH 2021 =
+= 1.0.0 - RELEASED ON 18 MARCH 2021 =
 * First version

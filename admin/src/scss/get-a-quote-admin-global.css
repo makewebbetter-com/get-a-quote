@@ -194,10 +194,6 @@ select {
     padding: 0 4px!important;
 }
 
-.mwb-errorr-8 {
-    margin-left: 185px;
-    padding-left: 20px;
-}
 
 .mwb-header-container {
     padding: 28px 32px;
@@ -228,7 +224,7 @@ select {
     letter-spacing: 0.3px;
     color: var(--mdc-theme-primary);
     flex: 0 0 100%;
-    max-width: calc(100% - 100px);
+    max-width: calc(100% - 200px);
 }
 
 .mwb-navbar {
