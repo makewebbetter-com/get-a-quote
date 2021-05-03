@@ -3,9 +3,9 @@ Contributors: MakeWebBetter
 Donate link: https://makewebbetter.com/
 Tags: email quote, request quote, quotation, quote plugin, wordpress quotes  
 Requires at least: 4.0
-Tested up to: 5.7
+Tested up to: 5.7.1
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,6 +29,7 @@ As soon as the user fills out and submit the form, he/she receives an email rega
 * Enable/Disable your quotation form fields
 * Enable/Disable service and quote status taxonomy
 * Add different statuses for your quotation
+* Choose what page to redirect users to after quote form submission
  
 ==  WHAT’S INCLUDED IN OUR GET A QUOTE FOR WORDPRESS PLUGIN ==
 
@@ -44,12 +45,17 @@ Our Get A Quote plugin helps merchants to create multiple statuses for the quota
 **4)** **Ability to create multiple services**
 With this plugin, merchants can create multiple services to offer. Customers will be able to select these services through the quotation form you added on your website. These services will be displayed in the Services field of your quotation form.
 
- **5)** **Acknowledge users through email for quote submission**
+**5)** **Acknowledge users through email for quote submission**
 Our Get A Quote plugin also lets you send an acknowledgement email to the user whenever s/he submits the quote requests. You can create and save your email subject and message which will be sent to the user to notify them about their successful submission of their quote request.
+
+**6)** **Redirect users to a set page after form submission**
+With this WordPress quotation plugin, you can redirect users to a specific page after they successfully submit the quotation request form. You just need to select the page from the General Settings and users will be sent to the selected page once they submit the form.
+
 
 [**Free demo of Get A  Quote for WordPress**](https://demo.makewebbetter.com/get-a-quote/?utm_source=MWB-getquote-org&utm_medium=MWB-ORG&utm_campaign=ORG)
 
-Check out [**Get A Quote for WordPress Documentation**](https://docs.makewebbetter.com/get-a-quote-for-wordpress/?utm_source=MWB-getquote-org&utm_medium=MWB-ORG&utm_campaign=ORG) to learn more about the features and working of the plugin.
+Check out [**Get A Quote for WordPress Documentation**](https://docs.makewebbetter.com/get-a-quote-for-wordpress/?utm_source=MWB-getquote-org&utm_medium=MWB-ORG&utm_campaign=ORG) to learn more about the features and working of the plugin. Check out our [**Get Quote Plugin knowledge base**](https://support.makewebbetter.com/wordpress-plugins-knowledge-base/category/get-a-quote-for-wordpress/?utm_source=MWB-getquote-org&utm_medium=MWB-ORG&utm_campaign=ORG)  for some deep insights and FAQs on the plugin.
+
 
  
 == Installation ==
@@ -101,9 +107,20 @@ Please visit the MakeWebBetter [**knowledge base**](https://support.makewebbette
 
 == Changelog ==
 
+= 1.0.1 -Released on 3 May 2021 =
+* New: feature - Captcha Verification
+* New: feature - Redirect to any page you want after successful submission.
+* Improved: Better Design for admin section
+* Other: Issues and Bugs Fixed.
+
 = 1.0.0 - Released on 18 march 2021 =
 * First version
 
+
 == Upgrade Notice ==
-= 1.0.0 - RELEASED ON 18 MARCH 2021 =
-* First version
+
+= 1.0.1 -Released on 3 May 2021 =
+* New: feature - Captcha Verification
+* New: feature - Redirect to any page you want after successful submission.
+* Improved: Better Design for admin section
+* Other: Issues and Bugs Fixed.
