@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function define_get_a_quote_constants() {
 
-	get_a_quote_constants( 'GET_A_QUOTE_VERSION', '1.0.0' );
+	get_a_quote_constants( 'GET_A_QUOTE_VERSION', '1.0.1' );
 	get_a_quote_constants( 'GET_A_QUOTE_DIR_PATH', plugin_dir_path( __FILE__ ) );
 	get_a_quote_constants( 'GET_A_QUOTE_DIR_URL', plugin_dir_url( __FILE__ ) );
 	get_a_quote_constants( 'GET_A_QUOTE_SERVER_URL', 'https://makewebbetter.com' );
