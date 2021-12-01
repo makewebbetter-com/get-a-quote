@@ -152,6 +152,14 @@ button[type="button"] {
 
 .mwb_gaq_email_setting td {
   padding: 0;
+  width: 100%;
+  display: block;
+}
+
+.mwb_gaq_email_setting td .mdc-button {
+  max-width: 200px;
+  display: block;
+  margin: 0 auto;
 }
 
 .mwb_gaq_email_setting td input,
@@ -177,7 +185,7 @@ button[type="button"] {
 .mwb_gaq_taxonomy_setting tbody {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .mwb_gaq_taxonomy_setting tbody tr {
@@ -191,7 +199,7 @@ button[type="button"] {
   display: flex;
   flex-wrap: wrap;
   flex: 0 0 44%;
-  margin: 30px 10px;
+  margin: 30px 10px 20px 0;
   max-width: 50%;
   padding: 20px;
 }
@@ -240,17 +248,20 @@ button[type="button"] {
 .gaq_status_service_wrap {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   margin: 10px 0;
 }
 
 .mwb-form-group.mwb_quote_status_gaq,.mwb-form-group.mwb_quote_service_gaq  {
   flex: 0 0 100%;
-  max-width: 50%;
+  max-width: calc(50% - 20px);
+  align-items: center;
 }
+
 
 .mwb_email_setting_form {
   margin: 40px auto;
+  max-width: 520px;
 }
 
 /* form field css start*/
@@ -653,7 +664,7 @@ a.mwb_gaq_open__drawer svg {
 }
 
 .mwb_form_fields th,
-td {
+.mwb_form_fields td {
   width: 150px;
   text-align: center;
   padding: 5px;
@@ -1122,6 +1133,18 @@ a.mwb_gaq_open__drawer svg {
     transform: translateY(20px);
     padding: 0 15px;
   }
+  .mwb_email_setting_form .wp-tooltip-label  .mwb-form-group__label {
+    max-width: 100%;
+  }
+  .mwb_email_setting_form .wp-tooltip-label  .mwb-form-group__control {
+    max-width: 100%;
+  }
+
+}
+@media only screen and (max-width: 768px) { 
+  .mwb-form-group.mwb_quote_status_gaq,.mwb-form-group.mwb_quote_service_gaq  {
+    max-width: 100%;
+  }
 }
 
 table.mwb-table {
@@ -1129,6 +1152,10 @@ table.mwb-table {
 }
 table.mwb-table th {
   text-align: inherit;
+}
+.wp-tooltip-label .mwb_gaq_email_sett_table .mwb-form-group {
+  margin: 0 10px 20px;
+  align-items: center;
 }
 
 /* form fields css ends */

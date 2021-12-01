@@ -257,19 +257,27 @@ select {
     margin: 0 -15px 35px;
 }
 
-.mwb-form-group__label {
+.gaq-secion-wrap .mwb-form-group .mwb-form-group__label,
+.mwb-form-group .mwb-form-group__label {
     flex: 0 0 100%;
     max-width: 200px;
     padding: 0 15px;
+    min-width: unset;
 }
 
-.mwb-form-group__control {
+.mwb-form-select select {
+    max-width: 150px;
+    width: 100%;
+}
+
+.gaq-secion-wrap .mwb-form-group .mwb-form-group__control,
+.mwb-form-group .mwb-form-group__control {
     flex: 0 0 100%;
     max-width: calc(100% - 200px);
     padding: 0 15px;
 }
 
-.mwb-form-label {
+.gaq-secion-wrap .mwb-form-group .mwb-form-label {
     font-family: 'NunitoSans-SemiBold';
     font-style: normal;
     font-weight: 600;
