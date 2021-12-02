@@ -21,6 +21,9 @@ $gaq_active_tab   = isset( $_GET['gaq_tab'] ) ? sanitize_key( $_GET['gaq_tab'] )
 if ( 'get-a-quote-form-fields-edit' === $gaq_active_tab || 'get-a-quote-form-fields-preview' === $gaq_active_tab ) {
 	echo '<style>#wpadminbar{
 		display:none;
+	}
+	body {
+	overflow:hidden;
 	}</style>';
 }
 ?>

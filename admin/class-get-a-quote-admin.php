@@ -277,7 +277,6 @@ class Get_A_Quote_Admin {
 	 * @since 1.0.0
 	 */
 	public function gaq_admin_save_tab_settings() {
-
 		global $gaq_mwb_gaq_obj, $error_notice;
 		if ( isset( $_POST['general_nonce'] ) ) {
 			$general_form_nonce = sanitize_text_field( wp_unslash( $_POST['general_nonce'] ) );
@@ -340,7 +339,6 @@ class Get_A_Quote_Admin {
 			'title' => esc_html__( 'Overview', 'get-a-quote' ),
 			'name'  => 'get-a-quote-admin-overview',
 		);
-
 		return $tabs;
 	}
 
@@ -549,9 +547,7 @@ class Get_A_Quote_Admin {
 	public function fill_gaq_columns( $column, $post_id ) {
 		$details = get_post_meta( $post_id, 'quotes_meta', true );
 		$details = json_decode( wp_json_encode( $details ), true );
-
 		switch ( $column ) {
-
 			case 'post_type_email':
 				$email = ! empty( $details['Email'] ) ? $details['Email'] : '';
 				echo esc_html( $email );
@@ -589,25 +585,20 @@ class Get_A_Quote_Admin {
 	 * @since    1.0.0
 	 */
 	public function update_quote_callback() {
-
 		// Return if doing autosave.
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
-
 		// Return if doing ajax :: Quick edits.
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
 		}
-
 		// Return on post trash, quick-edit, new post.
 		if ( empty( $_POST['action'] ) || 'editpost' !== $_POST['action'] ) {
 			return;
 		}
-
 		// Nonce verification.
 		check_admin_referer( 'mwb_gaq_meta_box_nonce', 'mwb_gaq_meta_form' );
-
 		// quotes post is updated here.
 		$details = $this->gaq_helper->detailed_post_array( get_the_ID() );
 		if ( isset( $_POST['firstname'] ) ) {
@@ -631,9 +622,7 @@ class Get_A_Quote_Admin {
 			$post_update_meta['filelink']   = ! empty( $details['filelink'] ) ? sanitize_text_field( wp_unslash( $details['filelink'] ) ) : '';
 
 			if ( ! empty( $post_update_meta ) ) {
-
 				update_post_meta( $post_id, 'quotes_meta', $post_update_meta );
-
 			}
 		}
 	}
@@ -645,9 +634,7 @@ class Get_A_Quote_Admin {
 	 * @since    1.0.0
 	 */
 	public function add_mwb_frontend_screens( $valid_screens = array() ) {
-
 		if ( is_array( $valid_screens ) ) {
-
 			// Push your screen here.
 			array_push( $valid_screens, 'makewebbetter_page_get_a_quote_menu' );
 		}
@@ -661,13 +648,11 @@ class Get_A_Quote_Admin {
 	 * @since    1.0.0
 	 */
 	public function add_mwb_deactivation_screens( $valid_screens = array() ) {
-
 		if ( is_array( $valid_screens ) ) {
 
 			// Push your screen here.
 			array_push( $valid_screens, 'get-a-quote' );
 		}
-
 		return $valid_screens;
 	}
 

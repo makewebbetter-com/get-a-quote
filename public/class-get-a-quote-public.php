@@ -126,25 +126,25 @@ class Get_A_Quote_Public {
 	 * Custom_loader_function
 	 * public function for the filter to be created.
 	 */
-	public function custom_loader_function() {
-		$value = get_option( 'gaq_enable_quote_form' );
-		if ( 'on' === $value ) {
-			add_action( 'wp_footer', array( $this, 'render_gaq_html' ) );
-		}
-	}
+	// public function custom_loader_function() {
+	// 	$value = get_option( 'gaq_enable_quote_form' );
+	// 	if ( 'on' === $value ) {
+	// 		add_action( 'wp_footer', array( $this, 'render_gaq_html' ) );
+	// 	}
+	// }
 
 	/**
 	 * Render_gaq_html
 	 * public function for the filter to be created.
 	 */
-	public function render_gaq_html() {
-		wc_get_template(
-			'partials/get-a-quote-loader.php',
-			array(),
-			'',
-			plugin_dir_path( __FILE__ )
-		);
-	}
+	// public function render_gaq_html() {
+	// 	wc_get_template(
+	// 		'partials/get-a-quote-loader.php',
+	// 		array(),
+	// 		'',
+	// 		plugin_dir_path( __FILE__ )
+	// 	);
+	// }
 
 	// End class file.
 }

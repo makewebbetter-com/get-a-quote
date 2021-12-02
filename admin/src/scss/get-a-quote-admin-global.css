@@ -260,9 +260,9 @@ select {
 .gaq-secion-wrap .mwb-form-group .mwb-form-group__label,
 .mwb-form-group .mwb-form-group__label {
     flex: 0 0 100%;
-    max-width: 200px;
+    max-width: 200px!important;
     padding: 0 15px;
-    min-width: unset;
+    min-width: unset!important;
 }
 
 .mwb-form-select select {
