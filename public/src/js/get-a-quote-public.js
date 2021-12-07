@@ -52,7 +52,6 @@ jQuery(document).ready(function($) {
 
       if (attrs.ltype == "label") {
         var newElelabel = document.createElement(attrs.ltype.toUpperCase());
-
         $.each(attrs, function(key) {
           switch (key) {
             case "lclass":
@@ -82,7 +81,7 @@ jQuery(document).ready(function($) {
 
         $.each(attrs, function(key, value) {
           switch (key) {
-            case "required":
+             case "required":
               if (value == "true") {
                 newEleinput.setAttribute(key, "required");
 
@@ -93,22 +92,18 @@ jQuery(document).ready(function($) {
 
             case "name":
               newEleinput.setAttribute("name", attrs.name);
-
               break;
 
             case "placeholder":
               newEleinput.setAttribute(key, value);
-
               break;
 
             case "iid":
               newEleinput.setAttribute("id", attrs.iid);
-
               break;
 
             case "iclass":
               newEleinput.setAttribute("class", attrs.iclass);
-
               break;
 
             case "pattern":
@@ -125,13 +120,11 @@ jQuery(document).ready(function($) {
               break;
           }
         });
-
         var inputfield = $(newEleinput);
       }
 
       if (labelfield != undefined && inputfield != undefined) {
         $(".active-front-form").append(labelfield);
-
         $(".active-front-form").append(inputfield);
       }
 
@@ -242,7 +235,24 @@ jQuery(document).ready(function($) {
 
           $(".success-div").show();
 
-          $(".success-div").html("<b>Successfully Submitted!</b>");
+          $(".active-from").html(
+            '<div class="mwb_gaq_success">' +
+              '<div class="mwb_gaq_success_icon">' +
+              '<span class="mwb_gaq_success_icon_leading">' +
+              "</span>" +
+              '<span class="mwb_gaq_success_icon_trailing">' +
+              "</span>" +
+              "</div>" +
+              '<div class="mwb_gaq_success_text">  ' +
+              '<h3 class="mwb_gaq_success_title">' +
+              "Quote Submitted" +
+              "</h3>" +
+              '<div class="mwb_gaq_success_desc">' +
+              '<p><span class="mwb_gaq_success_desc_green">Congratulations</span> your form has been submitted successfully.</p>' +
+              "</div>" +
+              "</div>" +
+              "</div>"
+          );
 
           $("html, body").animate({ scrollTop: 70 }, "slow");
 

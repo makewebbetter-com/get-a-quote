@@ -3,83 +3,140 @@
  * included in this file.
  */
 
- .mwb-form-control {
-    margin-bottom: 20px;
-    margin-top: 5px;
-    width: 80%;
+.mwb-form-control {
+  margin-bottom: 20px;
+  margin-top: 5px;
+  width: 80%;
 }
-.active-from{
-    width: 45%;
+.active-from {
+  width: 45%;
 }
 .form-labels {
-    display: block;
+  display: block;
 }
-.mwb-form-control{
-    font-size: 1rem;
-    padding: 10px 8px!important;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background-clip: padding-box;
-    background-color: #fff;
-    border-radius: .25rem;
-    border: 1px solid #ced4da;
-    color: #212529;
-    display: block;
-    font-weight: 400;
-    line-height: 1.5;
-    width: 100%;
-    margin-bottom:15px!important;
+.mwb-form-control {
+  font-size: 1rem;
+  padding: 10px 8px !important;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  color: #212529;
+  display: block;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 100%;
+  margin-bottom: 15px !important;
 }
 .mwb-btn {
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn-info-mwb {
-    color: #fff;
-    background-color: #0dcaf0;
-    border-color: #0dcaf0;
-    font-weight: 600;
-    padding: 8px 16px;
+  color: #fff;
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+  font-weight: 600;
+  padding: 8px 16px;
 }
 
 .mwb_gaq__form--group label {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 .active-front-form.mwb_gaq__form--group + .small label {
-    margin: 10px 0;
-    display: inline-block;
+  margin: 10px 0;
+  display: inline-block;
 }
 
 /*Pre-loader CSS*/
 .mwb-gaq-dialog-wrapper {
-    position: fixed;
-    top: 40%;
-    left: 40%;
-    z-index: 999999;
-    opacity: 0.7;
-    background: #ffffff;
-    box-shadow: 0 0 0 1500px #ffffff;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  z-index: 999999;
+  opacity: 0.7;
+  background: #ffffff;
+  box-shadow: 0 0 0 1500px #ffffff;
 }
 .mwb-gaq-item-img {
-    width: 50%;
+  width: 50%;
 }
 .mwb-gaq-dialog-wrapper {
-    display: none;
+  display: none;
+}
+
+/* Success Div Code */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.mwb_gaq_success {
+  text-align: center;
+  padding: 20px;
+}
+.mwb_gaq_success_title {
+  font-size: 26px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.mwb_gaq_success_desc_green {
+  color: #4bb543;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.mwb_gaq_success_icon {
+  height: 70px;
+  width: 70px;
+  background: #4bb543;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  padding: 20px;
+  position: relative;
+}
+.mwb_gaq_success_icon_leading {
+  height: 23px;
+  background: #ffffff;
+  width: 6px;
+  position: absolute;
+  top: 29px;
+  left: 19px;
+  border-radius: 25px;
+  transform: rotate(318deg);
+}
+.mwb_gaq_success_icon_trailing {
+  position: absolute;
+  right: 6px;
+  top: 32px;
+  background: #ffffff;
+  height: 6px;
+  width: 42px;
+  border-radius: 24px;
+  transform: rotate(320deg);
+}
+
+.mwb_gaq_success_desc p {
+  font-size: 20px;
 }
