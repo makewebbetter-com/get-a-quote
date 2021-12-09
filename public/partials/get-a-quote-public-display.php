@@ -69,5 +69,4 @@ $taxonomies = get_terms(
         <input type="text" name="vercode" class="mwb-form-control" placeholder="Verfication Code" required="required">
     </div>
     <button type="submit" class="mwb-btn btn-info-mwb" name="qsubmit" id="form_submit"><?php esc_html_e('Submit', 'get-a-quote'); ?></button>
-    </div>
 </form>

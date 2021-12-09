@@ -3,19 +3,6 @@
  * should reside in this file.
  */
 jQuery(document).ready(function($) {
-  // JS for preloader
-  $("#form_submit").on("click", function() {
-    var show_img = setTimeout(function pre() {
-      $("#primary").css("display", "none");
-      $(".mwb-gaq-dialog-wrapper").css("display", "block");
-    }, 300);
-    setTimeout(function preloaded() {
-      clearTimeout(show_img);
-      $("#primary").css("display", "block");
-      $(".mwb-gaq-dialog-wrapper").css("display", "none");
-    }, 3000);
-  });
-
   $(".success-div").hide();
 
   $(".error-div").hide();
@@ -37,9 +24,7 @@ jQuery(document).ready(function($) {
   } else {
     $(".active-from").hide();
     $(".error-div").show();
-    $(".error-div").html(
-      "Please make a form from admin section to get displayed here"
-    );
+    $(".error-div").html("Please consult with your site owner to get quote ");
   }
 
   /**
@@ -81,7 +66,7 @@ jQuery(document).ready(function($) {
 
         $.each(attrs, function(key, value) {
           switch (key) {
-             case "required":
+            case "required":
               if (value == "true") {
                 newEleinput.setAttribute(key, "required");
 
@@ -214,7 +199,6 @@ jQuery(document).ready(function($) {
     var form_data = new FormData(this);
     form_data.append("action", "trigger_form_submission");
     form_data.append("nonce", gaq_public_param.form_nonce);
-    jQuery(".mwb-gaq-dialog-wrapper").show();
     $.ajax({
       url: gaq_public_param.ajaxurl,
 
@@ -229,12 +213,15 @@ jQuery(document).ready(function($) {
       processData: false,
 
       success: function(response) {
-        jQuery(".mwb-gaq-dialog-wrapper").hide();
+        console.log(response);
+        if (response == "Captcha Not Verified") {
+          $("html, body").animate({ scrollTop: 100 }, "slow");
+
+          $(".error-div").html("<b>*" + response + "</b>");
+        }
         if (response == "Success" || response == "updated") {
           $(".error-div").hide();
-
           $(".success-div").show();
-
           $(".active-from").html(
             '<div class="mwb_gaq_success">' +
               '<div class="mwb_gaq_success_icon">' +
@@ -253,9 +240,7 @@ jQuery(document).ready(function($) {
               "</div>" +
               "</div>"
           );
-
           $("html, body").animate({ scrollTop: 70 }, "slow");
-
           if (redirect_value == "Yes") {
             var red_page = php_vars.red_page;
             setTimeout(function() {
@@ -276,6 +261,18 @@ jQuery(document).ready(function($) {
       },
     });
   });
+  // JS for preloader
+  // $("#form_submit").on("click", function() {
+  //   var show_img = setTimeout(function pre() {
+  //     $("#primary").css("display", "none");
+  //     $(".mwb-gaq-dialog-wrapper").css("display", "block");
+  //   }, 300);
+  //   setTimeout(function preloaded() {
+  //     clearTimeout(show_img);
+  //     $("#primary").css("display", "block");
+  //     $(".mwb-gaq-dialog-wrapper").css("display", "none");
+  //   }, 3000);
+  // });
 });
 (function($) {
   "use strict";
